@@ -1,5 +1,8 @@
 #include "EngineWindow.h"
 #include <EngineBase/EngineDebug.h>
+#include <iostream>
+#include <Windows.h>
+#include <string>
 //#ifdef _WINDOWS
 //#include <Windows.h>
 //#elseif _¸®´ª½º
@@ -50,6 +53,7 @@ void UEngineWindow::EngineWindowInit(HINSTANCE _Instance)
     wcex.lpszMenuName = nullptr;
     wcex.lpszClassName = "Default";
     wcex.hIconSm = nullptr;
+
     CreateWindowClass(wcex);
 
     hInstance = _Instance;
@@ -147,4 +151,10 @@ void UEngineWindow::Open(std::string_view _TitleName /*= "Window"*/)
 	ShowWindow(WindowHandle, SW_SHOW);
     UpdateWindow(WindowHandle);
 	// ShowWindow(WindowHandle, SW_HIDE);
+}
+
+void UEngineWindow::SetWindowTopMost()
+{
+    SetForegroundWindow(WindowHandle);
+    SetWindowPos(WindowHandle, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW);
 }
