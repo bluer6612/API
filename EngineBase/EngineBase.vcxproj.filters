@@ -10,6 +10,12 @@
     <ClInclude Include="EngineMath.h">
       <Filter>Math</Filter>
     </ClInclude>
+    <ClInclude Include="EngineDelegate.h">
+      <Filter>Function</Filter>
+    </ClInclude>
+    <ClInclude Include="PreCompile.h">
+      <Filter>PreCompile</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineDebug.cpp">
@@ -21,6 +27,12 @@
     <ClCompile Include="EngineMath.cpp">
       <Filter>Math</Filter>
     </ClCompile>
+    <ClCompile Include="EngineDelegate.cpp">
+      <Filter>Function</Filter>
+    </ClCompile>
+    <ClCompile Include="PreCompile.cpp">
+      <Filter>PreCompile</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Debug">
@@ -31,6 +43,12 @@
     </Filter>
     <Filter Include="Math">
       <UniqueIdentifier>{ea7ef493-e79b-4081-9ac6-502c8d1eb677}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Function">
+      <UniqueIdentifier>{2ae5fbfe-862b-4c33-b733-956c360fe246}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PreCompile">
+      <UniqueIdentifier>{81930aca-db5f-4e79-a8e2-be0ea3408be3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

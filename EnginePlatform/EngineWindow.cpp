@@ -1,5 +1,20 @@
+#include "PreCompile.h"
 #include "EngineWindow.h"
 #include <EngineBase/EngineDebug.h>
+
+//class AActor
+//{
+//    Player* NewPlayer; // <= 망했다.
+//};
+//
+//class Player : public AActor
+//{
+//
+//};
+
+// 레벨이 높은 헤더는 레벨이 낮은 
+// #include <EngineCore/EngineAPICore.h>
+
 //#ifdef _WINDOWS
 //#include <Windows.h>
 //#elseif _리눅스
@@ -9,6 +24,7 @@
 
 HINSTANCE UEngineWindow::hInstance = nullptr;
 std::map<std::string, WNDCLASSEXA> UEngineWindow::WindowClasss;
+int WindowCount = 0;
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
@@ -23,7 +39,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     }
     break;
     case WM_DESTROY:
-        PostQuitMessage(0);
+        --WindowCount;
         break;
     default:
         return DefWindowProc(hWnd, message, wParam, lParam);
@@ -34,10 +50,12 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 void UEngineWindow::EngineWindowInit(HINSTANCE _Instance)
 {
+    hInstance = _Instance;
+
+    // 어차피 무조건 해줘야 한다면 여기서 하려고 한것.
+    // 디폴트 윈도우 클래스 등록
     WNDCLASSEXA wcex;
-
     wcex.cbSize = sizeof(WNDCLASSEX);
-
     wcex.style = CS_HREDRAW | CS_VREDRAW;
     wcex.lpfnWndProc = WndProc;
     wcex.cbClsExtra = 0;
@@ -50,25 +68,47 @@ void UEngineWindow::EngineWindowInit(HINSTANCE _Instance)
     wcex.lpszClassName = "Default";
     wcex.hIconSm = nullptr;
     CreateWindowClass(wcex);
-
-    hInstance = _Instance;
 }
 
-int UEngineWindow::WindowMessageLoop()
+int UEngineWindow::WindowMessageLoop(EngineDelegate _FrameFunction)
 {
     // 단축키 인데 게임
-// HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_WINDOWSPROJECT2));
+    // HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_WINDOWSPROJECT2));
     MSG msg;
 
     // 기본 메시지 루프입니다:
-    while (GetMessage(&msg, nullptr, 0, 0))
+    // 메세지 루프가 getMessage라면 게임의 루프를 돌릴수 없다.
+    // 동기 함수이기 때문이다.
+    // 동기 자신의 목적이 끝날때까지 정지하는 함수.
+
+    // GetMessage
+    // 메세지가 없다 => 영원히 기다림
+    // 메세지가 있다 => 처리하고 리턴
+
+    // 처리하고 리턴
+    // 메세지가 없다 => 리턴
+    // 메세지가 있다 => 처리하고 리턴
+
+    // WindowCount;
+
+    while (WindowCount)
     {
-        // 단축키를 아예 안사용하므로 단축키를 처리한다는 일 자차게 없으므로 의미가 없는 코드가 되었다.
-        if (!TranslateAccelerator(msg.hwnd, nullptr, &msg))
+        // if (!TranslateAccelerator(msg.hwnd, nullptr, &msg))  => 윈도우 단축키 자체를 사용하지
+        // 않을 것이므로 그냥 무시
+        
+        // PM_REMOVE == 내가 처리할때 지금까지 쌓인 메세지 다지워.
+        if(0 != PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
         {
             TranslateMessage(&msg);
             DispatchMessage(&msg);
         }
+
+        if (true == _FrameFunction.IsBind())
+        {
+            _FrameFunction();
+        }
+        // 메세지가 없는 시간에 내 게임을 돌리는거야.
+        // 메세지 처리하고 나서 내 게임엔진을 돌린다.
     }
 
     return (int)msg.wParam;
@@ -109,12 +149,6 @@ UEngineWindow::~UEngineWindow()
 {
 }
 
-
-void UEngineWindow::Create(std::string_view _ClassName /*= "Default"*/)
-{
-    Create("Window", _ClassName);
-}
-
 void UEngineWindow::Create(std::string_view _TitleName, std::string_view _ClassName)
 {
     if (false == WindowClasss.contains(_ClassName.data()))
@@ -123,12 +157,10 @@ void UEngineWindow::Create(std::string_view _TitleName, std::string_view _ClassN
         return;
     }
 
+    WindowHandle = CreateWindowA(_ClassName.data(), _TitleName.data(), WS_OVERLAPPEDWINDOW,
+        0, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
 
-                                                //WS_OVERLAPPEDWINDOW
-    WindowHandle = CreateWindowA(_ClassName.data(), 0, WS_OVERLAPPED,
-        -10, 720, WS_SYSMENU, 360, nullptr, nullptr, hInstance, nullptr);
-
-    if (!WindowHandle)
+    if (nullptr == WindowHandle)
     {
         MSGASSERT(std::string(_TitleName) + " 윈도우 생성에 실패했습니다.");
         return;
@@ -142,11 +174,12 @@ void UEngineWindow::Open(std::string_view _TitleName /*= "Window"*/)
     if (nullptr == WindowHandle)
     {
         // 만들어
-        Create();
+        Create("Window");
     }
 
 	// 단순히 윈도창을 보여주는 것만이 아니라
 	ShowWindow(WindowHandle, SW_SHOW);
     UpdateWindow(WindowHandle);
+    ++WindowCount;
 	// ShowWindow(WindowHandle, SW_HIDE);
 }
