@@ -1,4 +1,5 @@
 #include "EngineWindow.h"
+#include <EngineBase/EngineDebug.h>
 //#ifdef _WINDOWS
 //#include <Windows.h>
 //#elseif _리눅스
@@ -7,11 +8,8 @@
 //#endif 
 
 HINSTANCE UEngineWindow::hInstance = nullptr;
+std::map<std::string, WNDCLASSEXA> UEngineWindow::WindowClasss;
 
-void UEngineWindow::EngineWindowInit(HINSTANCE _Instance)
-{
-    hInstance = _Instance;
-}
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
@@ -34,6 +32,29 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     return 0;
 }
 
+
+void UEngineWindow::EngineWindowInit(HINSTANCE _Instance)
+{
+    WNDCLASSEXA wcex;
+
+    wcex.cbSize = sizeof(WNDCLASSEX);
+
+    wcex.style = CS_HREDRAW | CS_VREDRAW;
+    wcex.lpfnWndProc = WndProc;
+    wcex.cbClsExtra = 0;
+    wcex.cbWndExtra = 0;
+    wcex.hInstance = hInstance;
+    wcex.hIcon = nullptr;
+    wcex.hCursor = LoadCursor(nullptr, IDC_ARROW);
+    wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
+    wcex.lpszMenuName = nullptr;
+    wcex.lpszClassName = "Default";
+    wcex.hIconSm = nullptr;
+    CreateWindowClass(wcex);
+
+    hInstance = _Instance;
+}
+
 int UEngineWindow::WindowMessageLoop()
 {
     // 단축키 인데 게임
@@ -54,37 +75,33 @@ int UEngineWindow::WindowMessageLoop()
     return (int)msg.wParam;
 }
 
-UEngineWindow::UEngineWindow() 
+void UEngineWindow::CreateWindowClass(const WNDCLASSEXA& _Class)
 {
-    // 선생님은 다 멀티바이트 형태로 함수들을 사용하겠다고 했으므로 
-    // WNDCLASSEXW => WNDCLASSEXA 
-    WNDCLASSEXA wcex;
+    // 일반적인 맵의 사용법
 
-    wcex.cbSize = sizeof(WNDCLASSEX);
+    std::map<std::string, WNDCLASSEXA>::iterator EndIter = WindowClasss.end();
+    std::map<std::string, WNDCLASSEXA>::iterator FindIter = WindowClasss.find(std::string(_Class.lpszClassName));
 
-    wcex.style = CS_HREDRAW | CS_VREDRAW;
-    wcex.lpfnWndProc = WndProc;
-    wcex.cbClsExtra = 0;
-    wcex.cbWndExtra = 0;
-    wcex.hInstance = hInstance;
-    // wcex.hInstance = nullptr;
-    wcex.hIcon = nullptr;
-    wcex.hCursor = LoadCursor(nullptr, IDC_ARROW);
-    wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
-    wcex.lpszMenuName = nullptr;
-    wcex.lpszClassName = "DefaultWindow";
-    wcex.hIconSm = nullptr;
-    // wcex.hIconSm = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
-
-    RegisterClassExA(&wcex);
-
-    WindowHandle = CreateWindowA("DefaultWindow", "MainWindow", WS_OVERLAPPEDWINDOW,
-        -2000, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
-
-    if (!WindowHandle)
+    // ckw
+    if (EndIter != FindIter)
     {
+        // std::string ErrorText = "같은 이름의 윈도우 클래스를 2번 등록했습니다" + std::string(_Class.lpszClassName);
+
+        // std::string 내부에 들고 있는 맴버변수 => std::string => std::vector<char>
+        // std::vector<char> char* = new char[100];
+        // ErrorText const char* 리턴해주는 함수가 c_str()
+        // const char* Text = ErrorText.c_str();
+        MSGASSERT("같은 이름의 윈도우 클래스를 2번 등록했습니다" + std::string(_Class.lpszClassName));
         return;
     }
+
+    RegisterClassExA(&_Class);
+
+    WindowClasss.insert(std::pair{ _Class.lpszClassName, _Class });
+}
+
+UEngineWindow::UEngineWindow() 
+{
 
     
 }
@@ -93,8 +110,39 @@ UEngineWindow::~UEngineWindow()
 {
 }
 
-void UEngineWindow::Open()
+void UEngineWindow::Create(std::string_view _ClassName /*= "Default"*/)
 {
+    Create("Window", _ClassName);
+}
+
+void UEngineWindow::Create(std::string_view _TitleName, std::string_view _ClassName)
+{
+    if (false == WindowClasss.contains(_ClassName.data()))
+    {
+        MSGASSERT("등록하지 않은 클래스로 윈도우창을 만들려고 했습니다" + std::string(_ClassName));
+        return;
+    }
+
+    WindowHandle = CreateWindowA(_ClassName.data(), _TitleName.data(), WS_OVERLAPPEDWINDOW,
+        0, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
+
+    if (!WindowHandle)
+    {
+        MSGASSERT("윈도우 생성에 실패했습니다." + std::string(_TitleName));
+        return;
+    }
+
+}
+
+void UEngineWindow::Open(std::string_view _TitleName /*= "Window"*/)
+{
+    // 어 window 안만들고 띄우려고 하네?
+    if (nullptr == WindowHandle)
+    {
+        // 만들어
+        Create();
+    }
+
 	// 단순히 윈도창을 보여주는 것만이 아니라
 	ShowWindow(WindowHandle, SW_SHOW);
     UpdateWindow(WindowHandle);
