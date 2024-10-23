@@ -14,8 +14,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	UEngineWindow::EngineWindowInit(hInstance);
 
 	UEngineWindow NewWindow;
-	NewWindow.SetWindowTopMost();
 	NewWindow.Open();
+	NewWindow.SetWindowTopMost();
 
 	return UEngineWindow::WindowMessageLoop();
 }

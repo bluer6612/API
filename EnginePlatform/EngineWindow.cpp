@@ -1,8 +1,6 @@
 #include "EngineWindow.h"
 #include <EngineBase/EngineDebug.h>
-#include <iostream>
-#include <Windows.h>
-#include <string>
+#include <windef.h>
 //#ifdef _WINDOWS
 //#include <Windows.h>
 //#elseif _리눅스
@@ -53,7 +51,6 @@ void UEngineWindow::EngineWindowInit(HINSTANCE _Instance)
     wcex.lpszMenuName = nullptr;
     wcex.lpszClassName = "Default";
     wcex.hIconSm = nullptr;
-
     CreateWindowClass(wcex);
 
     hInstance = _Instance;
@@ -95,7 +92,7 @@ void UEngineWindow::CreateWindowClass(const WNDCLASSEXA& _Class)
         // std::vector<char> char* = new char[100];
         // ErrorText const char* 리턴해주는 함수가 c_str()
         // const char* Text = ErrorText.c_str();
-        MSGASSERT("같은 이름의 윈도우 클래스를 2번 등록했습니다" + std::string(_Class.lpszClassName));
+        MSGASSERT(std::string(_Class.lpszClassName) + " 같은 이름의 윈도우 클래스를 2번 등록했습니다");
         return;
     }
 
@@ -123,16 +120,18 @@ void UEngineWindow::Create(std::string_view _TitleName, std::string_view _ClassN
 {
     if (false == WindowClasss.contains(_ClassName.data()))
     {
-        MSGASSERT("등록하지 않은 클래스로 윈도우창을 만들려고 했습니다" + std::string(_ClassName));
+        MSGASSERT(std::string(_ClassName) + " 등록하지 않은 클래스로 윈도우창을 만들려고 했습니다");
         return;
     }
 
-    WindowHandle = CreateWindowA(_ClassName.data(), _TitleName.data(), WS_OVERLAPPEDWINDOW,
-        0, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
+
+                                                //WS_OVERLAPPEDWINDOW
+    WindowHandle = CreateWindowA(_ClassName.data(), 0, WS_OVERLAPPED,
+        -10, 720, WS_SYSMENU, 360, nullptr, nullptr, hInstance, nullptr);
 
     if (!WindowHandle)
     {
-        MSGASSERT("윈도우 생성에 실패했습니다." + std::string(_TitleName));
+        MSGASSERT(std::string(_TitleName) + " 윈도우 생성에 실패했습니다.");
         return;
     }
 
@@ -155,6 +154,15 @@ void UEngineWindow::Open(std::string_view _TitleName /*= "Window"*/)
 
 void UEngineWindow::SetWindowTopMost()
 {
+
+    RECT rc1;
+    ::GetWindowRect(WindowHandle, &rc1);
     SetForegroundWindow(WindowHandle);
     SetWindowPos(WindowHandle, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW);
+
+    long style = ::GetWindowLongA(WindowHandle, GWL_STYLE);
+    style &= ~WS_CAPTION;
+    SetWindowLongA(WindowHandle, GWL_STYLE, style);
+
+    //SetWindowRgn(WindowHandle, hRgn, false);
 }

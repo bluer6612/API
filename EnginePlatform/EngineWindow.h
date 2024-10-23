@@ -27,7 +27,7 @@ public:
 	void Create(std::string_view _TitleName, std::string_view _ClassName = "Default");
 	void Create(std::string_view _ClassName = "Default");
 	void Open(std::string_view _TitleName = "Window");
-	void SetWindowTopMost()
+	void SetWindowTopMost();
 
 protected:
 
