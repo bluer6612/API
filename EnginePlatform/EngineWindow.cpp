@@ -1,6 +1,5 @@
 #include "EngineWindow.h"
 #include <EngineBase/EngineDebug.h>
-#include <windef.h>
 //#ifdef _WINDOWS
 //#include <Windows.h>
 //#elseif _¸®´ª½º
@@ -10,7 +9,6 @@
 
 HINSTANCE UEngineWindow::hInstance = nullptr;
 std::map<std::string, WNDCLASSEXA> UEngineWindow::WindowClasss;
-
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
@@ -111,6 +109,7 @@ UEngineWindow::~UEngineWindow()
 {
 }
 
+
 void UEngineWindow::Create(std::string_view _ClassName /*= "Default"*/)
 {
     Create("Window", _ClassName);
@@ -150,19 +149,4 @@ void UEngineWindow::Open(std::string_view _TitleName /*= "Window"*/)
 	ShowWindow(WindowHandle, SW_SHOW);
     UpdateWindow(WindowHandle);
 	// ShowWindow(WindowHandle, SW_HIDE);
-}
-
-void UEngineWindow::SetWindowTopMost()
-{
-
-    RECT rc1;
-    ::GetWindowRect(WindowHandle, &rc1);
-    SetForegroundWindow(WindowHandle);
-    SetWindowPos(WindowHandle, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW);
-
-    long style = ::GetWindowLongA(WindowHandle, GWL_STYLE);
-    style &= ~WS_CAPTION;
-    SetWindowLongA(WindowHandle, GWL_STYLE, style);
-
-    //SetWindowRgn(WindowHandle, hRgn, false);
 }

@@ -19,12 +19,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="EngineFunction.h" />
     <ClInclude Include="EngineWindow.h">
       <SubType>
       </SubType>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="EngineFunction.cpp" />
     <ClCompile Include="EngineWindow.cpp">
       <SubType>
       </SubType>

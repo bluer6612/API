@@ -27,9 +27,9 @@ public:
 	void Create(std::string_view _TitleName, std::string_view _ClassName = "Default");
 	void Create(std::string_view _ClassName = "Default");
 	void Open(std::string_view _TitleName = "Window");
-	void SetWindowTopMost();
 
 protected:
+	HWND WindowHandle = nullptr;
 
 private:
 	static HINSTANCE hInstance;
@@ -37,7 +37,6 @@ private:
 
 	// 리눅스에서는 컴파일이 안되거나 실행이 안되는 코드가 된다.
 	// hwnd => 위도우 창 1개
-	HWND WindowHandle = nullptr;
 
 };
 
