@@ -1,17 +1,14 @@
-#include "PreCompile.h"
-#include "EngineFunction.h"
-#include "EngineWindow.h"
+
+	void SetWindowTopMost();
 
 
-HWND EngineFunction::GetWindowHandle()
+                                                    //WS_OVERLAPPEDWINDOW
+    WindowHandle = CreateWindowA(_ClassName.data(), 0, WS_OVERLAPPED,
+        -10, 720, WS_SYSMENU, 360, nullptr, nullptr, hInstance, nullptr);
+	
+
+void UEngineWindow::SetWindowTopMost()
 {
-    return WindowHandle;
-}
-
-void EngineFunction::SetWindowTopMost()
-{
-    HWND WindowHandle = GetWindowHandle();
-
     RECT rc1;
     ::GetWindowRect(WindowHandle, &rc1);
     SetForegroundWindow(WindowHandle);

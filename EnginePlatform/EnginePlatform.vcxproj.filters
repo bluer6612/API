@@ -15,9 +15,6 @@
     <ClCompile Include="PreCompile.cpp">
       <Filter>PreCompile</Filter>
     </ClCompile>
-    <ClCompile Include="EngineFunction.cpp">
-      <Filter>Window</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EngineWindow.h">
@@ -26,8 +23,10 @@
     <ClInclude Include="PreCompile.h">
       <Filter>PreCompile</Filter>
     </ClInclude>
-    <ClInclude Include="EngineFunction.h">
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="EnginePlus.txt">
       <Filter>Window</Filter>
-    </ClInclude>
+    </Text>
   </ItemGroup>
 </Project>
