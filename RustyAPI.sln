@@ -3,16 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0. Base", "0. Base", "{A47D3410-535B-45B1-9B27-8104AF97D1D3}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Level0. Base", "Level0. Base", "{A47D3410-535B-45B1-9B27-8104AF97D1D3}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EnginePlatform", "EnginePlatform\EnginePlatform.vcxproj", "{F9CE566D-792C-41F3-A621-26F0A42CBA9C}"
 	ProjectSection(ProjectDependencies) = postProject
 		{47E3AAD8-CC6C-46C3-86C8-B7CA1A81DA66} = {47E3AAD8-CC6C-46C3-86C8-B7CA1A81DA66}
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. OS", "1. OS", "{9736908B-DAE2-4945-BB38-19B2DBE515F3}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Level1. OS", "Level1. OS", "{9736908B-DAE2-4945-BB38-19B2DBE515F3}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Engine", "2. Engine", "{C7010AB0-C593-44B0-9C87-F3564EBD0D6A}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Level2. Engine", "Level2. Engine", "{C7010AB0-C593-44B0-9C87-F3564EBD0D6A}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EngineCore", "EngineCore\EngineCore.vcxproj", "{E912F146-A8CE-43F3-AA89-C50B132307F5}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -20,9 +20,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EngineCore", "EngineCore\En
 		{F9CE566D-792C-41F3-A621-26F0A42CBA9C} = {F9CE566D-792C-41F3-A621-26F0A42CBA9C}
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Contents", "3. Contents", "{2FAAA4AE-9A61-4F74-B9F4-2C801708DAE9}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Level3. Contents", "Level3. Contents", "{2FAAA4AE-9A61-4F74-B9F4-2C801708DAE9}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. App", "4. App", "{409FE0F6-F160-4A48-8CDD-53B83A26C2A3}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Level4. App", "Level4. App", "{409FE0F6-F160-4A48-8CDD-53B83A26C2A3}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ContentsProject", "ContentsProject\ContentsProject.vcxproj", "{FF6353C1-F445-4001-AA75-89EA5F23AD81}"
 	ProjectSection(ProjectDependencies) = postProject

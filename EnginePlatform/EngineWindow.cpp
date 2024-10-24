@@ -94,7 +94,7 @@ int UEngineWindow::WindowMessageLoop(EngineDelegate _StartFunction, EngineDelega
     // 프로그램 시작하고 딱 1번 해야할일 있다면 여기에 넣어라.
     _StartFunction();
 
-    while (WindowCount)
+    while (0 != WindowCount)
     {
         // if (!TranslateAccelerator(msg.hwnd, nullptr, &msg))  => 윈도우 단축키 자체를 사용하지
         // 않을 것이므로 그냥 무시
@@ -179,6 +179,11 @@ void UEngineWindow::Open(std::string_view _TitleName /*= "Window"*/)
     {
         // 만들어
         Create("Window");
+    }
+
+    if (0 == WindowHandle)
+    {
+        return;
     }
 
 	// 단순히 윈도창을 보여주는 것만이 아니라
