@@ -14,6 +14,14 @@ public:
 	ULevel& operator=(const ULevel& _Other) = delete;
 	ULevel& operator=(ULevel&& _Other) noexcept = delete;
 
+	void BeginPlay()
+	{
+
+	}
+	void Tick()
+	{
+	}
+
 protected:
 
 private:

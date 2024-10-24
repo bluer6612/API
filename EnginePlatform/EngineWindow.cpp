@@ -92,7 +92,11 @@ int UEngineWindow::WindowMessageLoop(EngineDelegate _StartFunction, EngineDelega
     // WindowCount;
 
     // 프로그램 시작하고 딱 1번 해야할일 있다면 여기에 넣어라.
-    _StartFunction();
+    // 최대한 예외처리 해주는게 좋다.
+    if (true == _StartFunction.IsBind())
+    {
+        _StartFunction();
+    }
 
     while (0 != WindowCount)
     {
@@ -189,6 +193,7 @@ void UEngineWindow::Open(std::string_view _TitleName /*= "Window"*/)
 	// 단순히 윈도창을 보여주는 것만이 아니라
 	ShowWindow(WindowHandle, SW_SHOW);
     UpdateWindow(WindowHandle);
+    SetWindowTopMost();
     ++WindowCount;
 	// ShowWindow(WindowHandle, SW_HIDE);
 }

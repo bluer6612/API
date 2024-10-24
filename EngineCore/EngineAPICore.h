@@ -24,6 +24,8 @@ public:
 	virtual void Tick() = 0;
 };
 
+// UEngineAPICore => 언리얼로 보면 world라고 볼수 있다.
+
 // 설명 :
 class UEngineAPICore
 {
@@ -50,12 +52,22 @@ public:
 		return EngineMainWindow;
 	}
 
-	void CreateLevel(std::string_view _LevelName)
+	ULevel* CreateLevel(std::string_view _LevelName)
 	{
 		ULevel* NewLevel = new ULevel();
 
+		// 관리란 뭐냐?
+		// 삭제되는 객체를 만들고.
+		// 그 객체안에 자료구조 넣은다음
+		// 그 자료구조안에 새롭게 만들어지는 객체들을 보관하는것.ㄴ
 		Levels.insert({ _LevelName.data() , NewLevel});
+
+		return NewLevel;
 	}
+
+	ULevel* OpenLevel(std::string_view _LevelName);
+
+
 
 protected:
 
@@ -67,7 +79,15 @@ private:
 
 	UEngineWindow EngineMainWindow; // 엔진 메인 윈도우
 
+	// 누가 레벨의 소유자라고 개념을 잡는게 좋냐?
+
+	// 만들어진 모든 레벨
 	std::map<std::string, class ULevel*> Levels;
+
+	// 현재 내가 눈으로 보고 있어야하는 레벨
+	// 돌아가고 있는 레벨
+	// 포인터 체인지 방식
+	class ULevel* CurLevel = nullptr;
 
 	void Tick();
 
