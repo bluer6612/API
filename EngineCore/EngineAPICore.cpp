@@ -39,8 +39,11 @@ int UEngineAPICore::EngineStart(HINSTANCE _Inst, UContentsCore* _UserCore)
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
 	UserCore = _UserCore;
+	WNDCLASSEXA _wcex = WNDCLASSEXA();
+	WNDCLASSEXA _wcexS = WNDCLASSEXA();
 
-	UEngineWindow::EngineWindowInit(_Inst);
+	UEngineWindow::EngineWindowInit(_Inst, _wcex);
+	UEngineWindow::EngineWindowInit(_Inst, _wcexS);
 
 	// 객체 안만들면 객체지향이 아닌거 같아서 객체로 하자.
 	UEngineAPICore Core = UEngineAPICore();

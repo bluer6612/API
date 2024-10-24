@@ -13,11 +13,14 @@
 
 // 정신 잘 붙
 
+static int ScreenX = GetSystemMetrics(SM_CXSCREEN);
+static int ScreenY = GetSystemMetrics(SM_CYSCREEN);
+
 // 설명 :
 class UEngineWindow
 {
 public:
-	static void EngineWindowInit(HINSTANCE _Instance);
+	static void EngineWindowInit(HINSTANCE _Instance, WNDCLASSEXA _wcex);
 	static void CreateWindowClass(const WNDCLASSEXA& _Class);
 
 	static int WindowMessageLoop(EngineDelegate _StartFunction, EngineDelegate _FrameFunction);
@@ -33,7 +36,8 @@ public:
 
 	void Create(std::string_view _TitleName, std::string_view _ClassName = "Default");
 	void Open(std::string_view _TitleName = "Window");
-	void SetWindowTopMost();
+	void SetWindowTopMost(HWND _WindowHandle);
+	void SetWindowOpacity(HWND _WindowHandle);
 
 	inline HDC GetBackBuffer()
 	{
@@ -59,6 +63,7 @@ private:
 	// 윈도우에서 뭔가를 그리려는 함수의 대부분의 첫번째 인자는 hdc일것입니다.
 	HDC BackBuffer = nullptr;
 	HWND WindowHandle = nullptr;
+	HWND WindowHandleSub = nullptr;
 };
 
 
