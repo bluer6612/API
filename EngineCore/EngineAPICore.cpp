@@ -18,11 +18,26 @@ UEngineAPICore::UEngineAPICore()
 
 UEngineAPICore::~UEngineAPICore()
 {
+	std::map<std::string, class ULevel*>::iterator StartIter = Levels.begin();
+	std::map<std::string, class ULevel*>::iterator EndIter = Levels.end();
+
+	for (; StartIter != EndIter; ++StartIter)
+	{
+		if (nullptr != StartIter->second)
+		{
+			delete StartIter->second;
+			StartIter->second = nullptr;
+		}
+	}
+
+	Levels.clear();
 }
 
 
 int UEngineAPICore::EngineStart(HINSTANCE _Inst, UContentsCore* _UserCore)
 {
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+
 	UserCore = _UserCore;
 
 	UEngineWindow::EngineWindowInit(_Inst);

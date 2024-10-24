@@ -74,7 +74,7 @@ int UEngineWindow::WindowMessageLoop(EngineDelegate _StartFunction, EngineDelega
 {
     // 단축키 인데 게임
     // HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_WINDOWSPROJECT2));
-    MSG msg;
+    MSG msg = MSG();
 
     // 기본 메시지 루프입니다:
     // 메세지 루프가 getMessage라면 게임의 루프를 돌릴수 없다.
