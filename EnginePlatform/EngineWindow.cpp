@@ -70,7 +70,7 @@ void UEngineWindow::EngineWindowInit(HINSTANCE _Instance)
     CreateWindowClass(wcex);
 }
 
-int UEngineWindow::WindowMessageLoop(EngineDelegate _FrameFunction)
+int UEngineWindow::WindowMessageLoop(EngineDelegate _StartFunction, EngineDelegate _FrameFunction)
 {
     // 단축키 인데 게임
     // HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_WINDOWSPROJECT2));
@@ -90,6 +90,9 @@ int UEngineWindow::WindowMessageLoop(EngineDelegate _FrameFunction)
     // 메세지가 있다 => 처리하고 리턴
 
     // WindowCount;
+
+    // 프로그램 시작하고 딱 1번 해야할일 있다면 여기에 넣어라.
+    _StartFunction();
 
     while (WindowCount)
     {
@@ -180,7 +183,6 @@ void UEngineWindow::Open(std::string_view _TitleName /*= "Window"*/)
 
 	// 단순히 윈도창을 보여주는 것만이 아니라
 	ShowWindow(WindowHandle, SW_SHOW);
-    SetWindowTopMost();
     UpdateWindow(WindowHandle);
     ++WindowCount;
 	// ShowWindow(WindowHandle, SW_HIDE);
