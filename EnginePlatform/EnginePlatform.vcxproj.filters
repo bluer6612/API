@@ -24,9 +24,4 @@
       <Filter>PreCompile</Filter>
     </ClInclude>
   </ItemGroup>
-  <ItemGroup>
-    <Text Include="EnginePlus.txt">
-      <Filter>Window</Filter>
-    </Text>
-  </ItemGroup>
 </Project>

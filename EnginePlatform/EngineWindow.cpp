@@ -174,12 +174,14 @@ void UEngineWindow::Create(std::string_view _TitleName, std::string_view _ClassN
         return;
     }
 
+    // 윈도우가 만들어지면 hdc를 여기서 얻어올 겁니다.
+    BackBuffer = GetDC(WindowHandle);
 }
 
 void UEngineWindow::Open(std::string_view _TitleName /*= "Window"*/)
 {
     // 어 window 안만들고 띄우려고 하네?
-    if (nullptr == WindowHandle)
+    if (0 == WindowHandle)
     {
         // 만들어
         Create("Window");
