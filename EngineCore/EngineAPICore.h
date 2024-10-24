@@ -52,9 +52,13 @@ public:
 		return EngineMainWindow;
 	}
 
+	template<typename GameModeType, typename MainPawnType>
 	ULevel* CreateLevel(std::string_view _LevelName)
 	{
 		ULevel* NewLevel = new ULevel();
+
+		// 게임모드가 Level의 특성을 설정하는 중요객체이기 때문이다.
+		NewLevel->CreateGameMode<GameModeType, MainPawnType>();
 
 		// 관리란 뭐냐?
 		// 삭제되는 객체를 만들고.
@@ -65,7 +69,7 @@ public:
 		return NewLevel;
 	}
 
-	ULevel* OpenLevel(std::string_view _LevelName);
+	void OpenLevel(std::string_view _LevelName);
 
 
 

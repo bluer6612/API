@@ -83,10 +83,11 @@ void UEngineAPICore::Tick()
 	}
 
 	CurLevel->Tick();
+	CurLevel->Render();
 }
 
 
-ULevel* UEngineAPICore::OpenLevel(std::string_view _LevelName)
+void UEngineAPICore::OpenLevel(std::string_view _LevelName)
 {
 	std::string ChangeName = _LevelName.data();
 
@@ -97,6 +98,9 @@ ULevel* UEngineAPICore::OpenLevel(std::string_view _LevelName)
 	//}
 
 	//// 최신 방식
+	// 주의할 점이 하나가 있다.
+	// 없으면 노드를 insert까지 해버린다.
+	// 내부에서 없으면 만든다까지 겸하고 있다.
 	// CurLevel = Levels[ChangeName];
 
 	std::map<std::string, class ULevel*>::iterator FindIter = Levels.find(ChangeName);
