@@ -15,9 +15,6 @@ void EduContentsCore::BeginPlay()
 {
 	UEngineAPICore::GetCore()->CreateLevel("Title");
 	UEngineAPICore::GetCore()->CreateLevel("Play");
-	UEngineAPICore::GetCore()->CreateLevel("End");
-	// CreateLevel();
-
 }
 
 void EduContentsCore::Tick()
