@@ -25,6 +25,8 @@
 HINSTANCE UEngineWindow::hInstance = nullptr;
 std::map<std::string, WNDCLASSEXA> UEngineWindow::WindowClasss;
 int WindowCount = 0;
+int WindowClassCount = 0;
+int WindowClassIndex[] = { 1, 2, 3, 4, 0 };
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
@@ -64,10 +66,15 @@ void UEngineWindow::EngineWindowInit(HINSTANCE _Instance, WNDCLASSEXA _wcex)
     _wcex.hCursor = LoadCursor(nullptr, IDC_ARROW);
     _wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 9);
     _wcex.lpszMenuName = nullptr;
-    _wcex.lpszClassName = "Default" + WindowCount;
+    char a[100] = "Default";
+    *a = *a + (WindowClassIndex[WindowClassCount] + '0');
+    //_wcex.lpszClassName = ("Default" + (WindowClassIndex[WindowClassCount] + '0'));
+    _wcex.lpszClassName = a;
+    //_wcex.lpszClassName = "Default";
     _wcex.hIconSm = nullptr;
-    ++WindowCount;
     CreateWindowClass(_wcex);
+
+    ++WindowClassCount;
 }
 
 int UEngineWindow::WindowMessageLoop(EngineDelegate _StartFunction, EngineDelegate _FrameFunction)
@@ -169,8 +176,8 @@ void UEngineWindow::Create(std::string_view _TitleName, std::string_view _ClassN
     WindowHandle = CreateWindowA(_ClassName.data(), 0, WS_OVERLAPPED,
         -10, (ScreenY - (ScreenY / 3)), WS_SYSMENU, ScreenY / 3, nullptr, nullptr, hInstance, nullptr);
 
-    WindowHandleSub = CreateWindowA(_ClassName.data() + 'S', 0, WS_OVERLAPPED,
-        -10, ScreenY / 3, WS_SYSMENU, (ScreenY - (ScreenY / 3)), WindowHandle, nullptr, hInstance + 'S', nullptr);
+    WindowHandleSub = CreateWindowA(_ClassName.data(), 0, WS_OVERLAPPED,
+        -10, ScreenY / 3, WS_SYSMENU, (ScreenY - (ScreenY / 3)), WindowHandle, nullptr, hInstance , nullptr);
 
     if (nullptr == WindowHandle)
     {
@@ -182,13 +189,13 @@ void UEngineWindow::Create(std::string_view _TitleName, std::string_view _ClassN
     BackBuffer = GetDC(WindowHandle);
 }
 
-void UEngineWindow::Open(std::string_view _TitleName /*= "Window"*/)
+void UEngineWindow::Open(std::string_view _TitleName, std::string_view _ClassName)
 {
     // 어 window 안만들고 띄우려고 하네?
     if (0 == WindowHandle)
     {
         // 만들어
-        Create("Window");
+        Create(_TitleName, _ClassName);
     }
 
     if (0 == WindowHandle)
@@ -200,11 +207,13 @@ void UEngineWindow::Open(std::string_view _TitleName /*= "Window"*/)
 	ShowWindow(WindowHandle, SW_SHOW);
     UpdateWindow(WindowHandle);
     SetWindowTopMost(WindowHandle);
+    ++WindowCount;
 
     ShowWindow(WindowHandleSub, SW_SHOW);
     UpdateWindow(WindowHandleSub);
     SetWindowTopMost(WindowHandleSub);
     SetWindowOpacity(WindowHandleSub);
+    ++WindowCount;
 
 	// ShowWindow(WindowHandle, SW_HIDE);
 }

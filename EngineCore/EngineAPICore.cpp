@@ -1,5 +1,6 @@
 #include "PreCompile.h"
 #include "EngineAPICore.h"
+#include <string>
 
 #include <EnginePlatform/EngineWindow.h>
 #include <EngineBase/EngineDelegate.h>
@@ -47,7 +48,7 @@ int UEngineAPICore::EngineStart(HINSTANCE _Inst, UContentsCore* _UserCore)
 
 	// 객체 안만들면 객체지향이 아닌거 같아서 객체로 하자.
 	UEngineAPICore Core = UEngineAPICore();
-	Core.EngineMainWindow.Open();
+	Core.EngineMainWindow.Open("Window", _wcex.lpszClassName);
 	MainCore = &Core;
 
 	EngineDelegate Start = EngineDelegate(std::bind(EngineBeginPlay));

@@ -34,8 +34,11 @@ public:
 	UEngineWindow& operator=(const UEngineWindow& _Other) = delete;
 	UEngineWindow& operator=(UEngineWindow&& _Other) noexcept = delete;
 
-	void Create(std::string_view _TitleName, std::string_view _ClassName = "Default");
-	void Open(std::string_view _TitleName = "Window");
+	void Create(std::string_view _TitleName, std::string_view _ClassName);
+	void Open(std::string_view _TitleName, std::string_view _ClassName);
+
+	//void Create(std::string_view _TitleName, std::string_view _ClassName = "Default");
+	//void Open(std::string_view _TitleName = "Window");
 	void SetWindowTopMost(HWND _WindowHandle);
 	void SetWindowOpacity(HWND _WindowHandle);
 
