@@ -17,6 +17,18 @@ void APlayGameMode::BeginPlay()
 	// 플레이어가 만들어져 있다면. BeginPlay();
 	// 감안하고 짜셔야 합니다.
 
+	// class BByoRed;
+	// class BByoGreen;
+	// class BByoGreen;
+
+	// class LeftPlayer;
+	// class RightPlayer;
+	// class JumpPlayer;
+
+	// class Player;
+
+
+	// GetWorld()->SpawnActor<TitleLogo>();
 
 	// GetWorld()->SpawnActor<BackGround>();
 

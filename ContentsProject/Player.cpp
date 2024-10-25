@@ -22,7 +22,26 @@ void APlayer::BeginPlay()
 
 }
 
-void APlayer::Tick()
+void APlayer::Tick(float _DeltaTime)
 {
-	AddActorLoaction(FVector2D::RIGHT * 0.0001f);
+	// Time::DeltaTime;
+
+	// 여러분들의 컴퓨터가 1프레임이고
+	// 선생님의 컴퓨터가 2프레임이
+
+	// 게임시작하고 얼마지났다?
+
+	//         여러분  제컴퓨터는
+	// 0.5초             0.5        =+> 0.5         // 0.0, 0.0, => 0.5, 0.0
+	// 1.0초    1.0f     0.5        =+> 1.0         // 0.5, 0.0, => 1.0, 0.0
+	// 1.5초             0.5        =+> 1.5 - 1.0
+	// 2.0초    1.0f     0.5        =+> 1.0         // 1.0, 0.0, => 2.0, 0.0
+
+	// 델타임
+
+
+	// 엔진에서 
+	// 0.0, 0.0, => 1.0, 0.0
+
+	AddActorLoaction(FVector2D::RIGHT * _DeltaTime * 100);
 }

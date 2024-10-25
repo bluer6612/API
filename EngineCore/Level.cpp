@@ -36,7 +36,7 @@ void ULevel::Tick()
 	{
 		AActor* CurActor = *StartIter;
 
-		CurActor->Tick();
+		CurActor->Tick(1.0f);
 	}
 }
 
