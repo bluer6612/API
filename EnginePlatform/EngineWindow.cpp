@@ -154,6 +154,11 @@ UEngineWindow::UEngineWindow()
 
 UEngineWindow::~UEngineWindow()
 {
+    if (nullptr != WindowImage)
+    {
+        delete WindowImage;
+        WindowImage = nullptr;
+    }
 }
 
 void UEngineWindow::Create(std::string_view _TitleName, std::string_view _ClassName)
@@ -181,7 +186,14 @@ void UEngineWindow::Create(std::string_view _TitleName, std::string_view _ClassN
     }
 
     // 윈도우가 만들어지면 hdc를 여기서 얻어올 겁니다.
-    BackBuffer = GetDC(WindowHandle);
+    HDC WindowMainDC = GetDC(WindowHandle);
+
+    // BackBufferImage.Copy({ 100,100 }, {50, 50}, PlayerImage);
+
+    WindowImage = new UEngineWinImage();
+
+    // 이건 만든다는 개념이 아니다.
+    WindowImage->Create(WindowMainDC);
 }
 
 void UEngineWindow::Open(std::string_view _TitleName /*= "Window"*/)
@@ -218,4 +230,40 @@ void UEngineWindow::SetWindowTopMost()
     SetWindowLongA(WindowHandle, GWL_STYLE, style);
 
     //SetWindowRgn(WindowHandle, hRgn, false);
+}
+
+
+void UEngineWindow::SetWindowPosAndScale(FVector2D _Pos, FVector2D _Scale)
+{
+    // 여러번 호출하면 
+    //if (nullptr != BackBufferImage)
+    //{
+    //    // 기존 백버퍼는 지워버리고
+    //    delete BackBufferImage;
+    //    BackBufferImage = nullptr;
+    //}
+
+    //BackBufferImage = new UEngineWinImage();
+    //BackBufferImage->Create(_Scale);
+
+    // 
+
+    // BackBufferImage.Create(_Scale);
+
+    int a = 0;
+
+    // window의 크기 지정하는 함수들은
+
+    RECT Rc = { 0, 0, _Scale.iX(), _Scale.iY() };
+
+    // 이게 그 계산해주는 함수이다.
+    // 타이틀바 크기까지 합쳐진 크기로 준다.
+    // 윈도우 입장
+    // 현재 윈도우의 스타일을 넣어줘야 한다.
+
+    // 그러면 또 이녀석은 
+    // 윈도우에서 가져야할 위치를 포함한 크기를 주게 된다.
+    AdjustWindowRect(&Rc, WS_OVERLAPPEDWINDOW, FALSE);
+
+    ::SetWindowPos(WindowHandle, nullptr, _Pos.iX(), _Pos.iY(), Rc.right - Rc.left, Rc.bottom - Rc.top, SWP_NOZORDER);
 }

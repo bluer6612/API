@@ -9,6 +9,8 @@
 
 // user header
 #include <EngineBase/EngineDelegate.h>
+#include <EngineBase/EngineMath.h>
+#include "EngineWinImage.h"
 
 static int ScreenX = GetSystemMetrics(SM_CXSCREEN);
 static int ScreenY = GetSystemMetrics(SM_CYSCREEN);
@@ -35,9 +37,9 @@ public:
 	void Open(std::string_view _TitleName = "Window");
 	void SetWindowTopMost();
 
-	inline HDC GetBackBuffer()
+	inline HDC GetWindowMainDC()
 	{
-		return BackBuffer;
+		return WindowImage.GetDC();
 	}
 
 	// 실력이 낮을수록 남과 공유하려고 안한다.
@@ -50,6 +52,7 @@ public:
 		SetWindowTextA(WindowHandle, Text.data());
 	}
 
+	void SetWindowPosAndScale(FVector2D _Pos, FVector2D _Scale);
 protected:
 
 private:
@@ -66,7 +69,18 @@ private:
 	// 리눅스에서는 컴파일이 안되거나 실행이 안되는 코드가 된다.
 	// hwnd => 위도우 창 1개
 	// 윈도우에서 뭔가를 그리려는 함수의 대부분의 첫번째 인자는 hdc일것입니다.
-	HDC BackBuffer = nullptr;
+	// HDC를 그대로 사용할리가 없죠?
+
+	// 백버퍼에 그린걸 단 1번 windowdc에 복사붙여넣기 식으로 그릴것이다.
+	// HDC BackBufferDC = nullptr;
+
+	// 여기에 그려야만 나오는데.
+	// HDC WindowMainDC = nullptr;
+
+	UEngineWinImage* BackBufferImage = nullptr;
+
+	// 윈도우 이미지로 랩핑되었다.
+	UEngineWinImage* WindowImage = nullptr;
 	HWND WindowHandle = nullptr;
 };
 
