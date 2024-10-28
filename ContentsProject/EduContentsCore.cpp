@@ -5,6 +5,7 @@
 #include "PlayGameMode.h"
 #include "Player.h"
 
+
 EduContentsCore::EduContentsCore()
 {
 }
@@ -16,6 +17,8 @@ EduContentsCore::~EduContentsCore()
 // 엔진이 실행되고 단 1번 실행된다.
 void EduContentsCore::BeginPlay()
 {
+	// MyWindow.Open();
+
 	// 아무 쓸모 없는 코드.
 	// 애는 님들이 지워줘야한다.
 	// TitleLevel = new ULevel();

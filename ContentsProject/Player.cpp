@@ -1,6 +1,7 @@
 #include "PreCompile.h"
 #include "Player.h"
 #include <EngineCore/EngineAPICore.h>
+#include <EnginePlatform/EngineInput.h>
 
 APlayer::APlayer()
 {
@@ -19,11 +20,37 @@ void APlayer::BeginPlay()
 	// 기본크기가 존재하지 않으므로 
 	// 기본 크기 및 기본 스케일을 지정해줘야 합니다.
 
+	// 키를 만든다.
+	// 1번 케이스
+	// EngineInput::CreateKey("PlayerMove", 'A');
+	// EngineInput::CreateKey("PlayerMove", 'A', APlayer::PlayerLeftMove);
 
+	// 2번
+	// EngineInput::BindAction('A', APlayer::PlayerLeftMove);
 }
 
 void APlayer::Tick(float _DeltaTime)
 {
+	//if (UEngineInput::GetInst().IsDown('A'))
+	//{
+	//	int a = 0;
+	//}
+
+	// EngineInput::GetFree(EngineKey::HOME)
+	// if (true == EngineInput::GetFree('A'))
+
+	//// 안누르고 있을때 
+	//if (true == EngineInput::GetFree("PlayerMove"))
+
+	//// 키를 땟을때
+	//if (true == EngineInput::GetUp("PlayerMove"))
+
+	//// 계속 누르는 도중
+	//if (true == EngineInput::GetPress("PlayerMove"))
+
+	//// 가장 처음 한번 눌렀을때
+	//if (true == EngineInput::GetDown("PlayerMove"))
+
 	// Time::DeltaTime;
 
 	// 여러분들의 컴퓨터가 1프레임이고
@@ -67,5 +94,27 @@ void APlayer::Tick(float _DeltaTime)
 	// EngineWindow가 우리엔진의 대표적인 랩핑 클래스입니다.
 	// WindowAPI의 기능을 절대로 그냥 공개하는 경우는 없다.
 
-	AddActorLoaction(FVector2D::RIGHT * _DeltaTime * Speed);
+	// 윈도우가 제공하는 기본 입력함수입니다.
+	// 입력버퍼는 윈도우가 알아서 처리해주기 때문에
+	// 입력이 있을때만 0이 아닌 수를 리턴하는 함수입니다.
+
+	if (0 != GetAsyncKeyState('A'))
+	{
+		AddActorLoaction(FVector2D::RIGHT * _DeltaTime * Speed);
+	}
+
+	// 마우스 왼쪽 버튼입니다.
+	if (0 != GetAsyncKeyState(VK_LBUTTON))
+	{
+		AddActorLoaction(FVector2D::RIGHT * _DeltaTime * Speed);
+	}
+
+	GetAsyncKeyState(VK_HOME);
+
+	// 키보드의 거의 모든 키를 다 제공해 줍니다.
+	if (0 != GetAsyncKeyState(VK_LBUTTON))
+	{
+		AddActorLoaction(FVector2D::RIGHT * _DeltaTime * Speed);
+	}
+
 }

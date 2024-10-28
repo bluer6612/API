@@ -1,5 +1,6 @@
 #pragma once
 #include <EngineCore/EngineAPICore.h>
+#include <EnginePlatform/EngineWindow.h>
 
 // Ό³Έν :
 class EduContentsCore : public UContentsCore
@@ -21,5 +22,6 @@ protected:
 
 private:
 	ULevel* TitleLevel;
+	// UEngineWindow MyWindow;
 };
 
