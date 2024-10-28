@@ -23,6 +23,14 @@
 // 여기에서 싱글톤을 설명하겠다.
 // 설명 : 
 
+enum class KeyEvent
+{
+	Down,
+	Press,
+	Free,
+	Up,
+};
+
 class UEngineInput
 {
 public:
@@ -104,20 +112,35 @@ private:
 
 		float PressTime = 0.0f;
 
-		std::vector<std::function<void()>> Events;
+		std::vector<std::function<void(float)>> PressEvents;
+		std::vector<std::function<void(float)>> DownEvents;
+		std::vector<std::function<void(float)>> UpEvents;
+		std::vector<std::function<void(float)>> FreeEvents;
+
+
+		// 벡터나 리스트를 사용하면 에러가 난다.
+		// 학생들이 대처를 못하는데
+		// 결국 맨위로 올라가면 됩니다.
+
+		UEngineKey()
+		{
+		}
 
 		UEngineKey(int _Key)
 			: Key(_Key)
 		{
-
 		}
 
-		void KeyCheck()
-		{
-			GetAsyncKeyState(Key);
-		}
+		void EventCheck(float _DeltaTime);
+
+		void KeyCheck(float _DeltaTime);
+		
 	};
 
+
+public:
+	void KeyCheck(float _DeltaTime);
+	void EventCheck(float _DeltaTime);
 
 	// UEngineInput::GetInst().IsDown('A')
 
@@ -126,11 +149,65 @@ private:
 		if (false == Keys.contains(_KeyIndex))
 		{
 			MSGASSERT("아직도 등록되지 않은 키가 존재합니다.");
-			return;
+			return false;
 		}
+
+		// 
+		// Keys[_KeyIndex] => 없으면 내부에서 노드를 만든다.
+		// UMapNode
+		// {
+		//     UEngineKey Value = UEngineKey();
+		// }
 
 		return Keys[_KeyIndex].IsDown;
 	}
+
+	bool IsUp(int _KeyIndex)
+	{
+		if (false == Keys.contains(_KeyIndex))
+		{
+			MSGASSERT("아직도 등록되지 않은 키가 존재합니다.");
+			return false;
+		}
+
+		return Keys[_KeyIndex].IsUp;
+	}
+
+	bool IsPress(int _KeyIndex)
+	{
+		if (false == Keys.contains(_KeyIndex))
+		{
+			MSGASSERT("아직도 등록되지 않은 키가 존재합니다.");
+			return false;
+		}
+
+		return Keys[_KeyIndex].IsPress;
+	}
+
+	float IsPreeTime(int _KeyIndex)
+	{
+		if (false == Keys.contains(_KeyIndex))
+		{
+			MSGASSERT("아직도 등록되지 않은 키가 존재합니다.");
+			return false;
+		}
+
+		return Keys[_KeyIndex].PressTime;
+	}
+
+
+	bool IsFree(int _KeyIndex)
+	{
+		if (false == Keys.contains(_KeyIndex))
+		{
+			MSGASSERT("아직도 등록되지 않은 키가 존재합니다.");
+			return false;
+		}
+
+		return Keys[_KeyIndex].IsFree;
+	}
+
+	void BindAction(int _KeyIndex, KeyEvent _EventType,  std::function<void(float)> _Function);
 
 protected:
 

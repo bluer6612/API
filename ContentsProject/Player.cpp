@@ -2,11 +2,12 @@
 #include "Player.h"
 #include <EngineCore/EngineAPICore.h>
 #include <EnginePlatform/EngineInput.h>
+#include "Bullet.h"
 
 APlayer::APlayer()
 {
 	// UEngineAPICore::GetCore()->CreateLevel("Title");
-	SetActorLoaction({100, 100});
+	SetActorLocation({100, 100});
 	SetActorScale({ 100, 100 });
 }
 
@@ -17,6 +18,12 @@ APlayer::~APlayer()
 
 void APlayer::BeginPlay()
 {
+	// 이벤트 방식으로 처리
+	UEngineInput::GetInst().BindAction('A', KeyEvent::Press, std::bind(&APlayer::LeftMove, this, std::placeholders::_1));
+	UEngineInput::GetInst().BindAction('D', KeyEvent::Press, std::bind(&APlayer::RightMove, this, std::placeholders::_1));
+	UEngineInput::GetInst().BindAction('S', KeyEvent::Press, std::bind(&APlayer::DownMove, this, std::placeholders::_1));
+	UEngineInput::GetInst().BindAction('W', KeyEvent::Press, std::bind(&APlayer::UpMove, this, std::placeholders::_1));
+
 	// 기본크기가 존재하지 않으므로 
 	// 기본 크기 및 기본 스케일을 지정해줘야 합니다.
 
@@ -24,9 +31,30 @@ void APlayer::BeginPlay()
 	// 1번 케이스
 	// EngineInput::CreateKey("PlayerMove", 'A');
 	// EngineInput::CreateKey("PlayerMove", 'A', APlayer::PlayerLeftMove);
-
 	// 2번
 	// EngineInput::BindAction('A', APlayer::PlayerLeftMove);
+
+
+}
+
+void APlayer::LeftMove(float _DeltaTime)
+{
+	AddActorLocation(FVector2D::LEFT * _DeltaTime * Speed);
+}
+
+void APlayer::RightMove(float _DeltaTime)
+{
+	AddActorLocation(FVector2D::RIGHT * _DeltaTime * Speed);
+}
+
+void APlayer::UpMove(float _DeltaTime)
+{
+	AddActorLocation(FVector2D::UP *_DeltaTime * Speed);
+}
+
+void APlayer::DownMove(float _DeltaTime)
+{
+	AddActorLocation(FVector2D::DOWN * _DeltaTime * Speed);
 }
 
 void APlayer::Tick(float _DeltaTime)
@@ -98,23 +126,30 @@ void APlayer::Tick(float _DeltaTime)
 	// 입력버퍼는 윈도우가 알아서 처리해주기 때문에
 	// 입력이 있을때만 0이 아닌 수를 리턴하는 함수입니다.
 
-	if (0 != GetAsyncKeyState('A'))
-	{
-		AddActorLoaction(FVector2D::RIGHT * _DeltaTime * Speed);
-	}
+	//if (true == UEngineInput::GetInst().IsPress('D'))
+	//{
+	//	AddActorLocation(FVector2D::RIGHT * _DeltaTime * Speed);
+	//}
+	//if (true == UEngineInput::GetInst().IsPress('A'))
+	//{
+	//	AddActorLocation(FVector2D::LEFT * _DeltaTime * Speed);
+	//}
+	//if (true == UEngineInput::GetInst().IsPress('S'))
+	//{
+	//	AddActorLocation(FVector2D::DOWN * _DeltaTime * Speed);
+	//}
+	//if (true == UEngineInput::GetInst().IsPress('W'))
+	//{
+	//	AddActorLocation(FVector2D::UP * _DeltaTime * Speed);
+	//}
 
 	// 마우스 왼쪽 버튼입니다.
-	if (0 != GetAsyncKeyState(VK_LBUTTON))
+	// 눌린 한순간만 체크할수 있는 기능이 필요하다.
+	if (3.0f < UEngineInput::GetInst().IsPreeTime(VK_LBUTTON))
 	{
-		AddActorLoaction(FVector2D::RIGHT * _DeltaTime * Speed);
-	}
-
-	GetAsyncKeyState(VK_HOME);
-
-	// 키보드의 거의 모든 키를 다 제공해 줍니다.
-	if (0 != GetAsyncKeyState(VK_LBUTTON))
-	{
-		AddActorLoaction(FVector2D::RIGHT * _DeltaTime * Speed);
+		// 콘솔에서 슈팅 못만들면 API와서도 못만들어요.
+		ABullet* Ptr = GetWorld()->SpawnActor<ABullet>();
+		Ptr->SetActorLocation(GetActorLocation());
 	}
 
 }

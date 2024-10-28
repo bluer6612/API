@@ -4,6 +4,89 @@
 // UEngineInput UEngineInput::Inst = UEngineInput();
 // UEngineInput* UEngineInput::Inst = nullptr;
 
+// Input 내부에 Key 내부의 keyCheck 함수
+void UEngineInput::UEngineKey::KeyCheck(float _DeltaTime)
+{
+	// if (true == GetAsyncKeyState('B'))
+	if (0 != GetAsyncKeyState(Key))
+	{
+		// 게임엔진에서 시간재는법
+		// 특정 float을 만들어 놓고 그 float 계속 델타타임을 더해주면
+		PressTime += _DeltaTime;
+		// 이전전까지 안눌려있어다면
+		if (true == IsFree)
+		{
+			IsDown = true;
+			IsPress = true;
+			IsFree = false;
+			IsUp = false;
+		}
+		else if(true == IsDown)
+		{
+			IsDown = false;
+			IsPress = true;
+			IsFree = false;
+			IsUp = false;
+		}
+
+		// B키가 눌렸다면
+	} else 
+	{
+		PressTime = 0.0f;
+		// B키가 안눌렸다면
+		if (true == IsPress)
+		{
+			IsDown = false;
+			IsPress = false;
+			IsFree = true;
+			IsUp = true;
+		}
+		else if (true == IsUp)
+		{
+			IsDown = false;
+			IsPress = false;
+			IsFree = true;
+			IsUp = false;
+		}
+
+	}
+}
+
+void UEngineInput::UEngineKey::EventCheck(float _DeltaTime)
+{
+	if (true == IsDown)
+	{
+		for (size_t i = 0; i < DownEvents.size(); i++)
+		{
+			DownEvents[i](_DeltaTime);
+		}
+	}
+
+	if (true == IsPress)
+	{
+		for (size_t i = 0; i < PressEvents.size(); i++)
+		{
+			PressEvents[i](_DeltaTime);
+		}
+	}
+
+	if (true == IsFree)
+	{
+		for (size_t i = 0; i < FreeEvents.size(); i++)
+		{
+			FreeEvents[i](_DeltaTime);
+		}
+	}
+
+	if (true == IsUp)
+	{
+		for (size_t i = 0; i < UpEvents.size(); i++)
+		{
+			UpEvents[i](_DeltaTime);
+		}
+	}
+}
+
 UEngineInput::UEngineInput()
 {
 	// 여기에 
@@ -115,7 +198,61 @@ UEngineInput::UEngineInput()
 
 }
 
+void UEngineInput::EventCheck(float _DeltaTime)
+{
+	std::map<int, UEngineKey>::iterator StartIter = Keys.begin();
+	std::map<int, UEngineKey>::iterator EndIter = Keys.end();
+
+	for (; StartIter != EndIter; ++StartIter)
+	{
+		// 명시적이기 잖고 디버깅이 힘들어서 별로 좋아하지 않게 되었다.
+		UEngineKey& CurKey = StartIter->second;
+		CurKey.EventCheck(_DeltaTime);
+	}
+}
+
+void UEngineInput::KeyCheck(float _DeltaTime)
+{
+	std::map<int, UEngineKey>::iterator StartIter = Keys.begin();
+	std::map<int, UEngineKey>::iterator EndIter = Keys.end();
+
+	for (; StartIter != EndIter; ++StartIter)
+	{
+		// 명시적이기 잖고 디버깅이 힘들어서 별로 좋아하지 않게 되었다.
+		UEngineKey& CurKey = StartIter->second;
+		CurKey.KeyCheck(_DeltaTime);
+	}
+}
+
 UEngineInput::~UEngineInput()
 {
 }
 
+void UEngineInput::BindAction(int _KeyIndex, KeyEvent _EventType, std::function<void(float) > _Function)
+{
+	if (false == Keys.contains(_KeyIndex))
+	{
+		MSGASSERT("아직도 등록되지 않은 키가 존재합니다.");
+		return;
+	}
+
+	switch (_EventType)
+	{
+	case KeyEvent::Down:
+		Keys[_KeyIndex].DownEvents.push_back(_Function);
+		break;
+	case KeyEvent::Press:
+		Keys[_KeyIndex].PressEvents.push_back(_Function);
+		break;
+	case KeyEvent::Free:
+		Keys[_KeyIndex].FreeEvents.push_back(_Function);
+		break;
+	case KeyEvent::Up:
+		Keys[_KeyIndex].UpEvents.push_back(_Function);
+		break;
+	default:
+		break;
+	}
+
+
+}
