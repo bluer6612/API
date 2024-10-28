@@ -1,10 +1,19 @@
 
 	void SetWindowTopMost();
 
+    static int ScreenX = GetSystemMetrics(SM_CXSCREEN);
+    static int ScreenY = GetSystemMetrics(SM_CYSCREEN);
 
-                                                    //WS_OVERLAPPEDWINDOW
+
+    //WS_OVERLAPPEDWINDOW
+    /*WindowHandle = CreateWindowA(_ClassName.data(), 0, WS_OVERLAPPED,
+        -10, 720, WS_SYSMENU, 360, nullptr, nullptr, hInstance, nullptr);*/
+
     WindowHandle = CreateWindowA(_ClassName.data(), 0, WS_OVERLAPPED,
-        -10, 720, WS_SYSMENU, 360, nullptr, nullptr, hInstance, nullptr);
+        -10, (ScreenY - (ScreenY / 3)), WS_SYSMENU, ScreenY / 3, nullptr, nullptr, hInstance, nullptr);
+
+    /*WindowHandleSub = CreateWindowA(_ClassName.data(), 0, WS_OVERLAPPED,
+        -10, ScreenY / 3, WS_SYSMENU, (ScreenY - (ScreenY / 3)), WindowHandle, nullptr, hInstance, nullptr);*/
 
         
     SetWindowTopMost();

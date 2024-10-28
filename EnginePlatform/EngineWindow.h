@@ -10,8 +10,8 @@
 // user header
 #include <EngineBase/EngineDelegate.h>
 
-
-// 정신 잘 붙
+static int ScreenX = GetSystemMetrics(SM_CXSCREEN);
+static int ScreenY = GetSystemMetrics(SM_CYSCREEN);
 
 // 설명 :
 class UEngineWindow
@@ -33,6 +33,7 @@ public:
 
 	void Create(std::string_view _TitleName, std::string_view _ClassName = "Default");
 	void Open(std::string_view _TitleName = "Window");
+	void SetWindowTopMost();
 
 	inline HDC GetBackBuffer()
 	{
@@ -54,6 +55,7 @@ protected:
 private:
 	static HINSTANCE hInstance;
 	static std::map<std::string, WNDCLASSEXA> WindowClasss;
+
 
 	// WinApi의 기본랜더링의 핵심은
 	// HDC이다. HDC는 window창에 그리기 위한 권한 핸들입니다.

@@ -10,6 +10,7 @@
 // 엔진을 통틀어서 1번 만들어지기 때문에.
 // 1번 세팅되고 절대로 바뀌지 않을거다.
 UEngineAPICore* UEngineAPICore::MainCore = nullptr;
+UEngineAPICore* UEngineAPICore::TopScreenCore = nullptr;
 UContentsCore* UEngineAPICore::UserCore = nullptr;
 
 #include <Windows.h>
@@ -57,6 +58,10 @@ int UEngineAPICore::EngineStart(HINSTANCE _Inst, UContentsCore* _UserCore)
 	UEngineAPICore Core = UEngineAPICore();
 	Core.EngineMainWindow.Open();
 	MainCore = &Core;
+
+	UEngineAPICore TopCore = UEngineAPICore();
+	TopCore.EngineTopScreenWindow.Open();
+	TopScreenCore = &TopCore;
 
 	EngineDelegate Start = EngineDelegate(std::bind(EngineBeginPlay));
 	EngineDelegate FrameLoop = EngineDelegate(std::bind(EngineTick));;
