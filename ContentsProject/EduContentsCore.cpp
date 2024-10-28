@@ -24,6 +24,8 @@ void EduContentsCore::BeginPlay()
 	// 이걸 통해서 안만든 애들 => 다 아무런 쓸모가 없을 가능성이 없다.
 	
 	//UEngineAPICore::GetCore()->CreateLevel("Title");
+	UEngineAPICore::GetCore()->GetMainWindow().SetWindowTitle("EduWindow");
+
 	UEngineAPICore::GetCore()->CreateLevel<APlayGameMode, APlayer>("Play");
 	//UEngineAPICore::GetCore()->CreateLevel("End");
 

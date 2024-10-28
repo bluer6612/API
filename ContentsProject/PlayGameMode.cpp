@@ -2,6 +2,7 @@
 #include "PlayGameMode.h"
 
 #include <EngineCore/Level.h>
+#include "Player.h"
 
 APlayGameMode::APlayGameMode()
 {
@@ -14,6 +15,9 @@ APlayGameMode::~APlayGameMode()
 // 언리얼에서는 MainPawn 주인공 무조건 지정하게 해요.
 void APlayGameMode::BeginPlay()
 {
+	//APlayer* player = GetWorld()->SpawnActor<APlayer>();
+	//player->SetActorLoaction({300, 300});
+
 	// 플레이어가 만들어져 있다면. BeginPlay();
 	// 감안하고 짜셔야 합니다.
 

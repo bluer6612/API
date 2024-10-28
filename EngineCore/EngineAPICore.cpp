@@ -4,7 +4,7 @@
 #include <EnginePlatform/EngineWindow.h>
 #include <EngineBase/EngineDelegate.h>
 #include <EngineBase/EngineDebug.h>
-#include <chrono>
+
 
 
 // 엔진을 통틀어서 1번 만들어지기 때문에.
@@ -19,8 +19,11 @@ UContentsCore* UEngineAPICore::UserCore = nullptr;
 // 3 현재까지 3번 눌렀어요 
 //QueryPerformanceFrequency
 
+// #include <chrono>
+
 UEngineAPICore::UEngineAPICore()
 {
+
 }
 
 UEngineAPICore::~UEngineAPICore()
@@ -88,9 +91,9 @@ void UEngineAPICore::EngineTick()
 
 void UEngineAPICore::Tick()
 {
-	time_t Test = time(nullptr);
-
 	// 시간을 잴겁니다. 현재시간 
+	DeltaTimer.TimeCheck();
+	float DeltaTime = DeltaTimer.GetDeltaTime();
 
 	if (nullptr == CurLevel)
 	{
@@ -98,7 +101,8 @@ void UEngineAPICore::Tick()
 		return;
 	}
 
-	CurLevel->Tick();
+
+	CurLevel->Tick(DeltaTime);
 	CurLevel->Render();
 }
 

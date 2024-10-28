@@ -1,0 +1,38 @@
+1. 여러분들은 레벨을 만드셔야 합니다. Level이라는 클래스를 제공해줄 것이다.
+
+2. Level을 만들면서 GameMode라는것을 넣어줘야 하는 구조를 만들어야 한다.
+
+
+   Level => 장면
+   어떤 화면이 나왔다가 어떤 화면으로 전환된다.
+
+   // 에디터에서 버튼눌러서 지정해줘야하지만
+   // GUI가 없어요.
+
+   엔진코어->CreateLevel();
+
+   // 타일이 => 플레이 => 엔딩
+   엔진코어->CreateLevel<TitleGameMode>();
+   엔진코어->CreateLevel<PlayGameMode>();
+   엔진코어->CreateLevel<EndingGameMode>();
+   
+   Actor => 레벨에서 등장하는 요소들 전체.
+
+   class TitleGameMode : public AGameMode
+   {
+        BeingPlay()
+        {
+            GetWorld()->SpawnActor<Player>();
+            GetWorld()->SpawnActor<UI>();
+        }
+
+        Tick()
+        {
+        }
+   };
+
+언리얼에서 모든 오브젝트는 U를 붙입니다.
+UObject라는 클래스가 있고 그걸 상속받아요.
+
+AActor : public UObject 라는 애가 나옵니다.
+

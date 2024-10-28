@@ -21,6 +21,7 @@ public:
 protected:
 
 private:
+	float Speed = 100.0f;
 
 };
 

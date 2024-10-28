@@ -13,14 +13,11 @@
 
 // 정신 잘 붙
 
-static int ScreenX = GetSystemMetrics(SM_CXSCREEN);
-static int ScreenY = GetSystemMetrics(SM_CYSCREEN);
-
 // 설명 :
 class UEngineWindow
 {
 public:
-	static void EngineWindowInit(HINSTANCE _Instance, WNDCLASSEXA _wcex);
+	static void EngineWindowInit(HINSTANCE _Instance);
 	static void CreateWindowClass(const WNDCLASSEXA& _Class);
 
 	static int WindowMessageLoop(EngineDelegate _StartFunction, EngineDelegate _FrameFunction);
@@ -34,20 +31,23 @@ public:
 	UEngineWindow& operator=(const UEngineWindow& _Other) = delete;
 	UEngineWindow& operator=(UEngineWindow&& _Other) noexcept = delete;
 
-	void Create(std::string_view _TitleName, std::string_view _ClassName);
-	void Open(std::string_view _TitleName, std::string_view _ClassName);
-
-	//void Create(std::string_view _TitleName, std::string_view _ClassName = "Default");
-	//void Open(std::string_view _TitleName = "Window");
-	void SetWindowTopMost(HWND _WindowHandle);
-	void SetWindowOpacity(HWND _WindowHandle);
+	void Create(std::string_view _TitleName, std::string_view _ClassName = "Default");
+	void Open(std::string_view _TitleName = "Window");
 
 	inline HDC GetBackBuffer()
 	{
 		return BackBuffer;
 	}
 
+	// 실력이 낮을수록 남과 공유하려고 안한다.
+	// 자기만 아는걸 대명사처럼 말하고.
 
+	inline void SetWindowTitle(std::string_view Text)
+	{
+		// WindowAPI의 규칙 이해하고 있느냐.
+		// 전부다 에디터
+		SetWindowTextA(WindowHandle, Text.data());
+	}
 
 protected:
 
@@ -66,7 +66,6 @@ private:
 	// 윈도우에서 뭔가를 그리려는 함수의 대부분의 첫번째 인자는 hdc일것입니다.
 	HDC BackBuffer = nullptr;
 	HWND WindowHandle = nullptr;
-	HWND WindowHandleSub = nullptr;
 };
 
 

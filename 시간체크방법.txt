@@ -1,0 +1,29 @@
+	std::vector<int> Test;
+	Test.reserve(1000);
+	for (int i = 0; i < 1000; i++)
+	{
+		Test.push_back(i);
+	}
+
+	std::map<int, int> TestMap;
+	for (int i = 0; i < 1000; i++)
+	{
+		TestMap.insert({i, i});
+	}
+
+	int FindCOunt = 999;
+
+	UEngineTimer Timer;
+	Timer.TimeStart();
+
+	// std::map<int, int>::iterator FindIter = TestMap.find(FindCOunt);
+
+	//for (size_t i = 0; i < Test.size(); i++)
+	//{
+	//	if (Test[i] == FindCOunt)
+	//	{
+	//		break;
+	//	}
+	//}
+
+	double Time = Timer.DEnd();

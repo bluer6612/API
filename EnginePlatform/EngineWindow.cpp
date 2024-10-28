@@ -25,8 +25,6 @@
 HINSTANCE UEngineWindow::hInstance = nullptr;
 std::map<std::string, WNDCLASSEXA> UEngineWindow::WindowClasss;
 int WindowCount = 0;
-int WindowClassCount = 0;
-int WindowClassIndex[] = { 1, 2, 3, 4, 0 };
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
@@ -50,31 +48,26 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 }
 
 
-void UEngineWindow::EngineWindowInit(HINSTANCE _Instance, WNDCLASSEXA _wcex)
+void UEngineWindow::EngineWindowInit(HINSTANCE _Instance)
 {
     hInstance = _Instance;
 
     // 어차피 무조건 해줘야 한다면 여기서 하려고 한것.
     // 디폴트 윈도우 클래스 등록
-    _wcex.cbSize = sizeof(WNDCLASSEX);
-    _wcex.style = CS_HREDRAW | CS_VREDRAW;
-    _wcex.lpfnWndProc = WndProc;
-    _wcex.cbClsExtra = 0;
-    _wcex.cbWndExtra = 0;
-    _wcex.hInstance = hInstance;
-    _wcex.hIcon = nullptr;
-    _wcex.hCursor = LoadCursor(nullptr, IDC_ARROW);
-    _wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 9);
-    _wcex.lpszMenuName = nullptr;
-    char a[100] = "Default";
-    *a = *a + (WindowClassIndex[WindowClassCount] + '0');
-    //_wcex.lpszClassName = ("Default" + (WindowClassIndex[WindowClassCount] + '0'));
-    _wcex.lpszClassName = a;
-    //_wcex.lpszClassName = "Default";
-    _wcex.hIconSm = nullptr;
-    CreateWindowClass(_wcex);
-
-    ++WindowClassCount;
+    WNDCLASSEXA wcex;
+    wcex.cbSize = sizeof(WNDCLASSEX);
+    wcex.style = CS_HREDRAW | CS_VREDRAW;
+    wcex.lpfnWndProc = WndProc;
+    wcex.cbClsExtra = 0;
+    wcex.cbWndExtra = 0;
+    wcex.hInstance = hInstance;
+    wcex.hIcon = nullptr;
+    wcex.hCursor = LoadCursor(nullptr, IDC_ARROW);
+    wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
+    wcex.lpszMenuName = nullptr;
+    wcex.lpszClassName = "Default";
+    wcex.hIconSm = nullptr;
+    CreateWindowClass(wcex);
 }
 
 int UEngineWindow::WindowMessageLoop(EngineDelegate _StartFunction, EngineDelegate _FrameFunction)
@@ -165,19 +158,14 @@ UEngineWindow::~UEngineWindow()
 
 void UEngineWindow::Create(std::string_view _TitleName, std::string_view _ClassName)
 {
-
     if (false == WindowClasss.contains(_ClassName.data()))
     {
         MSGASSERT(std::string(_ClassName) + " 등록하지 않은 클래스로 윈도우창을 만들려고 했습니다");
         return;
     }
 
-    //WS_OVERLAPPEDWINDOW
-    WindowHandle = CreateWindowA(_ClassName.data(), 0, WS_OVERLAPPED,
-        -10, (ScreenY - (ScreenY / 3)), WS_SYSMENU, ScreenY / 3, nullptr, nullptr, hInstance, nullptr);
-
-    WindowHandleSub = CreateWindowA(_ClassName.data(), 0, WS_OVERLAPPED,
-        -10, ScreenY / 3, WS_SYSMENU, (ScreenY - (ScreenY / 3)), WindowHandle, nullptr, hInstance , nullptr);
+    WindowHandle = CreateWindowA(_ClassName.data(), _TitleName.data(), WS_OVERLAPPEDWINDOW,
+        0, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
 
     if (nullptr == WindowHandle)
     {
@@ -189,13 +177,13 @@ void UEngineWindow::Create(std::string_view _TitleName, std::string_view _ClassN
     BackBuffer = GetDC(WindowHandle);
 }
 
-void UEngineWindow::Open(std::string_view _TitleName, std::string_view _ClassName)
+void UEngineWindow::Open(std::string_view _TitleName /*= "Window"*/)
 {
     // 어 window 안만들고 띄우려고 하네?
     if (0 == WindowHandle)
     {
         // 만들어
-        Create(_TitleName, _ClassName);
+        Create(_TitleName);
     }
 
     if (0 == WindowHandle)
@@ -206,33 +194,6 @@ void UEngineWindow::Open(std::string_view _TitleName, std::string_view _ClassNam
 	// 단순히 윈도창을 보여주는 것만이 아니라
 	ShowWindow(WindowHandle, SW_SHOW);
     UpdateWindow(WindowHandle);
-    SetWindowTopMost(WindowHandle);
     ++WindowCount;
-
-    ShowWindow(WindowHandleSub, SW_SHOW);
-    UpdateWindow(WindowHandleSub);
-    SetWindowTopMost(WindowHandleSub);
-    SetWindowOpacity(WindowHandleSub);
-    ++WindowCount;
-
 	// ShowWindow(WindowHandle, SW_HIDE);
-}
-
-void UEngineWindow::SetWindowTopMost(HWND _WindowHandle)
-{
-    RECT rc1;
-    ::GetWindowRect(_WindowHandle, &rc1);
-    SetForegroundWindow(_WindowHandle);
-    SetWindowPos(_WindowHandle, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW);
-
-    long style = ::GetWindowLongA(_WindowHandle, GWL_STYLE);
-    style &= ~WS_CAPTION;
-    SetWindowLongA(_WindowHandle, GWL_STYLE, style);
-
-    //SetWindowRgn(WindowHandle, hRgn, false);
-}
-
-void UEngineWindow::SetWindowOpacity(HWND _WindowHandle)
-{
-    SetWindowLong(_WindowHandle, GWL_EXSTYLE, GetWindowLong(_WindowHandle, GWL_EXSTYLE) | WS_EX_LAYERED); SetLayeredWindowAttributes(_WindowHandle, 0, 150, LWA_ALPHA);
 }

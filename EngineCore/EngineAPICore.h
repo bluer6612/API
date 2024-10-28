@@ -8,6 +8,7 @@
 // 컴파일 시간이 
 #include <Windows.h>
 #include <EnginePlatform/EngineWindow.h>
+#include <EngineBase/EngineTimer.h>
 
 #pragma comment (lib, "EngineBase.lib")
 #pragma comment (lib, "EnginePlatform.lib")
@@ -81,7 +82,8 @@ private:
 	static UEngineAPICore* MainCore;
 	static UContentsCore* UserCore;
 
-	UEngineWindow EngineMainWindow; // 엔진 메인 윈도우
+	UEngineTimer DeltaTimer = UEngineTimer();
+	UEngineWindow EngineMainWindow = UEngineWindow(); // 엔진 메인 윈도우
 
 	// 누가 레벨의 소유자라고 개념을 잡는게 좋냐?
 
