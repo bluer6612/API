@@ -29,6 +29,9 @@ void EduContentsCore::BeginPlay()
 	//UEngineAPICore::GetCore()->CreateLevel("Title");
 	UEngineAPICore::GetCore()->GetMainWindow().SetWindowTitle("EduWindow");
 
+	// 이거 꼭 호출해줘야 합니다.
+	UEngineAPICore::GetCore()->GetMainWindow().SetWindowPosAndScale({ 0, 0 }, {1280, 720});
+
 	UEngineAPICore::GetCore()->CreateLevel<APlayGameMode, APlayer>("Play");
 	//UEngineAPICore::GetCore()->CreateLevel("End");
 

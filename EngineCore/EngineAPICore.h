@@ -53,6 +53,11 @@ public:
 		return EngineMainWindow;
 	}
 
+	float GetDeltaTime()
+	{
+		return DeltaTimer.GetDeltaTime();
+	}
+
 	template<typename GameModeType, typename MainPawnType>
 	ULevel* CreateLevel(std::string_view _LevelName)
 	{
@@ -80,12 +85,10 @@ private:
 	static void EngineBeginPlay();
 	static void EngineTick();
 	static UEngineAPICore* MainCore;
-	static UEngineAPICore* TopScreenCore;
 	static UContentsCore* UserCore;
 
 	UEngineTimer DeltaTimer = UEngineTimer();
 	UEngineWindow EngineMainWindow = UEngineWindow(); // 엔진 메인 윈도우
-	UEngineWindow EngineTopScreenWindow = UEngineWindow(); // 
 
 	// 누가 레벨의 소유자라고 개념을 잡는게 좋냐?
 

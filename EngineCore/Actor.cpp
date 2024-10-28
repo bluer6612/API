@@ -20,7 +20,7 @@ void AActor::Render()
 
 
 	UEngineWindow& MainWindow = UEngineAPICore::GetCore()->GetMainWindow();
-	HDC BackHDC = MainWindow.GetBackBuffer();
+	HDC BackHDC = MainWindow.GetWindowMainDC();
 
 	Rectangle(BackHDC, LeftTop.iX(), LeftTop.iY(), RightBot.iX(), RightBot.iY());
 }
