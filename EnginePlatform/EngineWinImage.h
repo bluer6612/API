@@ -1,5 +1,6 @@
 #pragma once
 #include <Windows.h>
+#include <EngineBase/EngineMath.h>
 
 // 이녀석이 이미지 역할을 대신할 겁니다.
 // 이녀석은 당연히 로드도 됩니다.

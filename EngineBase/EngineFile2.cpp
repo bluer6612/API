@@ -8,13 +8,6 @@ UEngineFile::UEngineFile()
 
 }
 
-// 자식에서 부모 생성자를 명시적으로 호출해주면 된다.
-UEngineFile::UEngineFile(std::string_view _Path)
-	: UEnginePath(_Path)
-{
-
-}
-
 UEngineFile::~UEngineFile()
 {
 	// 소멸자를 이용해서 자연스럽게 파괴되도록 만드는게 좋다.
