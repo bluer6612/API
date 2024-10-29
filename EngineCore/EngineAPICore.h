@@ -53,6 +53,11 @@ public:
 		return EngineMainWindow;
 	}
 
+	UEngineWindow& GetSubWindow()
+	{
+		return EngineSubWindow;
+	}
+
 	float GetDeltaTime()
 	{
 		return DeltaTimer.GetDeltaTime();
@@ -89,6 +94,7 @@ private:
 
 	UEngineTimer DeltaTimer = UEngineTimer();
 	UEngineWindow EngineMainWindow = UEngineWindow(); // 엔진 메인 윈도우
+	UEngineWindow EngineSubWindow = UEngineWindow(); // 엔진 상단 서브 윈도우
 
 	// 누가 레벨의 소유자라고 개념을 잡는게 좋냐?
 

@@ -159,7 +159,7 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="EduContentsCore.h">
+    <ClInclude Include="MainContentsCore.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -182,7 +182,7 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="EduContentsCore.cpp">
+    <ClCompile Include="MainContentsCore.cpp">
       <SubType>
       </SubType>
     </ClCompile>
