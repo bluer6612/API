@@ -36,6 +36,7 @@ public:
 protected:
 
 private:
+	void ScreenClear();
 	void DoubleBuffering();
 
 

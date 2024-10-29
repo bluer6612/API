@@ -54,3 +54,45 @@ void UEngineWinImage::Create(UEngineWinImage* _TargetImage,  FVector2D _Scale)
 
 	GetObject(hBitMap, sizeof(BITMAP), &Info);
 }
+
+void UEngineWinImage::CopyToBit(UEngineWinImage* _TargetImage, const FTransform& _Trans)
+{
+	if (nullptr == _TargetImage)
+	{
+		MSGASSERT("복사받을 대상이 존재하지 않습니다");
+	}
+
+	HDC CopyDC = ImageDC;
+	HDC TargetDC = _TargetImage->ImageDC;
+	// CopyDC => TargetDC에 카피하겠다.
+	// 윈도우는 이런 HDC간의 Copy를 위해서 
+	// 카피용 함수들을 몇개 준비했고 그중에서
+	// 가장 기본적인 함수가 바로 Bitblt
+
+	//HDC hdc, 카피 받을 대상 <= 여기에다가 복사해라
+	//int x, <= 위치x
+	//int y, <= 위치y
+	//int cx, <= 크기x
+	//int cy, <= 크기x
+	// HDC hdcSrc, 카피할 이미지
+	// int x1, 이미지 시작점 0
+	// int y1, 
+	// rop => 카피 옵션
+
+	FVector2D LeftTop = _Trans.CenterLeftTop();
+	FVector2D RightBot = _Trans.CenterRightBottom();
+
+	BitBlt(
+		TargetDC,
+		LeftTop.iX(),
+		LeftTop.iY(),
+		_Trans.Scale.iX(),
+		_Trans.Scale.iY(),
+		CopyDC,
+		0,
+		0,
+		SRCCOPY);
+
+	// SRCCOPY 카피할때 
+
+}

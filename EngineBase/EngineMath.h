@@ -43,7 +43,7 @@ public:
 		return static_cast<int>(Y);
 	}
 
-	FVector2D Half()
+	FVector2D Half() const
 	{
 		return { X * 0.5f, Y * 0.5f };
 	}
@@ -109,6 +109,25 @@ public:
 		X += _Other.X;
 		Y += _Other.Y;
 		return *this;
+	}
+};
+
+// 대부분 오브젝트에서 크기와 위치는 한쌍입니다.
+// 그래서 그 2가지를 모두 묶는 자료형을 만들어서 그걸 써요.
+class FTransform
+{
+public:
+	FVector2D Scale;
+	FVector2D Location;
+
+	FVector2D CenterLeftTop() const
+	{
+		return Location - Scale.Half();
+	}
+
+	FVector2D CenterRightBottom() const
+	{
+		return Location + Scale.Half();
 	}
 };
 

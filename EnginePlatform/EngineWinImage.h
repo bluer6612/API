@@ -37,6 +37,7 @@ public:
 
 	void Create(UEngineWinImage* _TargetImage, FVector2D _Scale);
 
+	void CopyToBit(UEngineWinImage* _TargetImage, const FTransform& _Pos);
 
 protected:
 
