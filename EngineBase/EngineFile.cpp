@@ -15,6 +15,12 @@ UEngineFile::UEngineFile(std::string_view _Path)
 
 }
 
+UEngineFile::UEngineFile(std::filesystem::path _Path)
+	: UEnginePath(_Path)
+{
+
+}
+
 UEngineFile::~UEngineFile()
 {
 	// 소멸자를 이용해서 자연스럽게 파괴되도록 만드는게 좋다.

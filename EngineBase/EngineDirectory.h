@@ -18,11 +18,13 @@ public:
 	UEngineDirectory& operator=(const UEngineDirectory& _Other) = delete;
 	UEngineDirectory& operator=(UEngineDirectory&& _Other) noexcept = delete;
 
-	std::vector<class UEngineFile> GetAllFile();
+	std::vector<class UEngineFile> GetAllFile(bool _IsRecursive = true);
+
 
 protected:
 
 private:
+	void GetAllFileRecursive(std::filesystem::path _Path, std::vector<class UEngineFile>& _Result);
 
 };
 

@@ -21,6 +21,7 @@ public:
 	UEngineFile();
 	// 생성체인
 	UEngineFile(std::string_view _Path);
+	UEngineFile(std::filesystem::path _Path);
 	~UEngineFile();
 
 	// Write

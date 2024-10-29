@@ -5,6 +5,8 @@
 #include <EngineBase/EngineDirectory.h>
 
 #include <EngineBase/EngineDebug.h>
+#include <EngineBase/EngineFile.h>
+#include <EngineCore/ImageManager.h>
 
 #include "PlayGameMode.h"
 #include "Player.h"
@@ -34,12 +36,13 @@ void EduContentsCore::BeginPlay()
 		return;
 	}
 
-	//std::vector<UEngineFile> AllFile = Dir.GetAllFile("*.Bmp", "*.Png");
-	//for (size_t i = 0; i < AllFile.size(); i++)
-	//{
-	//	ImageManager::Load(AllFile[i].GetPath());
-	//}
-	
+	std::vector<UEngineFile> ImageFiles = Dir.GetAllFile();
+
+	for (size_t i = 0; i < ImageFiles.size(); i++)
+	{
+		std::string FilePath = ImageFiles[i].GetPathToString();
+		UImageManager::GetInst().Load(FilePath);
+	}
 
 
 	UEngineAPICore::GetCore()->GetMainWindow().SetWindowTitle("EduWindow");

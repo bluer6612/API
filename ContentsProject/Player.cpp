@@ -57,5 +57,5 @@ void APlayer::Tick(float _DeltaTime)
 		AddActorLocation(FVector2D::UP * _DeltaTime * Speed);
 	}
 
-
+	// UEngineDebug::OutPutString("Down");
 }

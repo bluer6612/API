@@ -23,9 +23,20 @@ UEnginePath::~UEnginePath()
 {
 }
 
+std::string UEnginePath::GetPathToString()
+{
+	return Path.string();
+}
+
+
 bool UEnginePath::IsExists()
 {
 	return std::filesystem::exists(Path);
+}
+
+bool UEnginePath::IsFile()
+{
+	return false == IsDirectory();
 }
 
 bool UEnginePath::IsDirectory()
