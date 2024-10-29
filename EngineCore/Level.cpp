@@ -1,5 +1,6 @@
 #include "PreCompile.h"
 #include "Level.h"
+#include "EngineAPICore.h"
 
 ULevel::ULevel()
 {
@@ -52,4 +53,18 @@ void ULevel::Render()
 
 		CurActor->Render();
 	}
+
+}
+
+
+void DoubleBuffering()
+{
+	// 레벨의 랜더링이 끝났다.
+	UEngineWindow& MainWindow = UEngineAPICore::GetCore()->GetMainWindow();
+
+	UEngineWinImage* WindowImage = MainWindow.GetWindowImage();
+	UEngineWinImage* BackBufferImage = MainWindow.GetBackBuffer();
+
+	// WindowImage->CopyTo(BackBufferImage);
+
 }

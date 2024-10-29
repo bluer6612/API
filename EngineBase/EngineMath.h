@@ -33,12 +33,12 @@ public:
 
 	}
 
-	int iX()
+	int iX() const 
 	{
 		return static_cast<int>(X);
 	}
 
-	int iY()
+	int iY() const
 	{
 		return static_cast<int>(Y);
 	}
@@ -84,10 +84,25 @@ public:
 	}
 
 
+	// ture가 나오는 
 	bool operator==(FVector2D _Other) const
 	{
 		return X == _Other.X && Y == _Other.Y;
 	}
+
+	// float은 비교가 굉장히 위험
+	// const가 붙은 함수에서는 const가 붙은 함수 호출할수 없다.
+	bool EqualToInt(FVector2D _Other) const
+	{
+		// const FVector* const Ptr;
+		// this = nullptr;
+		return iX() == _Other.iX() && iY() == _Other.iY();
+	}
+
+	//bool Compare(FVector2D _Other, float _limite = 0.0f) const
+	//{
+	//	return X == _Other.X && Y == _Other.Y;
+	//}
 
 	FVector2D& operator+=(FVector2D _Other)
 	{

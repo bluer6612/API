@@ -5,7 +5,11 @@
 // 이녀석은 당연히 로드도 됩니다.
 
 // 설명 : API 이번 랜더링 구조의 핵심 클래스
-// 
+//       랩핑 클래스 winapi에서 우리한테 여러가지 랜더링 함수들을 제공하는데
+//       핵심 자료형이 HDC야 엔진 프로그래머 입장에서 이걸 수정하거나 망치면
+//       private으로 막고 싶다.
+//       UEngineWinImage => 내부에 Has a로 HDC
+//       ImageDC 가 만들어지지 않은 HDC는 의미가 없다.
 class UEngineWinImage
 {
 public:
@@ -31,7 +35,7 @@ public:
 		ImageDC = _DC;
 	}
 
-	void Create(FVector2D _Scale);
+	void Create(UEngineWinImage* _TargetImage, FVector2D _Scale);
 
 
 protected:
@@ -40,7 +44,9 @@ private:
 	// BMP 이미지 파일 그 자체에요
 	// FVector2D Size;
 	HDC ImageDC = nullptr;
-	HBITMAP BitMap = nullptr;
+	HBITMAP hBitMap = nullptr;
 
+	// 이미지 정보 얻어오기
+	BITMAP Info;
 };
 

@@ -38,6 +38,11 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         EndPaint(hWnd, &ps);
     }
     break;
+    //case WM_SIZING:
+    //{
+    //    int a = 0;
+    //}
+    break;
     case WM_DESTROY:
         --WindowCount;
         break;
@@ -159,6 +164,12 @@ UEngineWindow::~UEngineWindow()
         delete WindowImage;
         WindowImage = nullptr;
     }
+
+    if (nullptr != BackBufferImage)
+    {
+        delete BackBufferImage;
+        BackBufferImage = nullptr;
+    }
 }
 
 void UEngineWindow::Create(std::string_view _TitleName, std::string_view _ClassName)
@@ -169,15 +180,8 @@ void UEngineWindow::Create(std::string_view _TitleName, std::string_view _ClassN
         return;
     }
 
-    //WS_OVERLAPPEDWINDOW
-    /*WindowHandle = CreateWindowA(_ClassName.data(), 0, WS_OVERLAPPED,
-        -10, 720, WS_SYSMENU, 360, nullptr, nullptr, hInstance, nullptr);*/
-
-    WindowHandle = CreateWindowA(_ClassName.data(), 0, WS_OVERLAPPED,
-        -10, (ScreenY - (ScreenY / 3)), WS_SYSMENU, ScreenY / 3, nullptr, nullptr, hInstance, nullptr);
-
-    /*WindowHandleSub = CreateWindowA(_ClassName.data(), 0, WS_OVERLAPPED,
-        -10, ScreenY / 3, WS_SYSMENU, (ScreenY - (ScreenY / 3)), WindowHandle, nullptr, hInstance, nullptr);*/
+    WindowHandle = CreateWindowA(_ClassName.data(), _TitleName.data(), WS_OVERLAPPEDWINDOW,
+        0, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
 
     if (nullptr == WindowHandle)
     {
@@ -188,10 +192,8 @@ void UEngineWindow::Create(std::string_view _TitleName, std::string_view _ClassN
     // 윈도우가 만들어지면 hdc를 여기서 얻어올 겁니다.
     HDC WindowMainDC = GetDC(WindowHandle);
 
-    // BackBufferImage.Copy({ 100,100 }, {50, 50}, PlayerImage);
-    
+    // nullptr이 아니게 만든 순간 이제 진짜 윈도우 버퍼가 만들어졌다.
     WindowImage = new UEngineWinImage();
-
     // 이건 만든다는 개념이 아니다.
     WindowImage->Create(WindowMainDC);
 }
@@ -213,46 +215,31 @@ void UEngineWindow::Open(std::string_view _TitleName /*= "Window"*/)
 	// 단순히 윈도창을 보여주는 것만이 아니라
 	ShowWindow(WindowHandle, SW_SHOW);
     UpdateWindow(WindowHandle);
-    SetWindowTopMost();
     ++WindowCount;
 	// ShowWindow(WindowHandle, SW_HIDE);
 }
 
-void UEngineWindow::SetWindowTopMost()
-{
-    RECT rc1;
-    ::GetWindowRect(WindowHandle, &rc1);
-    SetForegroundWindow(WindowHandle);
-    SetWindowPos(WindowHandle, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_SHOWWINDOW);
-
-    long style = ::GetWindowLongA(WindowHandle, GWL_STYLE);
-    style &= ~WS_CAPTION;
-    SetWindowLongA(WindowHandle, GWL_STYLE, style);
-
-    //SetWindowRgn(WindowHandle, hRgn, false);
-}
-
-
 void UEngineWindow::SetWindowPosAndScale(FVector2D _Pos, FVector2D _Scale)
 {
-    // 여러번 호출하면 
-    //if (nullptr != BackBufferImage)
-    //{
-    //    // 기존 백버퍼는 지워버리고
-    //    delete BackBufferImage;
-    //    BackBufferImage = nullptr;
-    //}
 
-    //BackBufferImage = new UEngineWinImage();
-    //BackBufferImage->Create(_Scale);
+    // 이전의 크기와 달라졌을때만 백버퍼를 새로 만든 것이다.
+    if (false == WindowSize.EqualToInt(_Scale))
+    {
+        // 화면의 크기와 전히 동일한 크기여야 한다.
+        // 여러번 호출하면 기존에 만들었던 녀석이 Leck이 되므로
+        // 화면크기를 조정할 때마다 삭제해줘야 한다.
+        if (nullptr != BackBufferImage)
+        {
+            // 기존 백버퍼는 지워버리고
+            delete BackBufferImage;
+            BackBufferImage = nullptr;
+        }
 
-    // 
+        BackBufferImage = new UEngineWinImage();
+        BackBufferImage->Create(WindowImage, _Scale);
+    }
 
-    // BackBufferImage.Create(_Scale);
-
-    int a = 0;
-
-    // window의 크기 지정하는 함수들은
+    WindowSize = _Scale;
 
     RECT Rc = { 0, 0, _Scale.iX(), _Scale.iY() };
 
@@ -260,10 +247,10 @@ void UEngineWindow::SetWindowPosAndScale(FVector2D _Pos, FVector2D _Scale)
     // 타이틀바 크기까지 합쳐진 크기로 준다.
     // 윈도우 입장
     // 현재 윈도우의 스타일을 넣어줘야 한다.
-
+    
     // 그러면 또 이녀석은 
     // 윈도우에서 가져야할 위치를 포함한 크기를 주게 된다.
     AdjustWindowRect(&Rc, WS_OVERLAPPEDWINDOW, FALSE);
-
+    
     ::SetWindowPos(WindowHandle, nullptr, _Pos.iX(), _Pos.iY(), Rc.right - Rc.left, Rc.bottom - Rc.top, SWP_NOZORDER);
 }
