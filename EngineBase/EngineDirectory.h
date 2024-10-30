@@ -3,9 +3,7 @@
 // 최신 std기능을 이용해볼겁니다.
 #include "EnginePath.h"
 
-// 실패가 없는게 여러분들의 가장문제.
-
-// 설명 : 
+// 설명 :
 class UEngineDirectory : public UEnginePath
 {
 public:
@@ -20,8 +18,8 @@ public:
 	UEngineDirectory& operator=(const UEngineDirectory& _Other) = delete;
 	UEngineDirectory& operator=(UEngineDirectory&& _Other) noexcept = delete;
 
-	// 시간이 너무 없다고 안만듬. 나중에 만들어야지.
 	std::vector<class UEngineFile> GetAllFile(bool _IsRecursive = true);
+
 
 protected:
 

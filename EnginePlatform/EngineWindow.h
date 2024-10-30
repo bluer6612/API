@@ -70,8 +70,9 @@ public:
 		SetWindowTextA(_WindowImage, Text.data());
 	}
 
-
 	void SetWindowPosAndScale(FVector2D _Pos, FVector2D _Scale);
+
+	void SetWindowTitleDelete();
 
 	void SetWindowTitleDelete();
 

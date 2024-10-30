@@ -151,9 +151,8 @@ void UEngineWindow::CreateWindowClass(const WNDCLASSEXA& _Class)
     WindowClasss.insert(std::pair{ _Class.lpszClassName, _Class });
 }
 
-UEngineWindow::UEngineWindow() 
+UEngineWindow::UEngineWindow()
 {
-    
 }
 
 UEngineWindow::~UEngineWindow()
@@ -169,13 +168,6 @@ UEngineWindow::~UEngineWindow()
         delete BackBufferImage;
         BackBufferImage = nullptr;
     }
-    
-    // 릴리즈하는 순서는 왠만하면 만들어진 순서의 역순이 좋다.
-    if (nullptr != WindowHandle)
-    {
-        DestroyWindow(WindowHandle);
-        WindowHandle = nullptr;
-    }
 }
 
 void UEngineWindow::Create(std::string_view _TitleName, std::string_view _ClassName)
@@ -188,6 +180,8 @@ void UEngineWindow::Create(std::string_view _TitleName, std::string_view _ClassN
 
     WindowHandle = CreateWindowA(_ClassName.data(), _TitleName.data(), WS_OVERLAPPED,
         0, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
+    //WindowHandle = CreateWindowA(_ClassName.data(), 0, WS_OVERLAPPED,
+    //    -10, (ScreenY - (ScreenY / 3)), WS_SYSMENU, ScreenY / 3, nullptr, nullptr, hInstance, nullptr);
 
     if (nullptr == WindowHandle)
     {

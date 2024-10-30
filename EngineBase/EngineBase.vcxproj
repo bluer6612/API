@@ -166,19 +166,11 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="EngineString.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="EngineTimer.h">
       <SubType>
       </SubType>
     </ClInclude>
     <ClInclude Include="PreCompile.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="Object.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -199,10 +191,6 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="EngineString.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
     <ClCompile Include="EngineTimer.cpp">
       <SubType>
       </SubType>
@@ -212,10 +200,6 @@
       </SubType>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="Object.cpp">
-      <SubType>
-      </SubType>
     </ClCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
