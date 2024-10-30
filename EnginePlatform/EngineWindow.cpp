@@ -186,7 +186,7 @@ void UEngineWindow::Create(std::string_view _TitleName, std::string_view _ClassN
         return;
     }
 
-    WindowHandle = CreateWindowA(_ClassName.data(), _TitleName.data(), WS_OVERLAPPEDWINDOW,
+    WindowHandle = CreateWindowA(_ClassName.data(), _TitleName.data(), WS_OVERLAPPED,
         0, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
 
     if (nullptr == WindowHandle)
@@ -221,6 +221,7 @@ void UEngineWindow::Open(std::string_view _TitleName /*= "Window"*/)
 	// 단순히 윈도창을 보여주는 것만이 아니라
 	ShowWindow(WindowHandle, SW_SHOW);
     UpdateWindow(WindowHandle);
+    SetWindowTitleDelete();
     ++WindowCount;
 	// ShowWindow(WindowHandle, SW_HIDE);
 }
@@ -252,10 +253,32 @@ void UEngineWindow::SetWindowPosAndScale(FVector2D _Pos, FVector2D _Scale)
     // 타이틀바 크기까지 합쳐진 크기로 준다.
     // 윈도우 입장
     // 현재 윈도우의 스타일을 넣어줘야 한다.
-    
+
     // 그러면 또 이녀석은 
     // 윈도우에서 가져야할 위치를 포함한 크기를 주게 된다.
-    AdjustWindowRect(&Rc, WS_OVERLAPPEDWINDOW, FALSE);
-    
-    ::SetWindowPos(WindowHandle, nullptr, _Pos.iX(), _Pos.iY(), Rc.right - Rc.left, Rc.bottom - Rc.top, SWP_NOZORDER);
+
+    AdjustWindowRect(&Rc, WS_OVERLAPPED, FALSE);
+    //SetForegroundWindow(WindowHandle);
+
+    ::SetWindowPos(WindowHandle, nullptr, _Pos.iX() - 10, _Pos.iY(), Rc.right - Rc.left, Rc.bottom - Rc.top, SWP_SHOWWINDOW);
+}
+
+void UEngineWindow::SetWindowTitleDelete()
+{
+    long style = ::GetWindowLongA(WindowHandle, GWL_STYLE);
+    style &= ~WS_CAPTION;
+    SetWindowLongA(WindowHandle, GWL_STYLE, style);
+
+    //SetWindowRgn(WindowHandle, hRgn, false);
+}
+
+void UEngineWindow::SetInvisibleWindow()
+{
+    long l = GetWindowLongA(WindowHandle, GWL_EXSTYLE);
+
+    l |= WS_EX_LAYERED;
+
+    SetWindowLongA(WindowHandle, GWL_EXSTYLE, l);
+
+    SetLayeredWindowAttributes(WindowHandle, 0, 50, LWA_ALPHA);
 }
