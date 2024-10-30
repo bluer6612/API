@@ -49,7 +49,7 @@ void MainContentsCore::BeginPlay()
 	// 이거 꼭 호출해줘야 합니다.
 	UEngineAPICore::GetCore()->GetMainWindow().SetWindowPosAndScale({ 0, (ScreenY - (ScreenY / 3)) - 10 - 30 }, { WS_SYSMENU, ScreenY / 3 });
 	
-	UEngineAPICore::GetCore()->GetMainWindow().SetInvisibleWindow();
+	UEngineAPICore::GetCore()->GetMainWindow().SetWindowAlpha();
 
 	UEngineAPICore::GetCore()->GetSubWindow().SetWindowTitle(UEngineAPICore::GetCore()->GetMainWindow().GetWindowHandleSub(), "SubWindow");
 
