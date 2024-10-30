@@ -1,6 +1,21 @@
 #include "PreCompile.h"
 #include "EngineWinImage.h"
 #include <EngineBase/EngineDebug.h>
+#include <EngineBase/EnginePath.h>
+#include <EngineBase/EngineString.h>
+
+// GDI Plus 용 헤더
+#include <objidl.h>
+#include <gdiplus.h>
+
+// $(WindowsSDK_LibraryPath_x64) <= 여기 경로안에 들어있는 라이브러리 입니다.
+
+// 이미지용 window기본 라이브러리가 2가지가 있습니다.
+// BMP 확장용 라이브러리
+#pragma comment(lib, "Msimg32.lib")
+
+// PNG 를 통한 window 네이티브 그래픽 확장용 라이브러리
+#pragma comment(lib, "Gdiplus.lib")
 
 UEngineWinImage::UEngineWinImage()
 {
@@ -8,6 +23,20 @@ UEngineWinImage::UEngineWinImage()
 
 UEngineWinImage::~UEngineWinImage()
 {
+	// 윈도우 만들어준 메모리라도 릭은 안되겠지만
+	// 왠만하면 내가 명시적으로 지워주는것을 선호합니다.
+	if (nullptr != hBitMap)
+	{
+		DeleteObject(hBitMap);
+		hBitMap = nullptr;
+	}
+
+	if (nullptr != ImageDC)
+	{
+		DeleteDC(ImageDC);
+		ImageDC = nullptr;
+	}
+
 }
 
 void UEngineWinImage::Create(UEngineWinImage* _TargetImage,  FVector2D _Scale)
@@ -82,6 +111,7 @@ void UEngineWinImage::CopyToBit(UEngineWinImage* _TargetImage, const FTransform&
 	FVector2D LeftTop = _Trans.CenterLeftTop();
 	FVector2D RightBot = _Trans.CenterRightBottom();
 
+	// 이미지 
 	BitBlt(
 		TargetDC,
 		LeftTop.iX(),
@@ -95,4 +125,138 @@ void UEngineWinImage::CopyToBit(UEngineWinImage* _TargetImage, const FTransform&
 
 	// SRCCOPY 카피할때 
 
+	FVector2D Vector;
+}
+
+void UEngineWinImage::CopyToTrans(UEngineWinImage* _TargetImage, const FTransform& _RenderTrans, const FTransform& _LTImageTrans, UColor _Color /*= UColor(255, 0, 255, 255)*/)
+{
+	// _RenderTrans 액터의 트랜스폼
+
+	// _LTImageTrans 이미지 쪼갠 크기가
+	
+	HDC CopyDC = ImageDC;
+	HDC TargetDC = _TargetImage->ImageDC;
+
+    //_In_ HDC hdcDest, 여기에다가 카피해라
+    //_In_ int xoriginDest, 그려지는 위치
+    //_In_ int yoriginDest, 그려지는 위치
+    //_In_ int wDest, 그려지는 크기
+    //_In_ int hDest, 그려지는 크기
+    //_In_ HDC hdcSrc, 복사될 이미지 => 여러분들이 로드한 이미지
+    //_In_ int xoriginSrc, 이미지 이부분 
+    //_In_ int yoriginSrc, int X
+    //_In_ int wSrc,
+    //_In_ int hSrc,
+    //_In_ UINT crTransparent
+
+	FVector2D LeftTop = _RenderTrans.CenterLeftTop();
+
+	TransparentBlt(
+		TargetDC,
+		LeftTop.iX(),
+		LeftTop.iY(),
+		_RenderTrans.Scale.iX(),
+		_RenderTrans.Scale.iY(),
+		CopyDC,
+		_LTImageTrans.Location.iX(),
+		_LTImageTrans.Location.iY(),
+		_LTImageTrans.Scale.iX(),
+		_LTImageTrans.Scale.iY(),
+		_Color.Color
+	);
+}
+
+void UEngineWinImage::Load(UEngineWinImage* _TargetImage, std::string_view _Path)
+{
+	// Png랑 Bmp일때 로드하는 방식이 달라진다.
+	// Png로는 윈도우의 기본 이미지가 아니라서.
+	// BMP는 쉽게 로딩되지만 PNG는 조금더 코드를 쳐야 한다.
+	// 그래픽스는 결국 WinApi
+	
+	// Png를 로드해서 Bmp로 변환하는 과정을 거치는 개념에 가깝다.
+	// 하지만 결국 로드하는 함수만 다를뿐이지
+	// 로드가 끝났다면 결국
+	// class Color
+	// {
+	//    char R, G, B, 255;
+	// }
+	// Color Arr[??][??]
+	
+	// 로드가 끝나면 window의 관할이다. 
+	
+	// 언리얼이 그렇게 합니다.
+	// Window.png => WINDOW.PNG
+	// WIndow.png
+	// WIndow.Png
+	// WIndow.pNg
+	// WIndow.pnG
+
+	UEnginePath Path = _Path;
+
+	std::string UpperExt = UEngineString::ToUpper(Path.GetExtension());
+
+	HBITMAP NewBitmap = nullptr;
+
+	if (".PNG" == UpperExt)
+	{
+		// 로드까지만 GDI Plus를 이용 랜더링은 
+		// WInapi함수를 사용하는 개념으로 간다./
+		
+		// GDIPLus용 핸들을 표현할때 
+		ULONG_PTR gidplustoken = 0;
+
+		// GDI plus를 사용하기 위한 인풋
+		Gdiplus::GdiplusStartupInput StartupInput;
+		Gdiplus::GdiplusStartup(&gidplustoken, &StartupInput, nullptr);
+
+
+		std::wstring WidePath = UEngineString::AnsiToUnicode(_Path);
+
+		// 경로 넣어주면 이미지 로딩해주는 함수
+		Gdiplus::Image* pImage = Gdiplus::Image::FromFile(WidePath.c_str());
+
+		// 복사본을 생성하고 거기에서 bitmap 부분을 뽑아내는 방식
+		Gdiplus::Bitmap* pBitMap = reinterpret_cast<Gdiplus::Bitmap*>(pImage->Clone());
+
+		Gdiplus::Status stat = pBitMap->GetHBITMAP(Gdiplus::Color(255, 255, 0, 255), &NewBitmap);
+
+		if (Gdiplus::Status::Ok != stat)
+		{
+			MSGASSERT("Png 이미지 로드에 실패했습니다." + std::string(_Path));
+			return;
+		}
+
+		// 
+		delete pBitMap;
+		delete pImage;
+		
+
+		// 내부에 존재하는 bitmap을 꺼낸다.
+		// 윈도우는 결국 모든 이미지를 bitmap으로 본다.
+		// Gdiplus::* pImage = Gdiplus::Image::FromFile(WidePath.c_str());
+
+		int a = 0;
+
+		// 인코딩을 해야 합니다.
+
+		
+
+	}
+
+	if (nullptr == NewBitmap)
+	{
+		MSGASSERT("이미지 로딩에 실패했습니다");
+		return;
+	}
+
+	// 붓
+	HDC NewImageDC = CreateCompatibleDC(_TargetImage->GetDC());
+
+	HBITMAP OldBitMap = static_cast<HBITMAP>(SelectObject(NewImageDC, NewBitmap));
+	DeleteObject(OldBitMap);
+
+	hBitMap = NewBitmap;
+	ImageDC = NewImageDC;
+
+	GetObject(hBitMap, sizeof(BITMAP), &Info);
 }

@@ -36,5 +36,5 @@ void APlayGameMode::BeginPlay()
 
 
 
-	APlayMap* PMAP0 = GetWorld()->SpawnActor<APlayMap>();
+	// APlayMap* PMAP0 = GetWorld()->SpawnActor<APlayMap>();
 }

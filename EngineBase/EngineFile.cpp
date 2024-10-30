@@ -90,6 +90,7 @@ void UEngineFile::Read(void* _Ptr, size_t _Size)
 // 인라인은 구현과 선언을분리하면 인라인을 하기 힘듭니다.
 bool UEngineFile::IsExits()
 {
+	// Window제공함수
 	int Result = _access(Path, 00);
 
 	// 0이면 있는것 0 이외의 값이면 없는 것
