@@ -151,10 +151,8 @@ void UEngineWindow::CreateWindowClass(const WNDCLASSEXA& _Class)
     WindowClasss.insert(std::pair{ _Class.lpszClassName, _Class });
 }
 
-UEngineWindow::UEngineWindow() 
+UEngineWindow::UEngineWindow()
 {
-
-    
 }
 
 UEngineWindow::~UEngineWindow()
@@ -179,6 +177,7 @@ void UEngineWindow::Create(std::string_view _TitleName, std::string_view _ClassN
         MSGASSERT(std::string(_ClassName) + " 등록하지 않은 클래스로 윈도우창을 만들려고 했습니다");
         return;
     }
+
 
     WindowHandle = CreateWindowA(_ClassName.data(), _TitleName.data(), WS_OVERLAPPED,
         0, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
@@ -266,4 +265,15 @@ void UEngineWindow::SetWindowTitleDelete()
     SetWindowLongA(WindowHandle, GWL_STYLE, style);
 
     //SetWindowRgn(WindowHandle, hRgn, false);
+}
+
+void UEngineWindow::SetInvisibleWindow() {
+
+    long l = GetWindowLongA (WindowHandle, GWL_EXSTYLE);
+
+    l |= WS_EX_LAYERED;
+
+    SetWindowLongA(WindowHandle, GWL_EXSTYLE, l);
+
+    SetLayeredWindowAttributes(WindowHandle, 0, 50, LWA_ALPHA);
 }

@@ -71,6 +71,8 @@ public:
 
 	void SetWindowTitleDelete();
 
+	void SetInvisibleWindow();
+
 protected:
 
 private:

@@ -82,8 +82,6 @@ public:
 
 	void OpenLevel(std::string_view _LevelName);
 
-
-
 protected:
 
 private:
