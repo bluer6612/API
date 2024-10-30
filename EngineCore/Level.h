@@ -67,10 +67,10 @@ private:
 	// dujumsaigury
 	// 영어의미로 해주시면 됩니다.
 	// 맨앞만 
-	class AGameMode* GameMode = nullptr;
+	AGameMode* GameMode = nullptr;
 
 	// 주인공
-	class AActor* MainPawn = nullptr;
+	AActor* MainPawn = nullptr;
 
 	std::list<AActor*> AllActors;
 };

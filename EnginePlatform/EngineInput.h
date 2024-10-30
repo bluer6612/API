@@ -184,7 +184,7 @@ public:
 		return Keys[_KeyIndex].IsPress;
 	}
 
-	float IsPressTime(int _KeyIndex)
+	float IsPreeTime(int _KeyIndex)
 	{
 		if (false == Keys.contains(_KeyIndex))
 		{

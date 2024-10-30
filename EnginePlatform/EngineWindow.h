@@ -46,9 +46,9 @@ public:
 		return WindowImage;
 	}
 
-	inline UEngineWinImage* GetBackBuffer() const
+	inline HWND GetWindowHandle() const
 	{
-		return BackBufferImage;
+		return WindowHandle;
 	}
 
 	inline HWND GetWindowHandle() const

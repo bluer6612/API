@@ -1,11 +1,8 @@
 #pragma once
-#include <EngineBase/Object.h>
 #include <EngineBase/EngineMath.h>
 
-#include "EngineSprite.h"
-
 // Ό³Έν :
-class AActor : public UObject
+class AActor
 {
 public:
 	typedef AActor Super;
@@ -58,11 +55,5 @@ private:
 	class ULevel* World = nullptr;
 
 	FTransform Transform;
-
-
-public:
-	class UEngineSprite* Sprite = nullptr;
-	int CurIndex = 0; 
-	void SetSprite(std::string_view _Name, int _CurIndex = 0);
 };
 

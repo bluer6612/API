@@ -22,12 +22,6 @@ public:
 
 	std::string GetPathToString();
 
-	// 파일명 + 확장자 포함
-	std::string GetFileName();
-
-	// 확장자
-	std::string GetExtension();
-
 
 	// "C:\\AAAA\\BBBB\\";
 	// "C:\\AAAA\\BBBB\\Resources";
