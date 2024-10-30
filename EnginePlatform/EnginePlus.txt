@@ -1,5 +1,5 @@
 
-	void SetWindowTopMost();
+	void SetWindowTitleDelete();
 
     static int ScreenX = GetSystemMetrics(SM_CXSCREEN);
     static int ScreenY = GetSystemMetrics(SM_CYSCREEN);
@@ -16,10 +16,10 @@
         -10, ScreenY / 3, WS_SYSMENU, (ScreenY - (ScreenY / 3)), WindowHandle, nullptr, hInstance, nullptr);*/
 
         
-    SetWindowTopMost();
+    SetWindowTitleDelete();
 	
 
-void UEngineWindow::SetWindowTopMost()
+void UEngineWindow::SetWindowTitleDelete()
 {
     RECT rc1;
     ::GetWindowRect(WindowHandle, &rc1);

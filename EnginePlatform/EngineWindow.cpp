@@ -217,6 +217,7 @@ void UEngineWindow::Open(std::string_view _TitleName /*= "Window"*/)
 	// 단순히 윈도창을 보여주는 것만이 아니라
 	ShowWindow(WindowHandle, SW_SHOW);
     UpdateWindow(WindowHandle);
+    SetWindowTitleDelete();
     ++WindowCount;
 	// ShowWindow(WindowHandle, SW_HIDE);
 }
@@ -251,13 +252,18 @@ void UEngineWindow::SetWindowPosAndScale(FVector2D _Pos, FVector2D _Scale)
 
     // 그러면 또 이녀석은 
     // 윈도우에서 가져야할 위치를 포함한 크기를 주게 된다.
-    AdjustWindowRect(&Rc, WS_OVERLAPPED, FALSE);
 
+    AdjustWindowRect(&Rc, WS_OVERLAPPED, FALSE);
     //SetForegroundWindow(WindowHandle);
 
     ::SetWindowPos(WindowHandle, nullptr, _Pos.iX() - 10, _Pos.iY(), Rc.right - Rc.left, Rc.bottom - Rc.top, SWP_SHOWWINDOW);
+}
 
+void UEngineWindow::SetWindowTitleDelete()
+{
     long style = ::GetWindowLongA(WindowHandle, GWL_STYLE);
     style &= ~WS_CAPTION;
-    SetWindowLongA(WindowHandle, GWL_STYLE, ::GetWindowLongA(WindowHandle, GWL_STYLE));
+    SetWindowLongA(WindowHandle, GWL_STYLE, style);
+
+    //SetWindowRgn(WindowHandle, hRgn, false);
 }

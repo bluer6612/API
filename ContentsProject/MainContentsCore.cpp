@@ -11,7 +11,6 @@
 #include "PlayGameMode.h"
 #include "Player.h"
 
-
 MainContentsCore::MainContentsCore()
 {
 }
