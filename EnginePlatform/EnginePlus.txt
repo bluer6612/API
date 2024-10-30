@@ -28,7 +28,7 @@
     //SetForegroundWindow(WindowHandle);
 
     ::SetWindowPos(WindowHandle, nullptr, _Pos.iX() - 10, _Pos.iY(), Rc.right - Rc.left, Rc.bottom - Rc.top, SWP_SHOWWINDOW);
-
+}
 
 void UEngineWindow::SetWindowTitleDelete()
 {
