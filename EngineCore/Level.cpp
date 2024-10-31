@@ -6,6 +6,8 @@
 #include <EnginePlatform/EngineWindow.h>
 #include <EnginePlatform/EngineWinImage.h>
 
+#include "SpriteRenderer.h"
+
 ULevel::ULevel()
 {
 }
@@ -49,16 +51,13 @@ void ULevel::Render()
 {
 	ScreenClear();
 
+	// 지금 이제 랜더링의 주체가 USpriteRenderer 바뀌었다.
 	// 액터를 기반으로 랜더링을 돌리는건 곧 지워질 겁니다.
-	std::list<AActor*>::iterator StartIter = AllActors.begin();
-	std::list<AActor*>::iterator EndIter = AllActors.end();
 
-	for (; StartIter != EndIter; ++StartIter)
-	{
-		AActor* CurActor = *StartIter;
+	// 액터가 SpriteRenderer를 만들면
+	// Level도 그 스프라이트 랜더러를 알아야 한다.
 
-		CurActor->Render();
-	}
+
 
 	DoubleBuffering();
 }
@@ -69,7 +68,7 @@ void ULevel::ScreenClear()
 	UEngineWinImage* BackBufferImage = MainWindow.GetBackBuffer();
 	FVector2D Size = MainWindow.GetWindowSize();
 
-	Rectangle(BackBufferImage->GetDC(), 0, 0, Size.iX(), Size.iY());
+	Rectangle(BackBufferImage->GetDC(), -1, -1, Size.iX() + 2, Size.iY() + 2);
 }
 
 void ULevel::DoubleBuffering()
@@ -87,4 +86,9 @@ void ULevel::DoubleBuffering()
 	// 이미지 들은 백버퍼에 다 그려졌을 것이다.
 	BackBufferImage->CopyToBit(WindowImage, Trans);
 
+}
+
+void ULevel::PushRenderer(class USpriteRenderer* _Renderer)
+{
+	Renderers[_Renderer->GetOrder()].push_back(_Renderer);
 }

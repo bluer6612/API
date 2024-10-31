@@ -12,8 +12,8 @@
 #include <EngineBase/EngineMath.h>
 #include "EngineWinImage.h"
 
-static int ScreenX = GetSystemMetrics(SM_CXSCREEN);
-static int ScreenY = GetSystemMetrics(SM_CYSCREEN);
+
+// 정신 잘 붙
 
 // 설명 :
 class UEngineWindow
@@ -51,20 +51,10 @@ public:
 		return BackBufferImage;
 	}
 
-	inline HWND GetWindowHandle() const
-	{
-		return WindowHandle;
-	}
-
-	inline HWND GetWindowHandleSub() const
-	{
-		return WindowHandleSub;
-	}
-
 	// 실력이 낮을수록 남과 공유하려고 안한다.
 	// 자기만 아는걸 대명사처럼 말하고.
 
-	inline void SetWindowTitle(HWND _WindowHandle, std::string_view Text)
+	inline void SetWindowTitle(std::string_view Text)
 	{
 		// WindowAPI의 규칙 이해하고 있느냐.
 		// 전부다 에디터
@@ -72,14 +62,11 @@ public:
 		// 이러한 winapi나 std의 혹은 필수 라이브러의 함수들을 
 		// 랩핑함수가 아니라 
 		// 네이티브 함수라고 합니다.
-		SetWindowTextA(_WindowHandle, Text.data());
+		SetWindowTextA(WindowHandle, Text.data());
 	}
 
+
 	void SetWindowPosAndScale(FVector2D _Pos, FVector2D _Scale);
-
-	void SetWindowTitleDelete();
-
-	void SetWindowAlpha();
 
 
 protected:
@@ -117,8 +104,6 @@ private:
 	UEngineWinImage* WindowImage = nullptr;
 
 	HWND WindowHandle = nullptr;
-
-	HWND WindowHandleSub = nullptr;
 };
 
 

@@ -33,6 +33,11 @@ public:
 
 	}
 
+	FVector2D(long _X, long _Y) : X(static_cast<float>(_X)), Y(static_cast<float>(_Y))
+	{
+
+	}
+
 	int iX() const
 	{
 		return static_cast<int>(X);

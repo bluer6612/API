@@ -1,13 +1,22 @@
 #include "PreCompile.h"
 #include "Player.h"
+
 #include <EngineCore/EngineAPICore.h>
+#include <EngineCore/SpriteRenderer.h>
+
 #include <EnginePlatform/EngineInput.h>
+#include "Bullet.h"
 
 APlayer::APlayer()
 {
 	// UEngineAPICore::GetCore()->CreateLevel("Title");
 	SetActorLocation({100, 100});
-	SetActorScale({ 100, 100 });
+	SetActorScale({ 256, 256 });
+
+	// 랜더러를 하나 만든다.
+	SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
+	SpriteRenderer->SetSprite("bomb");
+	// CreateDefaultSubObject<U2DCollision>();
 }
 
 APlayer::~APlayer()
@@ -18,25 +27,11 @@ APlayer::~APlayer()
 void APlayer::BeginPlay()
 {
 	Super::BeginPlay();
-
-	//UEngineInput::GetInst().BindAction('A', KeyEvent::Press, std::bind(&APlayer::MoveFunction, this, FVector2D::LEFT));
-	//UEngineInput::GetInst().BindAction('D', KeyEvent::Press, std::bind(&APlayer::MoveFunction, this, FVector2D::RIGHT));
-	//UEngineInput::GetInst().BindAction('S', KeyEvent::Press, std::bind(&APlayer::MoveFunction, this, FVector2D::DOWN));
-	//UEngineInput::GetInst().BindAction('W', KeyEvent::Press, std::bind(&APlayer::MoveFunction, this, FVector2D::UP));
-
-	// GetWorld()->SpawnActor<APlayer>();
 }
 
-void APlayer::MoveFunction(FVector2D _Dir/*, AMonster* Monster*/)
-{
-	float DeltaTime = UEngineAPICore::GetCore()->GetDeltaTime();
-
-	AddActorLocation(_Dir * DeltaTime * Speed);
-}
 
 void APlayer::Tick(float _DeltaTime)
 {
-	// 부모가 뭘해줄지 모르니
 	Super::Tick(_DeltaTime);
 
 	if (true == UEngineInput::GetInst().IsPress('D'))
@@ -56,5 +51,11 @@ void APlayer::Tick(float _DeltaTime)
 		AddActorLocation(FVector2D::UP * _DeltaTime * Speed);
 	}
 
-	// UEngineDebug::OutPutString("Down");
+	if (true == UEngineInput::GetInst().IsDown('R'))
+	{
+		SpriteRenderer->SetSprite("bomb", MySpriteIndex);
+		++MySpriteIndex;
+	}
+
+
 }

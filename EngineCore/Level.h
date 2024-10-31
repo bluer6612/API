@@ -5,6 +5,7 @@
 class ULevel
 {
 public:
+	friend class USpriteRenderer;
 	friend class UEngineAPICore;
 	// constrcuter destructer
 	ULevel();
@@ -60,6 +61,10 @@ private:
 		AllActors.push_back(MainPawn);
 	}
 
+
+	// 아무나 함부로 호출하지 못하게 하기 위해서 private 이어야 한다.
+	void PushRenderer(class USpriteRenderer* _Renderer);
+
 	// 헝가리안 표기법
 	// 이름은 마음대로
 	// 맴버변수의 이름은 대문자
@@ -67,10 +72,13 @@ private:
 	// dujumsaigury
 	// 영어의미로 해주시면 됩니다.
 	// 맨앞만 
-	AGameMode* GameMode = nullptr;
+	class AGameMode* GameMode = nullptr;
 
 	// 주인공
-	AActor* MainPawn = nullptr;
+	class AActor* MainPawn = nullptr;
 
 	std::list<AActor*> AllActors;
+
+	// 오더링을 할것이다.
+	std::map<int, std::list<class USpriteRenderer*>> Renderers;
 };

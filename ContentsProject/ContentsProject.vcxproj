@@ -151,11 +151,15 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Bullet.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Player.h">
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="MainContentsCore.h">
+    <ClInclude Include="EduContentsCore.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -170,11 +174,15 @@
     <ClInclude Include="PreCompile.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Bullet.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Player.cpp">
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="MainContentsCore.cpp">
+    <ClCompile Include="EduContentsCore.cpp">
       <SubType>
       </SubType>
     </ClCompile>
