@@ -22,15 +22,6 @@ public:
 
 	std::string GetPathToString();
 
-	// 파일명 + 확장자 포함
-	std::string GetFileName();
-
-	// 파일명 + 확장자 포함
-	std::string GetDirectoryName();
-
-	// 확장자
-	std::string GetExtension();
-
 
 	// "C:\\AAAA\\BBBB\\";
 	// "C:\\AAAA\\BBBB\\Resources";
@@ -44,8 +35,6 @@ public:
 	bool IsDirectory();
 
 	bool IsFile();
-
-	void Append(std::string_view _AppendName);
 
 
 protected:
