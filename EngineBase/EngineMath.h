@@ -33,7 +33,7 @@ public:
 
 	}
 
-	int iX() const 
+	int iX() const
 	{
 		return static_cast<int>(X);
 	}
@@ -43,9 +43,31 @@ public:
 		return static_cast<int>(Y);
 	}
 
+	// X든 Y든 0이있으면 터트리는 함수.
+	bool IsZeroed() const
+	{
+		return X == 0.0f || Y == 0.0f;
+	}
+
 	FVector2D Half() const
 	{
 		return { X * 0.5f, Y * 0.5f };
+	}
+
+	float Length() const
+	{
+		return sqrtf(X * X + Y * Y);
+	}
+
+	void Normalize()
+	{
+		float Len = Length();
+		if (0.0f < Len && false == isnan(Len))
+		{
+			X = X / Len;
+			X = Y / Len;
+		}
+		return;
 	}
 
 	FVector2D operator*(float _Value) const
@@ -55,8 +77,6 @@ public:
 		Result.Y = Y * _Value;
 		return Result;
 	}
-
-
 
 	FVector2D operator+(FVector2D _Other) const
 	{
@@ -154,7 +174,7 @@ public:
 
 	FIntPoint operator+(FIntPoint _Other) const
 	{
-		FIntPoint Result; 
+		FIntPoint Result;
 		Result.X = X + _Other.X;
 		Result.Y = Y + _Other.Y;
 		return Result;
@@ -188,3 +208,26 @@ class EngineMath
 {
 };
 
+
+
+class UColor
+{
+public:
+	union
+	{
+		int Color;
+		struct
+		{
+			unsigned char R;
+			unsigned char G;
+			unsigned char B;
+			unsigned char A;
+		};
+	};
+
+	UColor(unsigned char _R, unsigned char _G, unsigned char _B, unsigned char _A)
+		:R(_R), G(_G), B(_B), A(_A)
+	{
+
+	}
+};
