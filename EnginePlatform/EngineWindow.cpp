@@ -177,26 +177,9 @@ void UEngineWindow::Create(std::string_view _TitleName, std::string_view _ClassN
         MSGASSERT(std::string(_ClassName) + " 등록하지 않은 클래스로 윈도우창을 만들려고 했습니다");
         return;
     }
-    // 윈도우가 만들어지면 hdc를 여기서 얻어올 겁니다.
-    HDC WindowMainDC;
 
-    if (nullptr == WindowHandle)
-    {
-        WindowHandle = CreateWindowA(_ClassName.data(), _TitleName.data(), WS_OVERLAPPED,
-            0, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
-
-        // 윈도우가 만들어지면 hdc를 여기서 얻어올 겁니다.
-        WindowMainDC = GetDC(WindowHandle);
-    }
-    else
-    {
-        WindowHandleSub = CreateWindowA(_ClassName.data(), _TitleName.data(), WS_OVERLAPPED,
-            0, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
-
-        // 윈도우가 만들어지면 hdc를 여기서 얻어올 겁니다.
-        WindowMainDC = GetDC(WindowHandleSub);
-    }
-
+    WindowHandle = CreateWindowA(_ClassName.data(), _TitleName.data(), WS_OVERLAPPED,
+        0, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
     //WindowHandle = CreateWindowA(_ClassName.data(), 0, WS_OVERLAPPED,
     //    -10, (ScreenY - (ScreenY / 3)), WS_SYSMENU, ScreenY / 3, nullptr, nullptr, hInstance, nullptr);
 
@@ -205,6 +188,9 @@ void UEngineWindow::Create(std::string_view _TitleName, std::string_view _ClassN
         MSGASSERT(std::string(_TitleName) + " 윈도우 생성에 실패했습니다.");
         return;
     }
+
+    // 윈도우가 만들어지면 hdc를 여기서 얻어올 겁니다.
+    HDC WindowMainDC = GetDC(WindowHandle);
 
     // nullptr이 아니게 만든 순간 이제 진짜 윈도우 버퍼가 만들어졌다.
     WindowImage = new UEngineWinImage();
@@ -230,12 +216,7 @@ void UEngineWindow::Open(std::string_view _TitleName /*= "Window"*/)
 	ShowWindow(WindowHandle, SW_SHOW);
     UpdateWindow(WindowHandle);
     SetWindowTitleDelete();
-    if (nullptr != WindowHandle && nullptr != WindowHandleSub)
-    {
-        ShowWindow(WindowHandleSub, SW_SHOW);
-        UpdateWindow(WindowHandleSub);
-        SetWindowAlpha(WindowHandleSub);
-    }
+    SetWindowAlpha();
     ++WindowCount;
 	// ShowWindow(WindowHandle, SW_HIDE);
 }
@@ -286,13 +267,13 @@ void UEngineWindow::SetWindowTitleDelete()
     //SetWindowRgn(WindowHandle, hRgn, false);
 }
 
-void UEngineWindow::SetWindowAlpha(HWND _WindowHandle)
+void UEngineWindow::SetWindowAlpha()
 {
-    long l = GetWindowLong(WindowHandleSub, GWL_EXSTYLE);
+    long l = GetWindowLong(WindowHandle, GWL_EXSTYLE);
 
     l |= WS_EX_LAYERED;
 
-    SetWindowLong(WindowHandleSub, GWL_EXSTYLE, l);
+    SetWindowLong(WindowHandle, GWL_EXSTYLE, l);
 
-    SetLayeredWindowAttributes(WindowHandleSub, 0, 50, LWA_ALPHA);
+    SetLayeredWindowAttributes(WindowHandle, 0, 50, LWA_ALPHA);
 }
