@@ -13,7 +13,9 @@
     <ClInclude Include="PlayMap.h">
       <Filter>ContentsObject\Play</Filter>
     </ClInclude>
-    <ClInclude Include="MainContentsCore.h" />
+    <ClInclude Include="MainContentsCore.h">
+      <Filter>Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -28,7 +30,9 @@
     <ClCompile Include="PlayMap.cpp">
       <Filter>ContentsObject\Play</Filter>
     </ClCompile>
-    <ClCompile Include="MainContentsCore.cpp" />
+    <ClCompile Include="MainContentsCore.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="PreCompile">
