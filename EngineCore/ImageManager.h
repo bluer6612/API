@@ -40,6 +40,8 @@ public:
 
 
 
+	void CuttingSprite(std::string_view _KeyName, int _X, int _Y);
+
 	void CuttingSprite(std::string_view _KeyName, FVector2D _CuttingSize);
 
 	// ½Åµ¿¹Î ÇÔ¼ö

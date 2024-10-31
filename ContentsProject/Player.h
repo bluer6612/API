@@ -25,13 +25,18 @@ public:
 	void UpMove();
 	void DownMove();*/
 
+	void RunSoundPlay();
+
 protected:
 
 private:
+
 	float Speed = 100.0f;
 	int MySpriteIndex = 0;
 
 	class USpriteRenderer* SpriteRenderer;
+
+	// class std::vector< USpriteRenderer* LeftRenderer;
 
 };
 
