@@ -27,6 +27,9 @@ public:
 
 	void RunSoundPlay();
 
+	void LevelChangeStart();
+	void LevelChangeEnd();
+
 protected:
 
 private:

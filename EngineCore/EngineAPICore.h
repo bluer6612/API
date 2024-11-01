@@ -99,6 +99,7 @@ private:
 	// 돌아가고 있는 레벨
 	// 포인터 체인지 방식
 	class ULevel* CurLevel = nullptr;
+	class ULevel* NextLevel = nullptr;
 
 	void Tick();
 

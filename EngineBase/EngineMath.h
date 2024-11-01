@@ -1,5 +1,4 @@
 #pragma once
-
 // FVector로 통일하겠습니다.
 // FVector2D xy
 // FVector3D xyz
@@ -134,6 +133,18 @@ public:
 		X += _Other.X;
 		Y += _Other.Y;
 		return *this;
+	}
+
+	std::string ToString()
+	{
+		std::string Stream;
+
+		Stream += "X : [";
+		Stream += std::to_string(X);
+		Stream += "] Y : [";
+		Stream += std::to_string(Y);
+		Stream += "]";
+		return Stream;
 	}
 };
 

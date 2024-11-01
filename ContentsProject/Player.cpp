@@ -3,6 +3,7 @@
 
 #include <EngineCore/EngineAPICore.h>
 #include <EngineCore/SpriteRenderer.h>
+#include <EngineCore/EngineCoreDebug.h>
 
 #include <EnginePlatform/EngineInput.h>
 #include "Bullet.h"
@@ -96,6 +97,18 @@ void APlayer::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 
+	UEngineDebug::CoreOutPutString("FPS : " + std::to_string(1.0f / _DeltaTime));
+	UEngineDebug::CoreOutPutString("PlayerPos : " + GetActorLocation().ToString());
+
+	if (true == UEngineInput::GetInst().IsDown('R'))
+	{
+		UEngineAPICore::GetCore()->OpenLevel("Title");
+		// UEngineDebug::SwitchIsDebug();
+	}
+
+	// UEngineAPICore::OpenLevel();
+
+
 	if (true == UEngineInput::GetInst().IsPress('D'))
 	{
 		SpriteRenderer->ChangeAnimation("Run_Right");
@@ -124,4 +137,16 @@ void APlayer::Tick(float _DeltaTime)
 	{
 		SpriteRenderer->ChangeAnimation("Idle_Right");
 	}
+}
+
+void APlayer::LevelChangeStart()
+{
+	Super::LevelChangeStart();
+}
+
+void APlayer::LevelChangeEnd()
+{
+	Super::LevelChangeEnd();
+
+
 }

@@ -8,17 +8,29 @@
 
 #include "SpriteRenderer.h"
 
+#include "EngineCoreDebug.h"
+
 ULevel::ULevel()
 {
 }
 
 ULevel::~ULevel()
 {
-	//if (nullptr != GameMode)
-	//{
-	//	delete GameMode;
-	//	GameMode = nullptr;
-	//}
+	{
+		// BeginPlayList 한번도 체인지 안한 액터는 
+		// 액터들이 다 비긴 플레이 리스트에 들어가 있다.
+
+		std::list<AActor*>::iterator StartIter = BeginPlayList.begin();
+		std::list<AActor*>::iterator EndIter = BeginPlayList.end();
+
+		for (; StartIter != EndIter; ++StartIter)
+		{
+			AActor* CurActor = *StartIter;
+			delete CurActor;
+		}
+	}
+
+
 
 	std::list<AActor*>::iterator StartIter = AllActors.begin();
 	std::list<AActor*>::iterator EndIter = AllActors.end();
@@ -32,6 +44,40 @@ ULevel::~ULevel()
 			delete *StartIter;
 		}
 	}
+}
+
+// 내가 CurLevel 됐을대
+void ULevel::LevelChangeStart()
+{
+	{
+		std::list<AActor*>::iterator StartIter = AllActors.begin();
+		std::list<AActor*>::iterator EndIter = AllActors.end();
+
+		for (; StartIter != EndIter; ++StartIter)
+		{
+			AActor* CurActor = *StartIter;
+
+			CurActor->LevelChangeStart();
+		}
+	}
+
+}
+
+// 나 이제 새로운 레벨로 바뀔거야.
+void ULevel::LevelChangeEnd()
+{
+	{
+		std::list<AActor*>::iterator StartIter = AllActors.begin();
+		std::list<AActor*>::iterator EndIter = AllActors.end();
+
+		for (; StartIter != EndIter; ++StartIter)
+		{
+			AActor* CurActor = *StartIter;
+
+			CurActor->LevelChangeEnd();
+		}
+	}
+
 }
 
 void ULevel::Tick(float _DeltaTime)
@@ -100,6 +146,7 @@ void ULevel::Render(float _DeltaTime)
 
 	}
 
+	UEngineDebug::PrintEngineDebugText();
 
 	DoubleBuffering();
 }
