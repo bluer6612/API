@@ -260,6 +260,9 @@ void UEngineWindow::SetWindowPosAndScale(std::string_view _TitleName, FVector2D 
     }
     else
     {
+        WindowSize = _Scale;
+        
+        AdjustWindowRect(&Rc, WS_OVERLAPPED, FALSE);
         SetForegroundWindow(WindowHandleSub);
         ::SetWindowPos(WindowHandleSub, nullptr, _Pos.iX() - 10, _Pos.iY(), Rc.right - Rc.left, Rc.bottom - Rc.top, SWP_SHOWWINDOW);
 

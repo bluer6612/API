@@ -72,11 +72,12 @@ void EduContentsCore::BeginPlay()
 	
 	UEngineAPICore::GetCore()->GetMainWindow().SetWindowPosAndScale("EduWindow", { 0, 0 }, { ScreenX, ScreenY });
 
-	UEngineAPICore::GetCore()->GetMainWindow().SetWindowAlpha();
+	//UEngineAPICore::GetCore()->GetMainWindow().SetWindowAlpha();
 
 	UEngineAPICore::GetCore()->GetSubWindow().SetWindowTitle("SubWindow");
 
-	UEngineAPICore::GetCore()->GetSubWindow().SetWindowPosAndScale("SubWindow", { 0, 3 / ScreenY }, { static_cast<long>(ScreenX), static_cast<long>((ScreenY - (ScreenY / 3))) });
+	//UEngineAPICore::GetCore()->GetSubWindow().SetWindowPosAndScale("SubWindow", { 0, (ScreenY - (ScreenY / 3)) - 10 - 30 }, { static_cast<long>(ScreenX), static_cast<long>(ScreenY / 3) });
+	UEngineAPICore::GetCore()->GetSubWindow().SetWindowPosAndScale("SubWindow", { 1000, 10 }, { 10000, 10 });
 
 	UEngineAPICore::GetCore()->CreateLevel<APlayGameMode, APlayer>("Play");
 

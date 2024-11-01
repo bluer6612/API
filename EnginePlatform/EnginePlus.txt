@@ -67,6 +67,11 @@ void UEngineWindow::SetWindowAlpha()
 
 
 	void SetWindowPosAndScale(std::string_view _TitleName, FVector2D _Pos, FVector2D _Scale);
+    
+	inline HWND GetWindowHandle() const
+	{
+		return WindowHandle;
+	}
 
 	inline HWND GetWindowHandleSub() const
 	{

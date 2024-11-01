@@ -71,6 +71,21 @@ public:
 	void SetWindowPosAndScale(std::string_view _TitleName, FVector2D _Pos, FVector2D _Scale);
 
 
+	void SetWindowHandle(HWND _WindowHandle)
+	{
+		WindowHandle = _WindowHandle;
+	}
+
+	void SetWindowHandleSub(HWND _WindowHandle)
+	{
+		WindowHandleSub = _WindowHandle;
+	}
+
+	inline HWND GetWindowHandle() const
+	{
+		return WindowHandle;
+	}
+
 	inline HWND GetWindowHandleSub() const
 	{
 		return WindowHandleSub;
