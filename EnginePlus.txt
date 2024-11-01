@@ -6,7 +6,7 @@
 
         
     SetWindowTitleDelete();
-	SetInvisibleWindow();
+	SetWindowAlpha();
 	
 
     RECT Rc = { 0, 0, _Scale.iX(), _Scale.iY() };
@@ -34,7 +34,7 @@ void UEngineWindow::SetWindowTitleDelete()
     //SetWindowRgn(WindowHandle, hRgn, false);
 }
 
-void UEngineWindow::SetInvisibleWindow()
+void UEngineWindow::SetWindowAlpha()
 {
     long l = GetWindowLongA(WindowHandle, GWL_EXSTYLE);
 
@@ -68,19 +68,27 @@ void UEngineWindow::SetInvisibleWindow()
 	{
 		return EngineSubWindow;
 	}
+    
+	HWND WindowHandleSub = nullptr;
+
 
   
+
+	UEngineWindow& GetSubWindow()
+	{
+		return EngineSubWindow;
+	}
+    
 	UEngineWindow EngineSubWindow = UEngineWindow(); // 엔진 서브 윈도우
 
 
-
-    UEngineAPICore::GetCore()->GetMainWindow().SetWindowTitle("MainWindow");
+	UEngineAPICore::GetCore()->GetMainWindow().SetWindowTitle("EduWindow");
 
 	// 이거 꼭 호출해줘야 합니다.
-	UEngineAPICore::GetCore()->GetMainWindow().SetWindowPosAndScale({ 0, (ScreenY - (ScreenY / 3)) - 10 - 30 }, { WS_SYSMENU, ScreenY / 3 });
-	
+	UEngineAPICore::GetCore()->GetMainWindow().SetWindowPosAndScale({ 0, (ScreenY - (ScreenY / 3)) - 10 - 30 }, { WS_SYSMENU, static_cast<long>(ScreenY / 3) });
+
 	UEngineAPICore::GetCore()->GetMainWindow().SetWindowAlpha();
 
 	UEngineAPICore::GetCore()->GetSubWindow().SetWindowTitle("SubWindow");
 
-	UEngineAPICore::GetCore()->GetSubWindow().SetWindowPosAndScale({ 0, 3 / ScreenY }, { WS_SYSMENU, (ScreenY - (ScreenY / 3)) });
+	UEngineAPICore::GetCore()->GetSubWindow().SetWindowPosAndScale({ 0, 3 / ScreenY }, { WS_SYSMENU, static_cast<long>((ScreenY - (ScreenY / 3))) });

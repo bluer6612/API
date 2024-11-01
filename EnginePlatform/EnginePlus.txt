@@ -5,33 +5,48 @@
     //    -10, (ScreenY - (ScreenY / 3)), WS_SYSMENU, ScreenY / 3, nullptr, nullptr, hInstance, nullptr);
 
         
-    SetWindowTitleDelete();
 	SetWindowAlpha();
-	
 
-    RECT Rc = { 0, 0, _Scale.iX(), _Scale.iY() };
 
-    // 이게 그 계산해주는 함수이다.
-    // 타이틀바 크기까지 합쳐진 크기로 준다.
-    // 윈도우 입장
-    // 현재 윈도우의 스타일을 넣어줘야 한다.
-
-    // 그러면 또 이녀석은 
-    // 윈도우에서 가져야할 위치를 포함한 크기를 주게 된다.
-
-    AdjustWindowRect(&Rc, WS_OVERLAPPED, FALSE);
-    //SetForegroundWindow(WindowHandle);
-
-    ::SetWindowPos(WindowHandle, nullptr, _Pos.iX() - 10, _Pos.iY(), Rc.right - Rc.left, Rc.bottom - Rc.top, SWP_SHOWWINDOW);
-}
-
-void UEngineWindow::SetWindowTitleDelete()
+void UEngineWindow::SetWindowPosAndScale(std::string_view _TitleName, FVector2D _Pos, FVector2D _Scale)
 {
-    long style = ::GetWindowLongA(WindowHandle, GWL_STYLE);
-    style &= ~WS_CAPTION;
-    SetWindowLongA(WindowHandle, GWL_STYLE, style);
+    RECT Rc = { 0, 0, _Scale.iX(), _Scale.iY() };
+    AdjustWindowRect(&Rc, WS_OVERLAPPED, FALSE);
 
-    //SetWindowRgn(WindowHandle, hRgn, false);
+    // 이전의 크기와 달라졌을때만 백버퍼를 새로 만든 것이다.
+    if (false == WindowSize.EqualToInt(_Scale) && _TitleName.data() == "EduWindow")
+    {
+        // 화면의 크기와 전히 동일한 크기여야 한다.
+        // 여러번 호출하면 기존에 만들었던 녀석이 Leck이 되므로
+        // 화면크기를 조정할 때마다 삭제해줘야 한다.
+        if (nullptr != BackBufferImage)
+        {
+            // 기존 백버퍼는 지워버리고
+            delete BackBufferImage;
+            BackBufferImage = nullptr;
+        }
+
+        BackBufferImage = new UEngineWinImage();
+        BackBufferImage->Create(WindowImage, _Scale);
+
+        WindowSize = _Scale;
+
+        SetForegroundWindow(WindowHandle);
+        ::SetWindowPos(WindowHandle, nullptr, _Pos.iX() - 10, _Pos.iY(), Rc.right - Rc.left, Rc.bottom - Rc.top, SWP_SHOWWINDOW);
+
+        long style = ::GetWindowLongA(WindowHandle, GWL_STYLE);
+        style &= ~WS_CAPTION;
+        SetWindowLongA(WindowHandle, GWL_STYLE, style);
+    }
+    else
+    {
+        SetForegroundWindow(WindowHandleSub);
+        ::SetWindowPos(WindowHandleSub, nullptr, _Pos.iX() - 10, _Pos.iY(), Rc.right - Rc.left, Rc.bottom - Rc.top, SWP_SHOWWINDOW);
+
+        long style = ::GetWindowLongA(WindowHandleSub, GWL_STYLE);
+        style &= ~WS_CAPTION;
+        SetWindowLongA(WindowHandleSub, GWL_STYLE, style);
+    }
 }
 
 void UEngineWindow::SetWindowAlpha()
@@ -50,12 +65,13 @@ void UEngineWindow::SetWindowAlpha()
     static int ScreenX = GetSystemMetrics(SM_CXSCREEN);
     static int ScreenY = GetSystemMetrics(SM_CYSCREEN);
 
+
+	void SetWindowPosAndScale(std::string_view _TitleName, FVector2D _Pos, FVector2D _Scale);
+
 	inline HWND GetWindowHandleSub() const
 	{
 		return WindowHandleSub;
 	}
-
-	void SetWindowTitleDelete();
 
 	void SetInvisibleWindow();
 
@@ -85,10 +101,10 @@ void UEngineWindow::SetWindowAlpha()
 	UEngineAPICore::GetCore()->GetMainWindow().SetWindowTitle("EduWindow");
 
 	// 이거 꼭 호출해줘야 합니다.
-	UEngineAPICore::GetCore()->GetMainWindow().SetWindowPosAndScale({ 0, (ScreenY - (ScreenY / 3)) - 10 - 30 }, { WS_SYSMENU, static_cast<long>(ScreenY / 3) });
+	UEngineAPICore::GetCore()->GetMainWindow().SetWindowPosAndScale("EduWindow", { 0, 0 }, { ScreenX, ScreenY });
 
 	UEngineAPICore::GetCore()->GetMainWindow().SetWindowAlpha();
 
 	UEngineAPICore::GetCore()->GetSubWindow().SetWindowTitle("SubWindow");
 
-	UEngineAPICore::GetCore()->GetSubWindow().SetWindowPosAndScale({ 0, 3 / ScreenY }, { WS_SYSMENU, static_cast<long>((ScreenY - (ScreenY / 3))) });
+	UEngineAPICore::GetCore()->GetSubWindow().SetWindowPosAndScale("SubWindow", { 0, 3 / ScreenY }, { WS_SYSMENU, static_cast<long>((ScreenY - (ScreenY / 3))) });
