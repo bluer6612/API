@@ -12,6 +12,8 @@
 #include <EngineBase/EngineMath.h>
 #include "EngineWinImage.h"
 
+static int ScreenX = GetSystemMetrics(SM_CXSCREEN);
+static int ScreenY = GetSystemMetrics(SM_CYSCREEN);
 
 // 정신 잘 붙
 
@@ -69,6 +71,15 @@ public:
 	void SetWindowPosAndScale(FVector2D _Pos, FVector2D _Scale);
 
 
+	inline HWND GetWindowHandleSub() const
+	{
+		return WindowHandleSub;
+	}
+
+	void SetWindowTitleDelete();
+
+	void SetWindowAlpha();
+
 protected:
 
 private:
@@ -104,6 +115,8 @@ private:
 	UEngineWinImage* WindowImage = nullptr;
 
 	HWND WindowHandle = nullptr;
+
+	HWND WindowHandleSub = nullptr;
 };
 
 

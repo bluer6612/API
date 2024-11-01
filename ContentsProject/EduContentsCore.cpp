@@ -69,14 +69,16 @@ void EduContentsCore::BeginPlay()
 
 	}
 
-	
-
-
-
 	UEngineAPICore::GetCore()->GetMainWindow().SetWindowTitle("EduWindow");
 
 	// 이거 꼭 호출해줘야 합니다.
-	UEngineAPICore::GetCore()->GetMainWindow().SetWindowPosAndScale({ 0, 0 }, {1280, 720});
+	UEngineAPICore::GetCore()->GetMainWindow().SetWindowPosAndScale({ 0, (ScreenY - (ScreenY / 3)) - 10 - 30 }, { WS_SYSMENU, static_cast<long>(ScreenY / 3) });
+
+	UEngineAPICore::GetCore()->GetMainWindow().SetWindowAlpha();
+
+	UEngineAPICore::GetCore()->GetSubWindow().SetWindowTitle("SubWindow");
+
+	UEngineAPICore::GetCore()->GetSubWindow().SetWindowPosAndScale({ 0, 3 / ScreenY }, { WS_SYSMENU, static_cast<long>((ScreenY - (ScreenY / 3))) });
 
 	UEngineAPICore::GetCore()->CreateLevel<APlayGameMode, APlayer>("Play");
 

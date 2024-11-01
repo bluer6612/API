@@ -37,4 +37,9 @@
     <ClInclude Include="EngineWinImage.h" />
     <ClInclude Include="EngineWinDebug.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="EnginePlus.txt">
+      <Filter>Window</Filter>
+    </Text>
+  </ItemGroup>
 </Project>
