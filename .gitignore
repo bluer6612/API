@@ -7,8 +7,7 @@
 NotUsedResources/
 
 #Bullet
-Bullet.h
-Bullet.cpp
+Bullet
 
 # User-specific files
 *.rsuser
