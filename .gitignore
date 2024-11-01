@@ -7,7 +7,7 @@
 NotUsedResources/
 
 #Bullet
-ContentsProject/Bullet.*
+Bullet.*
 
 # User-specific files
 *.rsuser
