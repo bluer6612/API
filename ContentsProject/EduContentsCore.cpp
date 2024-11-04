@@ -10,6 +10,7 @@
 
 #include "TitleGameMode.h"
 #include "PlayGameMode.h"
+#include "TileMapGameMode.h"
 #include "Player.h"
 
 
@@ -44,6 +45,8 @@ void EduContentsCore::BeginPlay()
 		return;
 	}
 
+	Dir.Append("Image");
+
 	// 모든 파일 다 얻어낸다음
 	std::vector<UEngineFile> ImageFiles = Dir.GetAllFile();
 
@@ -58,33 +61,46 @@ void EduContentsCore::BeginPlay()
 
 	UImageManager::GetInst().CuttingSprite("Player_Right.png", {128, 128});
 
+
 	{
 
 		UEngineDirectory BombDir;
-		BombDir.MoveParentToDirectory("Resources");
+		BombDir.MoveParentToDirectory("Resources//Image");
 		BombDir.Append("bomb");
 
 		UImageManager::GetInst().LoadFolder(BombDir.GetPathToString());
 
 	}
 
-	UEngineAPICore::GetCore()->GetMainWindow().SetWindowTitle("EduWindow");
+	{
+		// 타일셋 로드
+		UEngineDirectory Dir;
+		Dir.MoveParentToDirectory("Resources//Image");
+		Dir.Append("TileMap//TileSet");
+
+		UImageManager::GetInst().LoadFolder(Dir.GetPathToString());
+
+	}
+
+
 	
+
+
+	UEngineAPICore::GetCore()->GetMainWindow().SetWindowTitle("EduWindow");
+
 	UEngineAPICore::GetCore()->GetMainWindow().SetWindowPosAndScale("EduWindow", { 0, 0 }, { ScreenX, ScreenY });
 
-	//UEngineAPICore::GetCore()->GetMainWindow().SetWindowAlpha();
+	UEngineAPICore::GetCore()->GetMainWindow().SetWindowAlpha();
 
 	UEngineAPICore::GetCore()->GetSubWindow().SetWindowTitle("SubWindow");
 
-	//UEngineAPICore::GetCore()->GetSubWindow().SetWindowPosAndScale("SubWindow", { 0, (ScreenY - (ScreenY / 3)) - 10 - 30 }, { static_cast<long>(ScreenX), static_cast<long>(ScreenY / 3) });
-	UEngineAPICore::GetCore()->GetSubWindow().SetWindowPosAndScale("SubWindow", { 1000, 10 }, { 10000, 10 });
+	UEngineAPICore::GetCore()->GetSubWindow().SetWindowPosAndScale("SubWindow", { 0, 3 / ScreenY }, { static_cast<long>(ScreenX), static_cast<long>((ScreenY - (ScreenY / 3))) });
 
 	UEngineAPICore::GetCore()->CreateLevel<APlayGameMode, APlayer>("Play");
-
 	UEngineAPICore::GetCore()->CreateLevel<ATitleGameMode, AActor>("Title");
-	//UEngineAPICore::GetCore()->CreateLevel("End");
+	UEngineAPICore::GetCore()->CreateLevel<ATileMapGameMode, AActor>("Tile");
 
-	UEngineAPICore::GetCore()->OpenLevel("Title");
+	UEngineAPICore::GetCore()->OpenLevel("Tile");
 
 }
 

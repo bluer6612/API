@@ -39,6 +39,11 @@ APlayer::APlayer()
 
 		// SpriteRenderer->CreateAnimation("Test", "Player_Right.png", { 5,  4,  3}, 0.1f);
 		SpriteRenderer->SetAnimationEvent("Run_Right", 2, std::bind(&APlayer::RunSoundPlay, this));
+
+		std::string Name = SpriteRenderer->GetCurSpriteName();
+
+		int a = 0;
+
 	}
 
 

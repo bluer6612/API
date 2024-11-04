@@ -223,10 +223,10 @@ void UEngineWindow::Open(std::string_view _TitleName /*= "Window"*/)
 	// 단순히 윈도창을 보여주는 것만이 아니라
 	ShowWindow(WindowHandle, SW_SHOW);
     UpdateWindow(WindowHandle);
-    //SetWindowAlpha();
     ++WindowCount;
 	// ShowWindow(WindowHandle, SW_HIDE);
 }
+
 
 void UEngineWindow::SetWindowPosAndScale(std::string_view _TitleName, FVector2D _Pos, FVector2D _Scale)
 {
@@ -260,9 +260,6 @@ void UEngineWindow::SetWindowPosAndScale(std::string_view _TitleName, FVector2D 
     }
     else
     {
-        WindowSize = _Scale;
-        
-        AdjustWindowRect(&Rc, WS_OVERLAPPED, FALSE);
         SetForegroundWindow(WindowHandleSub);
         ::SetWindowPos(WindowHandleSub, nullptr, _Pos.iX() - 10, _Pos.iY(), Rc.right - Rc.left, Rc.bottom - Rc.top, SWP_SHOWWINDOW);
 
@@ -270,6 +267,17 @@ void UEngineWindow::SetWindowPosAndScale(std::string_view _TitleName, FVector2D 
         style &= ~WS_CAPTION;
         SetWindowLongA(WindowHandleSub, GWL_STYLE, style);
     }
+}
+
+FVector2D UEngineWindow::GetMousePos()
+{
+    POINT MousePoint;
+
+    GetCursorPos(&MousePoint);
+    // 윈도우창 위치기준으로 마우스 포지션을 
+    ScreenToClient(WindowHandle, &MousePoint);
+
+    return FVector2D(MousePoint.x, MousePoint.y);
 }
 
 void UEngineWindow::SetWindowAlpha()

@@ -78,7 +78,7 @@ void UEngineWindow::SetWindowAlpha()
 		return WindowHandleSub;
 	}
 
-	void SetInvisibleWindow();
+	void SetWindowAlpha();
 
 
 

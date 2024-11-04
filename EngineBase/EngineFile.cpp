@@ -1,10 +1,17 @@
 #include "PreCompile.h"
 #include "EngineFile.h"
 #include "EngineDebug.h"
+#include "EngineSerializer.h"
 
 UEngineFile::UEngineFile()
 {
 
+
+}
+
+UEngineFile::UEngineFile(const std::string& _Path)
+	: UEnginePath(std::string_view(_Path.c_str()))
+{
 
 }
 
@@ -29,7 +36,7 @@ UEngineFile::~UEngineFile()
 
 void UEngineFile::FileOpen(const char* _Mode)
 {
-	fopen_s(&File, Path, _Mode);
+	fopen_s(&File, GetPathToString().c_str(), _Mode);
 
 	// 방어코드
 	// 파일을 열지 못했다.
@@ -39,10 +46,37 @@ void UEngineFile::FileOpen(const char* _Mode)
 		// char [] Arr1
 		// Arr0 + Arr1
 
-		MSGASSERT(Path /*+ "파일 오픈에 실패했습니다"*/);
+		MSGASSERT(GetPathToString() + + "파일 오픈에 실패했습니다");
 	}
 }
 
+
+void UEngineFile::Write(UEngineSerializer& _Ser)
+{
+	Write(_Ser.GetDataPtr(), _Ser.GetWriteOffset());
+}
+
+int UEngineFile::GetFileSize()
+{
+	if (false == IsFile())
+	{
+		MSGASSERT(Path.string() + "파일이 아닌 존재의 크기를 알수는 없습니다.");
+		return -1;
+	}
+
+	return static_cast<int>(std::filesystem::file_size(Path));
+}
+
+void UEngineFile::Read(class UEngineSerializer& _Ser)
+{
+	// 파일 크기를 다 읽어서 
+
+	int FileSize = GetFileSize();
+
+	_Ser.DataResize(FileSize);
+
+	Read(_Ser.GetDataPtr(), FileSize);
+}
 
 void UEngineFile::Write(const void* _Ptr, size_t _Size)
 {
@@ -85,16 +119,6 @@ void UEngineFile::Read(void* _Ptr, size_t _Size)
 	}
 
 	fread(_Ptr, _Size, 1, File);
-}
-
-// 인라인은 구현과 선언을분리하면 인라인을 하기 힘듭니다.
-bool UEngineFile::IsExits()
-{
-	// Window제공함수
-	int Result = _access(Path, 00);
-
-	// 0이면 있는것 0 이외의 값이면 없는 것
-	return 0 == Result;
 }
 
 

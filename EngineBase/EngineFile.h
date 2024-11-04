@@ -20,25 +20,27 @@ class UEngineFile : public UEnginePath
 public:
 	UEngineFile();
 	// 생성체인
+	UEngineFile(const std::string& _Path);
 	UEngineFile(std::string_view _Path);
 	UEngineFile(std::filesystem::path _Path);
 	~UEngineFile();
 
 	// Write
+	void Write(class UEngineSerializer& _Ser);
+	void Read(class UEngineSerializer& _Ser);
+
 	void Write(const void* _Ptr, size_t _Size);
 	void Read(void* _Ptr, size_t _Size);
 
 	void FileOpen(const char* _Mode);
-	bool IsExits();
 	void Close();
+
+	int GetFileSize();
 
 // 기능 클래스 랩핑
 private:
 	// 상수
 	// _MAX_DIR 윈도우에 의존적인 프로그램
-	
-
-	char Path[MAXPATH] = "";
 	FILE* File = nullptr;
 };
 

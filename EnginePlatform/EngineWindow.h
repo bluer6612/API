@@ -15,8 +15,6 @@
 static int ScreenX = GetSystemMetrics(SM_CXSCREEN);
 static int ScreenY = GetSystemMetrics(SM_CYSCREEN);
 
-// 정신 잘 붙
-
 // 설명 :
 class UEngineWindow
 {
@@ -70,17 +68,6 @@ public:
 
 	void SetWindowPosAndScale(std::string_view _TitleName, FVector2D _Pos, FVector2D _Scale);
 
-
-	void SetWindowHandle(HWND _WindowHandle)
-	{
-		WindowHandle = _WindowHandle;
-	}
-
-	void SetWindowHandleSub(HWND _WindowHandle)
-	{
-		WindowHandleSub = _WindowHandle;
-	}
-
 	inline HWND GetWindowHandle() const
 	{
 		return WindowHandle;
@@ -92,6 +79,9 @@ public:
 	}
 
 	void SetWindowAlpha();
+
+	FVector2D GetMousePos();
+
 
 protected:
 
@@ -128,7 +118,6 @@ private:
 	UEngineWinImage* WindowImage = nullptr;
 
 	HWND WindowHandle = nullptr;
-
 	HWND WindowHandleSub = nullptr;
 };
 
