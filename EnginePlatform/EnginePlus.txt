@@ -89,16 +89,13 @@ void UEngineWindow::SetWindowAlpha()
 	{
 		return EngineSubWindow;
 	}
+	}
     
 	HWND WindowHandleSub = nullptr;
 
 
   
 
-	UEngineWindow& GetSubWindow()
-	{
-		return EngineSubWindow;
-	}
     
 	UEngineWindow EngineSubWindow = UEngineWindow(); // 엔진 서브 윈도우
 

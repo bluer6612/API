@@ -260,12 +260,12 @@ void UEngineWindow::SetWindowPosAndScale(std::string_view _TitleName, FVector2D 
     }
     else
     {
-        SetForegroundWindow(WindowHandleSub);
-        ::SetWindowPos(WindowHandleSub, nullptr, _Pos.iX() - 10, _Pos.iY(), Rc.right - Rc.left, Rc.bottom - Rc.top, SWP_SHOWWINDOW);
+        SetForegroundWindow(WindowHandle);
+        ::SetWindowPos(WindowHandle, nullptr, _Pos.iX() - 10, _Pos.iY(), Rc.right - Rc.left, Rc.bottom - Rc.top, SWP_SHOWWINDOW);
 
-        long style = ::GetWindowLongA(WindowHandleSub, GWL_STYLE);
+        long style = ::GetWindowLongA(WindowHandle, GWL_STYLE);
         style &= ~WS_CAPTION;
-        SetWindowLongA(WindowHandleSub, GWL_STYLE, style);
+        SetWindowLongA(WindowHandle, GWL_STYLE, style);
     }
 }
 
