@@ -30,9 +30,9 @@ void UEngineWindow::SetWindowPosAndScale(std::string_view _TitleName, FVector2D 
         BackBufferImage->Create(WindowImage, _Scale);
 
         WindowSize = _Scale;
-
+        
         SetForegroundWindow(WindowHandle);
-        ::SetWindowPos(WindowHandle, nullptr, _Pos.iX() - 10, _Pos.iY(), Rc.right - Rc.left, Rc.bottom - Rc.top, SWP_SHOWWINDOW);
+        ::SetWindowPos(WindowHandle, nullptr, _Pos.iX() , _Pos.iY(), Rc.right - Rc.left, Rc.bottom - Rc.top, SWP_SHOWWINDOW);
 
         long style = ::GetWindowLongA(WindowHandle, GWL_STYLE);
         style &= ~WS_CAPTION;
@@ -41,7 +41,7 @@ void UEngineWindow::SetWindowPosAndScale(std::string_view _TitleName, FVector2D 
     else
     {
         SetForegroundWindow(WindowHandleSub);
-        ::SetWindowPos(WindowHandleSub, nullptr, _Pos.iX() - 10, _Pos.iY(), Rc.right - Rc.left, Rc.bottom - Rc.top, SWP_SHOWWINDOW);
+        ::SetWindowPos(WindowHandleSub, nullptr, _Pos.iX(), _Pos.iY(), Rc.right - Rc.left, Rc.bottom - Rc.top, SWP_SHOWWINDOW);
 
         long style = ::GetWindowLongA(WindowHandleSub, GWL_STYLE);
         style &= ~WS_CAPTION;
@@ -82,7 +82,6 @@ void UEngineWindow::SetWindowAlpha()
 
 
 
-	Core.EngineSubWindow.Open();
 
 
 	UEngineWindow& GetSubWindow()
@@ -93,19 +92,23 @@ void UEngineWindow::SetWindowAlpha()
     
 	HWND WindowHandleSub = nullptr;
 
-
+    
+	Core.EngineSubWindow.Open();
+	Core.EngineTopWindow.Open();
   
 
     
 	UEngineWindow EngineSubWindow = UEngineWindow(); // 엔진 서브 윈도우
+	UEngineWindow EngineTopWindow = UEngineWindow(); // 엔진 탑 투명 윈도우
 
+    
 
-	UEngineAPICore::GetCore()->GetMainWindow().SetWindowTitle("EduWindow");
+    UEngineAPICore::GetCore()->GetMainWindow().SetWindowTitle("EduWindow");
 
-	UEngineAPICore::GetCore()->GetMainWindow().SetWindowPosAndScale("EduWindow", { 0, 0 }, { ScreenX, ScreenY });
-
-	UEngineAPICore::GetCore()->GetMainWindow().SetWindowAlpha();
+	UEngineAPICore::GetCore()->GetMainWindow().SetWindowPosAndScale("EduWindow", { static_cast < float>(0), (ScreenY - static_cast<float>( ScreenY * 0.31 )) }, { static_cast<float>(ScreenX), static_cast<float>(ScreenY * 0.275) });
 
 	UEngineAPICore::GetCore()->GetSubWindow().SetWindowTitle("SubWindow");
-    
-	UEngineAPICore::GetCore()->GetSubWindow().SetWindowPosAndScale("SubWindow", { 0, 3 / ScreenY }, { static_cast<long>(ScreenX), static_cast<long>((ScreenY - (ScreenY / 3))) });
+
+	UEngineAPICore::GetCore()->GetSubWindow().SetWindowPosAndScale("SubWindow", { static_cast <float>(0), (ScreenY - static_cast<float>(ScreenY * 0.345)) }, { static_cast<float>(ScreenX), static_cast<float>(ScreenY * 0.025) });
+
+	UEngineAPICore::GetCore()->GetSubWindow().SetWindowAlpha();

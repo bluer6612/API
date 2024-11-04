@@ -59,13 +59,8 @@ int UEngineAPICore::EngineStart(HINSTANCE _Inst, UContentsCore* _UserCore)
 	Core.EngineMainWindow.Open();
 	MainCore = &Core;
 
-	//UEngineAPICore DummyCore = UEngineAPICore();
-	//DummyCore.EngineMainWindow.SetWindowHandle(Core.EngineMainWindow.GetWindowHandle());
-	//Core.EngineSubWindow.SetWindowHandle(Core.EngineSubWindow.GetWindowHandleSub());
-
 	Core.EngineSubWindow.Open();
-
-	//Core.EngineMainWindow.SetWindowHandle(DummyCore.EngineMainWindow.GetWindowHandle());
+	Core.EngineTopWindow.Open();
 
 	EngineDelegate Start = EngineDelegate(std::bind(EngineBeginPlay));
 	EngineDelegate FrameLoop = EngineDelegate(std::bind(EngineTick));;
