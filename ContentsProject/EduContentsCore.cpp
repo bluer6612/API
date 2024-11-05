@@ -88,7 +88,9 @@ void EduContentsCore::BeginPlay()
 
 	UEngineAPICore::GetCore()->GetMainWindow().SetWindowTitle("EduWindow");
 
-	UEngineAPICore::GetCore()->GetMainWindow().SetWindowPosAndScale("EduWindow", { static_cast < float>(0), (ScreenY - static_cast<float>( ScreenY * 0.34 )) }, { static_cast<float>(ScreenX), static_cast<float>(ScreenY * 0.375) });
+	UEngineAPICore::GetCore()->GetMainWindow().SetWindowPosAndScale("EduWindow", { static_cast < float>(0), (ScreenY - static_cast<float>( ScreenY * 0.34 )) }, { static_cast<float>(ScreenX), static_cast<float>(ScreenY * 0.3) });
+
+	UEngineAPICore::GetCore()->GetMainWindow().SetWindowAlpha();
 
 	UEngineAPICore::GetCore()->GetSubWindow().SetWindowTitle("SubWindow");
 
@@ -96,7 +98,7 @@ void EduContentsCore::BeginPlay()
 	
 	UEngineAPICore::GetCore()->GetTopWindow().SetWindowTitle("TopWindow");
 
-	UEngineAPICore::GetCore()->GetTopWindow().SetWindowPosAndScale("TopWindow", { static_cast <float>(0), (ScreenY - static_cast<float>(ScreenY * 0.345)) }, { static_cast<float>(ScreenX), static_cast<float>(ScreenY * 0.025) });
+	UEngineAPICore::GetCore()->GetTopWindow().SetWindowPosAndScale("TopWindow", { static_cast <float>(0), (ScreenY - static_cast<float>(ScreenY * 0.34)) }, { static_cast<float>(ScreenX), static_cast<float>(ScreenY * 0.025) });
 
 	UEngineAPICore::GetCore()->GetTopWindow().SetWindowAlpha();
 
