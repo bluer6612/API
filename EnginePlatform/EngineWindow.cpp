@@ -292,9 +292,9 @@ void UEngineWindow::SetWindowAlpha()
     switch (true)
     {
     case WM_PAINT:
-        hdc = BeginPaint(WindowHandleSub, &ps);
+        hdc = BeginPaint(WindowHandle, &ps);
         Rectangle(hdc, rc1.left, rc1.top, rc1.right, rc1.bottom);
-        EndPaint(WindowHandleSub, &ps);
+        EndPaint(WindowHandle, &ps);
         break;
     }
 
