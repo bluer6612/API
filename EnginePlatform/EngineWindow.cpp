@@ -285,12 +285,26 @@ FVector2D UEngineWindow::GetMousePos()
 
 void UEngineWindow::SetWindowAlpha()
 {
+    HDC hdc;
     PAINTSTRUCT ps;
-    HDC hdc = BeginPaint(WindowHandle, &ps);
+    RECT rc1 = { 150, 150, 150, 150 };
 
-    TransparentBlt(hdc, 0, 0, ScreenX, ScreenY, GetDC(WindowHandle), 0, 0, ScreenX, ScreenY, RGB(255, 255, 255));
+    switch (true)
+    {
+    case WM_PAINT:
+        hdc = BeginPaint(WindowHandleSub, &ps);
+        Rectangle(hdc, rc1.left, rc1.top, rc1.right, rc1.bottom);
+        EndPaint(WindowHandleSub, &ps);
+        break;
+    }
 
-    EndPaint(WindowHandle, &ps);
+
+
+    //HDC hdc = BeginPaint(WindowHandle, &ps);
+
+    //TransparentBlt(hdc, 0, 0, ScreenX, ScreenY, GetDC(WindowHandle), 0, 0, ScreenX, ScreenY, RGB(255, 255, 255));
+
+    //EndPaint(WindowHandle, &ps);
 
 
     long l = GetWindowLongA(WindowHandle, GWL_EXSTYLE);
