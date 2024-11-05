@@ -1,6 +1,9 @@
 #include "PreCompile.h"
 #include "EngineWindow.h"
 #include <EngineBase/EngineDebug.h>
+#include <EngineCore/EngineAPICore.h>
+
+#pragma comment(lib,"msimg32.lib")
 
 //class AActor
 //{
@@ -260,7 +263,7 @@ void UEngineWindow::SetWindowPosAndScale(std::string_view _TitleName, FVector2D 
     }
     else
     {
-        SetForegroundWindow(WindowHandle);
+        //SetForegroundWindow(WindowHandle);
         ::SetWindowPos(WindowHandle, nullptr, _Pos.iX(), _Pos.iY(), Rc.right - Rc.left, Rc.bottom - Rc.top, SWP_SHOWWINDOW);
 
         long style = ::GetWindowLongA(WindowHandle, GWL_STYLE);
@@ -282,11 +285,19 @@ FVector2D UEngineWindow::GetMousePos()
 
 void UEngineWindow::SetWindowAlpha()
 {
+    PAINTSTRUCT ps;
+    HDC hdc = BeginPaint(WindowHandle, &ps);
+
+    TransparentBlt(hdc, 0, 0, ScreenX, ScreenY, GetDC(WindowHandle), 0, 0, ScreenX, ScreenY, RGB(255, 255, 255));
+
+    EndPaint(WindowHandle, &ps);
+
+
     long l = GetWindowLongA(WindowHandle, GWL_EXSTYLE);
 
     l |= WS_EX_LAYERED;
 
     SetWindowLongA(WindowHandle, GWL_EXSTYLE, l);
 
-    SetLayeredWindowAttributes(WindowHandle, 0, 50, LWA_ALPHA);
+    SetLayeredWindowAttributes(WindowHandle, RGB(0, 0 ,0), 50, LWA_COLORKEY);
 }
