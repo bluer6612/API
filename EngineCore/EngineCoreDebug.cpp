@@ -60,7 +60,7 @@ namespace UEngineDebug
 			return;
 		}
 
-		// void WinAPIOutPutString(UEngineWinImage * _Image, std::string_view _Text, FVector2D _Pos);
+		 void WinAPIOutPutString(UEngineWinImage * _Image, std::string_view _Text, FVector2D _Pos);
 		UEngineWinImage* BackBuffer = UEngineAPICore::GetCore()->GetMainWindow().GetBackBuffer();
 
 		for (size_t i = 0; i < DebugTexts.size(); i++)
@@ -70,7 +70,7 @@ namespace UEngineDebug
 		}
 
 		EngineTextPos = FVector2D::ZERO;
-		DebugTexts.clear();
+		//DebugTexts.clear();
 	}
 
 }

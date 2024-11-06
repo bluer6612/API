@@ -46,10 +46,10 @@ void APlayGameMode::BeginPlay()
 	{
 		AScore* NewActor = GetWorld()->SpawnActor<AScore>();
 
-		// NewActor->SetActorLocation({300, 300});
+		NewActor->SetActorLocation({30, 30});
 		NewActor->SetTextSpriteName("Text.bmp");
 		NewActor->SetOrder(ERenderOrder::UI);
-		NewActor->SetTextScale({50, 100});
+		NewActor->SetTextScale({5, 10});
 		NewActor->SetValue(45362784);
 
 	}

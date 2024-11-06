@@ -64,28 +64,20 @@ void EduContentsCore::BeginPlay()
 	UImageManager::GetInst().CuttingSprite("Player_Right.png", {128, 128});
 	UImageManager::GetInst().CuttingSprite("Text.bmp", { 16, 32 });
 
-
-	{
-		UEngineDirectory BombDir;
-		BombDir.MoveParentToDirectory("Resources//Image");
-		BombDir.Append("bomb");
-		UImageManager::GetInst().LoadFolder(BombDir.GetPathToString());
-	}
-
 	{
 		// 타일셋 로드
 		UEngineDirectory Dir;
-		Dir.MoveParentToDirectory("Resources//Image");
-		Dir.Append("TileMap//TileSet");
+		Dir.MoveParentToDirectory("Resources");
+		Dir.Append("Image//TileMap//TileSet");
 		UImageManager::GetInst().LoadFolder(Dir.GetPathToString());
 	}
 
 	{
-		// 로고 로드
-		UEngineDirectory LogoDir;
-		LogoDir.MoveParentToDirectory("Resources//Image");
-		LogoDir.Append("Logo");
-		UImageManager::GetInst().LoadFolder(LogoDir.GetPathToString());
+		// UI 로드
+		UEngineDirectory UIDir;
+		UIDir.MoveParentToDirectory("Resources");
+		UIDir.Append("Image//UI");
+		UImageManager::GetInst().LoadFolder(UIDir.GetPathToString());
 	}
 
 
@@ -97,7 +89,7 @@ void EduContentsCore::BeginPlay()
 	UEngineAPICore::GetCore()->CreateLevel<ATitleGameMode, TitleLogo>("Title");
 	UEngineAPICore::GetCore()->CreateLevel<ATileMapGameMode, AActor>("Tile");
 
-	UEngineAPICore::GetCore()->OpenLevel("Title");
+	UEngineAPICore::GetCore()->OpenLevel("Play");
 
 }
 

@@ -9,21 +9,28 @@ TitleLogo::TitleLogo()
 	{
 		LogoSpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
 		LogoSpriteRenderer->SetOrder(ERenderOrder::TITLE);
-		LogoSpriteRenderer->SetSprite("Logo.png");
+		LogoSpriteRenderer->SetSprite("UI_Logo2.png");
 
-		FVector2D MapScale = LogoSpriteRenderer->SetSpriteScale(2.0f);
-		LogoSpriteRenderer->SetComponentLocation(MapScale.Half());
+		FVector2D MapScale = LogoSpriteRenderer->SetSpriteScale(1.00f);
 		LogoSpriteRenderer->SetComponentLocation({ ScreenX / 2,  static_cast<int>(ScreenY / 13.6) });
 	}
 
 	{
 		LogoSpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
-		LogoSpriteRenderer->SetOrder(ERenderOrder::TITLETOOLTIP);
-		LogoSpriteRenderer->SetSprite("LogoTooltip.png");
+		LogoSpriteRenderer->SetOrder(ERenderOrder::UI);
+		LogoSpriteRenderer->SetSprite("UI_LogoTooltip2.png");
 
-		FVector2D MapScale = LogoSpriteRenderer->SetSpriteScale(2.05f);
-		LogoSpriteRenderer->SetComponentLocation(MapScale.Half());
+		FVector2D MapScale = LogoSpriteRenderer->SetSpriteScale(1.00f);
 		LogoSpriteRenderer->SetComponentLocation({ ScreenX / 2,  static_cast<int>(ScreenY / 5.675) });
+	}
+
+	{
+		LogoSpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
+		LogoSpriteRenderer->SetOrder(ERenderOrder::UI);
+		LogoSpriteRenderer->SetSprite("UI_biofuelspareparts.png");
+
+		FVector2D MapScale = LogoSpriteRenderer->SetSpriteScale(1.00f);
+		LogoSpriteRenderer->SetComponentLocation({ ScreenX / 2,  static_cast<int>(ScreenY / 2.675) });
 	}
 }
 

@@ -187,7 +187,7 @@ void UEngineWindow::Create(std::string_view _TitleName, std::string_view _ClassN
     }
 
     WindowHandle = CreateWindowA(_ClassName.data(), _TitleName.data(), WS_OVERLAPPED,
-        0, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
+        0, 0, ScreenX, ScreenY, nullptr, nullptr, hInstance, nullptr);
     //WindowHandle = CreateWindowA(_ClassName.data(), 0, WS_OVERLAPPED,
     //    -10, (ScreenY - (ScreenY / 3)), WS_SYSMENU, ScreenY / 3, nullptr, nullptr, hInstance, nullptr);
 
@@ -282,5 +282,5 @@ void UEngineWindow::SetWindowAlpha()
     long l = GetWindowLongA(WindowHandle, GWL_EXSTYLE);
     l |= WS_EX_LAYERED;
     SetWindowLongA(WindowHandle, GWL_EXSTYLE, l);
-    SetLayeredWindowAttributes(WindowHandle, RGB(0, 0, 0), 150, LWA_COLORKEY);
+    SetLayeredWindowAttributes(WindowHandle, RGB(0, 0, 0), 0, LWA_COLORKEY);
 }
