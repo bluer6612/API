@@ -17,7 +17,7 @@ APlayMap::APlayMap()
 		{
 			BackSpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
 			BackSpriteRenderer->SetOrder(ERenderOrder::BACKGROUND);
-			BackSpriteRenderer->SetSprite("bg001.png");
+			BackSpriteRenderer->SetSprite("GrassMap.png");
 
 			FVector2D MapScale = BackSpriteRenderer->SetSpriteScale(1.0f);
 			BackSpriteRenderer->SetComponentLocation(MapScale.Half());

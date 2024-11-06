@@ -1,6 +1,5 @@
 #include "PreCompile.h"
 #include "TitleLogo.h"
-#include <EngineCore/SpriteRenderer.h>
 #include <EnginePlatform/EngineInput.h>
 #include "ContentsEnum.h"
 
@@ -37,8 +36,6 @@ TitleLogo::TitleLogo()
 TitleLogo::~TitleLogo()
 {
 }
-
-
 
 void TitleLogo::Tick(float _DeltaTime)
 {
