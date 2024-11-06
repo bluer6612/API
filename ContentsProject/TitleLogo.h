@@ -21,5 +21,7 @@ protected:
 
 private:
 	USpriteRenderer* LogoSpriteRenderer;
+	USpriteRenderer* TooltipSpriteRenderer;
+	USpriteRenderer* MoneySpriteRenderer;
 };
 

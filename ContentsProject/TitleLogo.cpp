@@ -16,21 +16,21 @@ TitleLogo::TitleLogo()
 	}
 
 	{
-		LogoSpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
-		LogoSpriteRenderer->SetOrder(ERenderOrder::UI);
-		LogoSpriteRenderer->SetSprite("UI_LogoTooltip2.png");
+		TooltipSpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
+		TooltipSpriteRenderer->SetOrder(ERenderOrder::UI);
+		TooltipSpriteRenderer->SetSprite("UI_LogoTooltip2.png");
 
-		FVector2D MapScale = LogoSpriteRenderer->SetSpriteScale(1.00f);
-		LogoSpriteRenderer->SetComponentLocation({ ScreenX / 2,  static_cast<int>(ScreenY / 5.675) });
+		FVector2D MapScale = TooltipSpriteRenderer->SetSpriteScale(1.00f);
+		TooltipSpriteRenderer->SetComponentLocation({ ScreenX / 2,  static_cast<int>(ScreenY / 5.675) });
 	}
 
 	{
-		LogoSpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
-		LogoSpriteRenderer->SetOrder(ERenderOrder::UI);
-		LogoSpriteRenderer->SetSprite("UI_biofuelspareparts.png");
+		MoneySpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
+		MoneySpriteRenderer->SetOrder(ERenderOrder::UI);
+		MoneySpriteRenderer->SetSprite("UI_biofuelspareparts.png");
 
-		FVector2D MapScale = LogoSpriteRenderer->SetSpriteScale(1.00f);
-		LogoSpriteRenderer->SetComponentLocation({ ScreenX / 2,  static_cast<int>(ScreenY / 2.675) });
+		FVector2D MapScale = MoneySpriteRenderer->SetSpriteScale(1.00f);
+		MoneySpriteRenderer->SetComponentLocation({ ScreenX / 2,  static_cast<int>(ScreenY / 2.675) });
 	}
 }
 

@@ -39,7 +39,7 @@ void APlayGameMode::BeginPlay()
 	// <= 왠만하면 초반에 다 만들어 놓자.
 
 	ANewPlayer* Player = GetWorld()->GetPawn<ANewPlayer>();
-	Player->SetColImage("bg001_Col.png");
+	Player->SetColImage("bg00.png");
 
 	int a = 0;
 

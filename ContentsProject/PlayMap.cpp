@@ -26,21 +26,11 @@ APlayMap::APlayMap()
 		{
 			BackTopSpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
 			BackTopSpriteRenderer->SetOrder(ERenderOrder::BACKGROUNDTOP);
-			BackTopSpriteRenderer->SetSprite("bg001_Col.png");
+			BackTopSpriteRenderer->SetSprite("bg00.png");
 
 			FVector2D MapScale = BackTopSpriteRenderer->SetSpriteScale(1.0f);
 			BackTopSpriteRenderer->SetComponentLocation({ScreenX, -30 });
 		}
-
-		{
-			ColSpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
-			ColSpriteRenderer->SetOrder(ERenderOrder::COLMAP);
-			ColSpriteRenderer->SetSprite("bg001_Col.png");
-
-			FVector2D MapScale = ColSpriteRenderer->SetSpriteScale(0.4f);
-			ColSpriteRenderer->SetComponentLocation({ ScreenX, 0});
-		}
-
 	}
 
 }
@@ -55,6 +45,6 @@ void APlayMap::Tick(float _DeltaTime)
 
 	if (true == UEngineInput::GetInst().IsDown('Y'))
 	{
-		ColSpriteRenderer->SetActiveSwitch();
+		BackTopSpriteRenderer->SetActiveSwitch();
 	}
 }
