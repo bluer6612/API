@@ -257,7 +257,7 @@ void UEngineWindow::SetWindowPosAndScale(FVector2D _Pos, FVector2D _Scale)
     
     // 그러면 또 이녀석은 
     // 윈도우에서 가져야할 위치를 포함한 크기를 주게 된다.
-    AdjustWindowRect(&Rc, WS_OVERLAPPEDWINDOW, FALSE);
+    //AdjustWindowRect(&Rc, WS_OVERLAPPEDWINDOW, FALSE);
     
     ::SetWindowPos(WindowHandle, nullptr, _Pos.iX(), _Pos.iY(), Rc.right - Rc.left, Rc.bottom - Rc.top, SWP_NOZORDER);
 }
@@ -275,19 +275,6 @@ FVector2D UEngineWindow::GetMousePos()
 
 void UEngineWindow::SetWindowAlpha()
 {
-    HDC hdc;
-    PAINTSTRUCT ps;
-    RECT rc1 = { 50, 50, 50, 50 };
-
-    switch (WM_PAINT)
-    {
-    case WM_PAINT:
-        hdc = BeginPaint(WindowHandle, &ps);
-        Rectangle(hdc, rc1.left, rc1.top, rc1.right, rc1.bottom);
-        EndPaint(WindowHandle, &ps);
-        break;
-    }
-
     long style = ::GetWindowLongA(WindowHandle, GWL_STYLE);
     style &= ~WS_CAPTION;
     SetWindowLongA(WindowHandle, GWL_STYLE, style);
