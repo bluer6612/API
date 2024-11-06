@@ -24,8 +24,10 @@ public:
 	TitleLogo& operator=(const TitleLogo& _Other) = delete;
 	TitleLogo& operator=(TitleLogo&& _Other) noexcept = delete;
 
+	void SetColImage(std::string_view _ColImageName);
 protected:
 
 private:
+	//class UEngineWinImage* ColImage = nullptr;
 };
 
