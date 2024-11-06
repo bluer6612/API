@@ -231,13 +231,13 @@ void UEngineWindow::Open(std::string_view _TitleName /*= "Window"*/)
 }
 
 
-void UEngineWindow::SetWindowPosAndScale(std::string_view _TitleName, FVector2D _Pos, FVector2D _Scale)
+void UEngineWindow::SetWindowPosAndScale(FVector2D _Pos, FVector2D _Scale)
 {
     RECT Rc = { 0, 0, _Scale.iX(), _Scale.iY() };
     AdjustWindowRect(&Rc, WS_OVERLAPPED, FALSE);
 
     // 이전의 크기와 달라졌을때만 백버퍼를 새로 만든 것이다.
-    if (false == WindowSize.EqualToInt(_Scale) && _TitleName.data() == "EduWindow")
+    if (false == WindowSize.EqualToInt(_Scale))
     {
         // 화면의 크기와 전히 동일한 크기여야 한다.
         // 여러번 호출하면 기존에 만들었던 녀석이 Leck이 되므로
@@ -256,19 +256,6 @@ void UEngineWindow::SetWindowPosAndScale(std::string_view _TitleName, FVector2D 
 
         SetForegroundWindow(WindowHandle);
         ::SetWindowPos(WindowHandle, nullptr, _Pos.iX() , _Pos.iY(), Rc.right - Rc.left, Rc.bottom - Rc.top, SWP_SHOWWINDOW);
-
-        long style = ::GetWindowLongA(WindowHandle, GWL_STYLE);
-        style &= ~WS_CAPTION;
-        SetWindowLongA(WindowHandle, GWL_STYLE, style);
-    }
-    else
-    {
-        //SetForegroundWindow(WindowHandle);
-        ::SetWindowPos(WindowHandle, nullptr, _Pos.iX(), _Pos.iY(), Rc.right - Rc.left, Rc.bottom - Rc.top, SWP_SHOWWINDOW);
-
-        long style = ::GetWindowLongA(WindowHandle, GWL_STYLE);
-        style &= ~WS_CAPTION;
-        SetWindowLongA(WindowHandle, GWL_STYLE, style);
     }
 }
 
@@ -287,9 +274,9 @@ void UEngineWindow::SetWindowAlpha()
 {
     HDC hdc;
     PAINTSTRUCT ps;
-    RECT rc1 = { 150, 150, 150, 150 };
+    RECT rc1 = { 50, 50, 50, 50 };
 
-    switch (true)
+    switch (WM_PAINT)
     {
     case WM_PAINT:
         hdc = BeginPaint(WindowHandle, &ps);
@@ -298,20 +285,12 @@ void UEngineWindow::SetWindowAlpha()
         break;
     }
 
-
-
-    //HDC hdc = BeginPaint(WindowHandle, &ps);
-
-    //TransparentBlt(hdc, 0, 0, ScreenX, ScreenY, GetDC(WindowHandle), 0, 0, ScreenX, ScreenY, RGB(255, 255, 255));
-
-    //EndPaint(WindowHandle, &ps);
-
+    long style = ::GetWindowLongA(WindowHandle, GWL_STYLE);
+    style &= ~WS_CAPTION;
+    SetWindowLongA(WindowHandle, GWL_STYLE, style);
 
     long l = GetWindowLongA(WindowHandle, GWL_EXSTYLE);
-
     l |= WS_EX_LAYERED;
-
     SetWindowLongA(WindowHandle, GWL_EXSTYLE, l);
-
     SetLayeredWindowAttributes(WindowHandle, RGB(0, 0 ,0), 50, LWA_COLORKEY);
 }

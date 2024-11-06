@@ -65,22 +65,16 @@ public:
 		SetWindowTextA(WindowHandle, Text.data());
 	}
 
-
-	void SetWindowPosAndScale(std::string_view _TitleName, FVector2D _Pos, FVector2D _Scale);
+	void SetWindowPosAndScale(FVector2D _Pos, FVector2D _Scale);
 
 	inline HWND GetWindowHandle() const
 	{
 		return WindowHandle;
 	}
 
-	inline HWND GetWindowHandleSub() const
-	{
-		return WindowHandleSub;
-	}
+	FVector2D GetMousePos();
 
 	void SetWindowAlpha();
-
-	FVector2D GetMousePos();
 
 
 protected:
@@ -118,7 +112,6 @@ private:
 	UEngineWinImage* WindowImage = nullptr;
 
 	HWND WindowHandle = nullptr;
-	HWND WindowHandleSub = nullptr;
 };
 
 

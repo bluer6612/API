@@ -16,10 +16,10 @@ APlayMap::APlayMap()
 	{
 		USpriteRenderer* SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
 		SpriteRenderer->SetOrder(ERenderOrder::BACKGROUND);
-		SpriteRenderer->SetSprite("bg-1-1.png");
+		SpriteRenderer->SetSprite("bg001_Col.png");
 
-		FVector2D MapScale = SpriteRenderer->SetSpriteScale(1.0f);
-		SpriteRenderer->SetComponentLocation(MapScale.Half());
+		FVector2D MapScale = SpriteRenderer->SetSpriteScale(0.425f);
+		SpriteRenderer->SetComponentLocation({ static_cast <float>(ScreenX) * 0.5f, static_cast <float>(-50) });
 	}
 
 }

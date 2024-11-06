@@ -4,60 +4,31 @@
     //WindowHandle = CreateWindowA(_ClassName.data(), 0, WS_OVERLAPPED,
     //    -10, (ScreenY - (ScreenY / 3)), WS_SYSMENU, ScreenY / 3, nullptr, nullptr, hInstance, nullptr);
 
-        
-	SetWindowAlpha();
-
-
-void UEngineWindow::SetWindowPosAndScale(std::string_view _TitleName, FVector2D _Pos, FVector2D _Scale)
-{
-    RECT Rc = { 0, 0, _Scale.iX(), _Scale.iY() };
-    AdjustWindowRect(&Rc, WS_OVERLAPPED, FALSE);
-
-    // 이전의 크기와 달라졌을때만 백버퍼를 새로 만든 것이다.
-    if (false == WindowSize.EqualToInt(_Scale) && _TitleName.data() == "EduWindow")
-    {
-        // 화면의 크기와 전히 동일한 크기여야 한다.
-        // 여러번 호출하면 기존에 만들었던 녀석이 Leck이 되므로
-        // 화면크기를 조정할 때마다 삭제해줘야 한다.
-        if (nullptr != BackBufferImage)
-        {
-            // 기존 백버퍼는 지워버리고
-            delete BackBufferImage;
-            BackBufferImage = nullptr;
-        }
-
-        BackBufferImage = new UEngineWinImage();
-        BackBufferImage->Create(WindowImage, _Scale);
-
-        WindowSize = _Scale;
-        
-        SetForegroundWindow(WindowHandle);
-        ::SetWindowPos(WindowHandle, nullptr, _Pos.iX() , _Pos.iY(), Rc.right - Rc.left, Rc.bottom - Rc.top, SWP_SHOWWINDOW);
-
-        long style = ::GetWindowLongA(WindowHandle, GWL_STYLE);
-        style &= ~WS_CAPTION;
-        SetWindowLongA(WindowHandle, GWL_STYLE, style);
-    }
-    else
-    {
-        SetForegroundWindow(WindowHandleSub);
-        ::SetWindowPos(WindowHandleSub, nullptr, _Pos.iX(), _Pos.iY(), Rc.right - Rc.left, Rc.bottom - Rc.top, SWP_SHOWWINDOW);
-
-        long style = ::GetWindowLongA(WindowHandleSub, GWL_STYLE);
-        style &= ~WS_CAPTION;
-        SetWindowLongA(WindowHandleSub, GWL_STYLE, style);
-    }
-}
+    
 
 void UEngineWindow::SetWindowAlpha()
 {
+    HDC hdc;
+    PAINTSTRUCT ps;
+    RECT rc1 = { 50, 50, 50, 50 };
+
+    switch (WM_PAINT)
+    {
+    case WM_PAINT:
+        hdc = BeginPaint(WindowHandle, &ps);
+        Rectangle(hdc, rc1.left, rc1.top, rc1.right, rc1.bottom);
+        EndPaint(WindowHandle, &ps);
+        break;
+    }
+
+    long style = ::GetWindowLongA(WindowHandle, GWL_STYLE);
+    style &= ~WS_CAPTION;
+    SetWindowLongA(WindowHandle, GWL_STYLE, style);
+
     long l = GetWindowLongA(WindowHandle, GWL_EXSTYLE);
-
     l |= WS_EX_LAYERED;
-
     SetWindowLongA(WindowHandle, GWL_EXSTYLE, l);
-
-    SetLayeredWindowAttributes(WindowHandle, 0, 50, LWA_ALPHA);
+    SetLayeredWindowAttributes(WindowHandle, RGB(0, 0 ,0), 50, LWA_COLORKEY);
 }
 
 
@@ -65,50 +36,10 @@ void UEngineWindow::SetWindowAlpha()
     static int ScreenX = GetSystemMetrics(SM_CXSCREEN);
     static int ScreenY = GetSystemMetrics(SM_CYSCREEN);
 
-
-	void SetWindowPosAndScale(std::string_view _TitleName, FVector2D _Pos, FVector2D _Scale);
-    
-	inline HWND GetWindowHandle() const
-	{
-		return WindowHandle;
-	}
-
-	inline HWND GetWindowHandleSub() const
-	{
-		return WindowHandleSub;
-	}
-
-	void SetWindowAlpha();
+    void SetWindowAlpha();
 
 
 
-
-
-	UEngineWindow& GetSubWindow()
-	{
-		return EngineSubWindow;
-	}
-	}
-    
-	HWND WindowHandleSub = nullptr;
-
-    
-	Core.EngineSubWindow.Open();
-	Core.EngineTopWindow.Open();
-  
-
-    
-	UEngineWindow EngineSubWindow = UEngineWindow(); // 엔진 서브 윈도우
-	UEngineWindow EngineTopWindow = UEngineWindow(); // 엔진 탑 투명 윈도우
-
-    
-
-    UEngineAPICore::GetCore()->GetMainWindow().SetWindowTitle("EduWindow");
-
-	UEngineAPICore::GetCore()->GetMainWindow().SetWindowPosAndScale("EduWindow", { static_cast < float>(0), (ScreenY - static_cast<float>( ScreenY * 0.31 )) }, { static_cast<float>(ScreenX), static_cast<float>(ScreenY * 0.275) });
-
-	UEngineAPICore::GetCore()->GetSubWindow().SetWindowTitle("SubWindow");
-
-	UEngineAPICore::GetCore()->GetSubWindow().SetWindowPosAndScale("SubWindow", { static_cast <float>(0), (ScreenY - static_cast<float>(ScreenY * 0.345)) }, { static_cast<float>(ScreenX), static_cast<float>(ScreenY * 0.025) });
-
-	UEngineAPICore::GetCore()->GetSubWindow().SetWindowAlpha();
+	UEngineAPICore::GetCore()->GetMainWindow().SetWindowTitle("EduWindow");
+	UEngineAPICore::GetCore()->GetMainWindow().SetWindowPosAndScale({ static_cast < float>(0), (ScreenY - static_cast<float>( ScreenY * 0.34 )) }, { static_cast<float>(ScreenX), static_cast<float>(ScreenY * 0.3) });
+	UEngineAPICore::GetCore()->GetMainWindow().SetWindowAlpha();
