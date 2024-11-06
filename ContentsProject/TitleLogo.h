@@ -1,5 +1,14 @@
 #pragma once
 #include <EngineCore/Actor.h>
+#include "PreCompile.h"
+#include "Player.h"
+
+#include <EngineCore/EngineAPICore.h>
+#include <EngineCore/SpriteRenderer.h>
+#include <EngineCore/EngineCoreDebug.h>
+
+
+#include <EnginePlatform/EngineInput.h>
 
 // Ό³Έν :
 class TitleLogo : public AActor
@@ -18,6 +27,5 @@ public:
 protected:
 
 private:
-
 };
 

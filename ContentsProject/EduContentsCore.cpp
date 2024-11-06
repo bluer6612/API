@@ -85,9 +85,6 @@ void EduContentsCore::BeginPlay()
 	}
 
 
-	
-
-
 	UEngineAPICore::GetCore()->GetMainWindow().SetWindowTitle("EduWindow");
 	UEngineAPICore::GetCore()->GetMainWindow().SetWindowPosAndScale({ static_cast <float>(0), (ScreenY - static_cast<float>(ScreenY * 0.34)) }, { static_cast<float>(ScreenX), static_cast<float>(ScreenY * 0.3) });
 	UEngineAPICore::GetCore()->GetMainWindow().SetWindowAlpha();
@@ -96,7 +93,7 @@ void EduContentsCore::BeginPlay()
 	UEngineAPICore::GetCore()->CreateLevel<ATitleGameMode, AActor>("Title");
 	UEngineAPICore::GetCore()->CreateLevel<ATileMapGameMode, AActor>("Tile");
 
-	UEngineAPICore::GetCore()->OpenLevel("Play");
+	UEngineAPICore::GetCore()->OpenLevel("Title");
 
 }
 

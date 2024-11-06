@@ -15,12 +15,12 @@ public:
 	ATitleGameMode& operator=(const ATitleGameMode& _Other) = delete;
 	ATitleGameMode& operator=(ATitleGameMode&& _Other) noexcept = delete;
 
+	void SetColImage(std::string_view _ColImageName);
+
 protected:
 	void BeginPlay() override;
 
 	void Tick(float _DeltaTime) override;
-
 private:
-
 };
 
