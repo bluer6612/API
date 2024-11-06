@@ -7,5 +7,4 @@ enum class ERenderOrder
 	COLMAP = -999,
 	PLAYER = 0,
 	UI = 10000,
-	BACKGROUNDTOP = -10000,
 };

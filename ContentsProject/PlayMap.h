@@ -20,7 +20,6 @@ protected:
 
 private:
 	USpriteRenderer* BackSpriteRenderer;
-	USpriteRenderer* BackTopSpriteRenderer;
 	USpriteRenderer* ColSpriteRenderer;
 };
 

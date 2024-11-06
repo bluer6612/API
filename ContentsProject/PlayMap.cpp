@@ -25,21 +25,12 @@ APlayMap::APlayMap()
 		}
 
 		{
-			BackTopSpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
-			BackTopSpriteRenderer->SetOrder(ERenderOrder::BACKGROUNDTOP);
-			BackTopSpriteRenderer->SetSprite("bg001_Col.png");
-
-			FVector2D MapScale = BackTopSpriteRenderer->SetSpriteScale(0.5f);
-			BackTopSpriteRenderer->SetComponentLocation({ static_cast <float>((ScreenX) * 0.5), static_cast <float>(-ScreenY * 0.0375) });
-		}
-
-		{
 			ColSpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
 			ColSpriteRenderer->SetOrder(ERenderOrder::COLMAP);
-			ColSpriteRenderer->SetSprite("bg001.png");
+			ColSpriteRenderer->SetSprite("bg001_Col.png");
 
-			FVector2D MapScale = ColSpriteRenderer->SetSpriteScale(1.0f);
-			ColSpriteRenderer->SetComponentLocation(MapScale.Half());
+			FVector2D MapScale = ColSpriteRenderer->SetSpriteScale(0.4f);
+			ColSpriteRenderer->SetComponentLocation({ ScreenX, 0});
 		}
 
 	}
