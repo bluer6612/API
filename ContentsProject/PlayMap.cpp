@@ -3,6 +3,7 @@
 #include <EngineCore/EngineAPICore.h>
 #include <EngineCore/SpriteRenderer.h>
 #include "ContentsEnum.h"
+#include <EnginePlatform/EngineInput.h>
 
 
 APlayMap::APlayMap()
@@ -14,12 +15,24 @@ APlayMap::APlayMap()
 	//SetActorLocation(WindowSize.Half());
 
 	{
-		USpriteRenderer* SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
-		SpriteRenderer->SetOrder(ERenderOrder::BACKGROUND);
-		SpriteRenderer->SetSprite("bg001_Col.png");
+		{
+			BackSpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
+			BackSpriteRenderer->SetOrder(ERenderOrder::BACKGROUND);
+			BackSpriteRenderer->SetSprite("bg001.png");
 
-		FVector2D MapScale = SpriteRenderer->SetSpriteScale(0.425f);
-		SpriteRenderer->SetComponentLocation({ static_cast <float>(ScreenX) * 0.5f, static_cast <float>(-50) });
+			FVector2D MapScale = BackSpriteRenderer->SetSpriteScale(1.0f);
+			BackSpriteRenderer->SetComponentLocation(MapScale.Half());
+		}
+
+		{
+			ColSpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
+			ColSpriteRenderer->SetOrder(ERenderOrder::COLMAP);
+			ColSpriteRenderer->SetSprite("bg001_Col.png");
+
+			FVector2D MapScale = ColSpriteRenderer->SetSpriteScale(0.4f);
+			ColSpriteRenderer->SetComponentLocation({ ScreenX, 0});
+		}
+
 	}
 
 }
@@ -28,3 +41,12 @@ APlayMap::~APlayMap()
 {
 }
 
+void APlayMap::Tick(float _DeltaTime)
+{
+	Super::Tick(_DeltaTime);
+
+	if (true == UEngineInput::GetInst().IsDown('Y'))
+	{
+		ColSpriteRenderer->SetActiveSwitch();
+	}
+}

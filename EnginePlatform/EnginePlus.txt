@@ -33,11 +33,14 @@ void UEngineWindow::SetWindowAlpha()
 
 
 
-    static int ScreenX = GetSystemMetrics(SM_CXSCREEN);
-    static int ScreenY = GetSystemMetrics(SM_CYSCREEN);
+static int ScreenX = GetSystemMetrics(SM_CXSCREEN);
+static int ScreenY = GetSystemMetrics(SM_CYSCREEN);
 
     void SetWindowAlpha();
 
+
+    FVector2D MapScale = ColSpriteRenderer->SetSpriteScale(0.4f);
+    ColSpriteRenderer->SetComponentLocation({ ScreenX, 0});
 
 
 	UEngineAPICore::GetCore()->GetMainWindow().SetWindowTitle("EduWindow");

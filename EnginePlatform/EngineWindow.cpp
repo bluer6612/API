@@ -1,9 +1,6 @@
 #include "PreCompile.h"
 #include "EngineWindow.h"
 #include <EngineBase/EngineDebug.h>
-#include <EngineCore/EngineAPICore.h>
-
-#pragma comment(lib,"msimg32.lib")
 
 //class AActor
 //{
@@ -230,12 +227,8 @@ void UEngineWindow::Open(std::string_view _TitleName /*= "Window"*/)
 	// ShowWindow(WindowHandle, SW_HIDE);
 }
 
-
 void UEngineWindow::SetWindowPosAndScale(FVector2D _Pos, FVector2D _Scale)
 {
-    RECT Rc = { 0, 0, _Scale.iX(), _Scale.iY() };
-    AdjustWindowRect(&Rc, WS_OVERLAPPED, FALSE);
-
     // 이전의 크기와 달라졌을때만 백버퍼를 새로 만든 것이다.
     if (false == WindowSize.EqualToInt(_Scale))
     {
@@ -251,12 +244,22 @@ void UEngineWindow::SetWindowPosAndScale(FVector2D _Pos, FVector2D _Scale)
 
         BackBufferImage = new UEngineWinImage();
         BackBufferImage->Create(WindowImage, _Scale);
-
-        WindowSize = _Scale;
-
-        SetForegroundWindow(WindowHandle);
-        ::SetWindowPos(WindowHandle, nullptr, _Pos.iX() , _Pos.iY(), Rc.right - Rc.left, Rc.bottom - Rc.top, SWP_SHOWWINDOW);
     }
+
+    WindowSize = _Scale;
+
+    RECT Rc = { 0, 0, _Scale.iX(), _Scale.iY() };
+
+    // 이게 그 계산해주는 함수이다.
+    // 타이틀바 크기까지 합쳐진 크기로 준다.
+    // 윈도우 입장
+    // 현재 윈도우의 스타일을 넣어줘야 한다.
+    
+    // 그러면 또 이녀석은 
+    // 윈도우에서 가져야할 위치를 포함한 크기를 주게 된다.
+    AdjustWindowRect(&Rc, WS_OVERLAPPEDWINDOW, FALSE);
+    
+    ::SetWindowPos(WindowHandle, nullptr, _Pos.iX(), _Pos.iY(), Rc.right - Rc.left, Rc.bottom - Rc.top, SWP_NOZORDER);
 }
 
 FVector2D UEngineWindow::GetMousePos()
@@ -292,5 +295,5 @@ void UEngineWindow::SetWindowAlpha()
     long l = GetWindowLongA(WindowHandle, GWL_EXSTYLE);
     l |= WS_EX_LAYERED;
     SetWindowLongA(WindowHandle, GWL_EXSTYLE, l);
-    SetLayeredWindowAttributes(WindowHandle, RGB(0, 0 ,0), 50, LWA_COLORKEY);
+    SetLayeredWindowAttributes(WindowHandle, RGB(0, 0, 0), 50, LWA_COLORKEY);
 }

@@ -12,6 +12,7 @@
 #include <EngineBase/EngineMath.h>
 #include "EngineWinImage.h"
 
+
 static int ScreenX = GetSystemMetrics(SM_CXSCREEN);
 static int ScreenY = GetSystemMetrics(SM_CYSCREEN);
 
@@ -28,10 +29,10 @@ public:
 	~UEngineWindow();
 
 	// delete Function
-	//UEngineWindow(const UEngineWindow& _Other) = delete;
-	//UEngineWindow(UEngineWindow&& _Other) noexcept = delete;
-	//UEngineWindow& operator=(const UEngineWindow& _Other) = delete;
-	//UEngineWindow& operator=(UEngineWindow&& _Other) noexcept = delete;
+	UEngineWindow(const UEngineWindow& _Other) = delete;
+	UEngineWindow(UEngineWindow&& _Other) noexcept = delete;
+	UEngineWindow& operator=(const UEngineWindow& _Other) = delete;
+	UEngineWindow& operator=(UEngineWindow&& _Other) noexcept = delete;
 
 	void Create(std::string_view _TitleName, std::string_view _ClassName = "Default");
 	void Open(std::string_view _TitleName = "Window");
@@ -65,17 +66,12 @@ public:
 		SetWindowTextA(WindowHandle, Text.data());
 	}
 
-	void SetWindowPosAndScale(FVector2D _Pos, FVector2D _Scale);
 
-	inline HWND GetWindowHandle() const
-	{
-		return WindowHandle;
-	}
+	void SetWindowPosAndScale(FVector2D _Pos, FVector2D _Scale);
 
 	FVector2D GetMousePos();
 
 	void SetWindowAlpha();
-
 
 protected:
 

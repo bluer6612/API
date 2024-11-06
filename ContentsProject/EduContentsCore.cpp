@@ -12,6 +12,7 @@
 #include "PlayGameMode.h"
 #include "TileMapGameMode.h"
 #include "Player.h"
+#include "ANewPlayer.h"
 
 
 EduContentsCore::EduContentsCore()
@@ -60,6 +61,7 @@ void EduContentsCore::BeginPlay()
 	// 자르는 작업을 아래서 해주는게 좋다.
 
 	UImageManager::GetInst().CuttingSprite("Player_Right.png", {128, 128});
+	UImageManager::GetInst().CuttingSprite("Text.bmp", { 16, 32 });
 
 
 	{
@@ -82,15 +84,20 @@ void EduContentsCore::BeginPlay()
 
 	}
 
+
+	
+
+
 	UEngineAPICore::GetCore()->GetMainWindow().SetWindowTitle("EduWindow");
-	UEngineAPICore::GetCore()->GetMainWindow().SetWindowPosAndScale({ static_cast < float>(0), (ScreenY - static_cast<float>( ScreenY * 0.34 )) }, { static_cast<float>(ScreenX), static_cast<float>(ScreenY * 0.3) });
+	UEngineAPICore::GetCore()->GetMainWindow().SetWindowPosAndScale({ static_cast <float>(0), (ScreenY - static_cast<float>(ScreenY * 0.34)) }, { static_cast<float>(ScreenX), static_cast<float>(ScreenY * 0.3) });
 	UEngineAPICore::GetCore()->GetMainWindow().SetWindowAlpha();
 
-	UEngineAPICore::GetCore()->CreateLevel<APlayGameMode, APlayer>("Play");
+	UEngineAPICore::GetCore()->CreateLevel<APlayGameMode, ANewPlayer>("Play");
 	UEngineAPICore::GetCore()->CreateLevel<ATitleGameMode, AActor>("Title");
 	UEngineAPICore::GetCore()->CreateLevel<ATileMapGameMode, AActor>("Tile");
 
 	UEngineAPICore::GetCore()->OpenLevel("Play");
+
 }
 
 void EduContentsCore::Tick()

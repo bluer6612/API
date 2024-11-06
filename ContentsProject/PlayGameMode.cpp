@@ -3,6 +3,11 @@
 
 #include <EngineCore/Level.h>
 #include "PlayMap.h"
+#include "Player.h"
+#include "ANewPlayer.h"
+#include "Score.h"
+
+#include "ContentsEnum.h"
 
 APlayGameMode::APlayGameMode()
 {
@@ -33,10 +38,23 @@ void APlayGameMode::BeginPlay()
 	// 게임을 시작할대 필요한 것들을 준비하라고 만들어준 가장 먼저 만들어지기
 	// <= 왠만하면 초반에 다 만들어 놓자.
 
+	ANewPlayer* Player = GetWorld()->GetPawn<ANewPlayer>();
+	Player->SetColImage("bg001_Col.png");
 
-
+	int a = 0;
 
 	{
 		APlayMap* NewActor = GetWorld()->SpawnActor<APlayMap>();
+	}
+
+	{
+		AScore* NewActor = GetWorld()->SpawnActor<AScore>();
+
+		// NewActor->SetActorLocation({300, 300});
+		NewActor->SetTextSpriteName("Text.bmp");
+		NewActor->SetOrder(ERenderOrder::UI);
+		NewActor->SetTextScale({50, 100});
+		NewActor->SetValue(45362784);
+
 	}
 }

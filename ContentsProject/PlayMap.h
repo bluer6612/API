@@ -16,9 +16,10 @@ public:
 	APlayMap& operator=(APlayMap&& _Other) noexcept = delete;
 
 protected:
-	// void BeginPlay() override;
+	void Tick(float _DeltaTime) override;
 
 private:
-
+	USpriteRenderer* BackSpriteRenderer;
+	USpriteRenderer* ColSpriteRenderer;
 };
 
