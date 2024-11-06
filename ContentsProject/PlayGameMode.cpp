@@ -44,10 +44,6 @@ void APlayGameMode::BeginPlay()
 	int a = 0;
 
 	{
-		APlayMap* NewActor = GetWorld()->SpawnActor<APlayMap>();
-	}
-
-	{
 		AScore* NewActor = GetWorld()->SpawnActor<AScore>();
 
 		// NewActor->SetActorLocation({300, 300});

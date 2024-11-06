@@ -13,6 +13,7 @@
 #include "TileMapGameMode.h"
 #include "Player.h"
 #include "ANewPlayer.h"
+#include "TitleLogo.h"
 
 
 EduContentsCore::EduContentsCore()
@@ -65,13 +66,10 @@ void EduContentsCore::BeginPlay()
 
 
 	{
-
 		UEngineDirectory BombDir;
 		BombDir.MoveParentToDirectory("Resources//Image");
 		BombDir.Append("bomb");
-
 		UImageManager::GetInst().LoadFolder(BombDir.GetPathToString());
-
 	}
 
 	{
@@ -79,9 +77,15 @@ void EduContentsCore::BeginPlay()
 		UEngineDirectory Dir;
 		Dir.MoveParentToDirectory("Resources//Image");
 		Dir.Append("TileMap//TileSet");
-
 		UImageManager::GetInst().LoadFolder(Dir.GetPathToString());
+	}
 
+	{
+		// 로고 로드
+		UEngineDirectory LogoDir;
+		LogoDir.MoveParentToDirectory("Resources//Image");
+		LogoDir.Append("Logo");
+		UImageManager::GetInst().LoadFolder(LogoDir.GetPathToString());
 	}
 
 
@@ -90,7 +94,7 @@ void EduContentsCore::BeginPlay()
 	UEngineAPICore::GetCore()->GetMainWindow().SetWindowAlpha();
 
 	UEngineAPICore::GetCore()->CreateLevel<APlayGameMode, ANewPlayer>("Play");
-	UEngineAPICore::GetCore()->CreateLevel<ATitleGameMode, AActor>("Title");
+	UEngineAPICore::GetCore()->CreateLevel<ATitleGameMode, TitleLogo>("Title");
 	UEngineAPICore::GetCore()->CreateLevel<ATileMapGameMode, AActor>("Tile");
 
 	UEngineAPICore::GetCore()->OpenLevel("Title");

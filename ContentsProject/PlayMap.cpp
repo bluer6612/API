@@ -1,7 +1,6 @@
 #include "PreCompile.h"
 #include "PlayMap.h"
 #include <EngineCore/EngineAPICore.h>
-#include <EngineCore/SpriteRenderer.h>
 #include "ContentsEnum.h"
 #include <EnginePlatform/EngineInput.h>
 

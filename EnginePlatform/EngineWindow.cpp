@@ -282,5 +282,5 @@ void UEngineWindow::SetWindowAlpha()
     long l = GetWindowLongA(WindowHandle, GWL_EXSTYLE);
     l |= WS_EX_LAYERED;
     SetWindowLongA(WindowHandle, GWL_EXSTYLE, l);
-    SetLayeredWindowAttributes(WindowHandle, RGB(0, 0, 0), 50, LWA_COLORKEY);
+    SetLayeredWindowAttributes(WindowHandle, RGB(0, 0, 0), 150, LWA_COLORKEY);
 }

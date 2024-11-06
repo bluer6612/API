@@ -26,8 +26,11 @@ void ATitleGameMode::BeginPlay()
 {
 	Super::BeginPlay();
 
-	//TitleLogo* NewActor = GetWorld()->GetPawn<TitleLogo>();
-	//NewActor->SetColImage("bg001_Col.png");
+	TitleLogo* NewActor = GetWorld()->GetPawn<TitleLogo>();
+
+	{
+		APlayMap* NewActor = GetWorld()->SpawnActor<APlayMap>();
+	}
 }
 
 void ATitleGameMode::Tick(float _DeltaTime)
