@@ -3,6 +3,7 @@
 #include <EnginePlatform/EngineInput.h>
 #include <EngineCore/SpriteRenderer.h>
 #include <EngineCore/EngineAPICore.h>
+#include <EngineCore/EngineCoreDebug.h>
 
 ANewPlayer::ANewPlayer()
 {
@@ -27,6 +28,9 @@ void ANewPlayer::BeginPlay()
 	// 직접 카메라 피봇을 설정해줘야 한다.
 	FVector2D Size = UEngineAPICore::GetCore()->GetMainWindow().GetWindowSize();
 	GetWorld()->SetCameraPivot(Size.Half() * -1.0f);
+
+	GetWorld()->SetCameraToMainPawn(false);
+
 	// 앞으로 계속 강의할 것이다.
 	// 즉석함수만들기
 	// [] 람다 캡처
@@ -96,6 +100,17 @@ void ANewPlayer::BeginPlay()
 void ANewPlayer::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
+
+	// 세계에는 항상 0, 0이 존재한다.
+
+	UEngineDebug::CoreOutPutString("FPS : " + std::to_string(1.0f / _DeltaTime));
+	UEngineDebug::CoreOutPutString("PlayerPos : " + GetActorLocation().ToString());
+
+	if (true == UEngineInput::GetInst().IsDown('R'))
+	{
+		UEngineDebug::SwitchIsDebug();
+	}
+
 	FSM.Update(_DeltaTime);
 }
 
@@ -144,18 +159,20 @@ void ANewPlayer::Move(float _DeltaTime)
 		return;
 	}
 
-	if (nullptr != ColImage)
-	{
+	AddActorLocation(Vector * _DeltaTime * Speed);
 
-		// 픽셀충돌에서 제일 중요한건 애초에 박히지 않는것이다.
-		FVector2D NextPos = GetActorLocation() + Vector * _DeltaTime * Speed;
+	//if (nullptr != ColImage)
+	//{
 
-		UColor Color = ColImage->GetColor(NextPos, UColor::BLACK);
-		if (Color == UColor::WHITE)
-		{
-			AddActorLocation(Vector * _DeltaTime * Speed);
-		}
-	}
+	//	// 픽셀충돌에서 제일 중요한건 애초에 박히지 않는것이다.
+	//	FVector2D NextPos = GetActorLocation() + Vector * _DeltaTime * Speed;
+
+	//	UColor Color = ColImage->GetColor(NextPos, UColor::BLACK);
+	//	if (Color == UColor::WHITE)
+	//	{
+	//		AddActorLocation(Vector * _DeltaTime * Speed);
+	//	}
+	//}
 }
 
 void ANewPlayer::SetColImage(std::string_view _ColImageName)
