@@ -15,8 +15,7 @@ void U2DCollision::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// 스프라이트 랜더러가 
-
+	
 	AActor* Actor = GetActor();
 	ULevel* Level = Actor->GetWorld();
 

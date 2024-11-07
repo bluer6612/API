@@ -2,16 +2,13 @@
 #include <EngineCore/Actor.h>
 #include <EngineCore/ImageManager.h>
 
-// Ό³Έν :
 class AWindowTopBlack : public AActor
 {
 public:
-	// constrcuter destructer
-	AWindowTopBlack();
+		AWindowTopBlack();
 	~AWindowTopBlack();
 
-	// delete Function
-	AWindowTopBlack(const AWindowTopBlack& _Other) = delete;
+		AWindowTopBlack(const AWindowTopBlack& _Other) = delete;
 	AWindowTopBlack(AWindowTopBlack&& _Other) noexcept = delete;
 	AWindowTopBlack& operator=(const AWindowTopBlack& _Other) = delete;
 	AWindowTopBlack& operator=(AWindowTopBlack&& _Other) noexcept = delete;

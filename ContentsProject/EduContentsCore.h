@@ -2,16 +2,13 @@
 #include <EngineCore/EngineAPICore.h>
 #include <EnginePlatform/EngineWindow.h>
 
-// Ό³Έν :
 class EduContentsCore : public UContentsCore
 {
 public:
-	// constrcuter destructer
-	EduContentsCore();
+		EduContentsCore();
 	~EduContentsCore();
 
-	// delete Function
-	EduContentsCore(const EduContentsCore& _Other) = delete;
+		EduContentsCore(const EduContentsCore& _Other) = delete;
 	EduContentsCore(EduContentsCore&& _Other) noexcept = delete;
 	EduContentsCore& operator=(const EduContentsCore& _Other) = delete;
 	EduContentsCore& operator=(EduContentsCore&& _Other) noexcept = delete;
@@ -22,6 +19,5 @@ protected:
 
 private:
 	ULevel* TitleLevel;
-	// UEngineWindow MyWindow;
-};
+	};
 

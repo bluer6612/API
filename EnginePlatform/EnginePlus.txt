@@ -25,7 +25,5 @@ static int ScreenY = GetSystemMetrics(SM_CYSCREEN);
     
 	void CoreOutPutString(std::string_view _Text)
 	{
-// #ifdef _DEBUG
-		// 바로 출력하지 않는다.
-		EngineTextPos.Y += 20;
+				EngineTextPos.Y += 20;
 		DebugTexts.push_back({ _Text.data(), EngineTextPos});

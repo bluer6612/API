@@ -2,16 +2,13 @@
 #include <EngineCore/Actor.h>
 #include <EngineCore/SpriteRenderer.h>
 
-// Ό³Έν :
 class TitleLogo : public AActor
 {
 public:
-	// constrcuter destructer
-	TitleLogo();
+		TitleLogo();
 	~TitleLogo();
 
-	// delete Function
-	TitleLogo(const TitleLogo& _Other) = delete;
+		TitleLogo(const TitleLogo& _Other) = delete;
 	TitleLogo(TitleLogo&& _Other) noexcept = delete;
 	TitleLogo& operator=(const TitleLogo& _Other) = delete;
 	TitleLogo& operator=(TitleLogo&& _Other) noexcept = delete;

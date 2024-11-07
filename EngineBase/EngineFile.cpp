@@ -15,7 +15,6 @@ UEngineFile::UEngineFile(const std::string& _Path)
 
 }
 
-// 자식에서 부모 생성자를 명시적으로 호출해주면 된다.
 UEngineFile::UEngineFile(std::string_view _Path)
 	: UEnginePath(_Path)
 {
@@ -30,22 +29,16 @@ UEngineFile::UEngineFile(std::filesystem::path _Path)
 
 UEngineFile::~UEngineFile()
 {
-	// 소멸자를 이용해서 자연스럽게 파괴되도록 만드는게 좋다.
-	Close();
+		Close();
 }
 
 void UEngineFile::FileOpen(const char* _Mode)
 {
 	fopen_s(&File, GetPathToString().c_str(), _Mode);
 
-	// 방어코드
-	// 파일을 열지 못했다.
-	if (nullptr == File)
+			if (nullptr == File)
 	{
-		// char [] Arr0
-		// char [] Arr1
-		// Arr0 + Arr1
-
+						
 		MSGASSERT(GetPathToString() + + "파일 오픈에 실패했습니다");
 	}
 }
@@ -69,8 +62,7 @@ int UEngineFile::GetFileSize()
 
 void UEngineFile::Read(class UEngineSerializer& _Ser)
 {
-	// 파일 크기를 다 읽어서 
-
+	
 	int FileSize = GetFileSize();
 
 	_Ser.DataResize(FileSize);
@@ -90,8 +82,7 @@ void UEngineFile::Write(const void* _Ptr, size_t _Size)
 		MSGASSERT("존재하지 않는 메모리를 사용하려고 했습니다.");
 	}
 
-	// w일 경우에 대한 예외처리
-	if (nullptr == File)
+		if (nullptr == File)
 	{
 		MSGASSERT("열지 않은 파일에 내용을 쓰려고 했습니다");
 		return;
@@ -123,14 +114,9 @@ void UEngineFile::Read(void* _Ptr, size_t _Size)
 
 
 
-// 보통 파일 혹은 플랫폼 기능들은 언제나 한쌍이다.
-// 시작한다.
-// 사용한다.
-// 끝낸다
 void UEngineFile::Close()
 {
-	// 방어코드
-	if (nullptr != File)
+		if (nullptr != File)
 	{
 		fclose(File);
 		File = nullptr;

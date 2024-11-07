@@ -15,23 +15,14 @@ ATileMapGameMode::~ATileMapGameMode()
 {
 }
 
-// 타일찍고 저장할 수 있는 레벨
 void ATileMapGameMode::BeginPlay()
 {
 	Super::BeginPlay();
 
 	{
 		GroundTileMap = GetWorld()->SpawnActor<ATileMap>();
-		//GroundTileMap->Create("TileSet", { 100, 100 }, { 32, 32 });
-
-		//for (int y = 0; y < 20; y++)
-		//{
-		//	for (int x = 0; x < 20; x++)
-		//	{
-		//		GroundTileMap->SetTileIndex({ y,x }, 0);
-		//	}
-		//}
-	}
+		
+															}
 
 	{
 		WallTileMap = GetWorld()->SpawnActor<ATileMap>();
@@ -73,8 +64,7 @@ void ATileMapGameMode::Tick(float _DeltaTime)
 	{
 		UEngineSerializer _Ser;
 		WallTileMap->Serialize(_Ser);
-		// 순수한 바이트 덩어리 그냥 저장하면 끝난다.
-		UEngineDirectory Dir;
+				UEngineDirectory Dir;
 
 		if (false == Dir.MoveParentToDirectory("Resources"))
 		{
@@ -125,8 +115,7 @@ void ATileMapGameMode::Tick(float _DeltaTime)
 	}
 
 
-	// 이동할 필요가 없다. 예로 보여주는것
-	if (true == UEngineInput::GetInst().IsPress('A'))
+		if (true == UEngineInput::GetInst().IsPress('A'))
 	{
 		WallTileMap->AddActorLocation(FVector2D::LEFT * _DeltaTime * 100.0f);
 	}

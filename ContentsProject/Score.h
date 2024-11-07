@@ -5,16 +5,13 @@
 #include <EngineCore/ImageManager.h>
 #include <EngineCore/SpriteRenderer.h>
 
-// Ό³Έν :
 class AScore : public AActor
 {
 public:
-	// constrcuter destructer
-	AScore();
+		AScore();
 	~AScore();
 
-	// delete Function
-	AScore(const AScore& _Other) = delete;
+		AScore(const AScore& _Other) = delete;
 	AScore(AScore&& _Other) noexcept = delete;
 	AScore& operator=(const AScore& _Other) = delete;
 	AScore& operator=(AScore&& _Other) noexcept = delete;
