@@ -1,5 +1,4 @@
 #pragma once
-#include "PreCompile.h"
 #include <EngineCore/Actor.h>
 #include <EngineCore/SpriteRenderer.h>
 
@@ -16,10 +15,13 @@ public:
 	TitleLogo(TitleLogo&& _Other) noexcept = delete;
 	TitleLogo& operator=(const TitleLogo& _Other) = delete;
 	TitleLogo& operator=(TitleLogo&& _Other) noexcept = delete;
+
+	void Tick(float _DeltaTime);
+
 protected:
-	void Tick(float _DeltaTime) override;
 
 private:
+
 	USpriteRenderer* LogoSpriteRenderer;
 	USpriteRenderer* TooltipSpriteRenderer;
 	USpriteRenderer* MoneySpriteRenderer;

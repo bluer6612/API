@@ -6,7 +6,6 @@
 #include <EngineBase/EngineDelegate.h>
 #include <EngineBase/EngineDebug.h>
 
-#include <EngineCore/EngineCoreDebug.h>
 
 
 // 엔진을 통틀어서 1번 만들어지기 때문에.

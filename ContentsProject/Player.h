@@ -28,7 +28,7 @@ public:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
-	//void MoveFunction(FVector2D _Dir);
+	void MoveFunction(FVector2D _Dir);
 
 	/*void LeftMove();
 	void RightMove();
@@ -67,7 +67,7 @@ private:
 	void Idle(float _DeltaTime);
 	void MoveStart();
 	void Move(float _DeltaTime);
-	//void Fly(float _DeltaTime);
+	void Fly(float _DeltaTime);
 
 	// 상태는 아니지만 도움이나 체크에 처리되는 함수
 	void Gravity()

@@ -22,6 +22,5 @@ protected:
 private:
 	USpriteRenderer* BackSpriteRenderer;
 	USpriteRenderer* BackTopSpriteRenderer;
-
 };
 

@@ -113,6 +113,7 @@ public:
 
 	// 데이터를 직렬화(압축)
 	void Serialize(UEngineSerializer& _Ser);
+
 	// 데이터를 복구(할때)
 	void DeSerialize(UEngineSerializer& _Ser);
 

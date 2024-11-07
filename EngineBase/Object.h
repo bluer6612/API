@@ -87,6 +87,25 @@ public:
 		IsActiveValue = !IsActiveValue;
 	}
 
+	bool IsDebug()
+	{
+		return IsDebugValue;
+	}
+
+	void DebugOn()
+	{
+		IsDebugValue = true;
+	}
+
+	void DebugOff()
+	{
+		IsDebugValue = false;
+	}
+
+	void DebugSwitch()
+	{
+		IsDebugValue = !IsDebugValue;
+	}
 
 protected:
 
@@ -99,6 +118,8 @@ private:
 	float CurDeathTime = 0.0f;
 
 	std::string Name;
+
+	bool IsDebugValue = false;
 
 };
 

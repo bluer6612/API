@@ -6,6 +6,7 @@
 #include "Player.h"
 #include "ANewPlayer.h"
 #include "Score.h"
+#include <EngineCore/EngineAPICore.h>
 
 #include "ContentsEnum.h"
 
@@ -39,18 +40,25 @@ void APlayGameMode::BeginPlay()
 	// <= 왠만하면 초반에 다 만들어 놓자.
 
 	ANewPlayer* Player = GetWorld()->GetPawn<ANewPlayer>();
-	Player->SetColImage("bg00.png");
+	Player->SetColImage("bg001_Col.png");
+
+	FVector2D WindowSize = UEngineAPICore::GetCore()->GetMainWindow().GetWindowSize();
+
 
 	int a = 0;
 
 	{
-		AScore* NewActor = GetWorld()->SpawnActor<AScore>();
-
-		NewActor->SetActorLocation({30, 30});
-		NewActor->SetTextSpriteName("Text.bmp");
-		NewActor->SetOrder(ERenderOrder::UI);
-		NewActor->SetTextScale({5, 10});
-		NewActor->SetValue(45362784);
-
+		APlayMap* NewActor = GetWorld()->SpawnActor<APlayMap>();
 	}
+
+	//{
+	//	AScore* NewActor = GetWorld()->SpawnActor<AScore>();
+
+	//	// NewActor->SetActorLocation({300, 300});
+	//	NewActor->SetTextSpriteName("Text.bmp");
+	//	NewActor->SetOrder(ERenderOrder::UI);
+	//	NewActor->SetTextScale({50, 100});
+	//	NewActor->SetValue(45362784);
+
+	//}
 }

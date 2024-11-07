@@ -64,19 +64,26 @@ void EduContentsCore::BeginPlay()
 	UImageManager::GetInst().CuttingSprite("Player_Right.png", {128, 128});
 	UImageManager::GetInst().CuttingSprite("Text.bmp", { 16, 32 });
 
+	//UEngineSprite* Sprite = UImageManager::GetInst().FindSprite("Player_Right.png");
+	//UEngineWinImage* Image = UImageManager::GetInst().FindImage("Player_Right.png");
+	//Sprite->ClearSpriteData();
+	//Sprite->PushData(Image, { {0,0}, {350, 350} });
+
 	{
 		// 타일셋 로드
 		UEngineDirectory Dir;
-		Dir.MoveParentToDirectory("Resources");
-		Dir.Append("Image//TileMap//TileSet");
-		UImageManager::GetInst().LoadFolder(Dir.GetPathToString());
-	}
+		Dir.MoveParentToDirectory("Resources//Image");
+		Dir.Append("TileMap//TileSet");
 
+		UImageManager::GetInst().LoadFolder(Dir.GetPathToString());
+
+	}
+	
 	{
 		// UI 로드
 		UEngineDirectory UIDir;
-		UIDir.MoveParentToDirectory("Resources");
-		UIDir.Append("Image//UI");
+		UIDir.MoveParentToDirectory("Resources//Image");
+		UIDir.Append("UI");
 		UImageManager::GetInst().LoadFolder(UIDir.GetPathToString());
 	}
 

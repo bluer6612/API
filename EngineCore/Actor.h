@@ -26,7 +26,7 @@ public:
 	virtual void BeginPlay() {}
 
 	// 델타타임이란 무엇인가?
-	virtual void Tick(float _DeltaTime) {}
+	virtual void Tick(float _DeltaTime);
 
 	virtual void LevelChangeStart() {}
 	virtual void LevelChangeEnd() {}
@@ -76,6 +76,7 @@ public:
 		ComponentList.push_back(NewComponent);
 		return NewComponent;
 	}
+
 
 protected:
 

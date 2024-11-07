@@ -73,6 +73,7 @@ public:
 
 	void SetWindowAlpha();
 
+
 protected:
 
 private:

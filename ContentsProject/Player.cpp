@@ -231,6 +231,9 @@ void APlayer::Move(float _DeltaTime)
 		Vector += FVector2D::UP;
 	}
 
+	// 다 더해졌을 
+	// Vector
+
 	if (false == UEngineInput::GetInst().IsPress('A') &&
 		false == UEngineInput::GetInst().IsPress('D') &&
 		false == UEngineInput::GetInst().IsPress('W') &&

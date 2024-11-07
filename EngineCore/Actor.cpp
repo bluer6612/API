@@ -11,6 +11,7 @@
 #include <EngineBase/EngineDebug.h>
 
 #include "ImageManager.h"
+#include "EngineCoreDebug.h"
 
 // delete 도 헤더가 있어야 호출할수 있습니다.
 #include "ActorComponent.h"
@@ -56,6 +57,29 @@ AActor::~AActor()
 	Components.clear();
 }
 
+void AActor::Tick(float _DeltaTime)
+{
+	if (true == IsDebug())
+	{
+		FVector2D Pos = GetActorLocation();
+		FVector2D CameraPos = GetWorld()->GetCameraPos();
+
+		FTransform Trans;
+		Trans.Location = Pos - CameraPos;
+		Trans.Scale = {6, 6};
+
+		UEngineDebug::CoreDebugRender(Trans, UEngineDebug::EDebugPosType::Circle);
+	}
+
+	std::list<class UActorComponent*>::iterator StartIter = Components.begin();
+	std::list<class UActorComponent*>::iterator EndIter = Components.end();
+
+	for (; StartIter != EndIter; ++StartIter)
+	{
+		(*StartIter)->ComponentTick(_DeltaTime);
+	}
+
+}
 
 void AActor::ReleaseCheck(float _DeltaTime)
 {

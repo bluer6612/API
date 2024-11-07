@@ -5,6 +5,16 @@
 // FVector4D xyzw
 // FVector4D == FVector;
 
+
+class UEngineMath
+{
+public:
+	static float Sqrt(float _Value)
+	{
+		return ::sqrtf(_Value);
+	}
+};
+
 class FVector2D
 {
 public:
@@ -58,12 +68,19 @@ public:
 		return { X * 0.5f, Y * 0.5f };
 	}
 
+	// 빗변의 길이입니다.
 	float Length() const
 	{
-		return sqrtf(X * X + Y * Y);
+		return UEngineMath::Sqrt(X * X + Y * Y);
 	}
 
 	class FIntPoint ConvertToPoint() const;
+
+	static FVector2D Normalize(FVector2D _Value) 
+	{
+		_Value.Normalize();
+		return _Value;
+	}
 
 	void Normalize()
 	{
@@ -71,7 +88,7 @@ public:
 		if (0.0f < Len && false == isnan(Len))
 		{
 			X = X / Len;
-			X = Y / Len;
+			Y = Y / Len;
 		}
 		return;
 	}
@@ -97,6 +114,14 @@ public:
 		return Result;
 	}
 
+	FVector2D& operator-=(FVector2D _Other) 
+	{
+		X -= _Other.X;
+		Y -= _Other.Y;
+		return *this;
+	}
+
+
 	FVector2D operator-(FVector2D _Other) const
 	{
 		FVector2D Result;
@@ -105,6 +130,13 @@ public:
 		return Result;
 	}
 
+	FVector2D operator-() const
+	{
+		FVector2D Result;
+		Result.X = -X;
+		Result.Y = -Y;
+		return Result;
+	}
 
 	FVector2D operator/(int _Value) const
 	{
@@ -233,11 +265,6 @@ public:
 
 
 };
-
-class EngineMath
-{
-};
-
 
 
 class UColor

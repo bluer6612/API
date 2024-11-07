@@ -255,7 +255,7 @@ void UEngineWindow::SetWindowPosAndScale(FVector2D _Pos, FVector2D _Scale)
     
     // 그러면 또 이녀석은 
     // 윈도우에서 가져야할 위치를 포함한 크기를 주게 된다.
-    //AdjustWindowRect(&Rc, WS_OVERLAPPEDWINDOW, FALSE);
+    AdjustWindowRect(&Rc, WS_OVERLAPPEDWINDOW, FALSE);
     
     ::SetWindowPos(WindowHandle, nullptr, _Pos.iX(), _Pos.iY(), Rc.right - Rc.left, Rc.bottom - Rc.top, SWP_NOZORDER);
 }

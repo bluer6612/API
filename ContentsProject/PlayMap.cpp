@@ -25,11 +25,11 @@ APlayMap::APlayMap()
 
 		{
 			BackTopSpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
-			BackTopSpriteRenderer->SetOrder(ERenderOrder::BACKGROUNDTOP);
+			BackTopSpriteRenderer->SetOrder(ERenderOrder::BACKGROUND);
 			BackTopSpriteRenderer->SetSprite("bg00.png");
 
 			FVector2D MapScale = BackTopSpriteRenderer->SetSpriteScale(1.0f);
-			BackTopSpriteRenderer->SetComponentLocation({ScreenX, -30 });
+			BackTopSpriteRenderer->SetComponentLocation({ ScreenX, -30 });
 		}
 	}
 

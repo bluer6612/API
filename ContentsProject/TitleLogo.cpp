@@ -22,7 +22,7 @@ TitleLogo::TitleLogo()
 		FVector2D MapScale = TooltipSpriteRenderer->SetSpriteScale(1.0f);
 		TooltipSpriteRenderer->SetComponentLocation({ ScreenX / 2,  static_cast<int>(ScreenY / 5.8) });
 	}
-	
+
 	{
 		MoneySpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
 		MoneySpriteRenderer->SetOrder(ERenderOrder::UI);
