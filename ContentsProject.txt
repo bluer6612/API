@@ -1,0 +1,173 @@
+
+
+    void ATitleGameMode::BeginPlay()
+{
+	Super::BeginPlay();
+
+	TitleLogo* NewActor = GetWorld()->GetPawn<TitleLogo>();
+
+	{
+		APlayMap* NewActor = GetWorld()->SpawnActor<APlayMap>();
+	}
+}
+
+
+#include "PreCompile.h"
+#include "PlayMap.h"
+#include <EngineCore/EngineAPICore.h>
+#include "ContentsEnum.h"
+#include <EnginePlatform/EngineInput.h>
+#include <EngineCore/EngineCoreDebug.h>
+
+APlayMap::APlayMap()
+{
+	// 매번 윈도우 사이즈가 바뀌면
+	// 이거 자체도 사실 좋은건 아닙니다.
+	//FVector2D WindowSize =  UEngineAPICore::GetCore()->GetMainWindow().GetWindowSize();
+	//SetActorScale(WindowSize.Half());
+	//SetActorLocation(WindowSize.Half());
+
+	{
+		{
+			BackSpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
+			BackSpriteRenderer->SetOrder(ERenderOrder::BACKGROUND);
+			BackSpriteRenderer->SetSprite("GrassMap.png");
+
+			FVector2D MapScale = BackSpriteRenderer->SetSpriteScale(1.0f);
+			BackSpriteRenderer->SetComponentLocation(MapScale.Half());
+		}
+
+		{
+			BackTopSpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
+			BackTopSpriteRenderer->SetOrder(ERenderOrder::BACKGROUNDTOP);
+			BackTopSpriteRenderer->SetSprite("bg00.png");
+
+			FVector2D MapScale = BackTopSpriteRenderer->SetSpriteScale(1.0f);
+			BackTopSpriteRenderer->SetComponentLocation({ScreenX, -30 });
+		}
+	}
+
+}
+
+APlayMap::~APlayMap()
+{
+}
+
+void APlayMap::Tick(float _DeltaTime)
+{
+	Super::Tick(_DeltaTime);
+
+	UEngineDebug::CoreOutPutString("FPS : " + std::to_string(1.0f / _DeltaTime));
+	UEngineDebug::CoreOutPutString("PlayerPos : " + GetActorLocation().ToString());
+
+	if (true == UEngineInput::GetInst().IsDown('Y'))
+	{
+		BackTopSpriteRenderer->SetActiveSwitch();
+	}
+}
+
+
+	USpriteRenderer* BackSpriteRenderer;
+	USpriteRenderer* BackTopSpriteRenderer;
+
+
+
+
+#include "PreCompile.h"
+#include "TitleLogo.h"
+#include <EnginePlatform/EngineInput.h>
+#include "ContentsEnum.h"
+
+TitleLogo::TitleLogo()
+{
+	{
+		LogoSpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
+		LogoSpriteRenderer->SetOrder(ERenderOrder::TITLE);
+		LogoSpriteRenderer->SetSprite("UI_Logo.png");
+
+		FVector2D MapScale = LogoSpriteRenderer->SetSpriteScale(2.00f);
+		LogoSpriteRenderer->SetComponentLocation({ ScreenX / 2,  static_cast<int>(ScreenY / 13.6) });
+	}
+
+	{
+		TooltipSpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
+		TooltipSpriteRenderer->SetOrder(ERenderOrder::UI);
+		TooltipSpriteRenderer->SetSprite("UI_LogoTooltip.png");
+
+		FVector2D MapScale = TooltipSpriteRenderer->SetSpriteScale(1.0f);
+		TooltipSpriteRenderer->SetComponentLocation({ ScreenX / 2,  static_cast<int>(ScreenY / 5.8) });
+	}
+	
+	{
+		MoneySpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
+		MoneySpriteRenderer->SetOrder(ERenderOrder::UI);
+		MoneySpriteRenderer->SetSprite("UI_biofuelspareparts.png");
+
+		FVector2D MapScale = MoneySpriteRenderer->SetSpriteScale(2.00f);
+		MoneySpriteRenderer->SetComponentLocation({ ScreenX / 2,  static_cast<int>(ScreenY / 3.5) });
+	}
+
+	{
+		ButtonSpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
+		ButtonSpriteRenderer->SetOrder(ERenderOrder::UI);
+		ButtonSpriteRenderer->SetSprite("UI_TitleMenuButton.png");
+
+		FVector2D MapScale = ButtonSpriteRenderer->SetSpriteScale(2.00f);
+		ButtonSpriteRenderer->SetComponentLocation({ static_cast<float>(ScreenX * 0.43),  static_cast<float>(ScreenY / 3.975) });
+
+		ButtonSpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
+		ButtonSpriteRenderer->SetOrder(ERenderOrder::UI);
+		ButtonSpriteRenderer->SetSprite("UI_TitleMenuButton.png");
+
+		MapScale = ButtonSpriteRenderer->SetSpriteScale(2.00f);
+		ButtonSpriteRenderer->SetComponentLocation({ static_cast<float>(ScreenX * 0.5),  static_cast<float>(ScreenY / 3.975) });
+
+		ButtonSpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
+		ButtonSpriteRenderer->SetOrder(ERenderOrder::UI);
+		ButtonSpriteRenderer->SetSprite("UI_TitleMenuButton.png");
+
+		MapScale = ButtonSpriteRenderer->SetSpriteScale(2.00f);
+		ButtonSpriteRenderer->SetComponentLocation({ static_cast<float>(ScreenX * 0.57),  static_cast<float>(ScreenY / 3.975) });
+	}
+}
+
+TitleLogo::~TitleLogo()
+{
+}
+
+void TitleLogo::Tick(float _DeltaTime)
+{
+	Super::Tick(_DeltaTime);
+
+	if (true == UEngineInput::GetInst().IsDown('B'))
+	{
+		LogoSpriteRenderer->SetActiveSwitch();
+	}
+}
+
+
+	USpriteRenderer* LogoSpriteRenderer;
+	USpriteRenderer* TooltipSpriteRenderer;
+	USpriteRenderer* MoneySpriteRenderer;
+	USpriteRenderer* ButtonSpriteRenderer;
+
+
+	
+	{
+		// UI 로드
+		UEngineDirectory UIDir;
+		UIDir.MoveParentToDirectory("Resources");
+		UIDir.Append("Image//UI");
+		UImageManager::GetInst().LoadFolder(UIDir.GetPathToString());
+	}
+
+
+	UEngineAPICore::GetCore()->GetMainWindow().SetWindowTitle("EduWindow");
+	UEngineAPICore::GetCore()->GetMainWindow().SetWindowPosAndScale({ static_cast <float>(0), (ScreenY - static_cast<float>(ScreenY * 0.34)) }, { static_cast<float>(ScreenX), static_cast<float>(ScreenY * 0.3) });
+	UEngineAPICore::GetCore()->GetMainWindow().SetWindowAlpha();
+
+	UEngineAPICore::GetCore()->CreateLevel<APlayGameMode, ANewPlayer>("Play");
+	UEngineAPICore::GetCore()->CreateLevel<ATitleGameMode, TitleLogo>("Title");
+	UEngineAPICore::GetCore()->CreateLevel<ATileMapGameMode, AActor>("Tile");
+
+	UEngineAPICore::GetCore()->OpenLevel("Title");

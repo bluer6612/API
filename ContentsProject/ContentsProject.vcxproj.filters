@@ -111,4 +111,9 @@
       <UniqueIdentifier>{f3fe4416-a80c-4962-92a1-45cd6e4e4dbd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\ContentsProject.txt">
+      <Filter>ContentsObject\Play</Filter>
+    </Text>
+  </ItemGroup>
 </Project>
