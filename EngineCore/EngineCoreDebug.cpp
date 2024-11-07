@@ -41,8 +41,8 @@ namespace UEngineDebug
 	{
 // #ifdef _DEBUG
 		// 바로 출력하지 않는다.
-		DebugTexts.push_back({ _Text.data(), EngineTextPos});
 		EngineTextPos.Y += 20;
+		DebugTexts.push_back({ _Text.data(), EngineTextPos});
 // endif 
 	}
 
