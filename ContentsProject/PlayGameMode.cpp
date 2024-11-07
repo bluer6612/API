@@ -25,7 +25,6 @@ void APlayGameMode::BeginPlay()
 				
 			
 	ANewPlayer* Player = GetWorld()->GetPawn<ANewPlayer>();
-	Player->SetColImage("bg001_Col.png");
 
 	FVector2D WindowSize = UEngineAPICore::GetCore()->GetMainWindow().GetWindowSize();
 

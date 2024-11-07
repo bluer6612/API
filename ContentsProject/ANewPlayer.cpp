@@ -124,10 +124,6 @@ void ANewPlayer::Tick(float _DeltaTime)
 	Super::Tick(_DeltaTime);
 
 
-	
-	UEngineDebug::CoreOutPutString("FPS : " + std::to_string(1.0f / _DeltaTime));
-	UEngineDebug::CoreOutPutString("PlayerPos : " + GetActorLocation().ToString());
-
 	if (true == UEngineInput::GetInst().IsDown('R'))
 	{
 		UEngineDebug::SwitchIsDebug();

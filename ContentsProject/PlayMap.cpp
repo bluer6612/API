@@ -6,8 +6,7 @@
 #include <EngineCore/EngineCoreDebug.h>
 
 APlayMap::APlayMap()
-{
-					
+{	
 	{
 		{
 			BackSpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
@@ -21,13 +20,12 @@ APlayMap::APlayMap()
 		{
 			BackTopSpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
 			BackTopSpriteRenderer->SetOrder(ERenderOrder::BACKGROUND);
-			BackTopSpriteRenderer->SetSprite("bg00.png");
+			BackTopSpriteRenderer->SetSprite("WindowTopBlack.png");
 
 			FVector2D MapScale = BackTopSpriteRenderer->SetSpriteScale(1.0f);
 			BackTopSpriteRenderer->SetComponentLocation({ ScreenX, -30 });
 		}
 	}
-
 }
 
 APlayMap::~APlayMap()

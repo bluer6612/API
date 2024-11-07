@@ -31,7 +31,7 @@ APlayMap::APlayMap()
 		{
 			BackTopSpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
 			BackTopSpriteRenderer->SetOrder(ERenderOrder::BACKGROUND);
-			BackTopSpriteRenderer->SetSprite("bg00.png");
+			BackTopSpriteRenderer->SetSprite("WindowTopBlack.png");
 
 			FVector2D MapScale = BackTopSpriteRenderer->SetSpriteScale(1.0f);
 			BackTopSpriteRenderer->SetComponentLocation({ScreenX, -30 });
@@ -153,8 +153,10 @@ void TitleLogo::Tick(float _DeltaTime)
 #include "TitleLogo.h"
 
 	{
-				UEngineDirectory UIDir;
-		UIDir.MoveParentToDirectory("Resources		UIDir.Append("UI");
+		// UI ·Îµå
+		UEngineDirectory UIDir;
+		UIDir.MoveParentToDirectory("Resources//Image");
+		UIDir.Append("UI");
 		UImageManager::GetInst().LoadFolder(UIDir.GetPathToString());
 	}
 
