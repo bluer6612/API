@@ -26,13 +26,13 @@ void ATileMapGameMode::BeginPlay()
 
 	{
 		WallTileMap = GetWorld()->SpawnActor<ATileMap>();
-		WallTileMap->Create("TileSet", { 100, 100 }, { 32, 32 });
+		WallTileMap->Create("TileSet", { 48, 8 }, { 48, 40 });
 
-		for (int y = 0; y < 20; y++)
+		for (int y = 0; y < 40; y++)
 		{
-			for (int x = 0; x < 20; x++)
+			for (int x = 0; x < 40; x++)
 			{
-				WallTileMap->SetTileIndex({ y,x }, { 0, -6 }, {32, 44}, 2);
+				WallTileMap->SetTileIndex({ y,x }, { 0, -6 }, {48, 40}, 1);
 			}
 		}
 	}
@@ -58,6 +58,12 @@ void ATileMapGameMode::Tick(float _DeltaTime)
 			Tile->SpriteRenderer = nullptr;
 		}
 	}
+
+	if (true == UEngineInput::GetInst().IsDown('B'))
+	{
+		UEngineAPICore::GetCore()->OpenLevel("Title");
+	}
+
 
 
 	if (true == UEngineInput::GetInst().IsPress('R'))

@@ -78,7 +78,7 @@ void EduContentsCore::BeginPlay()
 	UEngineAPICore::GetCore()->CreateLevel<ATitleGameMode, TitleLogo>("Title");
 	UEngineAPICore::GetCore()->CreateLevel<ATileMapGameMode, AActor>("Tile");
 
-	UEngineAPICore::GetCore()->OpenLevel("Title");
+	UEngineAPICore::GetCore()->OpenLevel("Tile");
 
 }
 
