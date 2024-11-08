@@ -43,6 +43,9 @@
     <ClInclude Include="CharacterMap.h">
       <Filter>ContentsObject\Play</Filter>
     </ClInclude>
+    <ClInclude Include="Rusty.h">
+      <Filter>ContentsObject\Character</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -87,6 +90,9 @@
     <ClCompile Include="CharacterMap.cpp">
       <Filter>ContentsObject\Play</Filter>
     </ClCompile>
+    <ClCompile Include="Rusty.cpp">
+      <Filter>ContentsObject\Character</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="PreCompile">
@@ -115,6 +121,9 @@
     </Filter>
     <Filter Include="TileMap">
       <UniqueIdentifier>{f3fe4416-a80c-4962-92a1-45cd6e4e4dbd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ContentsObject\Character">
+      <UniqueIdentifier>{e508242d-1e8f-4de4-b07f-26697be26f0b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
