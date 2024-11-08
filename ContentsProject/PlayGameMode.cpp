@@ -4,7 +4,7 @@
 #include <EngineCore/Level.h>
 #include "PlayMap.h"
 #include "Player.h"
-#include "ANewPlayer.h"
+#include "Rusty.h"
 #include "Score.h"
 #include <EngineCore/EngineAPICore.h>
 
@@ -20,11 +20,7 @@ APlayGameMode::~APlayGameMode()
 
 void APlayGameMode::BeginPlay()
 {
-					
-			
-				
-			
-	ANewPlayer* Player = GetWorld()->GetPawn<ANewPlayer>();
+	ARusty* Rusty = GetWorld()->GetPawn<ARusty>();
 
 	FVector2D WindowSize = UEngineAPICore::GetCore()->GetMainWindow().GetWindowSize();
 

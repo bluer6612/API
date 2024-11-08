@@ -1,10 +1,10 @@
 #include "PreCompile.h"
 #include "Rusty.h"
+
 #include <EnginePlatform/EngineInput.h>
 #include <EngineCore/SpriteRenderer.h>
 #include <EngineCore/EngineAPICore.h>
 #include <EngineCore/EngineCoreDebug.h>
-#include <EngineCore/2DCollision.h>
 #include "ContentsEnum.h"
 
 ARusty::ARusty()
@@ -13,22 +13,14 @@ ARusty::ARusty()
 
 	{
 		SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
-		SpriteRenderer->SetSprite("Player_Right.png");
-		SpriteRenderer->SetComponentScale({ 300, 300 });
-		SpriteRenderer->CreateAnimation("Run_Right", "Player_Right.png", 2, 4, 0.1f);
-		SpriteRenderer->CreateAnimation("Idle_Right", "Player_Right.png", 0, 0, 0.1f);
+		SpriteRenderer->SetSprite("RustyGold");
+		SpriteRenderer->SetSpriteScale(2.0f);
+		SpriteRenderer->CreateAnimation("Idle_Right", "RustyGold", 48, 49, 0.5f);
+		SpriteRenderer->CreateAnimation("Run_Right", "RustyGold", 2, 5, 0.2f);
 	}
 
-	{
-		CollisionComponent = CreateDefaultSubObject<U2DCollision>();
-		CollisionComponent->SetComponentLocation({ 200, 0 });
-		CollisionComponent->SetComponentScale({ 50, 50 });
-		CollisionComponent->SetCollisionGroup(ECollisionGroup::PlayerBody);
-	}
-
-	DebugOn();
+	//DebugOn();
 }
-
 
 ARusty::~ARusty()
 {
@@ -114,7 +106,6 @@ void ARusty::Move(float _DeltaTime)
 	{
 		AddActorLocation(Vector * _DeltaTime * Speed);
 	}
-
 
 	if (false == UEngineInput::GetInst().IsPress('A') &&
 		false == UEngineInput::GetInst().IsPress('D') &&

@@ -8,23 +8,21 @@
 APlayMap::APlayMap()
 {	
 	{
-		{
-			BackSpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
-			BackSpriteRenderer->SetOrder(ERenderOrder::BACKGROUND);
-			BackSpriteRenderer->SetSprite("GrassMap.png");
+		BackSpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
+		BackSpriteRenderer->SetOrder(ERenderOrder::BACKGROUND);
+		BackSpriteRenderer->SetSprite("GrassMap.png");
 
-			FVector2D MapScale = BackSpriteRenderer->SetSpriteScale(1.0f);
-			BackSpriteRenderer->SetComponentLocation(MapScale.Half());
-		}
+		FVector2D MapScale = BackSpriteRenderer->SetSpriteScale(1.0f);
+		BackSpriteRenderer->SetComponentLocation(MapScale.Half());
+	}
 
-		{
-			BackTopSpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
-			BackTopSpriteRenderer->SetOrder(ERenderOrder::BACKGROUND);
-			BackTopSpriteRenderer->SetSprite("WindowTopBlack.png");
+	{
+		BackTopSpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
+		BackTopSpriteRenderer->SetOrder(ERenderOrder::BACKGROUND);
+		BackTopSpriteRenderer->SetSprite("WindowTopBlack.png");
 
-			FVector2D MapScale = BackTopSpriteRenderer->SetSpriteScale(1.0f);
-			BackTopSpriteRenderer->SetComponentLocation({ ScreenX, -30 });
-		}
+		FVector2D MapScale = BackTopSpriteRenderer->SetSpriteScale(1.0f);
+		BackTopSpriteRenderer->SetComponentLocation({ ScreenX, -30 });
 	}
 }
 

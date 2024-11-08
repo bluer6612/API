@@ -4,6 +4,8 @@
 #include <EngineBase/FSMStateManager.h>
 #include <EngineCore/2DCollision.h>
 
+#include "CharacterMap.h"
+
 enum class NewPlayerState
 {
 	Idle,
@@ -37,7 +39,6 @@ public:
 protected:
 
 private:
-	U2DCollision* CollisionComponent;
 	float Speed = 500.0f;
 	class UEngineWinImage* ColImage = nullptr;
 	class USpriteRenderer* SpriteRenderer = nullptr;

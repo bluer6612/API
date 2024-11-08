@@ -11,8 +11,7 @@
 #include "TitleGameMode.h"
 #include "PlayGameMode.h"
 #include "TileMapGameMode.h"
-#include "Player.h"
-#include "ANewPlayer.h"
+#include "Rusty.h"
 #include "TitleLogo.h"
 
 
@@ -47,9 +46,8 @@ void EduContentsCore::BeginPlay()
 	}
 
 		
-	UImageManager::GetInst().CuttingSprite("Player_Right.png", {128, 128});
+	//UImageManager::GetInst().CuttingSprite("Player_Right.png", {128, 128});
 	UImageManager::GetInst().CuttingSprite("Text.bmp", { 16, 32 });
-
 				
 	{
 		// 타일셋 로드
@@ -63,29 +61,30 @@ void EduContentsCore::BeginPlay()
 
 	{
 		// UI 로드
-		UEngineDirectory UIDir;
-		UIDir.MoveParentToDirectory("Resources//Image");
-		UIDir.Append("UI");
-		UImageManager::GetInst().LoadFolder(UIDir.GetPathToString());
+		UEngineDirectory Dir;
+		Dir.MoveParentToDirectory("Resources//Image");
+		Dir.Append("UI");
+		UImageManager::GetInst().LoadFolder(Dir.GetPathToString());
 	}
 
 	{
 		// Character 로드
-		UEngineDirectory CharRustyDir;
-		CharRustyDir.MoveParentToDirectory("Resources//Image//Character");
-		CharRustyDir.Append("Rusty");
-		UImageManager::GetInst().LoadFolder(CharRustyDir.GetPathToString());
+		UEngineDirectory Dir;
+		Dir.MoveParentToDirectory("Resources//Image//Character");
+		Dir.Append("RustyGold");
+		UImageManager::GetInst().LoadFolder(Dir.GetPathToString());
 	}
+
 
 	UEngineAPICore::GetCore()->GetMainWindow().SetWindowTitle("EduWindow");
 	UEngineAPICore::GetCore()->GetMainWindow().SetWindowPosAndScale({ static_cast <float>(0), (ScreenY - static_cast<float>(ScreenY * 0.34)) }, { static_cast<float>(ScreenX), static_cast<float>(ScreenY * 0.3) });
 	UEngineAPICore::GetCore()->GetMainWindow().SetWindowAlpha();
 
-	UEngineAPICore::GetCore()->CreateLevel<APlayGameMode, ANewPlayer>("Play");
+	UEngineAPICore::GetCore()->CreateLevel<APlayGameMode, ARusty>("Play");
 	UEngineAPICore::GetCore()->CreateLevel<ATitleGameMode, TitleLogo>("Title");
 	UEngineAPICore::GetCore()->CreateLevel<ATileMapGameMode, AActor>("Tile");
 
-	UEngineAPICore::GetCore()->OpenLevel("Tile");
+	UEngineAPICore::GetCore()->OpenLevel("Play");
 
 }
 
