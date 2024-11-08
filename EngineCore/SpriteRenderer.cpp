@@ -104,8 +104,8 @@ void USpriteRenderer::ComponentTick(float _DeltaTime)
 
 void USpriteRenderer::SetSprite(std::string_view _Name, int _CurIndex /*= 0*/)
 {
-			
-		Sprite = UImageManager::GetInst().FindSprite(_Name);
+	Sprite = UImageManager::GetInst().FindSprite(_Name);
+	SetSpriteScale(2.0f, _CurIndex = 0);
 
 	if (nullptr == Sprite)
 	{

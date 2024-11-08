@@ -67,5 +67,8 @@ void TitleLogo::Tick(float _DeltaTime)
 	if (true == UEngineInput::GetInst().IsDown('B'))
 	{
 		LogoSpriteRenderer->SetActiveSwitch();
+		TooltipSpriteRenderer->SetActiveSwitch();
+		MoneySpriteRenderer->SetActiveSwitch();
+		ButtonSpriteRenderer->SetActiveSwitch();
 	}
 }

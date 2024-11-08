@@ -46,6 +46,9 @@
     <ClInclude Include="ContentsEnum.h">
       <Filter>PreCompile\Global</Filter>
     </ClInclude>
+    <ClInclude Include="House.h">
+      <Filter>ContentsObject\Character</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -92,6 +95,9 @@
     </ClCompile>
     <ClCompile Include="ContentsEnum.cpp">
       <Filter>PreCompile\Global</Filter>
+    </ClCompile>
+    <ClCompile Include="House.cpp">
+      <Filter>ContentsObject\Character</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

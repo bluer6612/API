@@ -1,8 +1,9 @@
 #include "PreCompile.h"
 #include "PlayGameMode.h"
+#include "PlayMap.h"
 
 #include "Rusty.h"
-#include "PlayMap.h"
+#include "House.h"
 
 #include <EnginePlatform/EngineInput.h>
 
@@ -21,8 +22,10 @@ void APlayGameMode::BeginPlay()
 
 	ARusty* Rusty = AActor::GetWorld()->GetPawn<ARusty>();
 
+	AHouse* House = AActor::GetWorld()->SpawnActor<AHouse>();
+
 	{
-		TitleLogo* NewActor = AActor::GetWorld()->SpawnActor<TitleLogo>();
+		//TitleLogo* NewActor = AActor::GetWorld()->SpawnActor<TitleLogo>();
 	}
 
 	{

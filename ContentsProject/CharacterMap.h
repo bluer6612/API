@@ -3,6 +3,12 @@
 #include <EngineCore/SpriteRenderer.h>
 #include <EngineBase/EngineSerializer.h>
 
+enum class NewPlayerState
+{
+	Idle,
+	Move,
+};
+
 class ACharacter : public ISerializObject
 {
 public:

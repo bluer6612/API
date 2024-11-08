@@ -1,16 +1,8 @@
 #pragma once
 #include <EngineCore/Actor.h>
-#include <EngineCore/ImageManager.h>
 #include <EngineBase/FSMStateManager.h>
-#include <EngineCore/2DCollision.h>
 
 #include "CharacterMap.h"
-
-enum class NewPlayerState
-{
-	Idle,
-	Move,
-};
 
 class ARusty : public AActor
 {
@@ -28,23 +20,18 @@ public:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
-	void LevelChangeStart() override;
-
 	void Idle(float _DeltaTime);
 	void Move(float _DeltaTime);
 
-	void SetColImage(std::string_view _ColImageName);
-
+	void LevelChangeStart() override;
 
 protected:
 
 private:
-	float Speed = 500.0f;
-	class UEngineWinImage* ColImage = nullptr;
 	class USpriteRenderer* SpriteRenderer = nullptr;
+	UFSMStateManager FSM;
 
+	float Speed = 500.0f;
 	int IsGround = false;
 	bool IsMove = false;
-
-	UFSMStateManager FSM;
 };

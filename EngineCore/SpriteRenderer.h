@@ -3,6 +3,8 @@
 #include "EngineSprite.h"
 #include <EngineBase/EngineDelegate.h>
 #include <map>
+#include <EngineBase/EngineMath.h>
+#include <EngineCore/Actor.h>
 
 enum class PivotType
 {
@@ -106,6 +108,11 @@ public:
 	void SetCameraEffectScale(float _Effect);
 	void SetSprite(std::string_view _Name, int _CurIndex = 0);
 
+	void SetActorLocation(FVector2D _Location)
+	{
+		Transform.Location = _Location;
+	}
+
 protected:
 
 private:
@@ -114,6 +121,7 @@ private:
 	bool IsCameraEffect = true;
 	float CameraEffectScale = 1.0f;
 	FVector2D Pivot = FVector2D::ZERO;
+	FTransform Transform;
 
 	class UEngineSprite* Sprite = nullptr;
 
