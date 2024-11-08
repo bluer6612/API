@@ -81,7 +81,7 @@ void EduContentsCore::BeginPlay()
 	UEngineAPICore::GetCore()->GetMainWindow().SetWindowAlpha();
 
 	UEngineAPICore::GetCore()->CreateLevel<APlayGameMode, ARusty>("Play");
-	UEngineAPICore::GetCore()->CreateLevel<ATitleGameMode, TitleLogo>("Title");
+	//UEngineAPICore::GetCore()->CreateLevel<ATitleGameMode, TitleLogo>("Title");
 	UEngineAPICore::GetCore()->CreateLevel<ATileMapGameMode, AActor>("Tile");
 
 	UEngineAPICore::GetCore()->OpenLevel("Play");

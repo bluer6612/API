@@ -21,8 +21,7 @@ void ATileMapGameMode::BeginPlay()
 
 	{
 		GroundTileMap = GetWorld()->SpawnActor<ATileMap>();
-		
-															}
+	}
 
 	{
 		WallTileMap = GetWorld()->SpawnActor<ATileMap>();

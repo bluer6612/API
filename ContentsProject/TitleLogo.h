@@ -15,10 +15,11 @@ public:
 
 	void Tick(float _DeltaTime);
 
+	inline USpriteRenderer* GetLogoSpriteRenderer() const;
+
 protected:
 
 private:
-
 	USpriteRenderer* LogoSpriteRenderer;
 	USpriteRenderer* TooltipSpriteRenderer;
 	USpriteRenderer* MoneySpriteRenderer;

@@ -13,7 +13,8 @@ public:
 	ATitleGameMode& operator=(ATitleGameMode&& _Other) noexcept = delete;
 
 protected:
-	void BeginPlay() override;
+
+	void BeginPlay();
 
 	void Tick(float _DeltaTime) override;
 

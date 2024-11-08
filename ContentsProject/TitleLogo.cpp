@@ -10,7 +10,7 @@ TitleLogo::TitleLogo()
 		LogoSpriteRenderer->SetOrder(ERenderOrder::TITLE);
 		LogoSpriteRenderer->SetSprite("UI_Logo.png");
 
-		FVector2D MapScale = LogoSpriteRenderer->SetSpriteScale(2.00f);
+		LogoSpriteRenderer->SetSpriteScale(2.00f);
 		LogoSpriteRenderer->SetComponentLocation({ ScreenX / 2,  static_cast<int>(ScreenY / 13.6) });
 	}
 
@@ -19,7 +19,7 @@ TitleLogo::TitleLogo()
 		TooltipSpriteRenderer->SetOrder(ERenderOrder::UI);
 		TooltipSpriteRenderer->SetSprite("UI_LogoTooltip.png");
 
-		FVector2D MapScale = TooltipSpriteRenderer->SetSpriteScale(1.0f);
+		TooltipSpriteRenderer->SetSpriteScale(1.0f);
 		TooltipSpriteRenderer->SetComponentLocation({ ScreenX / 2,  static_cast<int>(ScreenY / 5.8) });
 	}
 
@@ -28,7 +28,7 @@ TitleLogo::TitleLogo()
 		MoneySpriteRenderer->SetOrder(ERenderOrder::UI);
 		MoneySpriteRenderer->SetSprite("UI_biofuelspareparts.png");
 
-		FVector2D MapScale = MoneySpriteRenderer->SetSpriteScale(2.00f);
+		MoneySpriteRenderer->SetSpriteScale(2.00f);
 		MoneySpriteRenderer->SetComponentLocation({ ScreenX / 2,  static_cast<int>(ScreenY / 3.5) });
 	}
 
@@ -37,21 +37,21 @@ TitleLogo::TitleLogo()
 		ButtonSpriteRenderer->SetOrder(ERenderOrder::UI);
 		ButtonSpriteRenderer->SetSprite("UI_TitleMenuButton.png");
 
-		FVector2D MapScale = ButtonSpriteRenderer->SetSpriteScale(2.00f);
+		ButtonSpriteRenderer->SetSpriteScale(2.00f);
 		ButtonSpriteRenderer->SetComponentLocation({ static_cast<float>(ScreenX * 0.43),  static_cast<float>(ScreenY / 3.975) });
 
 		ButtonSpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
 		ButtonSpriteRenderer->SetOrder(ERenderOrder::UI);
 		ButtonSpriteRenderer->SetSprite("UI_TitleMenuButton.png");
 
-		MapScale = ButtonSpriteRenderer->SetSpriteScale(2.00f);
+		ButtonSpriteRenderer->SetSpriteScale(2.00f);
 		ButtonSpriteRenderer->SetComponentLocation({ static_cast<float>(ScreenX * 0.5),  static_cast<float>(ScreenY / 3.975) });
 
 		ButtonSpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
 		ButtonSpriteRenderer->SetOrder(ERenderOrder::UI);
 		ButtonSpriteRenderer->SetSprite("UI_TitleMenuButton.png");
 
-		MapScale = ButtonSpriteRenderer->SetSpriteScale(2.00f);
+		ButtonSpriteRenderer->SetSpriteScale(2.00f);
 		ButtonSpriteRenderer->SetComponentLocation({ static_cast<float>(ScreenX * 0.57),  static_cast<float>(ScreenY / 3.975) });
 	}
 }

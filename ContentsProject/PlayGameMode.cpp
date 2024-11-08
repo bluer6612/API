@@ -1,14 +1,11 @@
 #include "PreCompile.h"
 #include "PlayGameMode.h"
 
-#include <EngineCore/Level.h>
-#include "PlayMap.h"
-#include "Player.h"
 #include "Rusty.h"
-#include "Score.h"
-#include <EngineCore/EngineAPICore.h>
+#include "PlayMap.h"
 
-#include "ContentsEnum.h"
+#include <EnginePlatform/EngineInput.h>
+
 
 APlayGameMode::APlayGameMode()
 {
@@ -20,17 +17,26 @@ APlayGameMode::~APlayGameMode()
 
 void APlayGameMode::BeginPlay()
 {
-	ARusty* Rusty = GetWorld()->GetPawn<ARusty>();
+	Super::BeginPlay();
 
-	FVector2D WindowSize = UEngineAPICore::GetCore()->GetMainWindow().GetWindowSize();
-
-
-	int a = 0;
+	ARusty* Rusty = AActor::GetWorld()->GetPawn<ARusty>();
 
 	{
-		APlayMap* NewActor = GetWorld()->SpawnActor<APlayMap>();
+		TitleLogo* NewActor = AActor::GetWorld()->SpawnActor<TitleLogo>();
 	}
 
-		
-					
+	{
+		APlayMap* NewActor = AActor::GetWorld()->SpawnActor<APlayMap>();
 	}
+}
+
+void APlayGameMode::Tick(float _DeltaTime)
+{
+	Super::Tick(_DeltaTime);
+
+	if (true == UEngineInput::GetInst().IsDown('B'))
+	{
+		//SetActiveSwitch();
+	}
+
+}

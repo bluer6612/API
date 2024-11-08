@@ -1,11 +1,10 @@
 #include "PreCompile.h"
 #include "TitleGameMode.h"
+#include "TitleLogo.h"
+#include "PlayMap.h"
 
 #include <EnginePlatform/EngineInput.h>
 #include <EngineCore/EngineAPICore.h>
-
-#include "TitleLogo.h"
-#include "PlayMap.h"
 
 ATitleGameMode::ATitleGameMode()
 {
@@ -15,12 +14,13 @@ ATitleGameMode::~ATitleGameMode()
 {
 }
 
-
 void ATitleGameMode::BeginPlay()
 {
-	Super::BeginPlay();
+	//Super::BeginPlay();
 
-	TitleLogo* NewActor = GetWorld()->GetPawn<TitleLogo>();
+	{
+		TitleLogo* NewActor = GetWorld()->SpawnActor<TitleLogo>();
+	}
 
 	{
 		APlayMap* NewActor = GetWorld()->SpawnActor<APlayMap>();

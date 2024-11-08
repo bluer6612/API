@@ -9,14 +9,14 @@
 
 ARusty::ARusty()
 {
-	SetActorLocation({ 100, 100 });
+	SetActorLocation({ static_cast<float>(ScreenX * 0.5 + -85), static_cast<float>((ScreenY * 0.3) * 0.5 + 40) });
 
 	{
 		SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
 		SpriteRenderer->SetSprite("RustyGold");
 		SpriteRenderer->SetSpriteScale(2.0f);
 		SpriteRenderer->CreateAnimation("Idle_Right", "RustyGold", 48, 49, 0.5f);
-		SpriteRenderer->CreateAnimation("Run_Right", "RustyGold", 2, 5, 0.2f);
+		SpriteRenderer->CreateAnimation("Run_Right", "RustyGold", 0, 5, 0.2f);
 	}
 
 	//DebugOn();
@@ -81,6 +81,7 @@ void ARusty::Idle(float _DeltaTime)
 
 void ARusty::Move(float _DeltaTime)
 {
+
 	FVector2D Vector = FVector2D::ZERO;
 
 	if (true == UEngineInput::GetInst().IsPress('D'))

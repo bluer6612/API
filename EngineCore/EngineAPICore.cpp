@@ -122,5 +122,5 @@ void UEngineAPICore::OpenLevel(std::string_view _LevelName)
 		return;
 	}
 
-			NextLevel = FindIter->second;
+	NextLevel = FindIter->second;
 }

@@ -5,7 +5,7 @@
       <Filter>PreCompile</Filter>
     </ClInclude>
     <ClInclude Include="EduContentsCore.h">
-      <Filter>Core</Filter>
+      <Filter>ContentsObject\Core</Filter>
     </ClInclude>
     <ClInclude Include="PlayGameMode.h">
       <Filter>ContentsObject\GameMode</Filter>
@@ -18,9 +18,6 @@
     </ClInclude>
     <ClInclude Include="PlayMap.h">
       <Filter>ContentsObject\Play</Filter>
-    </ClInclude>
-    <ClInclude Include="ContentsEnum.h">
-      <Filter>Global</Filter>
     </ClInclude>
     <ClInclude Include="TitleGameMode.h">
       <Filter>ContentsObject\GameMode</Filter>
@@ -46,13 +43,16 @@
     <ClInclude Include="Rusty.h">
       <Filter>ContentsObject\Character</Filter>
     </ClInclude>
+    <ClInclude Include="ContentsEnum.h">
+      <Filter>PreCompile\Global</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
       <Filter>PreCompile</Filter>
     </ClCompile>
     <ClCompile Include="EduContentsCore.cpp">
-      <Filter>Core</Filter>
+      <Filter>ContentsObject\Core</Filter>
     </ClCompile>
     <ClCompile Include="PlayGameMode.cpp">
       <Filter>ContentsObject\GameMode</Filter>
@@ -65,9 +65,6 @@
     </ClCompile>
     <ClCompile Include="PlayMap.cpp">
       <Filter>ContentsObject\Play</Filter>
-    </ClCompile>
-    <ClCompile Include="ContentsEnum.cpp">
-      <Filter>Global</Filter>
     </ClCompile>
     <ClCompile Include="TitleGameMode.cpp">
       <Filter>ContentsObject\GameMode</Filter>
@@ -93,6 +90,9 @@
     <ClCompile Include="Rusty.cpp">
       <Filter>ContentsObject\Character</Filter>
     </ClCompile>
+    <ClCompile Include="ContentsEnum.cpp">
+      <Filter>PreCompile\Global</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="PreCompile">
@@ -100,9 +100,6 @@
     </Filter>
     <Filter Include="ContentsObject">
       <UniqueIdentifier>{26872fba-4e70-4b03-abcf-75a854643a48}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Core">
-      <UniqueIdentifier>{a1cc2534-c12e-4252-9e7c-aafe5e50e75c}</UniqueIdentifier>
     </Filter>
     <Filter Include="ContentsObject\GameMode">
       <UniqueIdentifier>{853cd216-882a-48b9-a584-a08e11d0a3b2}</UniqueIdentifier>
@@ -113,9 +110,6 @@
     <Filter Include="ContentsObject\Global">
       <UniqueIdentifier>{510c5f9b-b0b2-438d-8751-8d88d6c951ec}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Global">
-      <UniqueIdentifier>{2852640c-2c84-4426-b62b-8e1b954fa8ee}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ContentsObject\Title">
       <UniqueIdentifier>{0968278a-21c6-494b-901e-ba95b20d1de3}</UniqueIdentifier>
     </Filter>
@@ -124,6 +118,12 @@
     </Filter>
     <Filter Include="ContentsObject\Character">
       <UniqueIdentifier>{e508242d-1e8f-4de4-b07f-26697be26f0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ContentsObject\Core">
+      <UniqueIdentifier>{a1cc2534-c12e-4252-9e7c-aafe5e50e75c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PreCompile\Global">
+      <UniqueIdentifier>{e73bc8e9-5e98-47bd-9526-87bd24639a7d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
