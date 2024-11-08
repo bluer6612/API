@@ -1,13 +1,16 @@
 #pragma once
 #include "Actor.h"
 
+// Ό³Έν :
 class AGameMode : public AActor
 {
 public:
-		AGameMode();
+	// constrcuter destructer
+	AGameMode();
 	~AGameMode();
 
-		AGameMode(const AGameMode& _Other) = delete;
+	// delete Function
+	AGameMode(const AGameMode& _Other) = delete;
 	AGameMode(AGameMode&& _Other) noexcept = delete;
 	AGameMode& operator=(const AGameMode& _Other) = delete;
 	AGameMode& operator=(AGameMode&& _Other) noexcept = delete;

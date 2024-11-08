@@ -40,6 +40,9 @@
     <ClInclude Include="Score.h">
       <Filter>ContentsObject\Global</Filter>
     </ClInclude>
+    <ClInclude Include="CharacterMap.h">
+      <Filter>ContentsObject\Play</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -80,6 +83,9 @@
     </ClCompile>
     <ClCompile Include="Score.cpp">
       <Filter>ContentsObject\Global</Filter>
+    </ClCompile>
+    <ClCompile Include="CharacterMap.cpp">
+      <Filter>ContentsObject\Play</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

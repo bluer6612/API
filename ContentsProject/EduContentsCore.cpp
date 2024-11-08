@@ -69,6 +69,13 @@ void EduContentsCore::BeginPlay()
 		UImageManager::GetInst().LoadFolder(UIDir.GetPathToString());
 	}
 
+	{
+		// Character ·Îµå
+		UEngineDirectory CharRustyDir;
+		CharRustyDir.MoveParentToDirectory("Resources//Image//Character");
+		CharRustyDir.Append("Rusty");
+		UImageManager::GetInst().LoadFolder(CharRustyDir.GetPathToString());
+	}
 
 	UEngineAPICore::GetCore()->GetMainWindow().SetWindowTitle("EduWindow");
 	UEngineAPICore::GetCore()->GetMainWindow().SetWindowPosAndScale({ static_cast <float>(0), (ScreenY - static_cast<float>(ScreenY * 0.34)) }, { static_cast<float>(ScreenX), static_cast<float>(ScreenY * 0.3) });
