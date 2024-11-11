@@ -1,0 +1,337 @@
+#include "PreCompile.h"
+#include "House.h"
+
+#include <EnginePlatform/EngineInput.h>
+#include <EngineCore/SpriteRenderer.h>
+#include <EngineCore/EngineAPICore.h>
+#include "ContentsEnum.h"
+
+AHouse::AHouse()
+{
+	{
+		SetActorLocation({ static_cast<float>(ScreenX * 0.5), static_cast<float>((ScreenY * 0.3) * 0.275) });
+		SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
+		SpriteRenderer->SetSprite("House");
+		SpriteRenderer->CreateAnimation("Idle", "House", 4, 4, 0);
+		SpriteRenderer->SetSpriteScale(5.75f);
+	}
+
+	{
+		SetActorLocation({ static_cast<float>(ScreenX * 0.5), static_cast<float>((ScreenY * 0.3) * 0.4) });
+		SpriteRendererWheel = CreateDefaultSubObject<USpriteRenderer>();
+		SpriteRendererWheel->SetSprite("House");
+		SpriteRendererWheel->CreateAnimation("Idle", "House", 9, 11, 0.5f);
+	}
+}
+
+AHouse::~AHouse()
+{
+}
+
+void AHouse::BeginPlay()
+{
+	Super::BeginPlay();
+
+	GetWorld()->SetCameraToMainPawn(false);
+
+	FSM.CreateState(NewPlayerState::Idle, std::bind(&AHouse::Idle, this, std::placeholders::_1),
+		[this]()
+		{
+			SpriteRenderer->ChangeAnimation("Idle");
+			SpriteRendererWheel->ChangeAnimation("Idle");
+		}
+	);
+
+	FSM.ChangeState(NewPlayerState::Idle);
+}
+
+void AHouse::Tick(float _DeltaTime)
+{
+	Super::Tick(_DeltaTime);
+
+	FSM.Update(_DeltaTime);
+}
+
+void AHouse::Idle(float _DeltaTime)
+{
+	return;
+}
+
+
+#pragma once
+#include <EngineCore/Actor.h>
+#include <EngineBase/FSMStateManager.h>
+
+// 설명 :
+class AHouse : public AActor
+{
+public:
+	// constrcuter destructer
+	AHouse();
+	~AHouse();
+
+	// delete Function
+	AHouse(const AHouse& _Other) = delete;
+	AHouse(AHouse&& _Other) noexcept = delete;
+	AHouse& operator=(const AHouse& _Other) = delete;
+	AHouse& operator=(AHouse&& _Other) noexcept = delete;
+
+	void BeginPlay() override;
+	void Tick(float _DeltaTime) override;
+
+	void Idle(float _DeltaTime);
+
+protected:
+
+private:
+	class USpriteRenderer* SpriteRenderer;
+	class USpriteRenderer* SpriteRendererWheel;
+	UFSMStateManager FSM;
+};
+
+
+#include "PreCompile.h"
+#include "Rusty.h"
+
+#include <EnginePlatform/EngineInput.h>
+#include <EngineCore/SpriteRenderer.h>
+#include <EngineCore/EngineAPICore.h>
+#include "ContentsEnum.h"
+
+ARusty::ARusty()
+{
+	SetActorLocation({ static_cast<float>(ScreenX * 0.5 + -85), static_cast<float>((ScreenY * 0.3) * 0.5 + 40) });
+
+	{
+		SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
+		SpriteRenderer->SetSprite("RustyGold");
+		SpriteRenderer->CreateAnimation("Idle_Right", "RustyGold", 48, 49, 0.5f);
+		SpriteRenderer->CreateAnimation("Run_Right", "RustyGold", 0, 5, 0.2f);
+	}
+}
+
+ARusty::~ARusty()
+{
+}
+
+void ARusty::BeginPlay()
+{
+	Super::BeginPlay();
+
+	GetWorld()->SetCameraToMainPawn(false);
+
+
+	FSM.CreateState(NewPlayerState::Idle, std::bind(&ARusty::Idle, this, std::placeholders::_1),
+		[this]()
+		{
+			SpriteRenderer->ChangeAnimation("Idle_Right");
+		}
+	);
+
+	FSM.CreateState(NewPlayerState::Move, std::bind(&ARusty::Move, this, std::placeholders::_1),
+		[this]()
+		{
+			SpriteRenderer->ChangeAnimation("Run_Right");
+		}
+	);
+
+	FSM.ChangeState(NewPlayerState::Idle);
+}
+
+void ARusty::Tick(float _DeltaTime)
+{
+	Super::Tick(_DeltaTime);
+
+	FSM.Update(_DeltaTime);
+}
+
+void ARusty::Idle(float _DeltaTime)
+{
+	if (true == UEngineInput::GetInst().IsPress('A') ||
+		true == UEngineInput::GetInst().IsPress('D') ||
+		true == UEngineInput::GetInst().IsPress('W') ||
+		true == UEngineInput::GetInst().IsPress('S'))
+	{
+		FSM.ChangeState(NewPlayerState::Move);
+		return;
+	}
+}
+
+void ARusty::Move(float _DeltaTime)
+{
+
+	FVector2D Vector = FVector2D::ZERO;
+
+	if (true == UEngineInput::GetInst().IsPress('D'))
+	{
+		Vector += FVector2D::RIGHT;
+	}
+	if (true == UEngineInput::GetInst().IsPress('A'))
+	{
+		Vector += FVector2D::LEFT;
+	}
+	if (true == UEngineInput::GetInst().IsPress('S'))
+	{
+		Vector += FVector2D::DOWN;
+	}
+	if (true == UEngineInput::GetInst().IsPress('W'))
+	{
+		Vector += FVector2D::UP;
+	}
+
+	Vector.Normalize();
+
+	if (true == IsMove)
+	{
+		AddActorLocation(Vector * _DeltaTime * Speed);
+	}
+
+	if (false == UEngineInput::GetInst().IsPress('A') &&
+		false == UEngineInput::GetInst().IsPress('D') &&
+		false == UEngineInput::GetInst().IsPress('W') &&
+		false == UEngineInput::GetInst().IsPress('S'))
+	{
+		FSM.ChangeState(NewPlayerState::Idle);
+		return;
+	}
+}
+
+void ARusty::LevelChangeStart()
+{
+	int a = 0;
+}
+
+
+#pragma once
+#include <EngineCore/Actor.h>
+#include <EngineBase/FSMStateManager.h>
+
+class ARusty : public AActor
+{
+public:
+	// constrcuter destructer
+	ARusty();
+	~ARusty();
+
+	// delete Function
+	ARusty(const ARusty& _Other) = delete;
+	ARusty(ARusty&& _Other) noexcept = delete;
+	ARusty& operator=(const ARusty& _Other) = delete;
+	ARusty& operator=(ARusty&& _Other) noexcept = delete;
+
+	void BeginPlay() override;
+	void Tick(float _DeltaTime) override;
+
+	void Idle(float _DeltaTime);
+	void Move(float _DeltaTime);
+
+	void LevelChangeStart() override;
+
+protected:
+
+private:
+	class USpriteRenderer* SpriteRenderer = nullptr;
+	UFSMStateManager FSM;
+
+	float Speed = 500.0f;
+	int IsGround = false;
+	bool IsMove = false;
+};
+
+
+
+#include "PreCompile.h"
+#include "EduContentsCore.h"
+#include <EngineCore/EngineAPICore.h>
+
+#include <EngineBase/EngineDirectory.h>
+#include <EngineBase/EngineFile.h>
+#include <EngineCore/ImageManager.h>
+
+#include "PlayGameMode.h"
+#include "TileMapGameMode.h"
+#include "Rusty.h"
+#include "TitleLogo.h"
+
+
+EduContentsCore::EduContentsCore()
+{
+}
+
+EduContentsCore::~EduContentsCore()
+{
+}
+
+void EduContentsCore::BeginPlay()
+{
+	
+	UEngineDirectory Dir;
+
+						
+	if (false == Dir.MoveParentToDirectory("Resources"))
+	{
+		MSGASSERT("리소스 폴더를 찾지 못했습니다.");
+		return;
+	}
+
+	Dir.Append("Image");
+
+		std::vector<UEngineFile> ImageFiles = Dir.GetAllFile();
+
+	for (size_t i = 0; i < ImageFiles.size(); i++)
+	{
+		std::string FilePath = ImageFiles[i].GetPathToString();
+		UImageManager::GetInst().Load(FilePath);
+	}
+
+	UImageManager::GetInst().CuttingSprite("Text.bmp", { 16, 32 });
+
+	{
+		// 타일셋 로드
+		UEngineDirectory Dir;
+		Dir.MoveParentToDirectory("Resources//Image");
+		Dir.Append("TileMap//TileSet");
+		UImageManager::GetInst().LoadFolder(Dir.GetPathToString());
+	}
+
+	{
+		// UI 로드
+		UEngineDirectory Dir;
+		Dir.MoveParentToDirectory("Resources//Image");
+		Dir.Append("UI");
+		UImageManager::GetInst().LoadFolder(Dir.GetPathToString());
+	}
+
+	{
+		// Character 로드
+		UEngineDirectory Dir;
+		Dir.MoveParentToDirectory("Resources//Image//Character");
+		Dir.Append("RustyGold");
+		UImageManager::GetInst().LoadFolder(Dir.GetPathToString());
+	}
+
+	{
+		// Building 로드
+		UEngineDirectory Dir;
+		Dir.MoveParentToDirectory("Resources//Image//Building");
+		Dir.Append("House");
+		UImageManager::GetInst().LoadFolder(Dir.GetPathToString());
+	}
+
+
+	UEngineAPICore::GetCore()->GetMainWindow().SetWindowTitle("EduWindow");
+	UEngineAPICore::GetCore()->GetMainWindow().SetWindowPosAndScale({ static_cast <float>(0), (ScreenY - static_cast<float>(ScreenY * 0.34)) }, { static_cast<float>(ScreenX), static_cast<float>(ScreenY * 0.3) });
+	UEngineAPICore::GetCore()->GetMainWindow().SetWindowAlpha();
+
+	UEngineAPICore::GetCore()->CreateLevel<APlayGameMode, ARusty>("Play");
+	UEngineAPICore::GetCore()->CreateLevel<ATileMapGameMode, AActor>("Tile");
+	//UEngineAPICore::GetCore()->CreateLevel<ATitleGameMode, TitleLogo>("Title");
+
+	UEngineAPICore::GetCore()->OpenLevel("Play");
+
+}
+
+void EduContentsCore::Tick()
+{
+	}
+

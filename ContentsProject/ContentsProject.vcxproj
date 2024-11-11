@@ -275,6 +275,8 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\ContentsProject.txt" />
+    <Text Include="Character.txt" />
+    <Text Include="GameMode.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

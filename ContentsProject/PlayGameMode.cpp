@@ -1,5 +1,7 @@
 #include "PreCompile.h"
 #include "PlayGameMode.h"
+#include "TitleGameMode.h"
+#include "TitleLogo.h"
 #include "PlayMap.h"
 
 #include "Rusty.h"

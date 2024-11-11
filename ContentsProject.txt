@@ -1,43 +1,29 @@
-
+#include "PreCompile.h"
 #include "PlayMap.h"
-
-    void ATitleGameMode::BeginPlay()
-{
-	Super::BeginPlay();
-
-	TitleLogo* NewActor = GetWorld()->GetPawn<TitleLogo>();
-
-	{
-		APlayMap* NewActor = GetWorld()->SpawnActor<APlayMap>();
-	}
-}
-
-
+#include <EngineCore/EngineAPICore.h>
+#include "ContentsEnum.h"
+#include <EnginePlatform/EngineInput.h>
 #include <EngineCore/EngineCoreDebug.h>
 
 APlayMap::APlayMap()
-{
-					
+{	
 	{
-		{
-			BackSpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
-			BackSpriteRenderer->SetOrder(ERenderOrder::BACKGROUND);
-			BackSpriteRenderer->SetSprite("GrassMap.png");
+		BackSpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
+		BackSpriteRenderer->SetOrder(ERenderOrder::BACKGROUND);
+		BackSpriteRenderer->SetSprite("GrassMap.png");
 
-			FVector2D MapScale = BackSpriteRenderer->SetSpriteScale(1.0f);
-			BackSpriteRenderer->SetComponentLocation(MapScale.Half());
-		}
-
-		{
-			BackTopSpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
-			BackTopSpriteRenderer->SetOrder(ERenderOrder::BACKGROUND);
-			BackTopSpriteRenderer->SetSprite("WindowTopBlack.png");
-
-			FVector2D MapScale = BackTopSpriteRenderer->SetSpriteScale(1.0f);
-			BackTopSpriteRenderer->SetComponentLocation({ScreenX, -30 });
-		}
+		FVector2D MapScale = BackSpriteRenderer->SetSpriteScale(1.0f);
+		BackSpriteRenderer->SetComponentLocation(MapScale.Half());
 	}
 
+	{
+		BackTopSpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
+		BackTopSpriteRenderer->SetOrder(ERenderOrder::BACKGROUND);
+		BackTopSpriteRenderer->SetSprite("WindowTopBlack.png");
+
+		FVector2D MapScale = BackTopSpriteRenderer->SetSpriteScale(1.0f);
+		BackTopSpriteRenderer->SetComponentLocation({ ScreenX, -30 });
+	}
 }
 
 APlayMap::~APlayMap()
@@ -58,125 +44,27 @@ void APlayMap::Tick(float _DeltaTime)
 }
 
 
+
+#pragma once
+#include <EngineCore/Actor.h>
 #include <EngineCore/SpriteRenderer.h>
 
+class APlayMap : public AActor
+{
+public:
+	APlayMap();
+	~APlayMap();
+
+	APlayMap(const APlayMap& _Other) = delete;
+	APlayMap(APlayMap&& _Other) noexcept = delete;
+	APlayMap& operator=(const APlayMap& _Other) = delete;
+	APlayMap& operator=(APlayMap&& _Other) noexcept = delete;
+
+protected:
+	void Tick(float _DeltaTime) override;
+
+private:
 	USpriteRenderer* BackSpriteRenderer;
 	USpriteRenderer* BackTopSpriteRenderer;
-
-
-
-
-#include "PreCompile.h"
-#include "TitleLogo.h"
-#include <EnginePlatform/EngineInput.h>
-#include "ContentsEnum.h"
-
-TitleLogo::TitleLogo()
-{
-	{
-		LogoSpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
-		LogoSpriteRenderer->SetOrder(ERenderOrder::TITLE);
-		LogoSpriteRenderer->SetSprite("UI_Logo.png");
-
-		FVector2D MapScale = LogoSpriteRenderer->SetSpriteScale(2.00f);
-		LogoSpriteRenderer->SetComponentLocation({ ScreenX / 2,  static_cast<int>(ScreenY / 13.6) });
-	}
-
-	{
-		TooltipSpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
-		TooltipSpriteRenderer->SetOrder(ERenderOrder::UI);
-		TooltipSpriteRenderer->SetSprite("UI_LogoTooltip.png");
-
-		FVector2D MapScale = TooltipSpriteRenderer->SetSpriteScale(1.0f);
-		TooltipSpriteRenderer->SetComponentLocation({ ScreenX / 2,  static_cast<int>(ScreenY / 5.8) });
-	}
-	
-	{
-		MoneySpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
-		MoneySpriteRenderer->SetOrder(ERenderOrder::UI);
-		MoneySpriteRenderer->SetSprite("UI_biofuelspareparts.png");
-
-		FVector2D MapScale = MoneySpriteRenderer->SetSpriteScale(2.00f);
-		MoneySpriteRenderer->SetComponentLocation({ ScreenX / 2,  static_cast<int>(ScreenY / 3.5) });
-	}
-
-	{
-		ButtonSpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
-		ButtonSpriteRenderer->SetOrder(ERenderOrder::UI);
-		ButtonSpriteRenderer->SetSprite("UI_TitleMenuButton.png");
-
-		FVector2D MapScale = ButtonSpriteRenderer->SetSpriteScale(2.00f);
-		ButtonSpriteRenderer->SetComponentLocation({ static_cast<float>(ScreenX * 0.43),  static_cast<float>(ScreenY / 3.975) });
-
-		ButtonSpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
-		ButtonSpriteRenderer->SetOrder(ERenderOrder::UI);
-		ButtonSpriteRenderer->SetSprite("UI_TitleMenuButton.png");
-
-		MapScale = ButtonSpriteRenderer->SetSpriteScale(2.00f);
-		ButtonSpriteRenderer->SetComponentLocation({ static_cast<float>(ScreenX * 0.5),  static_cast<float>(ScreenY / 3.975) });
-
-		ButtonSpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
-		ButtonSpriteRenderer->SetOrder(ERenderOrder::UI);
-		ButtonSpriteRenderer->SetSprite("UI_TitleMenuButton.png");
-
-		MapScale = ButtonSpriteRenderer->SetSpriteScale(2.00f);
-		ButtonSpriteRenderer->SetComponentLocation({ static_cast<float>(ScreenX * 0.57),  static_cast<float>(ScreenY / 3.975) });
-	}
-}
-
-TitleLogo::~TitleLogo()
-{
-}
-
-void TitleLogo::Tick(float _DeltaTime)
-{
-	Super::Tick(_DeltaTime);
-
-	if (true == UEngineInput::GetInst().IsDown('B'))
-	{
-		LogoSpriteRenderer->SetActiveSwitch();
-	}
-}
-
-
-#include <EngineCore/SpriteRenderer.h>
-
-	void Tick(float _DeltaTime);
-
-	USpriteRenderer* LogoSpriteRenderer;
-	USpriteRenderer* TooltipSpriteRenderer;
-	USpriteRenderer* MoneySpriteRenderer;
-	USpriteRenderer* ButtonSpriteRenderer;
-
-	
-
-#include "TitleLogo.h"
-
-	{
-		// UI ·Îµå
-		UEngineDirectory UIDir;
-		UIDir.MoveParentToDirectory("Resources//Image");
-		UIDir.Append("UI");
-		UImageManager::GetInst().LoadFolder(UIDir.GetPathToString());
-	}
-
-
-	UEngineAPICore::GetCore()->GetMainWindow().SetWindowTitle("EduWindow");
-	UEngineAPICore::GetCore()->GetMainWindow().SetWindowPosAndScale({ static_cast <float>(0), (ScreenY - static_cast<float>(ScreenY * 0.34)) }, { static_cast<float>(ScreenX), static_cast<float>(ScreenY * 0.3) });
-	UEngineAPICore::GetCore()->GetMainWindow().SetWindowAlpha();
-
-	UEngineAPICore::GetCore()->CreateLevel<APlayGameMode, ANewPlayer>("Play");
-	UEngineAPICore::GetCore()->CreateLevel<ATitleGameMode, TitleLogo>("Title");
-	UEngineAPICore::GetCore()->CreateLevel<ATileMapGameMode, AActor>("Tile");
-
-	UEngineAPICore::GetCore()->OpenLevel("Title");
-
-	
-enum class ERenderOrder
-{
-	BACKGROUND = -1000,
-	COLMAP = -999,
-	PLAYER = 0,
-	TITLE = 11000,
-	UI = 10000,
 };
+

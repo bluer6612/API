@@ -2,8 +2,6 @@
 #include <EngineCore/Actor.h>
 #include <EngineBase/FSMStateManager.h>
 
-#include "CharacterMap.h"
-
 class ARusty : public AActor
 {
 public:

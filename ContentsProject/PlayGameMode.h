@@ -1,7 +1,5 @@
 #pragma once
 #include <EngineCore/GameMode.h>
-#include "TitleGameMode.h"
-#include "TitleLogo.h"
 
 class APlayGameMode : public ATitleGameMode
 {

@@ -1,6 +1,5 @@
 #pragma once
 #include <EngineCore/EngineAPICore.h>
-#include <EnginePlatform/EngineWindow.h>
 
 class EduContentsCore : public UContentsCore
 {
@@ -18,6 +17,5 @@ protected:
 	void Tick() override;
 
 private:
-	ULevel* TitleLevel;
-	};
+};
 
