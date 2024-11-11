@@ -9,7 +9,6 @@
 #include <EngineBase/EngineMath.h>
 #include "EngineWinImage.h"
 
-
 static int ScreenX = GetSystemMetrics(SM_CXSCREEN);
 static int ScreenY = GetSystemMetrics(SM_CYSCREEN);
 
@@ -52,7 +51,7 @@ public:
 	inline void SetWindowTitle(std::string_view Text)
 	{
 						
-								SetWindowTextA(WindowHandle, Text.data());
+		SetWindowTextA(WindowHandle, Text.data());
 	}
 
 
@@ -68,16 +67,11 @@ private:
 	static HINSTANCE hInstance;
 	static std::map<std::string, WNDCLASSEXA> WindowClasss;
 
-					
-			
-	
-		
-		
 	FVector2D WindowSize;
 
-			UEngineWinImage* BackBufferImage = nullptr;
+	UEngineWinImage* BackBufferImage = nullptr;
 
-			UEngineWinImage* WindowImage = nullptr;
+	UEngineWinImage* WindowImage = nullptr;
 
 	HWND WindowHandle = nullptr;
 };

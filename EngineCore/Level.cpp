@@ -332,7 +332,7 @@ void ULevel::ScreenClear()
 
 void ULevel::DoubleBuffering()
 {
-		UEngineWindow& MainWindow = UEngineAPICore::GetCore()->GetMainWindow();
+	UEngineWindow& MainWindow = UEngineAPICore::GetCore()->GetMainWindow();
 
 	UEngineWinImage* WindowImage = MainWindow.GetWindowImage();
 	UEngineWinImage* BackBufferImage = MainWindow.GetBackBuffer();
@@ -341,7 +341,7 @@ void ULevel::DoubleBuffering()
 	Trans.Location = MainWindow.GetWindowSize().Half();
 	Trans.Scale = MainWindow.GetWindowSize();
 
-		BackBufferImage->CopyToBit(WindowImage, Trans);
+	BackBufferImage->CopyToBit(WindowImage, Trans);
 
 }
 

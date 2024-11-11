@@ -2,6 +2,8 @@
 #include "EngineWindow.h"
 #include <EngineBase/EngineDebug.h>
 
+#include <EngineCore/EngineAPICore.h>
+
 //class AActor
 //{
 //};
@@ -31,7 +33,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     {
         PAINTSTRUCT ps;
         HDC hdc = BeginPaint(hWnd, &ps);
-                EndPaint(hWnd, &ps);
+        EndPaint(hWnd, &ps);
     }
     break;
     //case WM_SIZING:
