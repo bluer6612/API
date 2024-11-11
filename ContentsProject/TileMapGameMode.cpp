@@ -31,7 +31,7 @@ void ATileMapGameMode::BeginPlay()
 		{
 			for (int x = 0; x < 40; x++)
 			{
-				WallTileMap->SetTileIndex({ y,x }, { 0, -6 }, {48, 40}, 1);
+				WallTileMap->SetTileIndex({ y,x }, { 0, -6 }, { 48, 40 }, 1);
 			}
 		}
 	}
@@ -57,12 +57,6 @@ void ATileMapGameMode::Tick(float _DeltaTime)
 			Tile->SpriteRenderer = nullptr;
 		}
 	}
-
-	if (true == UEngineInput::GetInst().IsDown('B'))
-	{
-		UEngineAPICore::GetCore()->OpenLevel("Title");
-	}
-
 
 
 	if (true == UEngineInput::GetInst().IsPress('R'))

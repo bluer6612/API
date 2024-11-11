@@ -2,8 +2,22 @@
 #include "EngineWindow.h"
 #include <EngineBase/EngineDebug.h>
 
+//class AActor
+//{
+//};
+//
+//class Player : public AActor
+//{
+//
+//};
 
 
+//#ifdef _WINDOWS
+//#include <Windows.h>
+//#elseif _리눅스
+//#include <Windows.h>
+//#elseif 안드로이드
+//#endif 
 
 HINSTANCE UEngineWindow::hInstance = nullptr;
 std::map<std::string, WNDCLASSEXA> UEngineWindow::WindowClasss;
@@ -20,7 +34,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
                 EndPaint(hWnd, &ps);
     }
     break;
-                    break;
+    //case WM_SIZING:
+    //{
+        //}
+    break;
     case WM_DESTROY:
         --WindowCount;
         break;
@@ -133,7 +150,7 @@ void UEngineWindow::Create(std::string_view _TitleName, std::string_view _ClassN
         MSGASSERT(std::string(_ClassName) + " 등록하지 않은 클래스로 윈도우창을 만들려고 했습니다");
         return;
     }
-
+    
     WindowHandle = CreateWindowA(_ClassName.data(), _TitleName.data(), WS_OVERLAPPED,
         0, 0, ScreenX, ScreenY, nullptr, nullptr, hInstance, nullptr);
 
@@ -210,5 +227,4 @@ void UEngineWindow::SetWindowAlpha()
     l |= WS_EX_LAYERED;
     SetWindowLongA(WindowHandle, GWL_EXSTYLE, l);
     SetLayeredWindowAttributes(WindowHandle, RGB(172, 9, 172), 0, LWA_COLORKEY);
-
 }

@@ -20,10 +20,12 @@ public:
 	static void CreateWindowClass(const WNDCLASSEXA& _Class);
 
 	static int WindowMessageLoop(EngineDelegate _StartFunction, EngineDelegate _FrameFunction);
-		UEngineWindow();
+	
+	UEngineWindow();
 	~UEngineWindow();
 
-		UEngineWindow(const UEngineWindow& _Other) = delete;
+	
+	UEngineWindow(const UEngineWindow& _Other) = delete;
 	UEngineWindow(UEngineWindow&& _Other) noexcept = delete;
 	UEngineWindow& operator=(const UEngineWindow& _Other) = delete;
 	UEngineWindow& operator=(UEngineWindow&& _Other) noexcept = delete;
@@ -59,7 +61,6 @@ public:
 	FVector2D GetMousePos();
 
 	void SetWindowAlpha();
-
 
 protected:
 

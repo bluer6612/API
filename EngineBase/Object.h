@@ -4,11 +4,13 @@
 class UObject
 {
 public:
-		UObject();
+	
+	UObject();
 
 			virtual ~UObject();
 
-		UObject(const UObject& _Other) = delete;
+	
+	UObject(const UObject& _Other) = delete;
 	UObject(UObject&& _Other) noexcept = delete;
 	UObject& operator=(const UObject& _Other) = delete;
 	UObject& operator=(UObject&& _Other) noexcept = delete;

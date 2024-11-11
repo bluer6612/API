@@ -151,28 +151,12 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="ANewPlayer.h">
+    <ClInclude Include="House.h" />
+    <ClInclude Include="NewPlayer.h">
       <SubType>
       </SubType>
     </ClInclude>
     <ClInclude Include="ATileMap.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="Bullet.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="CharacterMap.h" />
-    <ClInclude Include="ContentsEnum.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="House.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="Player.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -189,19 +173,16 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="PreCompile.h" />
-    <ClInclude Include="Rusty.h">
+    <ClInclude Include="ContentsEnum.h">
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Rusty.h" />
     <ClInclude Include="Score.h">
       <SubType>
       </SubType>
     </ClInclude>
     <ClInclude Include="TileMapGameMode.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="TitleGameMode.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -211,28 +192,12 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ANewPlayer.cpp">
+    <ClCompile Include="House.cpp" />
+    <ClCompile Include="NewPlayer.cpp">
       <SubType>
       </SubType>
     </ClCompile>
     <ClCompile Include="ATileMap.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="Bullet.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="CharacterMap.cpp" />
-    <ClCompile Include="ContentsEnum.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="House.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -252,19 +217,16 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Rusty.cpp">
+    <ClCompile Include="ContentsEnum.cpp">
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Rusty.cpp" />
     <ClCompile Include="Score.cpp">
       <SubType>
       </SubType>
     </ClCompile>
     <ClCompile Include="TileMapGameMode.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="TitleGameMode.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -274,8 +236,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\ContentsProject.txt" />
-    <Text Include="Character.txt" />
     <Text Include="GameMode.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -6,10 +6,12 @@
 class ATileMapGameMode : public AGameMode
 {
 public:
-		ATileMapGameMode();
+	
+	ATileMapGameMode();
 	~ATileMapGameMode();
 
-		ATileMapGameMode(const ATileMapGameMode& _Other) = delete;
+	
+	ATileMapGameMode(const ATileMapGameMode& _Other) = delete;
 	ATileMapGameMode(ATileMapGameMode&& _Other) noexcept = delete;
 	ATileMapGameMode& operator=(const ATileMapGameMode& _Other) = delete;
 	ATileMapGameMode& operator=(ATileMapGameMode&& _Other) noexcept = delete;

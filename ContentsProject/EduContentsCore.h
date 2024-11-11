@@ -4,10 +4,10 @@
 class EduContentsCore : public UContentsCore
 {
 public:
-		EduContentsCore();
+	EduContentsCore();
 	~EduContentsCore();
 
-		EduContentsCore(const EduContentsCore& _Other) = delete;
+	EduContentsCore(const EduContentsCore& _Other) = delete;
 	EduContentsCore(EduContentsCore&& _Other) noexcept = delete;
 	EduContentsCore& operator=(const EduContentsCore& _Other) = delete;
 	EduContentsCore& operator=(EduContentsCore&& _Other) noexcept = delete;

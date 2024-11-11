@@ -8,10 +8,12 @@
 class AScore : public AActor
 {
 public:
-		AScore();
+	
+	AScore();
 	~AScore();
 
-		AScore(const AScore& _Other) = delete;
+	
+	AScore(const AScore& _Other) = delete;
 	AScore(AScore&& _Other) noexcept = delete;
 	AScore& operator=(const AScore& _Other) = delete;
 	AScore& operator=(AScore&& _Other) noexcept = delete;

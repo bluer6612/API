@@ -45,32 +45,28 @@ void EduContentsCore::BeginPlay()
 	UImageManager::GetInst().CuttingSprite("Text.bmp", { 16, 32 });
 
 	{
-		// 타일셋 로드
-		UEngineDirectory Dir;
+				UEngineDirectory Dir;
 		Dir.MoveParentToDirectory("Resources//Image");
 		Dir.Append("TileMap//TileSet");
 		UImageManager::GetInst().LoadFolder(Dir.GetPathToString());
 	}
 
 	{
-		// UI 로드
-		UEngineDirectory Dir;
+				UEngineDirectory Dir;
 		Dir.MoveParentToDirectory("Resources//Image");
 		Dir.Append("UI");
 		UImageManager::GetInst().LoadFolder(Dir.GetPathToString());
 	}
 
 	{
-		// Character 로드
-		UEngineDirectory Dir;
+				UEngineDirectory Dir;
 		Dir.MoveParentToDirectory("Resources//Image//Character");
 		Dir.Append("RustyGold");
 		UImageManager::GetInst().LoadFolder(Dir.GetPathToString());
 	}
 
 	{
-		// Building 로드
-		UEngineDirectory Dir;
+				UEngineDirectory Dir;
 		Dir.MoveParentToDirectory("Resources//Image//Building");
 		Dir.Append("House");
 		UImageManager::GetInst().LoadFolder(Dir.GetPathToString());

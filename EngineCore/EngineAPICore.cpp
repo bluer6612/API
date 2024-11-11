@@ -12,7 +12,9 @@ UEngineAPICore* UEngineAPICore::MainCore = nullptr;
 UContentsCore* UEngineAPICore::UserCore = nullptr;
 
 #include <Windows.h>
+//QueryPerformanceCounter
 
+//QueryPerformanceFrequency
 
 
 UEngineAPICore::UEngineAPICore()
@@ -62,7 +64,9 @@ void UEngineAPICore::EngineBeginPlay()
 
 void UEngineAPICore::EngineTick()
 {
-		
+	//AXVidio NewVidio;
+	//NewVidio.Play("AAAA.avi");
+
 				
 
 		UserCore->Tick();
@@ -103,6 +107,8 @@ void UEngineAPICore::Tick()
 	CurLevel->Tick(DeltaTime);
 		CurLevel->Render(DeltaTime);
 
+		CurLevel->Collision(DeltaTime);
+
 		CurLevel->Release(DeltaTime);
 }
 
@@ -111,8 +117,13 @@ void UEngineAPICore::OpenLevel(std::string_view _LevelName)
 {
 	std::string ChangeName = _LevelName.data();
 
-					
-					
+	//if (true == Levels.contains(ChangeName))
+	//{
+	//	MSGASSERT(ChangeName + "라는 이름의 레벨은 존재하지 않습니다.");
+	//	return;
+	//}
+
+	//				
 	std::map<std::string, class ULevel*>::iterator FindIter = Levels.find(ChangeName);
 	std::map<std::string, class ULevel*>::iterator EndIter = Levels.end();
 
@@ -122,5 +133,5 @@ void UEngineAPICore::OpenLevel(std::string_view _LevelName)
 		return;
 	}
 
-	NextLevel = FindIter->second;
+			NextLevel = FindIter->second;
 }

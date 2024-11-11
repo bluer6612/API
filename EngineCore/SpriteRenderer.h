@@ -3,8 +3,6 @@
 #include "EngineSprite.h"
 #include <EngineBase/EngineDelegate.h>
 #include <map>
-#include <EngineBase/EngineMath.h>
-#include <EngineCore/Actor.h>
 
 enum class PivotType
 {
@@ -39,10 +37,12 @@ class USpriteRenderer : public USceneComponent
 
 
 public:
-		USpriteRenderer();
+	
+	USpriteRenderer();
 	~USpriteRenderer();
 
-		USpriteRenderer(const USpriteRenderer& _Other) = delete;
+	
+	USpriteRenderer(const USpriteRenderer& _Other) = delete;
 	USpriteRenderer(USpriteRenderer&& _Other) noexcept = delete;
 	USpriteRenderer& operator=(const USpriteRenderer& _Other) = delete;
 	USpriteRenderer& operator=(USpriteRenderer&& _Other) noexcept = delete;
@@ -64,7 +64,7 @@ public:
 		return Order;
 	}
 
-	FVector2D SetSpriteScale(float _Ratio = 1.0f, int _CurIndex = 0);
+	FVector2D SetSpriteScale(float _Ratio = 2.0f, int _CurIndex = 0);
 
 
 	void CreateAnimation(std::string_view _AnimationName, std::string_view _SpriteName, int _Start, int _End, float Time = 0.1f, bool _Loop = true);
@@ -82,16 +82,6 @@ public:
 		return Sprite->GetName();
 	}
 
-	bool IsActive() override
-	{
-						return UObject::IsActive() && GetActor()->IsActive();
-	}
-
-	
-	bool IsDestroy() override
-	{
-				return UObject::IsDestroy() || GetActor()->IsDestroy();
-	}
 
 	void SetCameraEffect(bool _Value)
 	{
@@ -108,11 +98,6 @@ public:
 	void SetCameraEffectScale(float _Effect);
 	void SetSprite(std::string_view _Name, int _CurIndex = 0);
 
-	void SetActorLocation(FVector2D _Location)
-	{
-		Transform.Location = _Location;
-	}
-
 protected:
 
 private:
@@ -121,7 +106,6 @@ private:
 	bool IsCameraEffect = true;
 	float CameraEffectScale = 1.0f;
 	FVector2D Pivot = FVector2D::ZERO;
-	FTransform Transform;
 
 	class UEngineSprite* Sprite = nullptr;
 

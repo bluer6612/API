@@ -10,9 +10,11 @@
 class UImageManager
 {
 public:
-		~UImageManager();
+	
+	~UImageManager();
 
-		UImageManager(const UImageManager& _Other) = delete;
+	
+	UImageManager(const UImageManager& _Other) = delete;
 	UImageManager(UImageManager&& _Other) noexcept = delete;
 	UImageManager& operator=(const UImageManager& _Other) = delete;
 	UImageManager& operator=(UImageManager&& _Other) noexcept = delete;

@@ -313,7 +313,8 @@ UEngineSprite* UImageManager::FindSprite(std::string_view _KeyName)
 		return nullptr;
 	}
 
-	
+	//std::map<std::string, UEngineSprite*>::iterator FindIter = Sprites.find(UpperName);
+
 		return Sprites[UpperName];
 }
 

@@ -5,11 +5,10 @@
 class ARusty : public AActor
 {
 public:
-	// constrcuter destructer
+	
 	ARusty();
 	~ARusty();
 
-	// delete Function
 	ARusty(const ARusty& _Other) = delete;
 	ARusty(ARusty&& _Other) noexcept = delete;
 	ARusty& operator=(const ARusty& _Other) = delete;

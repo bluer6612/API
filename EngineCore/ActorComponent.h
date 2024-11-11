@@ -8,10 +8,12 @@ public:
 
 	typedef UActorComponent Super;
 
-		UActorComponent();
+	
+	UActorComponent();
 		~UActorComponent();
 
-		UActorComponent(const UActorComponent& _Other) = delete;
+	
+	UActorComponent(const UActorComponent& _Other) = delete;
 	UActorComponent(UActorComponent&& _Other) noexcept = delete;
 	UActorComponent& operator=(const UActorComponent& _Other) = delete;
 	UActorComponent& operator=(UActorComponent&& _Other) noexcept = delete;
@@ -23,6 +25,18 @@ public:
 	{
 		return ParentActor;
 	}
+
+	bool IsActive() override
+	{
+						return UObject::IsActive() && GetActor()->IsActive();
+	}
+
+
+	bool IsDestroy() override
+	{
+				return UObject::IsDestroy() || GetActor()->IsDestroy();
+	}
+
 
 protected:
 

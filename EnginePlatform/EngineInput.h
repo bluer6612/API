@@ -21,9 +21,11 @@ enum class KeyEvent
 class UEngineInput
 {
 public:
-		~UEngineInput();
+	
+	~UEngineInput();
 
-		UEngineInput(const UEngineInput& _Other) = delete;
+	
+	UEngineInput(const UEngineInput& _Other) = delete;
 	UEngineInput(UEngineInput&& _Other) noexcept = delete;
 	UEngineInput& operator=(const UEngineInput& _Other) = delete;
 	UEngineInput& operator=(UEngineInput&& _Other) noexcept = delete;
@@ -38,9 +40,29 @@ public:
 	}
 
 
-				
-												
-										
+	//static UEngineInput& GetInst()
+	//{
+	//	return Inst;
+	//}
+
+					//static UEngineInput& GetInst()
+	//{
+	//	if (nullptr == Inst)
+	//	{
+	//		Inst = new UEngineInput();
+	//	}
+	//	return *Inst;
+	//}
+
+			//static void DestroyInst()
+	//{
+	//	if (nullptr != Inst)
+	//	{
+	//		delete Inst;
+	//		Inst = nullptr;
+	//	}
+	//}
+
 	private:
 	class UEngineKey
 	{

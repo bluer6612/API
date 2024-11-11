@@ -15,6 +15,7 @@ ARusty::ARusty()
 		SpriteRenderer->SetSprite("RustyGold");
 		SpriteRenderer->CreateAnimation("Idle_Right", "RustyGold", 48, 49, 0.5f);
 		SpriteRenderer->CreateAnimation("Run_Right", "RustyGold", 0, 5, 0.2f);
+		SpriteRenderer->SetOrder(10);
 	}
 }
 

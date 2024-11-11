@@ -6,7 +6,7 @@
 #include <EngineCore/EngineCoreDebug.h>
 
 APlayMap::APlayMap()
-{	
+{
 	{
 		BackSpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
 		BackSpriteRenderer->SetOrder(ERenderOrder::BACKGROUND);

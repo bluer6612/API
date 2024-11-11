@@ -69,7 +69,12 @@ void UEngineWinImage::CopyToBit(UEngineWinImage* _TargetImage, const FTransform&
 	HDC CopyDC = ImageDC;
 	HDC TargetDC = _TargetImage->ImageDC;
 				
-									
+	//HDC hdc, 카피 받을 대상 <= 여기에다가 복사해라
+	//int x, <= 위치x
+	//int y, <= 위치y
+	//int cx, <= 크기x
+	//int cy, <= 크기x
+				
 	FVector2D LeftTop = _Trans.CenterLeftTop();
 	FVector2D RightBot = _Trans.CenterRightBottom();
 
@@ -95,7 +100,18 @@ void UEngineWinImage::CopyToTrans(UEngineWinImage* _TargetImage, const FTransfor
 	HDC CopyDC = ImageDC;
 	HDC TargetDC = _TargetImage->ImageDC;
 
-                                            
+    //_In_ HDC hdcDest, 여기에다가 카피해라
+    //_In_ int xoriginDest, 그려지는 위치
+    //_In_ int yoriginDest, 그려지는 위치
+    //_In_ int wDest, 그려지는 크기
+    //_In_ int hDest, 그려지는 크기
+    //_In_ HDC hdcSrc, 복사될 이미지 => 여러분들이 로드한 이미지
+    //_In_ int xoriginSrc, 이미지 이부분 
+    //_In_ int yoriginSrc, int X
+    //_In_ int wSrc,
+    //_In_ int hSrc,
+    //_In_ UINT crTransparent
+
 	FVector2D LeftTop = _RenderTrans.CenterLeftTop();
 
 	TransparentBlt(

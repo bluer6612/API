@@ -23,8 +23,6 @@ public:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
-	void MoveFunction(FVector2D _Dir);
-
 	/*void LeftMove();
 	void RightMove();
 	void UpMove();
@@ -57,7 +55,6 @@ private:
 	void Idle(float _DeltaTime);
 	void MoveStart();
 	void Move(float _DeltaTime);
-	void Fly(float _DeltaTime);
 
 		void Gravity()
 	{

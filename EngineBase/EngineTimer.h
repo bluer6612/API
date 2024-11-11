@@ -4,10 +4,12 @@
 class UEngineTimer
 {
 public:
-		UEngineTimer();
+	
+	UEngineTimer();
 	~UEngineTimer();
 
-		UEngineTimer(const UEngineTimer& _Other) = delete;
+	
+	UEngineTimer(const UEngineTimer& _Other) = delete;
 	UEngineTimer(UEngineTimer&& _Other) noexcept = delete;
 	UEngineTimer& operator=(const UEngineTimer& _Other) = delete;
 	UEngineTimer& operator=(UEngineTimer&& _Other) noexcept = delete;
@@ -34,7 +36,18 @@ protected:
 
 private:
 					
-											
+	//typedef union _LARGE_INTEGER {
+	//	struct {
+	//		DWORD LowPart;
+	//		LONG HighPart;
+	//	} DUMMYSTRUCTNAME;
+	//	struct {
+	//		DWORD LowPart;
+	//		LONG HighPart;
+	//	} u;
+	//	LONGLONG QuadPart;
+	//} LARGE_INTEGER;
+
 
 		LARGE_INTEGER Count = LARGE_INTEGER(); 		
 	LARGE_INTEGER PrevTime = LARGE_INTEGER();

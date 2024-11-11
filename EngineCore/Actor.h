@@ -4,6 +4,12 @@
 
 #include "EngineSprite.h"
 
+enum class NewPlayerState
+{
+	Idle,
+	Move,
+};
+
 class AActor : public UObject
 {
 public:
@@ -11,10 +17,12 @@ public:
 
 	friend class ULevel;
 
-		AActor();
+	
+	AActor();
 	~AActor();
 
-		AActor(const AActor& _Other) = delete;
+	
+	AActor(const AActor& _Other) = delete;
 	AActor(AActor&& _Other) noexcept = delete;
 	AActor& operator=(const AActor& _Other) = delete;
 	AActor& operator=(AActor&& _Other) noexcept = delete;

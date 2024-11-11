@@ -6,10 +6,12 @@
 class UEngineSerializer
 {
 public:
-		UEngineSerializer();
+	
+	UEngineSerializer();
 	~UEngineSerializer();
 
-		UEngineSerializer(const UEngineSerializer& _Other) = delete;
+	
+	UEngineSerializer(const UEngineSerializer& _Other) = delete;
 	UEngineSerializer(UEngineSerializer&& _Other) noexcept = delete;
 	UEngineSerializer& operator=(const UEngineSerializer& _Other) = delete;
 	UEngineSerializer& operator=(UEngineSerializer&& _Other) noexcept = delete;
@@ -137,3 +139,7 @@ public:
 		virtual void DeSerialize(UEngineSerializer& _Ser) = 0;
 };
 
+//class Test
+//{
+//	//	//	//	//	//
+//	bool Check; //	int Value;  //};

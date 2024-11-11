@@ -21,10 +21,12 @@ public:
 class UEngineAPICore
 {
 public:
-		UEngineAPICore();
+	
+	UEngineAPICore();
 	~UEngineAPICore();
 
-		UEngineAPICore(const UEngineAPICore& _Other) = delete;
+	
+	UEngineAPICore(const UEngineAPICore& _Other) = delete;
 	UEngineAPICore(UEngineAPICore&& _Other) noexcept = delete;
 	UEngineAPICore& operator=(const UEngineAPICore& _Other) = delete;
 	UEngineAPICore& operator=(UEngineAPICore&& _Other) noexcept = delete;

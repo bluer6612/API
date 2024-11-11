@@ -29,7 +29,8 @@ std::wstring UEngineString::AnsiToUnicode(std::string_view _Name)
 					
 		
 			
-		
+	//이 함수가 2가지 역할을 다합니다.
+	
 					int Size = MultiByteToWideChar(CP_ACP, 0, _Name.data(), static_cast<int>(_Name.size()), nullptr, 0);
 
 	if (0 == Size)

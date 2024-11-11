@@ -20,4 +20,3 @@ private:
 	USpriteRenderer* BackSpriteRenderer;
 	USpriteRenderer* BackTopSpriteRenderer;
 };
-

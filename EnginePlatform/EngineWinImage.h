@@ -7,10 +7,12 @@
 class UEngineWinImage : public UObject
 {
 public:
-		UEngineWinImage();
+	
+	UEngineWinImage();
 	~UEngineWinImage();
 
-		UEngineWinImage(const UEngineWinImage& _Other) = delete;
+	
+	UEngineWinImage(const UEngineWinImage& _Other) = delete;
 	UEngineWinImage(UEngineWinImage&& _Other) noexcept = delete;
 	UEngineWinImage& operator=(const UEngineWinImage& _Other) = delete;
 	UEngineWinImage& operator=(UEngineWinImage&& _Other) noexcept = delete;

@@ -9,18 +9,20 @@
 AHouse::AHouse()
 {
 	{
-		SetActorLocation({ static_cast<float>(ScreenX * 0.5), static_cast<float>((ScreenY * 0.3) * 0.275) });
 		SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
 		SpriteRenderer->SetSprite("House");
+		//SpriteRenderer->SetSpriteScale(5.75f);
+		SpriteRenderer->SetComponentScale({ static_cast<float>(86 * 2), static_cast<float>(96 * 2) });
+		SpriteRenderer->SetComponentLocation({ static_cast<float>(ScreenX * 0.5), static_cast<float>((ScreenY * 0.3) * 0.275 + 2.5) });
 		SpriteRenderer->CreateAnimation("Idle", "House", 4, 4, 0);
-		SpriteRenderer->SetSpriteScale(5.75f);
+		SpriteRenderer->SetOrder(0);
 	}
 
 	{
-		SetActorLocation({ static_cast<float>(ScreenX * 0.5), static_cast<float>((ScreenY * 0.3) * 0.4) });
 		SpriteRendererWheel = CreateDefaultSubObject<USpriteRenderer>();
 		SpriteRendererWheel->SetSprite("House");
 		SpriteRendererWheel->CreateAnimation("Idle", "House", 9, 11, 0.5f);
+		SpriteRendererWheel->SetComponentLocation({ static_cast<float>(ScreenX * 0.5), static_cast<float>((ScreenY * 0.3) * 0.275 + 10)});
 	}
 }
 

@@ -32,7 +32,8 @@ public:
 
 	void DeSerialize(UEngineSerializer& _Ser)
 	{
-				
+		//std::string SpriteName;
+		
 		
 		std::string SpriteName;
 		_Ser >> SpriteName;
@@ -50,10 +51,12 @@ public:
 class ATileMap : public AActor, public ISerializObject
 {
 public:
-		ATileMap();
+	
+	ATileMap();
 	~ATileMap();
 
-		ATileMap(const ATileMap& _Other) = delete;
+	
+	ATileMap(const ATileMap& _Other) = delete;
 	ATileMap(ATileMap&& _Other) noexcept = delete;
 	ATileMap& operator=(const ATileMap& _Other) = delete;
 	ATileMap& operator=(ATileMap&& _Other) noexcept = delete;
