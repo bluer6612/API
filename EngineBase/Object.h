@@ -40,7 +40,7 @@ public:
 		return IsDestroyValue;
 	}
 
-			void Destroy(float _Time = 0.0f)
+	void Destroy(float _Time = 0.0f)
 	{
 		DeathTime = _Time;
 
@@ -68,7 +68,7 @@ public:
 		}
 	}
 
-			void SetActive(bool _IsActive)
+	void SetActive(bool _IsActive)
 	{
 		IsActiveValue = _IsActive;
 	}

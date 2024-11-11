@@ -25,11 +25,11 @@ public:
 		return Inst;
 	}
 
-			void Load(std::string_view Path);
+	void Load(std::string_view Path);
 
 	void LoadFolder(std::string_view Path);
 
-			void Load(std::string_view _KeyName, std::string_view Path);
+	void Load(std::string_view _KeyName, std::string_view Path);
 
 	void LoadFolder(std::string_view _KeyName, std::string_view Path);
 
@@ -41,7 +41,7 @@ public:
 
 	void CuttingSprite(std::string_view _NewSpriteName, std::string_view _Image, FVector2D _CuttingSize);
 
-		void CreateCutSprite(std::string_view _SearchKeyName, std::string_view _NewSpriteKeyName, FVector2D _StartPos, FVector2D _CuttingSize, FVector2D _XYOffSet, UINT _Xcount, UINT _ImageCount);
+void CreateCutSprite(std::string_view _SearchKeyName, std::string_view _NewSpriteKeyName, FVector2D _StartPos, FVector2D _CuttingSize, FVector2D _XYOffSet, UINT _Xcount, UINT _ImageCount);
 
 
 	bool IsLoadSprite(std::string_view _KeyName);
@@ -54,7 +54,7 @@ protected:
 private:
 	UImageManager();
 
-					std::map<std::string, UEngineWinImage*> Images;
+	std::map<std::string, UEngineWinImage*> Images;
 
 	std::map<std::string, UEngineSprite*> Sprites;
 

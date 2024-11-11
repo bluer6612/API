@@ -16,7 +16,7 @@ public:
 	UEngineSerializer& operator=(const UEngineSerializer& _Other) = delete;
 	UEngineSerializer& operator=(UEngineSerializer&& _Other) noexcept = delete;
 
-		void Write(void* _Data, unsigned int _Size);
+void Write(void* _Data, unsigned int _Size);
 
 	void operator<<(int& _Data)
 	{

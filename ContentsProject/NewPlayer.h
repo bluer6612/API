@@ -34,7 +34,7 @@ public:
 	void Gravity(float _DeltaTime);
 
 	
-		void CollisionEnter(AActor* _ColActor);
+void CollisionEnter(AActor* _ColActor);
 	void CollisionStay(AActor* _ColActor);
 	void CollisionEnd(AActor* _ColActor);
 

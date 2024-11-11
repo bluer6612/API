@@ -8,7 +8,6 @@ public:
 	
 	AHouse();
 	~AHouse();
-
 	
 	AHouse(const AHouse& _Other) = delete;
 	AHouse(AHouse&& _Other) noexcept = delete;
@@ -23,7 +22,9 @@ public:
 protected:
 
 private:
-	class USpriteRenderer* SpriteRenderer;
-	class USpriteRenderer* SpriteRendererWheel;
+	class USpriteRenderer* SpriteRenderer = nullptr;
+	class USpriteRenderer* SpriteRendererRightDoodad = nullptr;
+	class USpriteRenderer* SpriteRendererWheel = nullptr;
+	class USpriteRenderer* SpriteRendererDoor = nullptr;
 	UFSMStateManager FSM;
 };

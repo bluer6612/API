@@ -34,7 +34,7 @@ public:
 		return CollisionGroup;
 	}
 
-			template<typename EnumType>
+template<typename EnumType>
 	void SetCollisionGroup(EnumType _CollisionGroup)
 	{
 		SetCollisionGroup(static_cast<int>(_CollisionGroup));
@@ -48,7 +48,7 @@ public:
 	template<typename EnumType>
 	AActor* CollisionOnce(EnumType _OtherCollisionGroup, FVector2D _NextPos = FVector2D::ZERO)
 	{
-				std::vector<AActor*> Result;
+std::vector<AActor*> Result;
 		Collision(static_cast<int>(_OtherCollisionGroup), Result, _NextPos, 1);
 
 		if (true == Result.empty())
@@ -62,7 +62,7 @@ public:
 	template<typename EnumType>
 	std::vector<AActor*> CollisionAll(EnumType _OtherCollisionGroup)
 	{
-				std::vector<AActor*> Result;
+std::vector<AActor*> Result;
 		Collision(static_cast<int>(_OtherCollisionGroup), Result, -1);
 
 		return Result;
@@ -80,7 +80,7 @@ public:
 		return CollisionType;
 	}
 
-		void SetCollisionEnter(std::function<void(AActor*)> _Function);
+void SetCollisionEnter(std::function<void(AActor*)> _Function);
 	void SetCollisionStay(std::function<void(AActor*)> _Function);
 	void SetCollisionEnd(std::function<void(AActor*)> _Function);
 

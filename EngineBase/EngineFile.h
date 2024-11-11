@@ -18,7 +18,7 @@ public:
 	UEngineFile(std::filesystem::path _Path);
 	~UEngineFile();
 
-		void Write(class UEngineSerializer& _Ser);
+void Write(class UEngineSerializer& _Ser);
 	void Read(class UEngineSerializer& _Ser);
 
 	void Write(const void* _Ptr, size_t _Size);

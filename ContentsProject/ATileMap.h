@@ -15,7 +15,7 @@ public:
 	FVector2D Pivot;
 	int SpriteIndex;
 
-		void Serialize(UEngineSerializer& _Ser)
+void Serialize(UEngineSerializer& _Ser)
 	{
 		std::string SpriteName;
 		if (nullptr != SpriteRenderer)
@@ -61,7 +61,7 @@ public:
 	ATileMap& operator=(const ATileMap& _Other) = delete;
 	ATileMap& operator=(ATileMap&& _Other) noexcept = delete;
 
-			void Create(std::string_view _Sprite, FIntPoint _Count, FVector2D _TileSize);
+	void Create(std::string_view _Sprite, FIntPoint _Count, FVector2D _TileSize);
 
 	
 	void SetTileLocation(FVector2D _Location, int _SpriteIndex);
@@ -78,9 +78,9 @@ public:
 
 	bool IsIndexOver(FIntPoint _Index);
 
-		void Serialize(UEngineSerializer& _Ser);
+void Serialize(UEngineSerializer& _Ser);
 
-		void DeSerialize(UEngineSerializer& _Ser);
+void DeSerialize(UEngineSerializer& _Ser);
 
 protected:
 

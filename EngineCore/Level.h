@@ -33,9 +33,9 @@ public:
 	ULevel& operator=(ULevel&& _Other) noexcept = delete;
 
 	ULevel& operator=(const ULevel& _Other) = delete;
-		void LevelChangeStart();
+void LevelChangeStart();
 
-		void LevelChangeEnd();
+void LevelChangeEnd();
 
 	void Tick(float _DeltaTime);
 	void Render(float _DeltaTime);
@@ -145,7 +145,7 @@ private:
 		//AllActors.push_back(MainPawn);
 	}
 
-		void PushRenderer(class USpriteRenderer* _Renderer);
+void PushRenderer(class USpriteRenderer* _Renderer);
 	void ChangeRenderOrder(class USpriteRenderer* _Renderer, int _PrevOrder);
 
 	void PushCollision(class U2DCollision* _Collision);

@@ -56,7 +56,7 @@ private:
 	void MoveStart();
 	void Move(float _DeltaTime);
 
-		void Gravity()
+void Gravity()
 	{
 
 	}

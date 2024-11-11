@@ -13,7 +13,7 @@ enum class PivotType
 
 class USpriteRenderer : public USceneComponent
 {
-		public:
+public:
 	class FrameAnimation
 	{
 	public:
@@ -27,7 +27,7 @@ class USpriteRenderer : public USceneComponent
 		float CurTime = 0.0f;
 		bool Loop = true;
 
-		void Reset()
+void Reset()
 		{
 			CurIndex = 0;
 			CurTime = 0;
@@ -51,7 +51,7 @@ public:
 	void BeginPlay() override;
 	void ComponentTick(float _DeltaTime) override;
 
-				template<typename EnumType>
+	template<typename EnumType>
 	void SetOrder(EnumType _Order)
 	{
 		SetOrder(static_cast<int>(_Order));
@@ -69,11 +69,11 @@ public:
 
 	void CreateAnimation(std::string_view _AnimationName, std::string_view _SpriteName, int _Start, int _End, float Time = 0.1f, bool _Loop = true);
 
-						void CreateAnimation(std::string_view _AnimationName, std::string_view _SpriteName, std::vector<int> _Indexs, std::vector<float> _Frame, bool _Loop = true);
+	void CreateAnimation(std::string_view _AnimationName, std::string_view _SpriteName, std::vector<int> _Indexs, std::vector<float> _Frame, bool _Loop = true);
 
 	void CreateAnimation(std::string_view _AnimationName, std::string_view _SpriteName, std::vector<int> _Indexs, float _Frame, bool _Loop = true);
 
-		void ChangeAnimation(std::string_view _AnimationName, bool _Force = false);
+	void ChangeAnimation(std::string_view _AnimationName, bool _Force = false);
 
 	void SetAnimationEvent(std::string_view _AnimationName, int _Frame, std::function<void()> _Function);
 

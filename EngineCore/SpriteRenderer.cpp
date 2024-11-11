@@ -88,9 +88,8 @@ void USpriteRenderer::Render(float _DeltaTime)
 
 void USpriteRenderer::BeginPlay()
 {
-			Super::BeginPlay();
+	Super::BeginPlay();
 
-	
 	AActor* Actor = GetActor();
 	ULevel* Level = Actor->GetWorld();
 
@@ -105,7 +104,7 @@ void USpriteRenderer::ComponentTick(float _DeltaTime)
 void USpriteRenderer::SetSprite(std::string_view _Name, int _CurIndex /*= 0*/)
 {
 			
-		Sprite = UImageManager::GetInst().FindSprite(_Name);
+	Sprite = UImageManager::GetInst().FindSprite(_Name);
 
 	if (nullptr == Sprite)
 	{
@@ -128,7 +127,7 @@ void USpriteRenderer::SetOrder(int _Order)
 
 	Order = _Order;
 
-			ULevel* Level = GetActor()->GetWorld();
+	ULevel* Level = GetActor()->GetWorld();
 
 	if (nullptr != Level)
 	{

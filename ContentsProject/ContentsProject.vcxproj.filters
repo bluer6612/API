@@ -113,7 +113,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="GameMode.txt">
-      <Filter>ContentsObject\Character</Filter>
+      <Filter>ContentsObject\GameMode</Filter>
     </Text>
   </ItemGroup>
 </Project>

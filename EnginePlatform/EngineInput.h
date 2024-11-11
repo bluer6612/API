@@ -95,9 +95,9 @@ public:
 		{
 		}
 
-		void EventCheck();
+void EventCheck();
 
-		void KeyCheck(float _DeltaTime);
+void KeyCheck(float _DeltaTime);
 		
 	};
 

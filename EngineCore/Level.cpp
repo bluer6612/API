@@ -189,9 +189,9 @@ void ULevel::Collision(float _DeltaTime)
 		int Left = Data.Left;
 		int Right = Data.Right;
 		
-				std::list<class U2DCollision*>& LeftList = CheckCollisions[Left];
+std::list<class U2DCollision*>& LeftList = CheckCollisions[Left];
 
-				std::list<class U2DCollision*>& RightList = Collisions[Right];
+std::list<class U2DCollision*>& RightList = Collisions[Right];
 
 		std::list<class U2DCollision*>::iterator StartLeftIter = LeftList.begin();
 		std::list<class U2DCollision*>::iterator EndLeftIter = LeftList.end();
