@@ -70,13 +70,9 @@ void UEngineWindow::EngineWindowInit(HINSTANCE _Instance)
 
 int UEngineWindow::WindowMessageLoop(EngineDelegate _StartFunction, EngineDelegate _FrameFunction)
 {
-            MSG msg = MSG();
+    MSG msg = MSG();
 
-                
-            
-            
-    
-            if (true == _StartFunction.IsBind())
+    if (true == _StartFunction.IsBind())
     {
         _StartFunction();
     }
@@ -84,7 +80,7 @@ int UEngineWindow::WindowMessageLoop(EngineDelegate _StartFunction, EngineDelega
     while (0 != WindowCount)
     {
                         
-                if(0 != PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
+        if(0 != PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
         {
             TranslateMessage(&msg);
             DispatchMessage(&msg);
@@ -94,21 +90,20 @@ int UEngineWindow::WindowMessageLoop(EngineDelegate _StartFunction, EngineDelega
         {
             _FrameFunction();
         }
-                    }
+    }
 
     return (int)msg.wParam;
 }
 
 void UEngineWindow::CreateWindowClass(const WNDCLASSEXA& _Class)
 {
-    
     std::map<std::string, WNDCLASSEXA>::iterator EndIter = WindowClasss.end();
     std::map<std::string, WNDCLASSEXA>::iterator FindIter = WindowClasss.find(std::string(_Class.lpszClassName));
 
-        if (EndIter != FindIter)
+    if (EndIter != FindIter)
     {
         
-                                        MSGASSERT(std::string(_Class.lpszClassName) + " 같은 이름의 윈도우 클래스를 2번 등록했습니다");
+        MSGASSERT(std::string(_Class.lpszClassName) + " 같은 이름의 윈도우 클래스를 2번 등록했습니다");
         return;
     }
 
@@ -136,7 +131,7 @@ UEngineWindow::~UEngineWindow()
         BackBufferImage = nullptr;
     }
     
-        if (nullptr != WindowHandle)
+    if (nullptr != WindowHandle)
     {
         DestroyWindow(WindowHandle);
         WindowHandle = nullptr;
@@ -160,17 +155,17 @@ void UEngineWindow::Create(std::string_view _TitleName, std::string_view _ClassN
         return;
     }
 
-        HDC WindowMainDC = GetDC(WindowHandle);
+    HDC WindowMainDC = GetDC(WindowHandle);
 
-        WindowImage = new UEngineWinImage();
-        WindowImage->Create(WindowMainDC);
+    WindowImage = new UEngineWinImage();
+    WindowImage->Create(WindowMainDC);
 }
 
 void UEngineWindow::Open(std::string_view _TitleName /*= "Window"*/)
 {
-        if (0 == WindowHandle)
+    if (0 == WindowHandle)
     {
-                Create(_TitleName);
+        Create(_TitleName);
     }
 
     if (0 == WindowHandle)
@@ -178,18 +173,18 @@ void UEngineWindow::Open(std::string_view _TitleName /*= "Window"*/)
         return;
     }
 
-		ShowWindow(WindowHandle, SW_SHOW);
+	ShowWindow(WindowHandle, SW_SHOW);
     UpdateWindow(WindowHandle);
     ++WindowCount;
 	}
 
 void UEngineWindow::SetWindowPosAndScale(FVector2D _Pos, FVector2D _Scale)
 {
-        if (false == WindowSize.EqualToInt(_Scale))
+    if (false == WindowSize.EqualToInt(_Scale))
     {
-                                if (nullptr != BackBufferImage)
+        if (nullptr != BackBufferImage)
         {
-                        delete BackBufferImage;
+            delete BackBufferImage;
             BackBufferImage = nullptr;
         }
 
@@ -201,8 +196,7 @@ void UEngineWindow::SetWindowPosAndScale(FVector2D _Pos, FVector2D _Scale)
 
     RECT Rc = { 0, 0, _Scale.iX(), _Scale.iY() };
 
-                    
-            AdjustWindowRect(&Rc, WS_OVERLAPPEDWINDOW, FALSE);
+    AdjustWindowRect(&Rc, WS_OVERLAPPEDWINDOW, FALSE);
     
     ::SetWindowPos(WindowHandle, nullptr, _Pos.iX(), _Pos.iY(), Rc.right - Rc.left, Rc.bottom - Rc.top, SWP_NOZORDER);
 }
@@ -212,7 +206,7 @@ FVector2D UEngineWindow::GetMousePos()
     POINT MousePoint;
 
     GetCursorPos(&MousePoint);
-        ScreenToClient(WindowHandle, &MousePoint);
+    ScreenToClient(WindowHandle, &MousePoint);
 
     return FVector2D(MousePoint.x, MousePoint.y);
 }
