@@ -39,9 +39,9 @@ AHouse::AHouse()
 
 	{
 		ModelAdd(3, 1.f, 95, 20, 8);
-		ModelAdd(5, 80, 60, 9);
-		ModelAdd(8, 0, 147.5, 7);
-		ModelAdd(16, 0, 147.5, 7);
+		ModelAdd(5, 16, 32, 80, 60, 9);
+		ModelAdd(8, 64, 48, 0, 147.5, 7);
+		ModelAdd(17, 16, 32, 80, -20, 6);
 
 	}
 }
