@@ -21,14 +21,14 @@ public:
 
 	int RandomInt(int _Min, int _Max)
 	{
-std::uniform_int_distribution<int> RandomCreate(_Min, _Max);
+				std::uniform_int_distribution<int> RandomCreate(_Min, _Max);
 
 						return RandomCreate.operator()(MtGen);
 	}
 
 	float Randomfloat(float _Min, float _Max)
 	{
-std::uniform_real_distribution<float> RandomCreate(_Min, _Max);
+				std::uniform_real_distribution<float> RandomCreate(_Min, _Max);
 		return RandomCreate.operator()(MtGen);
 	}
 

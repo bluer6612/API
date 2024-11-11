@@ -19,7 +19,7 @@ public:
 		return Transform;
 	}
 
-		FTransform GetActorTransform();
+	FTransform GetActorTransform();
 
 	FVector2D GetComponentScale()
 	{

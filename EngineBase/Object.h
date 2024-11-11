@@ -7,7 +7,7 @@ public:
 	
 	UObject();
 
-			virtual ~UObject();
+	virtual ~UObject();
 
 	
 	UObject(const UObject& _Other) = delete;

@@ -54,7 +54,7 @@ protected:
 private:
 	UImageManager();
 
-	std::map<std::string, UEngineWinImage*> Images;
+					std::map<std::string, UEngineWinImage*> Images;
 
 	std::map<std::string, UEngineSprite*> Sprites;
 

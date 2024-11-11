@@ -11,6 +11,7 @@ USpriteRenderer* Model[10] = { };
 
 AHouse::AHouse()
 {
+	//SpriteRenderer->SetSpriteScale(5.75f);
 
 	{
 		SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
@@ -37,13 +38,11 @@ AHouse::AHouse()
 	}
 
 	{
-		Model[index] = CreateDefaultSubObject<USpriteRenderer>();
-		Model[index]->SetSprite("House");
-		Model[index]->CreateAnimation("Idle", "House", 5, 5, 0);
-		Model[index]->SetComponentScale({ static_cast<float>(16 * 2), static_cast<float>(32 * 2) });
-		Model[index]->SetComponentLocation({ static_cast<float>(ScreenX * 0.5 + 80), static_cast<float>((ScreenY * 0.3) * 0.275 + 60) });
-		Model[index]->SetOrder(9);
-		++index;
+		ModelAdd(3, 1.f, 95, 20, 8);
+		ModelAdd(5, 80, 60, 9);
+		ModelAdd(8, 0, 147.5, 7);
+		ModelAdd(16, 0, 147.5, 7);
+
 	}
 }
 
@@ -83,4 +82,26 @@ void AHouse::Tick(float _DeltaTime)
 void AHouse::Idle(float _DeltaTime)
 {
 	return;
+}
+
+void AHouse::ModelAdd(int _ModelNumber, float _Size, int _X, int _Y, int _Order = 0)
+{
+	Model[index] = CreateDefaultSubObject<USpriteRenderer>();
+	Model[index]->SetSprite("House");
+	Model[index]->CreateAnimation("Idle", "House", _ModelNumber, _ModelNumber, 0);
+	Model[index]->SetSpriteScale(_Size);
+	Model[index]->SetComponentLocation({ static_cast<float>(ScreenX * 0.5 + _X), static_cast<float>((ScreenY * 0.3) * 0.275 + _Y) });
+	Model[index]->SetOrder(_Order);
+	++index;
+}
+
+void AHouse::ModelAdd(int _ModelNumber, int _SizeX, int _SizeY, int _X, int _Y, int _Order = 0)
+{
+	Model[index] = CreateDefaultSubObject<USpriteRenderer>();
+	Model[index]->SetSprite("House");
+	Model[index]->CreateAnimation("Idle", "House", _ModelNumber, _ModelNumber, 0);
+	Model[index]->SetComponentScale({ static_cast<float>(_SizeX * 2), static_cast<float>(_SizeY * 2) });
+	Model[index]->SetComponentLocation({ static_cast<float>(ScreenX * 0.5 + _X), static_cast<float>((ScreenY * 0.3) * 0.275 + _Y) });
+	Model[index]->SetOrder(_Order);
+	++index;
 }

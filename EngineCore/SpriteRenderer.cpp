@@ -15,51 +15,49 @@ USpriteRenderer::~USpriteRenderer()
 
 void USpriteRenderer::Render(float _DeltaTime)
 {
-		if (nullptr != CurAnimation)
+	if (nullptr != CurAnimation)
 	{
-		std::vector<int>& Indexs = CurAnimation->FrameIndex;
-		std::vector<float>& Times = CurAnimation->FrameTime;
+	std::vector<int>& Indexs = CurAnimation->FrameIndex;
+	std::vector<float>& Times = CurAnimation->FrameTime;
 
-		Sprite = CurAnimation->Sprite;
+	Sprite = CurAnimation->Sprite;
 
 
-		CurAnimation->CurTime += _DeltaTime;
+	CurAnimation->CurTime += _DeltaTime;
 
-		float CurFrameTime = Times[CurAnimation->CurIndex];
+	float CurFrameTime = Times[CurAnimation->CurIndex];
 
-				if (CurAnimation->CurTime > CurFrameTime)
+	if (CurAnimation->CurTime > CurFrameTime)
+	{
+		CurAnimation->CurTime -= CurFrameTime;
+		++CurAnimation->CurIndex;
+
+		if (CurAnimation->Events.contains(CurAnimation->CurIndex))
 		{
-			CurAnimation->CurTime -= CurFrameTime;
-			++CurAnimation->CurIndex;
-
-			if (CurAnimation->Events.contains(CurAnimation->CurIndex))
-			{
-				CurAnimation->Events[CurAnimation->CurIndex]();
-			}
-
-			if (CurAnimation->CurIndex >= Indexs.size())
-			{
-				if (true == CurAnimation->Loop)
-				{
-					CurAnimation->CurIndex = 0;
-
-					if (CurAnimation->Events.contains(CurAnimation->CurIndex))
-					{
-						CurAnimation->Events[CurAnimation->CurIndex]();
-					}
-
-				}
-				else
-				{
-					--CurAnimation->CurIndex;
-				}
-			}
-
+			CurAnimation->Events[CurAnimation->CurIndex]();
 		}
 
+		if (CurAnimation->CurIndex >= Indexs.size())
+		{
+			if (true == CurAnimation->Loop)
+			{
+				CurAnimation->CurIndex = 0;
 
-				CurIndex = Indexs[CurAnimation->CurIndex];
+				if (CurAnimation->Events.contains(CurAnimation->CurIndex))
+				{
+					CurAnimation->Events[CurAnimation->CurIndex]();
+				}
+
 			}
+			else
+			{
+				--CurAnimation->CurIndex;
+			}
+		}
+
+		}
+		CurIndex = Indexs[CurAnimation->CurIndex];
+	}
 
 	if (nullptr == Sprite)
 	{
@@ -103,7 +101,6 @@ void USpriteRenderer::ComponentTick(float _DeltaTime)
 
 void USpriteRenderer::SetSprite(std::string_view _Name, int _CurIndex /*= 0*/)
 {
-			
 	Sprite = UImageManager::GetInst().FindSprite(_Name);
 
 	if (nullptr == Sprite)
@@ -112,13 +109,7 @@ void USpriteRenderer::SetSprite(std::string_view _Name, int _CurIndex /*= 0*/)
 		return;
 	}
 
-	CurIndex = _CurIndex;
-
-	UEngineSprite::USpriteData CurData = Sprite->GetSpriteData(_CurIndex);
-
-	FVector2D Scale = CurData.Transform.Scale * 2.0f;
-
-	SetComponentScale(CurData.Transform.Scale * 2.0f);
+	SetSpriteScale(2.0f, _CurIndex);
 }
 
 void USpriteRenderer::SetOrder(int _Order)

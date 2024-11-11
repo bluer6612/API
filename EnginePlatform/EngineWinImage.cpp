@@ -18,7 +18,7 @@ UEngineWinImage::UEngineWinImage()
 
 UEngineWinImage::~UEngineWinImage()
 {
-			if (nullptr != hBitMap)
+	if (nullptr != hBitMap)
 	{
 		DeleteObject(hBitMap);
 		hBitMap = nullptr;
@@ -39,19 +39,14 @@ void UEngineWinImage::Create(UEngineWinImage* _TargetImage,  FVector2D _Scale)
 		MSGASSERT("Main windowDC를 넣지않고 이미지를 생성하려고 했습니다");
 		return;
 	}
-
-				
-				
-	
 	
 	HBITMAP NewBitmap = static_cast<HBITMAP>(CreateCompatibleBitmap(_TargetImage->GetDC(), _Scale.iX(), _Scale.iY()));
 
-				
-		HDC NewImageDC = CreateCompatibleDC(_TargetImage->GetDC());
+	HDC NewImageDC = CreateCompatibleDC(_TargetImage->GetDC());
 
-		
-		HBITMAP OldBitMap = static_cast<HBITMAP>(SelectObject(NewImageDC, NewBitmap));
-			DeleteObject(OldBitMap);
+	HBITMAP OldBitMap = static_cast<HBITMAP>(SelectObject(NewImageDC, NewBitmap));
+
+	DeleteObject(OldBitMap);
 
 	hBitMap = NewBitmap;
 	ImageDC = NewImageDC;
@@ -131,10 +126,6 @@ void UEngineWinImage::CopyToTrans(UEngineWinImage* _TargetImage, const FTransfor
 
 void UEngineWinImage::Load(UEngineWinImage* _TargetImage, std::string_view _Path)
 {
-					
-									
-		
-						
 	UEnginePath Path = _Path;
 
 	std::string UpperExt = UEngineString::ToUpper(Path.GetExtension());

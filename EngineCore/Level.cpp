@@ -189,9 +189,9 @@ void ULevel::Collision(float _DeltaTime)
 		int Left = Data.Left;
 		int Right = Data.Right;
 		
-std::list<class U2DCollision*>& LeftList = CheckCollisions[Left];
+				std::list<class U2DCollision*>& LeftList = CheckCollisions[Left];
 
-std::list<class U2DCollision*>& RightList = Collisions[Right];
+				std::list<class U2DCollision*>& RightList = Collisions[Right];
 
 		std::list<class U2DCollision*>::iterator StartLeftIter = LeftList.begin();
 		std::list<class U2DCollision*>::iterator EndLeftIter = LeftList.end();
@@ -332,7 +332,7 @@ void ULevel::ScreenClear()
 
 void ULevel::DoubleBuffering()
 {
-	UEngineWindow& MainWindow = UEngineAPICore::GetCore()->GetMainWindow();
+		UEngineWindow& MainWindow = UEngineAPICore::GetCore()->GetMainWindow();
 
 	UEngineWinImage* WindowImage = MainWindow.GetWindowImage();
 	UEngineWinImage* BackBufferImage = MainWindow.GetBackBuffer();
@@ -341,7 +341,7 @@ void ULevel::DoubleBuffering()
 	Trans.Location = MainWindow.GetWindowSize().Half();
 	Trans.Scale = MainWindow.GetWindowSize();
 
-	BackBufferImage->CopyToBit(WindowImage, Trans);
+		BackBufferImage->CopyToBit(WindowImage, Trans);
 
 }
 

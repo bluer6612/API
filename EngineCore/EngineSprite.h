@@ -9,9 +9,9 @@ public:
 	class USpriteData
 	{
 	public:
-				UEngineWinImage* Image;
-				FTransform Transform;
-			};
+		UEngineWinImage* Image;
+		FTransform Transform;
+	};
 
 	
 	UEngineSprite();
