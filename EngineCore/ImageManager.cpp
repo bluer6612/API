@@ -97,14 +97,14 @@ void UImageManager::Load(std::string_view _KeyName, std::string_view Path)
 		return;
 	}
 
-		UEngineWinImage* NewImage = new UEngineWinImage();
+	UEngineWinImage* NewImage = new UEngineWinImage();
 	NewImage->Load(WindowImage, Path);
 	NewImage->SetName(UpperName);
 	Images.insert({ UpperName , NewImage});
 
 	UEngineSprite* NewSprite = new UEngineSprite();
 
-		FTransform Trans;
+	FTransform Trans;
 	Trans.Location = { 0,0 };
 	Trans.Scale = NewImage->GetImageScale();
 	NewSprite->PushData(NewImage, Trans);

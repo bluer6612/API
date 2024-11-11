@@ -45,28 +45,28 @@ void EduContentsCore::BeginPlay()
 	UImageManager::GetInst().CuttingSprite("Text.bmp", { 16, 32 });
 
 	{
-				UEngineDirectory Dir;
+		UEngineDirectory Dir;
 		Dir.MoveParentToDirectory("Resources//Image");
 		Dir.Append("TileMap//TileSet");
 		UImageManager::GetInst().LoadFolder(Dir.GetPathToString());
 	}
 
 	{
-				UEngineDirectory Dir;
+		UEngineDirectory Dir;
 		Dir.MoveParentToDirectory("Resources//Image");
 		Dir.Append("UI");
 		UImageManager::GetInst().LoadFolder(Dir.GetPathToString());
 	}
 
 	{
-				UEngineDirectory Dir;
+		UEngineDirectory Dir;
 		Dir.MoveParentToDirectory("Resources//Image//Character");
 		Dir.Append("RustyGold");
 		UImageManager::GetInst().LoadFolder(Dir.GetPathToString());
 	}
 
 	{
-				UEngineDirectory Dir;
+		UEngineDirectory Dir;
 		Dir.MoveParentToDirectory("Resources//Image//Building");
 		Dir.Append("House");
 		UImageManager::GetInst().LoadFolder(Dir.GetPathToString());
@@ -79,7 +79,6 @@ void EduContentsCore::BeginPlay()
 
 	UEngineAPICore::GetCore()->CreateLevel<APlayGameMode, ARusty>("Play");
 	UEngineAPICore::GetCore()->CreateLevel<ATileMapGameMode, AActor>("Tile");
-	//UEngineAPICore::GetCore()->CreateLevel<ATitleGameMode, TitleLogo>("Title");
 
 	UEngineAPICore::GetCore()->OpenLevel("Play");
 
