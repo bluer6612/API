@@ -1,8 +1,7 @@
 #pragma once
-#include <EngineCore/Actor.h>
-#include <EngineBase/FSMStateManager.h>
+#include "Building.h"
 
-class AHouse : public AActor
+class AHouse : public ABuilding
 {
 public:
 	
@@ -19,15 +18,10 @@ public:
 
 	void Idle(float _DeltaTime);
 
-	void ModelAdd(int _ModelNumber, float _Size, int _X, int _Y, int _Order);
-
-	void ModelAdd(int _ModelNumber, int _SizeX, int _SizeY, int _X, int _Y, int _Order);
-
 protected:
 
 private:
 	class USpriteRenderer* SpriteRenderer = nullptr;
 	class USpriteRenderer* SpriteRendererWheel = nullptr;
 	class USpriteRenderer* SpriteRendererDoor = nullptr;
-	UFSMStateManager FSM;
 };
