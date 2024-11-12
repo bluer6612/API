@@ -1,5 +1,6 @@
 #pragma once
 #include <EngineCore/GameMode.h>
+#include "TileMap.h"
 
 class APlayGameMode : public AGameMode
 {
@@ -21,5 +22,7 @@ protected:
 
 private:
 	class AScore* Score;
+	ATileMap* WallTileMap = nullptr;
+	ATileMap* GroundTileMap = nullptr;
 };
 

@@ -4,7 +4,7 @@
     <ClInclude Include="PreCompile.h">
       <Filter>PreCompile</Filter>
     </ClInclude>
-    <ClInclude Include="EduContentsCore.h">
+    <ClInclude Include="MainContentsCore.h">
       <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="PlayGameMode.h">
@@ -21,9 +21,6 @@
     </ClInclude>
     <ClInclude Include="TileMap.h">
       <Filter>TileMap</Filter>
-    </ClInclude>
-    <ClInclude Include="TileMapGameMode.h">
-      <Filter>ContentsObject\GameMode</Filter>
     </ClInclude>
     <ClInclude Include="NewPlayer.h">
       <Filter>ContentsObject\Global</Filter>
@@ -45,7 +42,7 @@
     <ClCompile Include="PreCompile.cpp">
       <Filter>PreCompile</Filter>
     </ClCompile>
-    <ClCompile Include="EduContentsCore.cpp">
+    <ClCompile Include="MainContentsCore.cpp">
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="PlayGameMode.cpp">
@@ -62,9 +59,6 @@
     </ClCompile>
     <ClCompile Include="TileMap.cpp">
       <Filter>TileMap</Filter>
-    </ClCompile>
-    <ClCompile Include="TileMapGameMode.cpp">
-      <Filter>ContentsObject\GameMode</Filter>
     </ClCompile>
     <ClCompile Include="NewPlayer.cpp">
       <Filter>ContentsObject\Global</Filter>

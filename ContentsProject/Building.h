@@ -1,7 +1,6 @@
 #pragma once
 #include <EngineCore/Actor.h>
 #include <EngineBase/FSMStateManager.h>
-
 #include <EnginePlatform/EngineInput.h>
 #include <EngineCore/SpriteRenderer.h>
 #include <EngineCore/EngineAPICore.h>

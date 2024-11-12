@@ -1,5 +1,5 @@
 #include "PreCompile.h"
-#include <ContentsProject/EduContentsCore.h>
+#include <ContentsProject/MainContentsCore.h>
 
 
 #include <EngineCore/EngineAPICore.h>
@@ -16,6 +16,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	_In_ LPWSTR    lpCmdLine,
 	_In_ int       nCmdShow)
 {
-	EduContentsCore User;
+	MainContentsCore User;
 	return UEngineAPICore::EngineStart(hInstance, &User);
 }

@@ -1,5 +1,5 @@
 #include "PreCompile.h"
-#include "EduContentsCore.h"
+#include "MainContentsCore.h"
 #include <EngineCore/EngineAPICore.h>
 
 #include <EngineBase/EngineDirectory.h>
@@ -7,20 +7,19 @@
 #include <EngineCore/ImageManager.h>
 
 #include "PlayGameMode.h"
-#include "TileMapGameMode.h"
 #include "Rusty.h"
 #include "TitleLogo.h"
 
 
-EduContentsCore::EduContentsCore()
+MainContentsCore::MainContentsCore()
 {
 }
 
-EduContentsCore::~EduContentsCore()
+MainContentsCore::~MainContentsCore()
 {
 }
 
-void EduContentsCore::BeginPlay()
+void MainContentsCore::BeginPlay()
 {
 	
 	UEngineDirectory Dir;
@@ -73,17 +72,16 @@ void EduContentsCore::BeginPlay()
 	}
 
 
-	UEngineAPICore::GetCore()->GetMainWindow().SetWindowTitle("EduWindow");
+	UEngineAPICore::GetCore()->GetMainWindow().SetWindowTitle("MainWindow");
 	UEngineAPICore::GetCore()->GetMainWindow().SetWindowPosAndScale({ static_cast <float>(0), (ScreenY - static_cast<float>(ScreenY * 0.34)) }, { static_cast<float>(ScreenX), static_cast<float>(ScreenY * 0.3) });
 	UEngineAPICore::GetCore()->GetMainWindow().SetWindowAlpha();
 
 	UEngineAPICore::GetCore()->CreateLevel<APlayGameMode, ARusty>("Play");
-	UEngineAPICore::GetCore()->CreateLevel<ATileMapGameMode, AActor>("Tile");
 
 	UEngineAPICore::GetCore()->OpenLevel("Play");
 
 }
 
-void EduContentsCore::Tick()
+void MainContentsCore::Tick()
 {
 	}

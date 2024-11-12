@@ -164,7 +164,7 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="EduContentsCore.h">
+    <ClInclude Include="MainContentsCore.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -183,10 +183,6 @@
     </ClInclude>
     <ClInclude Include="Rusty.h" />
     <ClInclude Include="Score.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="TileMapGameMode.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -209,7 +205,7 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="EduContentsCore.cpp">
+    <ClCompile Include="MainContentsCore.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -231,10 +227,6 @@
     </ClCompile>
     <ClCompile Include="Rusty.cpp" />
     <ClCompile Include="Score.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="TileMapGameMode.cpp">
       <SubType>
       </SubType>
     </ClCompile>
