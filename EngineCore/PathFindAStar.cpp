@@ -6,9 +6,7 @@ UPathFindAStar::UPathFindAStar()
 {
 	NodePool.resize(1000);
 
-		
 	WayDir = { {0, 1}, {0, -1}, {1, 0}, {-1, 0},  {-1, 1}, {-1, -1}, {1, 1}, {1, -1} };
-
 }
 
 UPathFindAStar::~UPathFindAStar()
@@ -27,8 +25,6 @@ bool Comp(UPathFindNode* first, UPathFindNode* second)
 	}
 }
 
-
-
 std::list<FIntPoint> UPathFindAStar::PathFind(const FIntPoint& _Start, const FIntPoint& _End)
 {
 	NodeClear();
@@ -37,63 +33,58 @@ std::list<FIntPoint> UPathFindAStar::PathFind(const FIntPoint& _Start, const FIn
 
 	UPathFindNode* ResultNode = nullptr;
 
-		while (true)
+	while (true)
 	{
 		if (OpenList.empty())
 		{
-						break;
+			break;
 		}
-		
 
-						OpenList.sort(Comp);
+	OpenList.sort(Comp);
 
+	UPathFindNode* CurNode = OpenList.front();
+	OpenList.pop_front();
+	CloseList.push_back(CurNode);
 
+	FIntPoint CheckPoint = {0, 0};
 
-		UPathFindNode* CurNode = OpenList.front();
-				OpenList.pop_front();
-		CloseList.push_back(CurNode);
+	for (size_t i = 0; i < WayDir.size(); i++)
+	{
+		CheckPoint = CurNode->Point + WayDir[i];
 
-		FIntPoint CheckPoint = {0, 0};
-
-		for (size_t i = 0; i < WayDir.size(); i++)
+		if (false == PathFindData->IsMove(CheckPoint))
 		{
-			CheckPoint = CurNode->Point + WayDir[i];
-
-						if (false == PathFindData->IsMove(CheckPoint))
-			{
-				continue;
-			}
-
-						if (true == FindCloseNode(CheckPoint))
-			{
-				continue;
-			}
-
-						if (true == FindOpenNode(CheckPoint))
-			{
-				continue;
-			}
-
-			if (CheckPoint == EndPoint)
-			{
-				break;
-			}
-
-			GetNewNode(CheckPoint, CurNode);
+			continue;
 		}
+
+		if (true == FindCloseNode(CheckPoint))
+		{
+			continue;
+		}
+
+		if (true == FindOpenNode(CheckPoint))
+		{
+			continue;
+		}
+
+		if (CheckPoint == EndPoint)
+		{
+			break;
+		}
+
+		GetNewNode(CheckPoint, CurNode);
+	}
 		
-				if (CheckPoint == EndPoint)
+		if (CheckPoint == EndPoint)
 		{
 			ResultNode = CurNode;
 			break;
 		}
-
-
 	}
 
 	std::list<FIntPoint> Result;
 
-		if (nullptr != ResultNode)
+	if (nullptr != ResultNode)
 	{
 		while (nullptr != ResultNode)
 		{
@@ -102,14 +93,9 @@ std::list<FIntPoint> UPathFindAStar::PathFind(const FIntPoint& _Start, const FIn
 			ResultNode = ResultNode->ParentNode;
 		}
 	}
-	
-
 
 	return Result;
-
 }
-
-
 
 bool UPathFindAStar::FindOpenNode(FIntPoint _Point)
 {
@@ -141,5 +127,4 @@ bool UPathFindAStar::FindCloseNode(FIntPoint _Point)
 	}
 
 	return false;
-
 }

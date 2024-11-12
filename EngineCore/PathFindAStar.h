@@ -9,7 +9,10 @@ class UPathFindNode
 public:
 	UPathFindNode* ParentNode;
 	FIntPoint Point;
-	float F = 0.0f; 	float G = 0.0f; 	float H = 0.0f; 
+	float F = 0.0f;
+	float G = 0.0f;
+	float H = 0.0f; 
+
 	FVector2D GetPointToVector()
 	{
 		return { Point.X, Point.Y };
@@ -19,16 +22,16 @@ public:
 class IPathFindData
 {
 public:
-			virtual bool IsMove(const FIntPoint& _Point) = 0;
+	virtual bool IsMove(const FIntPoint& _Point) = 0;
 };
 
 class UPathFindAStar
 {
 public:
-		UPathFindAStar();
+	UPathFindAStar();
 	~UPathFindAStar();
 
-		UPathFindAStar(const UPathFindAStar& _Other) = delete;
+	UPathFindAStar(const UPathFindAStar& _Other) = delete;
 	UPathFindAStar(UPathFindAStar&& _Other) noexcept = delete;
 	UPathFindAStar& operator=(const UPathFindAStar& _Other) = delete;
 	UPathFindAStar& operator=(UPathFindAStar&& _Other) noexcept = delete;
@@ -52,7 +55,7 @@ private:
 
 	FIntPoint EndPoint;
 
-						std::vector<UPathFindNode> NodePool;
+	std::vector<UPathFindNode> NodePool;
 	int PoolCount = 0;
 
 	void NodeClear()
