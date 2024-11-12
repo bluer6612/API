@@ -46,6 +46,8 @@ void MainContentsCore::BeginPlay()
 	DirectoryAdd("", "Menu");
 	DirectoryAdd("Character", "RustyGold");
 	DirectoryAdd("Building", "House");
+	DirectoryAdd("Building", "Well");
+	DirectoryAdd("Building", "Biofuelconverter");
 
 	UEngineAPICore::GetCore()->GetMainWindow().SetWindowTitle("MainWindow");
 	UEngineAPICore::GetCore()->GetMainWindow().SetWindowPosAndScale({ static_cast <float>(0), (ScreenY - static_cast<float>(ScreenY * 0.34)) }, { static_cast<float>(ScreenX), static_cast<float>(ScreenY * 0.3) });

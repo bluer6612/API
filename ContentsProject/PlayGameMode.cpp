@@ -1,10 +1,10 @@
 #include "PreCompile.h"
 #include "PlayGameMode.h"
-#include "TitleLogo.h"
-#include "PlayMap.h"
 
 #include "Rusty.h"
 #include "House.h"
+#include "Well.h"
+#include "Biofuelconverter.h"
 
 #include <EngineBase/EngineFile.h>
 #include <EngineBase/EngineDirectory.h>
@@ -46,7 +46,10 @@ void APlayGameMode::BeginPlay()
 	//캐릭터
 	ARusty* Rusty = AActor::GetWorld()->GetPawn<ARusty>();
 
+	//건물
 	AHouse* House = AActor::GetWorld()->SpawnActor<AHouse>();
+	AWell* Well = AActor::GetWorld()->SpawnActor<AWell>();
+	ABiofuelconverter* Biofuelconverter = AActor::GetWorld()->SpawnActor<ABiofuelconverter>();
 
 	//타이틀
 	{

@@ -28,23 +28,23 @@ AHouse::AHouse()
 	}
 
 	{
-		ModelAdd(2, 16, 16, -112.5, 225, 7);
-		ModelAdd(2, 16, 16, -47.5, 219, 7);
-		ModelAdd(2, 16, 16, 70, 220, 7);
-		ModelAdd(3, 16, 16, 15, 224, 7);
-		ModelAdd(3, 16, 16, 104, 225, 7);
-		ModelAdd(3, 1.f, 95, 20, 8);
-		ModelAdd(5, 16, 32, 80, 60, 9);
-		ModelAdd(6, 16, 32, 95, 60, 8);
-		ModelAdd(8, 64, 48, 0, 147.5, 7);
-		ModelAdd(13, 16, 16, 72.5, 175, 7);
-		ModelAdd(15, 32, 32, -76, -21, 7);
-		ModelAdd(16, 16, 16, 87.5, 107.5, 8);
-		ModelAdd(17, 16, 32, 80, -20, 6);
-		ModelAdd(18, 16, 16, -80, 77, 7);
-		ModelAdd(19, 32, 16, -76, 161, 7);
-		ModelAdd(20, 16, 16, -88, 23, 7);
-		ModelAdd(21, 16, 16, -90, 210, 7);
+		ModelAdd("House", 2, 16, 16, -112.5, 225, 7);
+		ModelAdd("House", 2, 16, 16, -47.5, 219, 7);
+		ModelAdd("House", 2, 16, 16, 70, 220, 7);
+		ModelAdd("House", 3, 16, 16, 15, 224, 7);
+		ModelAdd("House", 3, 16, 16, 104, 225, 7);
+		ModelAdd("House", 3, 1.f, 95, 20, 8);
+		ModelAdd("House", 5, 16, 32, 80, 60, 9);
+		ModelAdd("House", 6, 16, 32, 95, 60, 8);
+		ModelAdd("House", 8, 64, 48, 0, 147.5, 7);
+		ModelAdd("House", 13, 16, 16, 72.5, 175, 7);
+		ModelAdd("House", 15, 32, 32, -76, -21, 7);
+		ModelAdd("House", 16, 16, 16, 87.5, 107.5, 8);
+		ModelAdd("House", 17, 16, 32, 80, -20, 6);
+		ModelAdd("House", 18, 16, 16, -80, 77, 7);
+		ModelAdd("House", 19, 32, 16, -76, 161, 7);
+		ModelAdd("House", 20, 16, 16, -88, 23, 7);
+		ModelAdd("House", 21, 16, 16, -90, 210, 7);
 	}
 }
 

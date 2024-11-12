@@ -20,9 +20,9 @@ public:
 	ABuilding& operator=(const ABuilding& _Other) = delete;
 	ABuilding& operator=(ABuilding&& _Other) noexcept = delete;
 
-	void ModelAdd(int _ModelNumber, float _Size, int _X, int _Y, int _Order);
+	void ModelAdd(std::string _Name, int _ModelNumber, float _Size, int _X, int _Y, int _Order);
 
-	void ModelAdd(int _ModelNumber, int _SizeX, int _SizeY, int _X, int _Y, int _Order);
+	void ModelAdd(std::string _Name, int _ModelNumber, int _SizeX, int _SizeY, int _X, int _Y, int _Order);
 
 protected:
 	int index = 0;

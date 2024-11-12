@@ -40,6 +40,12 @@
     <ClInclude Include="MenuUI.h">
       <Filter>ContentsObject\UI</Filter>
     </ClInclude>
+    <ClInclude Include="Well.h">
+      <Filter>ContentsObject\Building</Filter>
+    </ClInclude>
+    <ClInclude Include="Biofuelconverter.h">
+      <Filter>ContentsObject\Building</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -80,6 +86,12 @@
     </ClCompile>
     <ClCompile Include="MenuUI.cpp">
       <Filter>ContentsObject\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Well.cpp">
+      <Filter>ContentsObject\Building</Filter>
+    </ClCompile>
+    <ClCompile Include="Biofuelconverter.cpp">
+      <Filter>ContentsObject\Building</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

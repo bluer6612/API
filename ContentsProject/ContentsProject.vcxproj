@@ -151,6 +151,10 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Biofuelconverter.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Building.h">
       <SubType>
       </SubType>
@@ -194,8 +198,16 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Well.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Biofuelconverter.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Building.cpp">
       <SubType>
       </SubType>
@@ -239,6 +251,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="TitleLogo.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Well.cpp">
       <SubType>
       </SubType>
     </ClCompile>
