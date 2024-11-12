@@ -1,7 +1,7 @@
 #pragma once
 #include <EngineCore/GameMode.h>
 
-#include "ATileMap.h"
+#include "TileMap.h"
 
 class ATileMapGameMode : public AGameMode
 {

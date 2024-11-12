@@ -156,7 +156,7 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="ATileMap.h">
+    <ClInclude Include="TileMap.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -197,7 +197,7 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="ATileMap.cpp">
+    <ClCompile Include="TileMap.cpp">
       <SubType>
       </SubType>
     </ClCompile>

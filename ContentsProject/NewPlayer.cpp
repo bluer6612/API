@@ -26,19 +26,12 @@ ANewPlayer::ANewPlayer()
 		CollisionComponent->SetCollisionGroup(ECollisionGroup::PlayerBody);
 		CollisionComponent->SetCollisionType(ECollisionType::CirCle);
 
+		GetWorld()->CollisionGroupLink(ECollisionGroup::PlayerBody, ECollisionGroup::MonsterBody);
 
-										GetWorld()->CollisionGroupLink(ECollisionGroup::PlayerBody, ECollisionGroup::MonsterBody);
-
-								
 		CollisionComponent->SetCollisionEnter(std::bind(&ANewPlayer::CollisionEnter, this, std::placeholders::_1));
 		CollisionComponent->SetCollisionStay(std::bind(&ANewPlayer::CollisionStay, this, std::placeholders::_1));
 		CollisionComponent->SetCollisionEnd(std::bind(&ANewPlayer::CollisionEnd, this, std::placeholders::_1));
-
-								
-				
-					}
-
-
+	}
 
 	DebugOn();
 }
@@ -65,7 +58,7 @@ ANewPlayer::~ANewPlayer()
 void ANewPlayer::BeginPlay()
 {
 	Super::BeginPlay();
-		FVector2D Size = UEngineAPICore::GetCore()->GetMainWindow().GetWindowSize();
+	FVector2D Size = UEngineAPICore::GetCore()->GetMainWindow().GetWindowSize();
 	GetWorld()->SetCameraPivot(Size.Half() * -1.0f);
 
 	GetWorld()->SetCameraToMainPawn(false);
@@ -78,13 +71,6 @@ void ANewPlayer::BeginPlay()
 	);
 
 	FSM.CreateState(NewPlayerState::Move, std::bind(&ANewPlayer::Move, this, std::placeholders::_1),
-		[this]()
-		{
-			SpriteRenderer->ChangeAnimation("Run_Right");
-		}
-	);
-
-	FSM.CreateState(NewPlayerState::Attack, std::bind(&ANewPlayer::Attack, this, std::placeholders::_1),
 		[this]()
 		{
 			SpriteRenderer->ChangeAnimation("Run_Right");
@@ -109,7 +95,7 @@ void ANewPlayer::PlayerGroundCheck(FVector2D _MovePos)
 
 	if (nullptr != ColImage)
 	{
-				FVector2D NextPos = GetActorLocation() + _MovePos;
+		FVector2D NextPos = GetActorLocation() + _MovePos;
 
 		NextPos.X = floorf(NextPos.X);
 		NextPos.Y = floorf(NextPos.Y);
@@ -122,7 +108,7 @@ void ANewPlayer::PlayerGroundCheck(FVector2D _MovePos)
 		else if (Color == UColor::BLACK)
 		{
 			IsGround = true;
-					}
+		}
 	}
 }
 
@@ -130,14 +116,15 @@ void ANewPlayer::Gravity(float _DeltaTime)
 {
 	if (false == IsGround)
 	{
-						AddActorLocation(GravityForce * _DeltaTime);
+		AddActorLocation(GravityForce * _DeltaTime);
 		GravityForce += FVector2D::DOWN * _DeltaTime * 500.0f;
 	}
-	else {
+	else
+	{
 		GravityForce = FVector2D::ZERO;
 	}
 
-	}
+}
 
 void ANewPlayer::Tick(float _DeltaTime)
 {
@@ -148,8 +135,6 @@ void ANewPlayer::Tick(float _DeltaTime)
 		DashTime += _DeltaTime;
 	}
 
-
-	
 	UEngineDebug::CoreOutPutString("FPS : " + std::to_string(1.0f / _DeltaTime));
 	UEngineDebug::CoreOutPutString("PlayerPos : " + GetActorLocation().ToString());
 
@@ -168,48 +153,21 @@ void ANewPlayer::Tick(float _DeltaTime)
 
 void ANewPlayer::Idle(float _DeltaTime)
 {
-		PlayerCameraCheck();
-	PlayerGroundCheck(GravityForce * _DeltaTime);
-	Gravity(_DeltaTime);
-
-	if (true == UEngineInput::GetInst().IsPress('F'))
-	{
-		FSM.ChangeState(NewPlayerState::Attack);
-		return;
-	}
+	PlayerCameraCheck();
 
 	if (true == UEngineInput::GetInst().IsPress('A') ||
 		true == UEngineInput::GetInst().IsPress('D') ||
 		true == UEngineInput::GetInst().IsPress('W') ||
 		true == UEngineInput::GetInst().IsPress('S'))
 	{
-						FSM.ChangeState(NewPlayerState::Move);
+		FSM.ChangeState(NewPlayerState::Move);
 		return;
 	}
 }
 
-void ANewPlayer::Attack(float _DeltaTime)
-{
-	
-	//FTransform MonsterTransform;	//FTransform PlayerTransform; //= SpriteRenderer->GetActorTransform();
-
-	//if (FTransform::RectToRect(MonsterTransform, PlayerTransform))
-	//{
-	//}
-
-	AActor* Result = CollisionComponent->CollisionOnce(ECollisionGroup::MonsterBody);
-	if (nullptr != Result)
-	{
-		Result->Destroy();
-	}
-}
-
-
 void ANewPlayer::Move(float _DeltaTime)
 {
-		PlayerCameraCheck();
-	PlayerGroundCheck(GravityForce * _DeltaTime);
-	Gravity(_DeltaTime);
+	PlayerCameraCheck();
 
 	FVector2D Vector = FVector2D::ZERO;
 
@@ -218,31 +176,10 @@ void ANewPlayer::Move(float _DeltaTime)
 		Vector += FVector2D::RIGHT;
 	}
 
-	
-	
-	if (true == UEngineInput::GetInst().IsUp('A'))
-	{
-				if (false == DashCheck)
-		{
-			DashCheck = true;
-			DashTime = _DeltaTime;
-		}
-		else if (true == DashCheck && 0.2f >= DashTime)
-		{
-						DashTime = 0.0f;
-			FSM.ChangeState(NewPlayerState::Dash);
-						return;
-		}
-
-	}
-
 	if (true == UEngineInput::GetInst().IsPress('A'))
 	{
-
-
 		Vector += FVector2D::LEFT;
-			}
-
+	}
 
 	if (true == UEngineInput::GetInst().IsPress('S'))
 	{
@@ -251,34 +188,25 @@ void ANewPlayer::Move(float _DeltaTime)
 	if (true == UEngineInput::GetInst().IsPress('W'))
 	{
 		Vector += FVector2D::UP;
-			}
-
-	if (true == UEngineInput::GetInst().IsPress('F'))
-	{
-		FSM.ChangeState(NewPlayerState::Attack);
-		return;
 	}
 
 	Vector.Normalize();
 
-		
-		AddActorLocation(Vector * _DeltaTime * Speed);
-
-
-			
+	AddActorLocation(Vector * _DeltaTime * Speed);
 
 	while (true)
 	{
 		UColor Color = ColImage->GetColor(GetActorLocation(), UColor::WHITE);
+		
 		if (Color == UColor::BLACK)
 		{
-						AddActorLocation(FVector2D::UP);
+			AddActorLocation(FVector2D::UP);
 		}
-		else {
+		else
+		{
 			break;
 		}
 	}
-
 
 	if (false == UEngineInput::GetInst().IsPress('A') &&
 		false == UEngineInput::GetInst().IsPress('D') &&

@@ -19,7 +19,7 @@
     <ClInclude Include="TitleLogo.h">
       <Filter>ContentsObject\Title</Filter>
     </ClInclude>
-    <ClInclude Include="ATileMap.h">
+    <ClInclude Include="TileMap.h">
       <Filter>TileMap</Filter>
     </ClInclude>
     <ClInclude Include="TileMapGameMode.h">
@@ -57,7 +57,7 @@
     <ClCompile Include="TitleLogo.cpp">
       <Filter>ContentsObject\Title</Filter>
     </ClCompile>
-    <ClCompile Include="ATileMap.cpp">
+    <ClCompile Include="TileMap.cpp">
       <Filter>TileMap</Filter>
     </ClCompile>
     <ClCompile Include="TileMapGameMode.cpp">

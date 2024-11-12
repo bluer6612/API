@@ -7,15 +7,15 @@
 class Tile : public ISerializObject
 {
 public:
-					USpriteRenderer* SpriteRenderer;
+	USpriteRenderer* SpriteRenderer;
 
 	bool IsMove = true;
 	int TileType = -1;
-			FVector2D Scale;
+	FVector2D Scale;
 	FVector2D Pivot;
 	int SpriteIndex;
 
-void Serialize(UEngineSerializer& _Ser)
+	void Serialize(UEngineSerializer& _Ser)
 	{
 		std::string SpriteName;
 		if (nullptr != SpriteRenderer)
@@ -55,7 +55,6 @@ public:
 	ATileMap();
 	~ATileMap();
 
-	
 	ATileMap(const ATileMap& _Other) = delete;
 	ATileMap(ATileMap&& _Other) noexcept = delete;
 	ATileMap& operator=(const ATileMap& _Other) = delete;
@@ -63,7 +62,6 @@ public:
 
 	void Create(std::string_view _Sprite, FIntPoint _Count, FVector2D _TileSize);
 
-	
 	void SetTileLocation(FVector2D _Location, int _SpriteIndex);
 
 	void SetTileIndex(FIntPoint _Index, int _SpriteIndex);
@@ -78,19 +76,14 @@ public:
 
 	bool IsIndexOver(FIntPoint _Index);
 
-void Serialize(UEngineSerializer& _Ser);
+	void Serialize(UEngineSerializer& _Ser);
 
-void DeSerialize(UEngineSerializer& _Ser);
+	void DeSerialize(UEngineSerializer& _Ser);
 
 protected:
 
 private:
-			
-		
-	
-				
-		
-		FIntPoint TileCount;
+	FIntPoint TileCount;
 	std::string SpriteName;
 	FVector2D TileSize;
 	std::vector<std::vector<Tile>> AllTiles;
