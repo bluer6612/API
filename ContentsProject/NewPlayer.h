@@ -12,16 +12,13 @@ enum class NewPlayerState
 	Attack,
 };
 
-// 설명 :
 class ANewPlayer : public AActor
 {
 public:
-	// constrcuter destructer
-	ANewPlayer();
+		ANewPlayer();
 	~ANewPlayer();
 
-	// delete Function
-	ANewPlayer(const ANewPlayer& _Other) = delete;
+		ANewPlayer(const ANewPlayer& _Other) = delete;
 	ANewPlayer(ANewPlayer&& _Other) noexcept = delete;
 	ANewPlayer& operator=(const ANewPlayer& _Other) = delete;
 	ANewPlayer& operator=(ANewPlayer&& _Other) noexcept = delete;
@@ -42,10 +39,8 @@ public:
 
 	void Gravity(float _DeltaTime);
 
-	// 중력은 만드는 방법이 너무 많다.
-
-	// 나랑 충돌한 액터를 준다.
-	void CollisionEnter(AActor* _ColActor);
+	
+		void CollisionEnter(AActor* _ColActor);
 	void CollisionStay(AActor* _ColActor);
 	void CollisionEnd(AActor* _ColActor);
 

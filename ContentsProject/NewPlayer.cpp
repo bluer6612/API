@@ -27,31 +27,16 @@ ANewPlayer::ANewPlayer()
 		CollisionComponent->SetCollisionType(ECollisionType::CirCle);
 
 
-		// 데미지 판정을 이걸로 하는게 좋겠죠.
-		// 이걸 호출해야 이벤트가 시작됩니다.
-		// 어디서 호출하건 문제가 없고
-		// 한번만 호출하면 된다.
-		GetWorld()->CollisionGroupLink(ECollisionGroup::PlayerBody, ECollisionGroup::MonsterBody);
+										GetWorld()->CollisionGroupLink(ECollisionGroup::PlayerBody, ECollisionGroup::MonsterBody);
 
-		// 절대 호출안됩니다.
-		// 어떤 그룹과 어떤 그룹이 충돌해라. 함수를 줄거고 그걸 호출하지 않으면 절대 
-		// 왜 그 함수를 호출하면 어떤게 될는 이유는 관심이 없다.
-		
+								
 		CollisionComponent->SetCollisionEnter(std::bind(&ANewPlayer::CollisionEnter, this, std::placeholders::_1));
 		CollisionComponent->SetCollisionStay(std::bind(&ANewPlayer::CollisionStay, this, std::placeholders::_1));
 		CollisionComponent->SetCollisionEnd(std::bind(&ANewPlayer::CollisionEnd, this, std::placeholders::_1));
 
-		// 처음 닿았을때 딱 1번만 호출된다.
-		// 계속 충돌체크를 할겁니다.
-		// 포탈 => 이런 것들을 좀 생각해보셔야 합니다.
-		// CollisionComponent->SetCollisionEnter(펑셔널);
-
-		// 계속 닿고 있을때 호출되는 함수
-		// CollisionComponent->SetCollisionStay(펑셔널);
-
-		// 계속 닿고 있을때 호출되는 함수
-		// CollisionComponent->SetCollisionEnd(펑셔널);
-	}
+								
+				
+					}
 
 
 
@@ -80,8 +65,7 @@ ANewPlayer::~ANewPlayer()
 void ANewPlayer::BeginPlay()
 {
 	Super::BeginPlay();
-	// 직접 카메라 피봇을 설정해줘야 한다.
-	FVector2D Size = UEngineAPICore::GetCore()->GetMainWindow().GetWindowSize();
+		FVector2D Size = UEngineAPICore::GetCore()->GetMainWindow().GetWindowSize();
 	GetWorld()->SetCameraPivot(Size.Half() * -1.0f);
 
 	GetWorld()->SetCameraToMainPawn(false);
@@ -125,8 +109,7 @@ void ANewPlayer::PlayerGroundCheck(FVector2D _MovePos)
 
 	if (nullptr != ColImage)
 	{
-		// 픽셀충돌에서 제일 중요한건 애초에 박히지 않는것이다.
-		FVector2D NextPos = GetActorLocation() + _MovePos;
+				FVector2D NextPos = GetActorLocation() + _MovePos;
 
 		NextPos.X = floorf(NextPos.X);
 		NextPos.Y = floorf(NextPos.Y);
@@ -139,8 +122,7 @@ void ANewPlayer::PlayerGroundCheck(FVector2D _MovePos)
 		else if (Color == UColor::BLACK)
 		{
 			IsGround = true;
-			// 땅에 박히지 않을때까지 올려주는 기능도 함께 만들거나 해야한다.
-		}
+					}
 	}
 }
 
@@ -148,17 +130,14 @@ void ANewPlayer::Gravity(float _DeltaTime)
 {
 	if (false == IsGround)
 	{
-		// 증가시키고 
-		// 여기서 계산
-		AddActorLocation(GravityForce * _DeltaTime);
+						AddActorLocation(GravityForce * _DeltaTime);
 		GravityForce += FVector2D::DOWN * _DeltaTime * 500.0f;
 	}
 	else {
 		GravityForce = FVector2D::ZERO;
 	}
 
-	// 상시 
-}
+	}
 
 void ANewPlayer::Tick(float _DeltaTime)
 {
@@ -170,8 +149,7 @@ void ANewPlayer::Tick(float _DeltaTime)
 	}
 
 
-	// 세계에는 항상 0, 0이 존재한다.
-
+	
 	UEngineDebug::CoreOutPutString("FPS : " + std::to_string(1.0f / _DeltaTime));
 	UEngineDebug::CoreOutPutString("PlayerPos : " + GetActorLocation().ToString());
 
@@ -190,8 +168,7 @@ void ANewPlayer::Tick(float _DeltaTime)
 
 void ANewPlayer::Idle(float _DeltaTime)
 {
-	// 게임적 허용
-	PlayerCameraCheck();
+		PlayerCameraCheck();
 	PlayerGroundCheck(GravityForce * _DeltaTime);
 	Gravity(_DeltaTime);
 
@@ -206,19 +183,15 @@ void ANewPlayer::Idle(float _DeltaTime)
 		true == UEngineInput::GetInst().IsPress('W') ||
 		true == UEngineInput::GetInst().IsPress('S'))
 	{
-		// 상태를 바꾸는 순간은 그 바로 종료하는게 좋다.
-		// 최종적으로 상태를 바꿨다면 종료해라.
-		FSM.ChangeState(NewPlayerState::Move);
+						FSM.ChangeState(NewPlayerState::Move);
 		return;
 	}
 }
 
 void ANewPlayer::Attack(float _DeltaTime)
 {
-	// AMonster* Monster;
-
-	//FTransform MonsterTransform;// = Monster->GetRender()->GetActorTransfrom();
-	//FTransform PlayerTransform; //= SpriteRenderer->GetActorTransform();
+	
+	//FTransform MonsterTransform;	//FTransform PlayerTransform; //= SpriteRenderer->GetActorTransform();
 
 	//if (FTransform::RectToRect(MonsterTransform, PlayerTransform))
 	//{
@@ -234,8 +207,7 @@ void ANewPlayer::Attack(float _DeltaTime)
 
 void ANewPlayer::Move(float _DeltaTime)
 {
-	// 일반적인 이동을 하는 이유 땅에 내가 닿아있기 때문에
-	PlayerCameraCheck();
+		PlayerCameraCheck();
 	PlayerGroundCheck(GravityForce * _DeltaTime);
 	Gravity(_DeltaTime);
 
@@ -247,23 +219,19 @@ void ANewPlayer::Move(float _DeltaTime)
 	}
 
 	
-	// DashTime += _DeltaTime;
-
+	
 	if (true == UEngineInput::GetInst().IsUp('A'))
 	{
-		// 이전까지 체크를 안하고 있었다.
-		if (false == DashCheck)
+				if (false == DashCheck)
 		{
 			DashCheck = true;
 			DashTime = _DeltaTime;
 		}
 		else if (true == DashCheck && 0.2f >= DashTime)
 		{
-			// 대쉬 체크 안하겠다.
-			DashTime = 0.0f;
+						DashTime = 0.0f;
 			FSM.ChangeState(NewPlayerState::Dash);
-			// statechange
-			return;
+						return;
 		}
 
 	}
@@ -273,8 +241,7 @@ void ANewPlayer::Move(float _DeltaTime)
 
 
 		Vector += FVector2D::LEFT;
-		// A키를 눌렀다.
-	}
+			}
 
 
 	if (true == UEngineInput::GetInst().IsPress('S'))
@@ -284,8 +251,7 @@ void ANewPlayer::Move(float _DeltaTime)
 	if (true == UEngineInput::GetInst().IsPress('W'))
 	{
 		Vector += FVector2D::UP;
-		// AddActorLocation(FVector2D::UP * _DeltaTime * Speed);
-	}
+			}
 
 	if (true == UEngineInput::GetInst().IsPress('F'))
 	{
@@ -295,25 +261,18 @@ void ANewPlayer::Move(float _DeltaTime)
 
 	Vector.Normalize();
 
-	// 땅 체크하는 함수.
-	// PlayerGroundCheck(Vector * _DeltaTime * Speed);
-
-	// 나는 이미 이동을 했다.
-	AddActorLocation(Vector * _DeltaTime * Speed);
+		
+		AddActorLocation(Vector * _DeltaTime * Speed);
 
 
-	// 내가 딛고 있는 땅이 언덕인지를 어떻게 알거냐????
-	// 1. 색깔을 통한 구분. 언덕은 빨간색으로 칠한다.
-	// 2. 
-
+			
 
 	while (true)
 	{
 		UColor Color = ColImage->GetColor(GetActorLocation(), UColor::WHITE);
 		if (Color == UColor::BLACK)
 		{
-			// 나가 땅위로 올라갈때까지 while 계속 올려준다.
-			AddActorLocation(FVector2D::UP);
+						AddActorLocation(FVector2D::UP);
 		}
 		else {
 			break;
