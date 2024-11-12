@@ -12,6 +12,8 @@ public:
 	MainContentsCore& operator=(const MainContentsCore& _Other) = delete;
 	MainContentsCore& operator=(MainContentsCore&& _Other) noexcept = delete;
 
+	void DirectoryAdd(std::string _dir, std::string _Append);
+
 protected:
 	void BeginPlay() override;
 	void Tick() override;

@@ -43,34 +43,10 @@ void MainContentsCore::BeginPlay()
 
 	UImageManager::GetInst().CuttingSprite("Text.bmp", { 16, 32 });
 
-	{
-		UEngineDirectory Dir;
-		Dir.MoveParentToDirectory("Resources//Image");
-		Dir.Append("TileMap//TileSet");
-		UImageManager::GetInst().LoadFolder(Dir.GetPathToString());
-	}
-
-	{
-		UEngineDirectory Dir;
-		Dir.MoveParentToDirectory("Resources//Image");
-		Dir.Append("UI");
-		UImageManager::GetInst().LoadFolder(Dir.GetPathToString());
-	}
-
-	{
-		UEngineDirectory Dir;
-		Dir.MoveParentToDirectory("Resources//Image//Character");
-		Dir.Append("RustyGold");
-		UImageManager::GetInst().LoadFolder(Dir.GetPathToString());
-	}
-
-	{
-		UEngineDirectory Dir;
-		Dir.MoveParentToDirectory("Resources//Image//Building");
-		Dir.Append("House");
-		UImageManager::GetInst().LoadFolder(Dir.GetPathToString());
-	}
-
+	DirectoryAdd("", "TileMap//TileSet");
+	DirectoryAdd("", "UI");
+	DirectoryAdd("Character", "RustyGold");
+	DirectoryAdd("Building", "House");
 
 	UEngineAPICore::GetCore()->GetMainWindow().SetWindowTitle("MainWindow");
 	UEngineAPICore::GetCore()->GetMainWindow().SetWindowPosAndScale({ static_cast <float>(0), (ScreenY - static_cast<float>(ScreenY * 0.34)) }, { static_cast<float>(ScreenX), static_cast<float>(ScreenY * 0.3) });
@@ -84,4 +60,14 @@ void MainContentsCore::BeginPlay()
 
 void MainContentsCore::Tick()
 {
+}
+
+void MainContentsCore::DirectoryAdd(std::string _dir, std::string _Append)
+{
+	{
+		UEngineDirectory Dir;
+		Dir.MoveParentToDirectory("Resources//Image//"+ _dir);
+		Dir.Append(_Append);
+		UImageManager::GetInst().LoadFolder(Dir.GetPathToString());
 	}
+}
