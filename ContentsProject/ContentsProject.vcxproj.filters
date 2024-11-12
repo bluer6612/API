@@ -17,7 +17,7 @@
       <Filter>Global</Filter>
     </ClInclude>
     <ClInclude Include="TitleLogo.h">
-      <Filter>ContentsObject\Title</Filter>
+      <Filter>ContentsObject\UI</Filter>
     </ClInclude>
     <ClInclude Include="TileMap.h">
       <Filter>TileMap</Filter>
@@ -37,6 +37,9 @@
     <ClInclude Include="Building.h">
       <Filter>ContentsObject\Building</Filter>
     </ClInclude>
+    <ClInclude Include="MenuUI.h">
+      <Filter>ContentsObject\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -55,7 +58,7 @@
       <Filter>Global</Filter>
     </ClCompile>
     <ClCompile Include="TitleLogo.cpp">
-      <Filter>ContentsObject\Title</Filter>
+      <Filter>ContentsObject\UI</Filter>
     </ClCompile>
     <ClCompile Include="TileMap.cpp">
       <Filter>TileMap</Filter>
@@ -74,6 +77,9 @@
     </ClCompile>
     <ClCompile Include="Building.cpp">
       <Filter>ContentsObject\Building</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuUI.cpp">
+      <Filter>ContentsObject\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -98,9 +104,6 @@
     <Filter Include="Global">
       <UniqueIdentifier>{2852640c-2c84-4426-b62b-8e1b954fa8ee}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ContentsObject\Title">
-      <UniqueIdentifier>{0968278a-21c6-494b-901e-ba95b20d1de3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="TileMap">
       <UniqueIdentifier>{f3fe4416-a80c-4962-92a1-45cd6e4e4dbd}</UniqueIdentifier>
     </Filter>
@@ -109,6 +112,9 @@
     </Filter>
     <Filter Include="ContentsObject\Building">
       <UniqueIdentifier>{3525cda0-54e1-40de-bda9-44bd36208ae6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ContentsObject\UI">
+      <UniqueIdentifier>{0968278a-21c6-494b-901e-ba95b20d1de3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

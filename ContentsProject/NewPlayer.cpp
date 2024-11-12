@@ -7,6 +7,18 @@
 #include <EngineCore/2DCollision.h>
 #include "ContentsEnum.h"
 
+void ANewPlayer::TestTimeEvent()
+{
+	UEngineDebug::OutPutString("Test");
+
+	// TimeEventer.PushEvent(1.0f, std::bind(&AMonster::TestTimeEvent, this));
+
+
+	//AMonster* NewActor = GetWorld()->SpawnActor<AMonster>();
+	//NewActor->SetActorLocation(GetActorLocation() + FVector2D{ 100, 0 });
+}
+
+
 ANewPlayer::ANewPlayer()
 {
 	SetActorLocation({ 100, 100 });
@@ -34,6 +46,8 @@ ANewPlayer::ANewPlayer()
 	}
 
 	DebugOn();
+
+	TimeEventer.PushEvent(1.0f, std::bind(&ANewPlayer::TestTimeEvent, this), true);
 }
 
 void ANewPlayer::CollisionEnter(AActor* _ColActor)
@@ -129,11 +143,6 @@ void ANewPlayer::Gravity(float _DeltaTime)
 void ANewPlayer::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
-
-	if (0.0f != DashTime)
-	{
-		DashTime += _DeltaTime;
-	}
 
 	UEngineDebug::CoreOutPutString("FPS : " + std::to_string(1.0f / _DeltaTime));
 	UEngineDebug::CoreOutPutString("PlayerPos : " + GetActorLocation().ToString());

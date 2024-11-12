@@ -21,10 +21,8 @@ MainContentsCore::~MainContentsCore()
 
 void MainContentsCore::BeginPlay()
 {
-	
 	UEngineDirectory Dir;
 
-						
 	if (false == Dir.MoveParentToDirectory("Resources"))
 	{
 		MSGASSERT("리소스 폴더를 찾지 못했습니다.");
@@ -33,7 +31,7 @@ void MainContentsCore::BeginPlay()
 
 	Dir.Append("Image");
 
-		std::vector<UEngineFile> ImageFiles = Dir.GetAllFile();
+	std::vector<UEngineFile> ImageFiles = Dir.GetAllFile();
 
 	for (size_t i = 0; i < ImageFiles.size(); i++)
 	{
@@ -44,7 +42,8 @@ void MainContentsCore::BeginPlay()
 	UImageManager::GetInst().CuttingSprite("Text.bmp", { 16, 32 });
 
 	DirectoryAdd("", "TileMap//TileSet");
-	DirectoryAdd("", "UI");
+	DirectoryAdd("", "Title");
+	DirectoryAdd("", "Menu");
 	DirectoryAdd("Character", "RustyGold");
 	DirectoryAdd("Building", "House");
 

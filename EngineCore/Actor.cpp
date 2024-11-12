@@ -13,6 +13,7 @@
 #include "ImageManager.h"
 #include "EngineCoreDebug.h"
 
+// delete 도 헤더가 있어야 호출할수 있습니다.
 #include "ActorComponent.h"
 
 std::list<UActorComponent*> AActor::ComponentList;
@@ -40,7 +41,8 @@ AActor::AActor()
 
 AActor::~AActor()
 {
-		std::list<UActorComponent*>::iterator StartIter = Components.begin();
+	// 컴포넌트의 생성주기는 액터의 생명주기와 같다고 한다.
+	std::list<UActorComponent*>::iterator StartIter = Components.begin();
 	std::list<UActorComponent*>::iterator EndIter = Components.end();
 	for (; StartIter != EndIter; ++StartIter)
 	{
@@ -69,6 +71,8 @@ void AActor::Tick(float _DeltaTime)
 		UEngineDebug::CoreDebugRender(Trans, UEngineDebug::EDebugPosType::Circle);
 	}
 
+	TimeEventer.Update(_DeltaTime);
+
 	std::list<class UActorComponent*>::iterator StartIter = Components.begin();
 	std::list<class UActorComponent*>::iterator EndIter = Components.end();
 
@@ -96,7 +100,8 @@ void AActor::ReleaseCheck(float _DeltaTime)
 {
 	UObject::ReleaseCheck(_DeltaTime);
 
-		std::list<UActorComponent*>::iterator StartIter = Components.begin();
+	// 컴포넌트의 생성주기는 액터의 생명주기와 같다고 한다.
+	std::list<UActorComponent*>::iterator StartIter = Components.begin();
 	std::list<UActorComponent*>::iterator EndIter = Components.end();
 	for (; StartIter != EndIter; )
 	{
@@ -109,7 +114,8 @@ void AActor::ReleaseCheck(float _DeltaTime)
 			continue;
 		}
 
-				delete Component;
+		// 액터는 죽을 컴포넌트가 있으면 진짜 죽
+		delete Component;
 		StartIter = Components.erase(StartIter);
 	}
 }

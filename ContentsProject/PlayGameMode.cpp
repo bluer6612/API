@@ -34,13 +34,13 @@ void APlayGameMode::BeginPlay()
 		WallTileMap = GetWorld()->SpawnActor<ATileMap>();
 		WallTileMap->Create("TileSet", { 48, 8 }, { 48, 40 });
 
-		for (int y = 0; y < 40; y++)
-		{
-			for (int x = 0; x < 40; x++)
-			{
-				WallTileMap->SetTileIndex({ y,x }, { 0, -6 }, { 48, 40 }, 1);
-			}
-		}
+		//for (int y = 0; y < 40; y++)
+		//{
+		//	for (int x = 0; x < 40; x++)
+		//	{
+		//		WallTileMap->SetTileIndex({ y,x }, { 0, 0 }, { 48, 40 }, 1);
+		//	}
+		//}
 	}
 
 	//Ä³¸¯ÅÍ

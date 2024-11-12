@@ -34,6 +34,8 @@ public:
 	void CollisionStay(AActor* _ColActor);
 	void CollisionEnd(AActor* _ColActor);
 
+	void TestTimeEvent();
+
 protected:
 
 private:
@@ -41,9 +43,6 @@ private:
 	float Speed = 500.0f;
 	class UEngineWinImage* ColImage = nullptr;
 	class USpriteRenderer* SpriteRenderer = nullptr;
-
-	float DashTime;
-	bool DashCheck = false;
 
 	int IsGround = false;
 	FVector2D GravityForce = FVector2D::ZERO;

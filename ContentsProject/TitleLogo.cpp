@@ -1,7 +1,7 @@
 #include "PreCompile.h"
 #include "TitleLogo.h"
-#include <EnginePlatform/EngineInput.h>
 #include "ContentsEnum.h"
+#include <EnginePlatform/EngineInput.h>
 
 TitleLogo::TitleLogo()
 {

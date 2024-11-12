@@ -156,6 +156,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="House.h" />
+    <ClInclude Include="MenuUI.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="NewPlayer.h">
       <SubType>
       </SubType>
@@ -197,6 +201,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="House.cpp" />
+    <ClCompile Include="MenuUI.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="NewPlayer.cpp">
       <SubType>
       </SubType>
