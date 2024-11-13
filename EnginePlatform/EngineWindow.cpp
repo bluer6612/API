@@ -31,7 +31,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     {
         PAINTSTRUCT ps;
         HDC hdc = BeginPaint(hWnd, &ps);
-                EndPaint(hWnd, &ps);
+        EndPaint(hWnd, &ps);
     }
     break;
     //case WM_SIZING:
@@ -70,13 +70,9 @@ void UEngineWindow::EngineWindowInit(HINSTANCE _Instance)
 
 int UEngineWindow::WindowMessageLoop(EngineDelegate _StartFunction, EngineDelegate _FrameFunction)
 {
-            MSG msg = MSG();
+    MSG msg = MSG();
 
-                
-            
-            
-    
-            if (true == _StartFunction.IsBind())
+    if (true == _StartFunction.IsBind())
     {
         _StartFunction();
     }
@@ -84,7 +80,7 @@ int UEngineWindow::WindowMessageLoop(EngineDelegate _StartFunction, EngineDelega
     while (0 != WindowCount)
     {
                         
-                if(0 != PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
+        if(0 != PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
         {
             TranslateMessage(&msg);
             DispatchMessage(&msg);
@@ -94,21 +90,19 @@ int UEngineWindow::WindowMessageLoop(EngineDelegate _StartFunction, EngineDelega
         {
             _FrameFunction();
         }
-                    }
+    }
 
     return (int)msg.wParam;
 }
 
 void UEngineWindow::CreateWindowClass(const WNDCLASSEXA& _Class)
 {
-    
     std::map<std::string, WNDCLASSEXA>::iterator EndIter = WindowClasss.end();
     std::map<std::string, WNDCLASSEXA>::iterator FindIter = WindowClasss.find(std::string(_Class.lpszClassName));
 
-        if (EndIter != FindIter)
+    if (EndIter != FindIter)
     {
-        
-                                        MSGASSERT(std::string(_Class.lpszClassName) + " 같은 이름의 윈도우 클래스를 2번 등록했습니다");
+        MSGASSERT(std::string(_Class.lpszClassName) + " 같은 이름의 윈도우 클래스를 2번 등록했습니다");
         return;
     }
 
@@ -160,17 +154,17 @@ void UEngineWindow::Create(std::string_view _TitleName, std::string_view _ClassN
         return;
     }
 
-        HDC WindowMainDC = GetDC(WindowHandle);
+    HDC WindowMainDC = GetDC(WindowHandle);
 
-        WindowImage = new UEngineWinImage();
-        WindowImage->Create(WindowMainDC);
+    WindowImage = new UEngineWinImage();
+    WindowImage->Create(WindowMainDC);
 }
 
 void UEngineWindow::Open(std::string_view _TitleName /*= "Window"*/)
 {
-        if (0 == WindowHandle)
+    if (0 == WindowHandle)
     {
-                Create(_TitleName);
+        Create(_TitleName);
     }
 
     if (0 == WindowHandle)
@@ -178,18 +172,18 @@ void UEngineWindow::Open(std::string_view _TitleName /*= "Window"*/)
         return;
     }
 
-		ShowWindow(WindowHandle, SW_SHOW);
+	ShowWindow(WindowHandle, SW_SHOW);
     UpdateWindow(WindowHandle);
     ++WindowCount;
 	}
 
 void UEngineWindow::SetWindowPosAndScale(FVector2D _Pos, FVector2D _Scale)
 {
-        if (false == WindowSize.EqualToInt(_Scale))
+    if (false == WindowSize.EqualToInt(_Scale))
     {
-                                if (nullptr != BackBufferImage)
+        if (nullptr != BackBufferImage)
         {
-                        delete BackBufferImage;
+            delete BackBufferImage;
             BackBufferImage = nullptr;
         }
 
@@ -200,11 +194,18 @@ void UEngineWindow::SetWindowPosAndScale(FVector2D _Pos, FVector2D _Scale)
     WindowSize = _Scale;
 
     RECT Rc = { 0, 0, _Scale.iX(), _Scale.iY() };
-
                     
-            AdjustWindowRect(&Rc, WS_OVERLAPPEDWINDOW, FALSE);
+     AdjustWindowRect(&Rc, WS_OVERLAPPEDWINDOW, FALSE);
     
-    ::SetWindowPos(WindowHandle, nullptr, _Pos.iX(), _Pos.iY(), Rc.right - Rc.left, Rc.bottom - Rc.top, SWP_NOZORDER);
+    ::SetWindowPos(WindowHandle, nullptr, _Pos.iX(), _Pos.iY() + 12, Rc.right - Rc.left, Rc.bottom - Rc.top, SWP_NOZORDER);
+
+    APPBARDATA appBarData;
+    memset(&appBarData, 0, 20);
+    appBarData.hWnd = FindWindowA(("Shell_TrayWnd"), "Window");
+    appBarData.cbSize = 20;
+    appBarData.lParam |= ABS_AUTOHIDE;
+    //appBarData.lParam |= ABS_ALWAYSONTOP;
+    ::SHAppBarMessage(ABM_SETSTATE, &appBarData);
 }
 
 FVector2D UEngineWindow::GetMousePos()
@@ -212,7 +213,7 @@ FVector2D UEngineWindow::GetMousePos()
     POINT MousePoint;
 
     GetCursorPos(&MousePoint);
-        ScreenToClient(WindowHandle, &MousePoint);
+    ScreenToClient(WindowHandle, &MousePoint);
 
     return FVector2D(MousePoint.x, MousePoint.y);
 }
@@ -227,4 +228,11 @@ void UEngineWindow::SetWindowAlpha()
     l |= WS_EX_LAYERED;
     SetWindowLongA(WindowHandle, GWL_EXSTYLE, l);
     SetLayeredWindowAttributes(WindowHandle, RGB(172, 9, 172), 0, LWA_COLORKEY);
+
+    APPBARDATA appBarData2;
+    memset(&appBarData2, 0, 20);
+    appBarData2.cbSize = 20;
+    appBarData2.hWnd = FindWindowA(("Shell_TrayWnd"), "Window");
+    appBarData2.lParam |= ABS_ALWAYSONTOP;
+    ::SHAppBarMessage(ABM_SETSTATE, &appBarData2);
 }
