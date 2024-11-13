@@ -3,12 +3,14 @@
 
 AHouse::AHouse()
 {
+	Location.X = static_cast<float>(ScreenX * 0.5);
+	Location.Y = static_cast<float>(ScreenY * 0.3 * 0.275) + 2.5;
+
 	{
 		SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
-		SpriteRenderer->SetSprite("House");
-		SpriteRenderer->CreateAnimation("Idle", "House", 4, 4, 0);
+		SpriteRenderer->SetSprite("004_House.png");
 		SpriteRenderer->SetComponentScale({ static_cast<float>(86 * 2), static_cast<float>(96 * 2) });
-		SpriteRenderer->SetComponentLocation({ static_cast<float>(ScreenX * 0.5), static_cast<float>((ScreenY * 0.3) * 0.275 + 2.5) });
+		SpriteRenderer->SetComponentLocation({ Location.X, Location.Y });
 		SpriteRenderer->SetOrder(10);
 	}
 
@@ -28,23 +30,23 @@ AHouse::AHouse()
 	}
 
 	{
-		ModelAdd("House", 2, 16, 16, -112.5, 225, 7);
-		ModelAdd("House", 2, 16, 16, -47.5, 219, 7);
-		ModelAdd("House", 2, 16, 16, 70, 220, 7);
-		ModelAdd("House", 3, 16, 16, 15, 224, 7);
-		ModelAdd("House", 3, 16, 16, 104, 225, 7);
-		ModelAdd("House", 3, 1.f, 95, 20, 8);
-		ModelAdd("House", 5, 16, 32, 80, 60, 9);
-		ModelAdd("House", 6, 16, 32, 95, 60, 8);
-		ModelAdd("House", 8, 64, 48, 0, 147.5, 7);
-		ModelAdd("House", 13, 16, 16, 72.5, 175, 7);
-		ModelAdd("House", 15, 32, 32, -76, -21, 7);
-		ModelAdd("House", 16, 16, 16, 87.5, 107.5, 8);
-		ModelAdd("House", 17, 16, 32, 80, -20, 6);
-		ModelAdd("House", 18, 16, 16, -80, 77, 7);
-		ModelAdd("House", 19, 32, 16, -76, 161, 7);
-		ModelAdd("House", 20, 16, 16, -88, 23, 7);
-		ModelAdd("House", 21, 16, 16, -90, 210, 7);
+		ModelAdd("002_House.png", 16, 16, -112.5, 225 - 2, 7);
+		ModelAdd("002_House.png", 16, 16, -47.5, 219 - 2, 7);
+		ModelAdd("002_House.png", 16, 16, 70, 220 - 2, 7);
+		ModelAdd("003_House.png", 16, 16, 15, 224 - 2, 7);
+		ModelAdd("003_House.png", 16, 16, 104, 225 - 2, 7);
+		ModelAdd("003_House.png", 16, 16, 95, 20 - 2, 8);
+		ModelAdd("005_House.png", 16, 32, 80, 60 - 2, 9);
+		ModelAdd("006_House.png", 16, 32, 95, 60 - 2, 8);
+		ModelAdd("007_House.png", 64, 48, 0, 147.5 - 2, 7);
+		ModelAdd("013_House.png", 16, 16, 72.5, 175 - 2, 7);
+		ModelAdd("015_House.png", 32, 32, -76, -21 - 2, 7);
+		ModelAdd("016_House.png", 16, 16, 87.5, 107.5 - 2, 8);
+		ModelAdd("017_House.png", 16, 32, 80, -20 - 2, 6);
+		ModelAdd("018_House.png", 16, 16, -80, 77 - 2, 7);
+		ModelAdd("019_House.png", 32, 16, -76, 161 - 2, 7);
+		ModelAdd("020_House.png", 16, 16, -88, 23 - 2, 7);
+		ModelAdd("021_House.png", 16, 16, -90, 210 - 2, 7);
 	}
 }
 
@@ -61,13 +63,8 @@ void AHouse::BeginPlay()
 	FSM.CreateState(NewPlayerState::Idle, std::bind(&AHouse::Idle, this, std::placeholders::_1),
 		[this]()
 		{
-			SpriteRenderer->ChangeAnimation("Idle");
 			SpriteRendererWheel->ChangeAnimation("Idle");
 			SpriteRendererDoor->ChangeAnimation("Idle");
-			for (size_t i = 0; i < index; i++)
-			{
-				Model[i]->ChangeAnimation("Idle");
-			}
 		}
 	);
 

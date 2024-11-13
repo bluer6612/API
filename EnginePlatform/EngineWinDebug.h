@@ -5,14 +5,4 @@
 namespace UEngineDebug
 {
 	void WinAPIOutPutString(UEngineWinImage* _Image, std::string_view _Text, FVector2D _Pos);
-	}
-
-//partial class UEngineDebug
-//{
-//
-//};
-
-//partial class UEngineDebug
-//{
-//
-//};
+}

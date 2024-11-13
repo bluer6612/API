@@ -131,12 +131,11 @@ void UImageManager::LoadFolder(std::string_view _KeyName, std::string_view _Path
 		return;
 	}
 
-
 	UEngineSprite* NewSprite = new UEngineSprite();
 	NewSprite->SetName(UpperName);
 	Sprites.insert({ UpperName , NewSprite });
 
-		UEngineWinImage* WindowImage = UEngineAPICore::GetCore()->GetMainWindow().GetWindowImage();
+	UEngineWinImage* WindowImage = UEngineAPICore::GetCore()->GetMainWindow().GetWindowImage();
 
 	UEngineDirectory Dir = _Path;
 	std::vector<UEngineFile> ImageFiles = Dir.GetAllFile();
@@ -152,7 +151,7 @@ void UImageManager::LoadFolder(std::string_view _KeyName, std::string_view _Path
 			NewImage->SetName(UpperFileName);
 			NewImage->Load(WindowImage, FilePath);
 		}
-		Images.insert({ UpperFileName,  NewImage });
+		Images.insert({ UpperFileName, NewImage });
 		
 		FTransform Transform;
 		Transform.Location = { 0, 0 };
@@ -306,7 +305,7 @@ bool UImageManager::IsLoadSprite(std::string_view _KeyName)
 UEngineSprite* UImageManager::FindSprite(std::string_view _KeyName)
 {
 	std::string UpperName = UEngineString::ToUpper(_KeyName);
-	
+
 	if (false == Sprites.contains(UpperName))
 	{
 		MSGASSERT("로드하지 않은 스프라이트를 사용하려고 했습니다" + std::string(_KeyName));
@@ -315,7 +314,7 @@ UEngineSprite* UImageManager::FindSprite(std::string_view _KeyName)
 
 	//std::map<std::string, UEngineSprite*>::iterator FindIter = Sprites.find(UpperName);
 
-		return Sprites[UpperName];
+	return Sprites[UpperName];
 }
 
 UEngineWinImage* UImageManager::FindImage(std::string_view _KeyName)
@@ -324,10 +323,10 @@ UEngineWinImage* UImageManager::FindImage(std::string_view _KeyName)
 
 	if (false == Images.contains(UpperName))
 	{
-				return nullptr;
+		return nullptr;
 	}
 
-		return Images[UpperName];
+	return Images[UpperName];
 }
 
 void UImageManager::CreateCutSprite(std::string_view _SearchKeyName, std::string_view _NewSpriteKeyName, FVector2D _StartPos, FVector2D _CuttingSize, FVector2D _XYOffSet, UINT _Xcount, UINT _ImageCount)
@@ -393,7 +392,6 @@ void UImageManager::CreateCutSprite(std::string_view _SearchKeyName, std::string
 	}
 
 	FVector2D TotalSize = FVector2D(static_cast<int>(TotalSizeX), static_cast<int>(TotalSizeY));
-
 
 	UEngineWinImage* NewImage = new UEngineWinImage();
 	UEngineSprite* NewSprite = new UEngineSprite();

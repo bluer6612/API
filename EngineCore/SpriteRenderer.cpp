@@ -138,7 +138,7 @@ FVector2D USpriteRenderer::SetSpriteScale(float _Ratio /*= 1.0f*/, int _CurIndex
 
 	FVector2D Scale = CurData.Transform.Scale* _Ratio;
 
-	SetComponentScale(CurData.Transform.Scale * _Ratio);
+	SetComponentScale(Scale);
 
 	return Scale;
 }
