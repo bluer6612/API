@@ -23,10 +23,13 @@ public:
 	void ModelAdd(std::string _Name, double _X, double _Y, int _Order);
 
 protected:
-	int index = 0;
-	USpriteRenderer* Model[20] = { };
+	class USpriteRenderer* SpriteRenderer = nullptr;
+
 	UFSMStateManager FSM;
+
+	USpriteRenderer* Model[20] = { };
 	FVector2D Location;
+	int index = 0;
 
 private:
 

@@ -1,9 +1,8 @@
 #pragma once
-#include <EngineCore/Actor.h>
-#include <EngineCore/SpriteRenderer.h>
+#include "Building.h"
 
 // Ό³Έν :
-class AMenuUI : public AActor
+class AMenuUI : public ABuilding
 {
 public:
 	// constrcuter destructer

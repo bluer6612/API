@@ -41,7 +41,7 @@ void MainContentsCore::BeginPlay()
 
 	UImageManager::GetInst().CuttingSprite("Text.bmp", { 16, 32 });
 
-	DirectoryAdd("", "TileMap//TileSet");
+	DirectoryAdd("", "TileMap");
 	DirectoryAdd("", "Title");
 	DirectoryAdd("", "Menu");
 	DirectoryAdd("Character", "RustyGold");
