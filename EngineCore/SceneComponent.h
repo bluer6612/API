@@ -32,7 +32,7 @@ public:
 	}
 
 
-void SetComponentLocation(FVector2D _Location)
+	void SetComponentLocation(FVector2D _Location)
 	{
 		Transform.Location = _Location;
 	}

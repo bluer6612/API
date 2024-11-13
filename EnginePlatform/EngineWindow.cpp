@@ -52,7 +52,7 @@ void UEngineWindow::EngineWindowInit(HINSTANCE _Instance)
 {
     hInstance = _Instance;
 
-            WNDCLASSEXA wcex;
+    WNDCLASSEXA wcex;
     wcex.cbSize = sizeof(WNDCLASSEX);
     wcex.style = CS_HREDRAW | CS_VREDRAW;
     wcex.lpfnWndProc = WndProc;

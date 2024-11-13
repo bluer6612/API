@@ -25,8 +25,6 @@ void AWell::BeginPlay()
 {
 	Super::BeginPlay();
 
-	GetWorld()->SetCameraToMainPawn(false);
-
 	FSM.CreateState(NewPlayerState::Idle, std::bind(&AWell::Idle, this, std::placeholders::_1),
 		[this]()
 		{
@@ -41,10 +39,9 @@ void AWell::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 
-	FSM.Update(_DeltaTime);
+	//FSM.Update(_DeltaTime);
 }
 
 void AWell::Idle(float _DeltaTime)
 {
-	return;
 }

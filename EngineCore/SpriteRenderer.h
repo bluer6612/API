@@ -66,7 +66,6 @@ public:
 
 	FVector2D SetSpriteScale(float _Ratio = 2.0f, int _CurIndex = 0);
 
-
 	void CreateAnimation(std::string_view _AnimationName, std::string_view _SpriteName, int _Start, int _End, float Time = 0.1f, bool _Loop = true);
 
 	void CreateAnimation(std::string_view _AnimationName, std::string_view _SpriteName, std::vector<int> _Indexs, std::vector<float> _Frame, bool _Loop = true);
@@ -81,7 +80,6 @@ public:
 	{
 		return Sprite->GetName();
 	}
-
 
 	void SetCameraEffect(bool _Value)
 	{

@@ -17,45 +17,43 @@ void USpriteRenderer::Render(float _DeltaTime)
 {
 	if (nullptr != CurAnimation)
 	{
-	std::vector<int>& Indexs = CurAnimation->FrameIndex;
-	std::vector<float>& Times = CurAnimation->FrameTime;
+		std::vector<int>& Indexs = CurAnimation->FrameIndex;
+		std::vector<float>& Times = CurAnimation->FrameTime;
 
-	Sprite = CurAnimation->Sprite;
+		Sprite = CurAnimation->Sprite;
 
+		CurAnimation->CurTime += _DeltaTime;
 
-	CurAnimation->CurTime += _DeltaTime;
+		float CurFrameTime = Times[CurAnimation->CurIndex];
 
-	float CurFrameTime = Times[CurAnimation->CurIndex];
-
-	if (CurAnimation->CurTime > CurFrameTime)
-	{
-		CurAnimation->CurTime -= CurFrameTime;
-		++CurAnimation->CurIndex;
-
-		if (CurAnimation->Events.contains(CurAnimation->CurIndex))
+		if (CurAnimation->CurTime > CurFrameTime)
 		{
-			CurAnimation->Events[CurAnimation->CurIndex]();
-		}
+			CurAnimation->CurTime -= CurFrameTime;
+			++CurAnimation->CurIndex;
 
-		if (CurAnimation->CurIndex >= Indexs.size())
-		{
-			if (true == CurAnimation->Loop)
+			if (CurAnimation->Events.contains(CurAnimation->CurIndex))
 			{
-				CurAnimation->CurIndex = 0;
+				CurAnimation->Events[CurAnimation->CurIndex]();
+			}
 
-				if (CurAnimation->Events.contains(CurAnimation->CurIndex))
+			if (CurAnimation->CurIndex >= Indexs.size())
+			{
+				if (true == CurAnimation->Loop)
 				{
-					CurAnimation->Events[CurAnimation->CurIndex]();
+					CurAnimation->CurIndex = 0;
+
+					if (CurAnimation->Events.contains(CurAnimation->CurIndex))
+					{
+						CurAnimation->Events[CurAnimation->CurIndex]();
+					}
 				}
-
-			}
-			else
-			{
-				--CurAnimation->CurIndex;
+				else
+				{
+					--CurAnimation->CurIndex;
+				}
 			}
 		}
 
-		}
 		CurIndex = Indexs[CurAnimation->CurIndex];
 	}
 
@@ -135,8 +133,10 @@ FVector2D USpriteRenderer::SetSpriteScale(float _Ratio /*= 1.0f*/, int _CurIndex
 	}
 
 	UEngineSprite::USpriteData CurData = Sprite->GetSpriteData(_CurIndex);
+	
 
-	FVector2D Scale = CurData.Transform.Scale* _Ratio;
+	//FVector2D Scale = CurData.Transform.Scale * _Ratio;
+	FVector2D Scale = Sprite->GetSpriteData().Image->GetImageScale() * static_cast<int>(_Ratio);
 
 	SetComponentScale(Scale);
 
