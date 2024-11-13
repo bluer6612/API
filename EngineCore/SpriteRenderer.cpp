@@ -133,10 +133,12 @@ FVector2D USpriteRenderer::SetSpriteScale(float _Ratio /*= 1.0f*/, int _CurIndex
 	}
 
 	UEngineSprite::USpriteData CurData = Sprite->GetSpriteData(_CurIndex);
-	
-
-	//FVector2D Scale = CurData.Transform.Scale * _Ratio;
 	FVector2D Scale = Sprite->GetSpriteData().Image->GetImageScale() * static_cast<int>(_Ratio);
+	
+	if (_Ratio > 1)
+	{
+		Scale = CurData.Transform.Scale * _Ratio;
+	}
 
 	SetComponentScale(Scale);
 

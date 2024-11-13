@@ -24,35 +24,23 @@ TitleLogo::TitleLogo()
 	}
 
 	{
-		MoneySpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
-		MoneySpriteRenderer->SetOrder(ERenderOrder::UI);
-		MoneySpriteRenderer->SetSprite("UI_biofuelspareparts.png");
+		ButtonSpriteRenderer[0] = CreateDefaultSubObject<USpriteRenderer>();
+		ButtonSpriteRenderer[0]->SetOrder(ERenderOrder::UI);
+		ButtonSpriteRenderer[0]->SetSprite("UI_TitleMenuButton.png");
+		ButtonSpriteRenderer[0]->SetSpriteScale(2.00f);
+		ButtonSpriteRenderer[0]->SetComponentLocation({ static_cast<float>(ScreenX * 0.43),  static_cast<float>(ScreenY / 3.975) });
 
-		MoneySpriteRenderer->SetSpriteScale(2.00f);
-		MoneySpriteRenderer->SetComponentLocation({ ScreenX / 2,  static_cast<int>(ScreenY / 3.5) });
-	}
+		ButtonSpriteRenderer[1] = CreateDefaultSubObject<USpriteRenderer>();
+		ButtonSpriteRenderer[1]->SetOrder(ERenderOrder::UI);
+		ButtonSpriteRenderer[1]->SetSprite("UI_TitleMenuButton.png");
+		ButtonSpriteRenderer[1]->SetSpriteScale(2.00f);
+		ButtonSpriteRenderer[1]->SetComponentLocation({ static_cast<float>(ScreenX * 0.5),  static_cast<float>(ScreenY / 3.975) });
 
-	{
-		ButtonSpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
-		ButtonSpriteRenderer->SetOrder(ERenderOrder::UI);
-		ButtonSpriteRenderer->SetSprite("UI_TitleMenuButton.png");
-
-		ButtonSpriteRenderer->SetSpriteScale(2.00f);
-		ButtonSpriteRenderer->SetComponentLocation({ static_cast<float>(ScreenX * 0.43),  static_cast<float>(ScreenY / 3.975) });
-
-		ButtonSpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
-		ButtonSpriteRenderer->SetOrder(ERenderOrder::UI);
-		ButtonSpriteRenderer->SetSprite("UI_TitleMenuButton.png");
-
-		ButtonSpriteRenderer->SetSpriteScale(2.00f);
-		ButtonSpriteRenderer->SetComponentLocation({ static_cast<float>(ScreenX * 0.5),  static_cast<float>(ScreenY / 3.975) });
-
-		ButtonSpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
-		ButtonSpriteRenderer->SetOrder(ERenderOrder::UI);
-		ButtonSpriteRenderer->SetSprite("UI_TitleMenuButton.png");
-
-		ButtonSpriteRenderer->SetSpriteScale(2.00f);
-		ButtonSpriteRenderer->SetComponentLocation({ static_cast<float>(ScreenX * 0.57),  static_cast<float>(ScreenY / 3.975) });
+		ButtonSpriteRenderer[2] = CreateDefaultSubObject<USpriteRenderer>();
+		ButtonSpriteRenderer[2]->SetOrder(ERenderOrder::UI);
+		ButtonSpriteRenderer[2]->SetSprite("UI_TitleMenuButton.png");
+		ButtonSpriteRenderer[2]->SetSpriteScale(2.00f);
+		ButtonSpriteRenderer[2]->SetComponentLocation({ static_cast<float>(ScreenX * 0.57),  static_cast<float>(ScreenY / 3.975) });
 	}
 }
 
@@ -68,7 +56,8 @@ void TitleLogo::Tick(float _DeltaTime)
 	{
 		LogoSpriteRenderer->SetActiveSwitch();
 		TooltipSpriteRenderer->SetActiveSwitch();
-		MoneySpriteRenderer->SetActiveSwitch();
-		ButtonSpriteRenderer->SetActiveSwitch();
+		ButtonSpriteRenderer[0]->SetActiveSwitch();
+		ButtonSpriteRenderer[1]->SetActiveSwitch();
+		ButtonSpriteRenderer[2]->SetActiveSwitch();
 	}
 }

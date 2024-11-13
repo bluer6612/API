@@ -20,7 +20,6 @@ protected:
 private:
 	USpriteRenderer* LogoSpriteRenderer;
 	USpriteRenderer* TooltipSpriteRenderer;
-	USpriteRenderer* MoneySpriteRenderer;
-	USpriteRenderer* ButtonSpriteRenderer;
+	USpriteRenderer* ButtonSpriteRenderer[3];
 };
 

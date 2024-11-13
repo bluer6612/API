@@ -31,6 +31,13 @@ AHouse::AHouse()
 	}
 
 	{
+		MoneySpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
+		MoneySpriteRenderer->SetSprite("022_Housebiofuelspareparts.png");
+		MoneySpriteRenderer->SetComponentLocation({ ScreenX / 2,  static_cast<int>(ScreenY / 3.5) });
+		MoneySpriteRenderer->SetOrder(ERenderOrder::UI);
+	}
+
+	{
 		ModelAdd("002_House.png", -112.5, 225 - 2, 7);
 		ModelAdd("002_House.png", -47.5, 219 - 2, 7);
 		ModelAdd("002_House.png", 70, 220 - 2, 7);

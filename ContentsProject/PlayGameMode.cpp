@@ -53,7 +53,7 @@ void APlayGameMode::BeginPlay()
 
 	//타이틀
 	{
-		//TitleLogo* NewActor = AActor::GetWorld()->SpawnActor<TitleLogo>();
+		TitleLogo* NewActor = AActor::GetWorld()->SpawnActor<TitleLogo>();
 	}
 
 	//맵
@@ -157,12 +157,4 @@ void APlayGameMode::Tick(float _DeltaTime)
 	{
 		WallTileMap->AddActorLocation(FVector2D::DOWN * _DeltaTime * 100.0f);
 	}
-
-
-	//타이틀 전환용
-	if (true == UEngineInput::GetInst().IsDown('B'))
-	{
-		//SetActiveSwitch();
-	}
-
 }
