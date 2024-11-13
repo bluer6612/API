@@ -53,7 +53,7 @@ void APlayGameMode::BeginPlay()
 
 	//Å¸ÀÌÆ²
 	{
-		TitleLogo* NewActor = AActor::GetWorld()->SpawnActor<TitleLogo>();
+		//TitleLogo* NewActor = AActor::GetWorld()->SpawnActor<TitleLogo>();
 	}
 
 	//¸Ê
@@ -66,23 +66,22 @@ void APlayGameMode::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 
+	//if (true == UEngineInput::GetInst().IsPress(VK_LBUTTON))
+	//{
+	//	FVector2D MousePos = UEngineAPICore::GetCore()->GetMainWindow().GetMousePos();
+	//	WallTileMap->SetTileLocation(MousePos, 1);
+	//}
 
-	if (true == UEngineInput::GetInst().IsPress(VK_LBUTTON))
-	{
-		FVector2D MousePos = UEngineAPICore::GetCore()->GetMainWindow().GetMousePos();
-		WallTileMap->SetTileLocation(MousePos, 1);
-	}
-
-	if (true == UEngineInput::GetInst().IsPress(VK_RBUTTON))
-	{
-		FVector2D MousePos = UEngineAPICore::GetCore()->GetMainWindow().GetMousePos();
-		Tile* Tile = WallTileMap->GetTileRef(MousePos);
-		if (nullptr != Tile->SpriteRenderer)
-		{
-			Tile->SpriteRenderer->Destroy(5.0f);
-			Tile->SpriteRenderer = nullptr;
-		}
-	}
+	//if (true == UEngineInput::GetInst().IsPress(VK_RBUTTON))
+	//{
+	//	FVector2D MousePos = UEngineAPICore::GetCore()->GetMainWindow().GetMousePos();
+	//	Tile* Tile = WallTileMap->GetTileRef(MousePos);
+	//	if (nullptr != Tile->SpriteRenderer)
+	//	{
+	//		Tile->SpriteRenderer->Destroy(5.0f);
+	//		Tile->SpriteRenderer = nullptr;
+	//	}
+	//}
 
 
 	if (true == UEngineInput::GetInst().IsPress('R'))
@@ -158,3 +157,4 @@ void APlayGameMode::Tick(float _DeltaTime)
 		WallTileMap->AddActorLocation(FVector2D::DOWN * _DeltaTime * 100.0f);
 	}
 }
+
