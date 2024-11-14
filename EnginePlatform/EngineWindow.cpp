@@ -194,18 +194,14 @@ void UEngineWindow::SetWindowPosAndScale(FVector2D _Pos, FVector2D _Scale)
     WindowSize = _Scale;
 
     RECT Rc = { 0, 0, _Scale.iX(), _Scale.iY() };
+
+    ::SetForegroundWindow(WindowHandle);
+
+    ::LockSetForegroundWindow(1);
                     
      AdjustWindowRect(&Rc, WS_OVERLAPPEDWINDOW, FALSE);
-    
-    ::SetWindowPos(WindowHandle, nullptr, _Pos.iX(), _Pos.iY(), Rc.right - Rc.left, Rc.bottom - Rc.top + 12, SWP_NOZORDER);
 
-    APPBARDATA appBarData;
-    memset(&appBarData, 0, 20);
-    appBarData.hWnd = FindWindowA(("Shell_TrayWnd"), "Window");
-    appBarData.cbSize = 20;
-    appBarData.lParam |= ABS_AUTOHIDE;
-    //appBarData.lParam |= ABS_ALWAYSONTOP;
-    ::SHAppBarMessage(ABM_SETSTATE, &appBarData);
+    ::SetWindowPos(WindowHandle, nullptr, _Pos.iX(), _Pos.iY(), Rc.right - Rc.left, Rc.bottom - Rc.top , SWP_NOZORDER);
 }
 
 FVector2D UEngineWindow::GetMousePos()
@@ -229,10 +225,15 @@ void UEngineWindow::SetWindowAlpha()
     SetWindowLongA(WindowHandle, GWL_EXSTYLE, l);
     SetLayeredWindowAttributes(WindowHandle, RGB(172, 9, 172), 0, LWA_COLORKEY);
 
-    //APPBARDATA appBarData2;
-    //memset(&appBarData2, 0, 20);
-    //appBarData2.cbSize = 20;
-    //appBarData2.hWnd = FindWindowA(("Shell_TrayWnd"), "Window");
-    //appBarData2.lParam |= ABS_ALWAYSONTOP;
-    //::SHAppBarMessage(ABM_SETSTATE, &appBarData2);
+    {
+        APPBARDATA appBarData;
+        memset(&appBarData, 0, sizeof(appBarData));
+        appBarData.hWnd = FindWindowA(("Shell_TrayWnd"), NULL);
+        appBarData.cbSize = sizeof(appBarData);
+        appBarData.lParam |= ABS_ALWAYSONTOP;
+        //appBarData.lParam |= ABS_AUTOHIDE;
+        //appBarData.lParam |= ABS_ALWAYSONTOP;
+        //appBarData.lParam |= ABS_AUTOHIDE | ABS_ALWAYSONTOP;
+        ::SHAppBarMessage(ABM_SETSTATE, &appBarData);
+    }
 }

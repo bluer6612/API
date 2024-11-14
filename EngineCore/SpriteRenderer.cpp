@@ -121,25 +121,12 @@ void USpriteRenderer::SetSprite(std::string_view _Name, int _CurIndex /*= 0*/)
 	}
 
 	CurIndex = _CurIndex;
-	SetSpriteScale(2.0f, _CurIndex);
-}
 
-void USpriteRenderer::SetOrder(int _Order)
-{
-	int PrevOrder = Order;
+	FVector2D Scale = GetComponentScale();
 
-	Order = _Order;
-
-	if (PrevOrder == Order)
+	if (Scale.X == 0)
 	{
-		return;
-	}
-
-	ULevel* Level = GetActor()->GetWorld();
-
-	if (nullptr != Level)
-	{
-		Level->ChangeRenderOrder(this, PrevOrder);
+		SetSpriteScale(2.0f, _CurIndex);
 	}
 }
 
@@ -162,6 +149,24 @@ FVector2D USpriteRenderer::SetSpriteScale(float _Ratio /*= 1.0f*/, int _CurIndex
 	SetComponentScale(Scale);
 }
 
+void USpriteRenderer::SetOrder(int _Order)
+{
+	int PrevOrder = Order;
+
+	Order = _Order;
+
+	if (PrevOrder == Order)
+	{
+		return;
+	}
+
+	ULevel* Level = GetActor()->GetWorld();
+
+	if (nullptr != Level)
+	{
+		Level->ChangeRenderOrder(this, PrevOrder);
+	}
+}
 
 void USpriteRenderer::CreateAnimation(std::string_view _AnimationName, std::string_view _SpriteName, int _Start, int _End, float Time /*= 0.1f*/, bool _Loop /*= true*/)
 {
