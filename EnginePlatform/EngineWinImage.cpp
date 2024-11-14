@@ -18,7 +18,7 @@ UEngineWinImage::UEngineWinImage()
 
 UEngineWinImage::~UEngineWinImage()
 {
-	if (nullptr != hBitMap)
+			if (nullptr != hBitMap)
 	{
 		DeleteObject(hBitMap);
 		hBitMap = nullptr;
@@ -39,14 +39,19 @@ void UEngineWinImage::Create(UEngineWinImage* _TargetImage,  FVector2D _Scale)
 		MSGASSERT("Main windowDC를 넣지않고 이미지를 생성하려고 했습니다");
 		return;
 	}
+
+				
+				
+	
 	
 	HBITMAP NewBitmap = static_cast<HBITMAP>(CreateCompatibleBitmap(_TargetImage->GetDC(), _Scale.iX(), _Scale.iY()));
 
-	HDC NewImageDC = CreateCompatibleDC(_TargetImage->GetDC());
+				
+		HDC NewImageDC = CreateCompatibleDC(_TargetImage->GetDC());
 
-	HBITMAP OldBitMap = static_cast<HBITMAP>(SelectObject(NewImageDC, NewBitmap));
-
-	DeleteObject(OldBitMap);
+		
+		HBITMAP OldBitMap = static_cast<HBITMAP>(SelectObject(NewImageDC, NewBitmap));
+			DeleteObject(OldBitMap);
 
 	hBitMap = NewBitmap;
 	ImageDC = NewImageDC;
@@ -124,8 +129,45 @@ void UEngineWinImage::CopyToTrans(UEngineWinImage* _TargetImage, const FTransfor
 	);
 }
 
+void UEngineWinImage::CopyToAlpha(UEngineWinImage* _TargetImage,
+	const FTransform& _RenderTrans,
+	const FTransform& _LTImageTrans,
+	unsigned char _Alpha)
+{
+
+				
+					
+	BLENDFUNCTION BLEND;
+	BLEND.BlendOp = AC_SRC_OVER;
+	BLEND.BlendFlags = 0;
+	BLEND.AlphaFormat = AC_SRC_ALPHA;
+	BLEND.SourceConstantAlpha = _Alpha;
+
+	HDC CopyDC = ImageDC;
+	HDC TargetDC = _TargetImage->ImageDC;
+	FVector2D LeftTop = _RenderTrans.CenterLeftTop();
+
+	AlphaBlend(
+		TargetDC,
+		LeftTop.iX(),
+		LeftTop.iY(),
+		_RenderTrans.Scale.iX(),
+		_RenderTrans.Scale.iY(),
+		CopyDC,
+		_LTImageTrans.Location.iX(),
+		_LTImageTrans.Location.iY(),
+		_LTImageTrans.Scale.iX(),
+		_LTImageTrans.Scale.iY(),
+		BLEND
+	);
+}
+
 void UEngineWinImage::Load(UEngineWinImage* _TargetImage, std::string_view _Path)
 {
+					
+									
+		
+						
 	UEnginePath Path = _Path;
 
 	std::string UpperExt = UEngineString::ToUpper(Path.GetExtension());

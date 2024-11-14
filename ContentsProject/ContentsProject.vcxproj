@@ -159,6 +159,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Fade.h" />
     <ClInclude Include="House.h" />
     <ClInclude Include="MenuUI.h">
       <SubType>
@@ -212,6 +213,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Fade.cpp" />
     <ClCompile Include="House.cpp" />
     <ClCompile Include="MenuUI.cpp">
       <SubType>

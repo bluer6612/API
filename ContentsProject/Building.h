@@ -6,16 +6,13 @@
 #include <EngineCore/EngineAPICore.h>
 #include "ContentsEnum.h"
 
-// Ό³Έν :
 class ABuilding : public AActor
 {
 public:
-	// constrcuter destructer
-	ABuilding();
+		ABuilding();
 	~ABuilding();
 
-	// delete Function
-	ABuilding(const ABuilding& _Other) = delete;
+		ABuilding(const ABuilding& _Other) = delete;
 	ABuilding(ABuilding&& _Other) noexcept = delete;
 	ABuilding& operator=(const ABuilding& _Other) = delete;
 	ABuilding& operator=(ABuilding&& _Other) noexcept = delete;

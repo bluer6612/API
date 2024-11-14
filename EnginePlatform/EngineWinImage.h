@@ -7,38 +7,43 @@
 class UEngineWinImage : public UObject
 {
 public:
-	
-	UEngineWinImage();
+		UEngineWinImage();
 	~UEngineWinImage();
 
-	UEngineWinImage(const UEngineWinImage& _Other) = delete;
+		UEngineWinImage(const UEngineWinImage& _Other) = delete;
 	UEngineWinImage(UEngineWinImage&& _Other) noexcept = delete;
 	UEngineWinImage& operator=(const UEngineWinImage& _Other) = delete;
 	UEngineWinImage& operator=(UEngineWinImage&& _Other) noexcept = delete;
 
-	HDC GetDC()
+		HDC GetDC()
 	{
 		return ImageDC;
 	}
 	
-	void Create(HDC _DC)
-		{
-			ImageDC = _DC;
-		}
+		void Create(HDC _DC)
+	{
+		ImageDC = _DC;
+	}
 
 	void Create(UEngineWinImage* _TargetImage, FVector2D _Scale);
 
-	void CopyToBit(UEngineWinImage* _TargetImage, 
-			const FTransform& _Trans);
+		void CopyToBit(UEngineWinImage* _TargetImage, 
+		const FTransform& _Trans);
 
-	void CopyToTrans(UEngineWinImage* _TargetImage, 
-			const FTransform& _RenderTrans, 
-			const FTransform& _LTImageTrans,
-			UColor _Color = UColor(255, 0, 255, 0));
+					void CopyToTrans(UEngineWinImage* _TargetImage, 
+		const FTransform& _RenderTrans, 
+		const FTransform& _LTImageTrans,
+		UColor _Color = UColor(255, 0, 255, 0));
+
+	void CopyToAlpha(UEngineWinImage* _TargetImage,
+		const FTransform& _RenderTrans,
+		const FTransform& _LTImageTrans,
+		unsigned char _Alpha);
+
 
 	void Load(UEngineWinImage* _TargetImage, std::string_view _Path);
 
-	FVector2D GetImageScale() const
+		FVector2D GetImageScale() const
 	{
 		return { Info.bmWidth, Info.bmHeight };
 	}
@@ -53,9 +58,9 @@ public:
 protected:
 
 private:
-	HDC ImageDC = nullptr;
+			HDC ImageDC = nullptr;
 	HBITMAP hBitMap = nullptr;
 
-	BITMAP Info;
+		BITMAP Info;
 };
 

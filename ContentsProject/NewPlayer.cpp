@@ -6,13 +6,13 @@
 #include <EngineCore/EngineCoreDebug.h>
 #include <EngineCore/2DCollision.h>
 #include "ContentsEnum.h"
+#include "Fade.h"
 
 void ANewPlayer::TestTimeEvent()
 {
 	UEngineDebug::OutPutString("Test");
 
-	// TimeEventer.PushEvent(1.0f, std::bind(&AMonster::TestTimeEvent, this));
-
+	
 
 	//AMonster* NewActor = GetWorld()->SpawnActor<AMonster>();
 	//NewActor->SetActorLocation(GetActorLocation() + FVector2D{ 100, 0 });
@@ -76,18 +76,17 @@ void ANewPlayer::BeginPlay()
 	GetWorld()->SetCameraPivot(Size.Half() * -1.0f);
 
 	GetWorld()->SetCameraToMainPawn(false);
-
 	FSM.CreateState(NewPlayerState::Idle, std::bind(&ANewPlayer::Idle, this, std::placeholders::_1),
 		[this]()
 		{
-			SpriteRenderer->ChangeAnimation("Idle_Right");
+			SpriteRenderer->ChangeAnimation("Idle" + DirString);
 		}
 	);
 
 	FSM.CreateState(NewPlayerState::Move, std::bind(&ANewPlayer::Move, this, std::placeholders::_1),
 		[this]()
 		{
-			SpriteRenderer->ChangeAnimation("Run_Right");
+			SpriteRenderer->ChangeAnimation("Run" + DirString);
 		}
 	);
 
@@ -157,7 +156,23 @@ void ANewPlayer::Tick(float _DeltaTime)
 		UEngineDebug::SwitchIsDebug();
 	}
 
+	DirCheck();
 	FSM.Update(_DeltaTime);
+}
+
+void ANewPlayer::DirCheck()
+{
+
+	if (true == UEngineInput::GetInst().IsPress('D'))
+	{
+		DirString = "_Right";
+	}
+
+	if (true == UEngineInput::GetInst().IsPress('A'))
+	{
+		DirString = "_Left";
+	}
+
 }
 
 void ANewPlayer::Idle(float _DeltaTime)

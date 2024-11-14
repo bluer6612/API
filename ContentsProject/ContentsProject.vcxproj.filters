@@ -46,6 +46,9 @@
     <ClInclude Include="Biofuelconverter.h">
       <Filter>ContentsObject\Building</Filter>
     </ClInclude>
+    <ClInclude Include="Fade.h">
+      <Filter>ContentsObject\Global</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -92,6 +95,9 @@
     </ClCompile>
     <ClCompile Include="Biofuelconverter.cpp">
       <Filter>ContentsObject\Building</Filter>
+    </ClCompile>
+    <ClCompile Include="Fade.cpp">
+      <Filter>ContentsObject\Global</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -134,6 +134,7 @@ protected:
 private:
 	void ScreenClear();
 	void DoubleBuffering();
+	void BeginPlayCheck();
 
 
 		template<typename GameModeType, typename MainPawnType>

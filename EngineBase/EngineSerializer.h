@@ -6,17 +6,15 @@
 class UEngineSerializer
 {
 public:
-	
-	UEngineSerializer();
+		UEngineSerializer();
 	~UEngineSerializer();
 
-	
-	UEngineSerializer(const UEngineSerializer& _Other) = delete;
+		UEngineSerializer(const UEngineSerializer& _Other) = delete;
 	UEngineSerializer(UEngineSerializer&& _Other) noexcept = delete;
 	UEngineSerializer& operator=(const UEngineSerializer& _Other) = delete;
 	UEngineSerializer& operator=(UEngineSerializer&& _Other) noexcept = delete;
 
-void Write(void* _Data, unsigned int _Size);
+		void Write(void* _Data, unsigned int _Size);
 
 	void operator<<(int& _Data)
 	{
@@ -42,7 +40,10 @@ void Write(void* _Data, unsigned int _Size);
 	{
 						int Size = static_cast<int>(_Data.size());
 		operator<<(Size);
-		Write(&_Data[0], static_cast<int>(_Data.size()));
+		if (0 != Size)
+		{
+			Write(&_Data[0], static_cast<int>(_Data.size()));
+		}
 	}
 
 	void operator<<(class ISerializObject& _Data);

@@ -1,5 +1,6 @@
 #include "PreCompile.h"
 #include "PlayGameMode.h"
+#include "Fade.h"
 
 #include "Rusty.h"
 #include "House.h"
@@ -60,6 +61,12 @@ void APlayGameMode::BeginPlay()
 	{
 		APlayMap* NewActor = AActor::GetWorld()->SpawnActor<APlayMap>();
 	}
+
+	//ÆäÀÌµå
+	//{
+	//	AFade* Actor = GetWorld()->SpawnActor<AFade>();
+	//	Actor->FadeOut();
+	//}
 }
 
 void APlayGameMode::Tick(float _DeltaTime)

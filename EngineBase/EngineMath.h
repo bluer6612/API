@@ -8,6 +8,29 @@ public:
 	{
 		return ::sqrtf(_Value);
 	}
+
+	template <typename DataType>
+	DataType ClampMax(DataType value, DataType maxValue)
+	{
+		return (value > maxValue) ? maxValue : value;
+	}
+
+	template <typename DataType>
+	DataType ClampMin(DataType value, DataType minValue)
+	{
+		return (value < minValue) ? minValue : value;
+	}
+
+	template <typename DataType>
+	static DataType Clamp(DataType value, DataType minValue, DataType maxValue)
+	{
+		if (value < minValue)
+			return minValue;
+		else if (value > maxValue)
+			return maxValue;
+		else
+			return value;
+	}
 };
 
 class FVector2D
@@ -109,7 +132,7 @@ public:
 		return Result;
 	}
 
-	FVector2D operator+(FVector2D _Other) const
+	FVector2D operator+(const FVector2D& _Other) const
 	{
 		FVector2D Result;
 		Result.X = X + _Other.X;
@@ -117,7 +140,7 @@ public:
 		return Result;
 	}
 
-	FVector2D& operator-=(FVector2D _Other) 
+	FVector2D& operator-=(const FVector2D& _Other)
 	{
 		X -= _Other.X;
 		Y -= _Other.Y;
@@ -125,7 +148,7 @@ public:
 	}
 
 
-	FVector2D operator-(FVector2D _Other) const
+	FVector2D operator-(const FVector2D& _Other) const
 	{
 		FVector2D Result;
 		Result.X = X - _Other.X;
@@ -157,7 +180,7 @@ public:
 		return Result;
 	}
 
-		bool operator==(FVector2D _Other) const
+		bool operator==(const FVector2D& _Other) const
 	{
 		return X == _Other.X && Y == _Other.Y;
 	}
@@ -172,12 +195,27 @@ public:
 	//	return X == _Other.X && Y == _Other.Y;
 	//}
 
-	FVector2D& operator+=(FVector2D _Other)
+	FVector2D& operator+=(const FVector2D& _Other)
 	{
 		X += _Other.X;
 		Y += _Other.Y;
 		return *this;
 	}
+
+	FVector2D& operator*=(const FVector2D& _Other)
+	{
+		X *= _Other.X;
+		Y *= _Other.Y;
+		return *this;
+	}
+
+	FVector2D& operator*=(float _Other)
+	{
+		X *= _Other;
+		Y *= _Other;
+		return *this;
+	}
+
 
 	std::string ToString()
 	{
@@ -212,10 +250,16 @@ private:
 public:
 	static bool Collision(ECollisionType _LeftType, const FTransform& _Left, ECollisionType _RightType, const FTransform& _Right);
 
-		static bool RectToRect(const FTransform& _Left, const FTransform& _Right);
-	
+		static bool PointToCirCle(const FTransform& _Left, const FTransform& _Right);
+	static bool PointToRect(const FTransform& _Left, const FTransform& _Right);
+
+	static bool RectToRect(const FTransform& _Left, const FTransform& _Right);
+	static bool RectToCirCle(const FTransform& _Left, const FTransform& _Right);
+
 	static bool CirCleToCirCle(const FTransform& _Left, const FTransform& _Right);
-	
+	static bool CirCleToRect(const FTransform& _Left, const FTransform& _Right);
+
+
 	FVector2D Scale;
 	FVector2D Location;
 
@@ -223,6 +267,14 @@ public:
 	FVector2D CenterLeftTop() const
 	{
 		return Location - Scale.Half();
+	}
+
+	FVector2D CenterLeftBottom() const
+	{
+		FVector2D Location;
+		Location.X = Location.X - Scale.hX();
+		Location.Y = Location.Y + Scale.hY();
+		return Location;
 	}
 
 	float CenterLeft() const
@@ -233,6 +285,14 @@ public:
 	float CenterTop() const
 	{
 		return Location.Y - Scale.hY();
+	}
+
+	FVector2D CenterRightTop() const
+	{
+		FVector2D Location;
+		Location.X = Location.X + Scale.hX();
+		Location.Y = Location.Y - Scale.hY();
+		return Location;
 	}
 
 	FVector2D CenterRightBottom() const

@@ -4,12 +4,10 @@
 class UEngineTimer
 {
 public:
-	
-	UEngineTimer();
+		UEngineTimer();
 	~UEngineTimer();
 
-	
-	UEngineTimer(const UEngineTimer& _Other) = delete;
+		UEngineTimer(const UEngineTimer& _Other) = delete;
 	UEngineTimer(UEngineTimer&& _Other) noexcept = delete;
 	UEngineTimer& operator=(const UEngineTimer& _Other) = delete;
 	UEngineTimer& operator=(UEngineTimer&& _Other) noexcept = delete;

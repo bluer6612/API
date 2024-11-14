@@ -36,13 +36,16 @@ public:
 
 	void TestTimeEvent();
 
+	void DirCheck();
 protected:
 
 private:
 	U2DCollision* CollisionComponent;
-	float Speed = 500.0f;
 	class UEngineWinImage* ColImage = nullptr;
 	class USpriteRenderer* SpriteRenderer = nullptr;
+
+	std::string DirString = "_Right";
+	float Speed = 500.0f;
 
 	int IsGround = false;
 	FVector2D GravityForce = FVector2D::ZERO;
