@@ -229,10 +229,10 @@ void UEngineWindow::SetWindowAlpha()
     SetWindowLongA(WindowHandle, GWL_EXSTYLE, l);
     SetLayeredWindowAttributes(WindowHandle, RGB(172, 9, 172), 0, LWA_COLORKEY);
 
-    APPBARDATA appBarData2;
-    memset(&appBarData2, 0, 20);
-    appBarData2.cbSize = 20;
-    appBarData2.hWnd = FindWindowA(("Shell_TrayWnd"), "Window");
-    appBarData2.lParam |= ABS_ALWAYSONTOP;
-    ::SHAppBarMessage(ABM_SETSTATE, &appBarData2);
+    //APPBARDATA appBarData2;
+    //memset(&appBarData2, 0, 20);
+    //appBarData2.cbSize = 20;
+    //appBarData2.hWnd = FindWindowA(("Shell_TrayWnd"), "Window");
+    //appBarData2.lParam |= ABS_ALWAYSONTOP;
+    //::SHAppBarMessage(ABM_SETSTATE, &appBarData2);
 }
