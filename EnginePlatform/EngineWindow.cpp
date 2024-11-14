@@ -197,7 +197,7 @@ void UEngineWindow::SetWindowPosAndScale(FVector2D _Pos, FVector2D _Scale)
                     
      AdjustWindowRect(&Rc, WS_OVERLAPPEDWINDOW, FALSE);
     
-    ::SetWindowPos(WindowHandle, nullptr, _Pos.iX(), _Pos.iY() + 12, Rc.right - Rc.left, Rc.bottom - Rc.top, SWP_NOZORDER);
+    ::SetWindowPos(WindowHandle, nullptr, _Pos.iX(), _Pos.iY(), Rc.right - Rc.left, Rc.bottom - Rc.top + 12, SWP_NOZORDER);
 
     APPBARDATA appBarData;
     memset(&appBarData, 0, 20);

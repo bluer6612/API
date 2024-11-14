@@ -180,14 +180,14 @@ public:
 		return Result;
 	}
 
-		bool operator==(const FVector2D& _Other) const
+	bool operator==(const FVector2D& _Other) const
 	{
 		return X == _Other.X && Y == _Other.Y;
 	}
 
-			bool EqualToInt(FVector2D _Other) const
+	bool EqualToInt(FVector2D _Other) const
 	{
-						return iX() == _Other.iX() && iY() == _Other.iY();
+		return iX() == _Other.iX() && iY() == _Other.iY();
 	}
 
 	//bool Compare(FVector2D _Other, float _limite = 0.0f) const
@@ -234,7 +234,8 @@ enum class ECollisionType
 {
 	Point,
 	Rect,
-	CirCle, 	Max
+	CirCle,
+	Max
 
 	//AABB,
 	//OBB,
@@ -250,7 +251,7 @@ private:
 public:
 	static bool Collision(ECollisionType _LeftType, const FTransform& _Left, ECollisionType _RightType, const FTransform& _Right);
 
-		static bool PointToCirCle(const FTransform& _Left, const FTransform& _Right);
+	static bool PointToCirCle(const FTransform& _Left, const FTransform& _Right);
 	static bool PointToRect(const FTransform& _Left, const FTransform& _Right);
 
 	static bool RectToRect(const FTransform& _Left, const FTransform& _Right);
@@ -360,8 +361,6 @@ public:
 		Y += _Other.Y;
 		return *this;
 	}
-
-
 };
 
 

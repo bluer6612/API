@@ -48,9 +48,8 @@ void USpriteRenderer::Render(float _DeltaTime)
 
 void USpriteRenderer::BeginPlay()
 {
-			Super::BeginPlay();
+	Super::BeginPlay();
 
-	
 	AActor* Actor = GetActor();
 	ULevel* Level = Actor->GetWorld();
 
@@ -69,14 +68,12 @@ void USpriteRenderer::ComponentTick(float _DeltaTime)
 
 		Sprite = CurAnimation->Sprite;
 
-
 		CurAnimation->CurTime += _DeltaTime;
 
 		float CurFrameTime = Times[CurAnimation->CurIndex];
 
-				if (CurAnimation->CurTime > CurFrameTime)
+		if (CurAnimation->CurTime > CurFrameTime)
 		{
-
 			CurAnimation->CurTime -= CurFrameTime;
 			++CurAnimation->CurIndex;
 
@@ -85,7 +82,7 @@ void USpriteRenderer::ComponentTick(float _DeltaTime)
 				CurAnimation->Events[CurIndex]();
 			}
 
-						if (CurAnimation->CurIndex >= Indexs.size())
+			if (CurAnimation->CurIndex >= Indexs.size())
 			{
 				CurAnimation->IsEnd = true;
 			}
@@ -107,19 +104,15 @@ void USpriteRenderer::ComponentTick(float _DeltaTime)
 					--CurAnimation->CurIndex;
 				}
 			}
-
 		}
-
-
-				CurIndex = Indexs[CurAnimation->CurIndex];
-			}
-
+		
+		CurIndex = Indexs[CurAnimation->CurIndex];
+	}
 }
 
 void USpriteRenderer::SetSprite(std::string_view _Name, int _CurIndex /*= 0*/)
-{
-			
-		Sprite = UImageManager::GetInst().FindSprite(_Name);
+{	
+	Sprite = UImageManager::GetInst().FindSprite(_Name);
 
 	if (nullptr == Sprite)
 	{
@@ -128,6 +121,7 @@ void USpriteRenderer::SetSprite(std::string_view _Name, int _CurIndex /*= 0*/)
 	}
 
 	CurIndex = _CurIndex;
+	SetSpriteScale(2.0f, _CurIndex);
 }
 
 void USpriteRenderer::SetOrder(int _Order)
@@ -141,7 +135,7 @@ void USpriteRenderer::SetOrder(int _Order)
 		return;
 	}
 
-			ULevel* Level = GetActor()->GetWorld();
+	ULevel* Level = GetActor()->GetWorld();
 
 	if (nullptr != Level)
 	{
@@ -158,12 +152,14 @@ FVector2D USpriteRenderer::SetSpriteScale(float _Ratio /*= 1.0f*/, int _CurIndex
 	}
 
 	UEngineSprite::USpriteData CurData = Sprite->GetSpriteData(_CurIndex);
+	FVector2D Scale = Sprite->GetSpriteData().Image->GetImageScale() * _Ratio;
 
-	FVector2D Scale = CurData.Transform.Scale * _Ratio;
+	if (_Ratio > 1.0f)
+	{
+		Scale = CurData.Transform.Scale * _Ratio;
+	}
 
-	SetComponentScale(CurData.Transform.Scale * _Ratio);
-
-	return Scale;
+	SetComponentScale(Scale);
 }
 
 

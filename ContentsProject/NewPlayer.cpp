@@ -12,8 +12,7 @@ void ANewPlayer::TestTimeEvent()
 {
 	UEngineDebug::OutPutString("Test");
 
-	
-
+	// TimeEventer.PushEvent(1.0f, std::bind(&AMonster::TestTimeEvent, this));
 	//AMonster* NewActor = GetWorld()->SpawnActor<AMonster>();
 	//NewActor->SetActorLocation(GetActorLocation() + FVector2D{ 100, 0 });
 }

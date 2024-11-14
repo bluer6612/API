@@ -13,7 +13,7 @@ APlayMap::APlayMap()
 		BackSpriteRenderer->SetSprite("GrassMap.png");
 
 		FVector2D MapScale = BackSpriteRenderer->SetSpriteScale(1.0f);
-		BackSpriteRenderer->SetComponentLocation(MapScale.Half());
+		BackSpriteRenderer->SetComponentLocation({ static_cast<float>(ScreenX * 0.5), static_cast<float>(ScreenY * 0.6 * 0.2725)});
 	}
 
 	{

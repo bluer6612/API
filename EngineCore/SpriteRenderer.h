@@ -64,16 +64,16 @@ public:
 		return Order;
 	}
 
-	FVector2D SetSpriteScale(float _Ratio = 1.0f, int _CurIndex = 0);
+	FVector2D SetSpriteScale(float _Ratio = 2.0f, int _CurIndex = 0);
 
 
 	void CreateAnimation(std::string_view _AnimationName, std::string_view _SpriteName, int _Start, int _End, float Time = 0.1f, bool _Loop = true);
 
-						void CreateAnimation(std::string_view _AnimationName, std::string_view _SpriteName, std::vector<int> _Indexs, std::vector<float> _Frame, bool _Loop = true);
+	void CreateAnimation(std::string_view _AnimationName, std::string_view _SpriteName, std::vector<int> _Indexs, std::vector<float> _Frame, bool _Loop = true);
 
 	void CreateAnimation(std::string_view _AnimationName, std::string_view _SpriteName, std::vector<int> _Indexs, float _Frame, bool _Loop = true);
 
-		void ChangeAnimation(std::string_view _AnimationName, bool _Force = false);
+	void ChangeAnimation(std::string_view _AnimationName, bool _Force = false);
 
 	void SetAnimationEvent(std::string_view _AnimationName, int _Frame, std::function<void()> _Function);
 
@@ -97,12 +97,12 @@ public:
 	void SetCameraEffectScale(float _Effect);
 	void SetSprite(std::string_view _Name, int _CurIndex = 0);
 
-			bool IsCurAnimationEnd()
+	bool IsCurAnimationEnd()
 	{
 		return CurAnimation->IsEnd;
 	}
 
-		void SetAlphaChar(unsigned char _Value)
+	void SetAlphaChar(unsigned char _Value)
 	{
 		Alpha = _Value;
 	}
@@ -110,7 +110,7 @@ public:
 	void SetAlphafloat(float _Value)
 	{
 		_Value = UEngineMath::Clamp(_Value, 0.0f, 1.0f);
-										Alpha = static_cast<unsigned char>(_Value * 255.0f);
+		Alpha = static_cast<unsigned char>(_Value * 255.0f);
 	}
 
 protected:
@@ -121,7 +121,7 @@ private:
 	bool IsCameraEffect = true;
 	float CameraEffectScale = 1.0f;
 
-		unsigned char Alpha = 255;
+	unsigned char Alpha = 255;
 
 	FVector2D Pivot = FVector2D::ZERO;
 

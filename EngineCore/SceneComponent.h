@@ -8,7 +8,6 @@ public:
 	USceneComponent();
 	~USceneComponent();
 
-	
 	USceneComponent(const USceneComponent& _Other) = delete;
 	USceneComponent(USceneComponent&& _Other) noexcept = delete;
 	USceneComponent& operator=(const USceneComponent& _Other) = delete;
@@ -30,7 +29,6 @@ public:
 	{
 		return Transform.Location;
 	}
-
 
 	void SetComponentLocation(FVector2D _Location)
 	{
