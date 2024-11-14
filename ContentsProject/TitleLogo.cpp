@@ -10,7 +10,6 @@ TitleLogo::TitleLogo()
 		LogoSpriteRenderer->SetOrder(ERenderOrder::TITLE);
 		LogoSpriteRenderer->SetSprite("UI_Logo.png");
 
-		LogoSpriteRenderer->SetSpriteScale(2.00f);
 		LogoSpriteRenderer->SetComponentLocation({ ScreenX / 2,  static_cast<int>(ScreenY / 13.6) });
 	}
 
@@ -27,19 +26,16 @@ TitleLogo::TitleLogo()
 		ButtonSpriteRenderer[0] = CreateDefaultSubObject<USpriteRenderer>();
 		ButtonSpriteRenderer[0]->SetOrder(ERenderOrder::UI);
 		ButtonSpriteRenderer[0]->SetSprite("UI_TitleMenuButton.png");
-		ButtonSpriteRenderer[0]->SetSpriteScale(2.00f);
 		ButtonSpriteRenderer[0]->SetComponentLocation({ static_cast<float>(ScreenX * 0.43),  static_cast<float>(ScreenY / 3.975) });
 
 		ButtonSpriteRenderer[1] = CreateDefaultSubObject<USpriteRenderer>();
 		ButtonSpriteRenderer[1]->SetOrder(ERenderOrder::UI);
 		ButtonSpriteRenderer[1]->SetSprite("UI_TitleMenuButton.png");
-		ButtonSpriteRenderer[1]->SetSpriteScale(2.00f);
 		ButtonSpriteRenderer[1]->SetComponentLocation({ ScreenHX,  static_cast<float>(ScreenY / 3.975) });
 
 		ButtonSpriteRenderer[2] = CreateDefaultSubObject<USpriteRenderer>();
 		ButtonSpriteRenderer[2]->SetOrder(ERenderOrder::UI);
 		ButtonSpriteRenderer[2]->SetSprite("UI_TitleMenuButton.png");
-		ButtonSpriteRenderer[2]->SetSpriteScale(2.00f);
 		ButtonSpriteRenderer[2]->SetComponentLocation({ static_cast<float>(ScreenX * 0.57),  static_cast<float>(ScreenY / 3.975) });
 	}
 }

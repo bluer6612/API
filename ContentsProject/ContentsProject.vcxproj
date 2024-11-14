@@ -161,7 +161,7 @@
     </ClInclude>
     <ClInclude Include="Fade.h" />
     <ClInclude Include="House.h" />
-    <ClInclude Include="MenuUI.h">
+    <ClInclude Include="MenuPanelUI.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -215,7 +215,7 @@
     </ClCompile>
     <ClCompile Include="Fade.cpp" />
     <ClCompile Include="House.cpp" />
-    <ClCompile Include="MenuUI.cpp">
+    <ClCompile Include="MenuPanelUI.cpp">
       <SubType>
       </SubType>
     </ClCompile>

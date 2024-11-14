@@ -37,9 +37,6 @@
     <ClInclude Include="Building.h">
       <Filter>ContentsObject\Building</Filter>
     </ClInclude>
-    <ClInclude Include="MenuUI.h">
-      <Filter>ContentsObject\UI</Filter>
-    </ClInclude>
     <ClInclude Include="Well.h">
       <Filter>ContentsObject\Building</Filter>
     </ClInclude>
@@ -49,6 +46,7 @@
     <ClInclude Include="Fade.h">
       <Filter>ContentsObject\Global</Filter>
     </ClInclude>
+    <ClInclude Include="MenuPanelUI.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -87,9 +85,6 @@
     <ClCompile Include="Building.cpp">
       <Filter>ContentsObject\Building</Filter>
     </ClCompile>
-    <ClCompile Include="MenuUI.cpp">
-      <Filter>ContentsObject\UI</Filter>
-    </ClCompile>
     <ClCompile Include="Well.cpp">
       <Filter>ContentsObject\Building</Filter>
     </ClCompile>
@@ -99,6 +94,7 @@
     <ClCompile Include="Fade.cpp">
       <Filter>ContentsObject\Global</Filter>
     </ClCompile>
+    <ClCompile Include="MenuPanelUI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="PreCompile">

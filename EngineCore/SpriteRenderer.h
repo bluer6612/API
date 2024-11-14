@@ -14,7 +14,7 @@ enum class PivotType
 
 class USpriteRenderer : public USceneComponent
 {
-		public:
+	public:
 	class FrameAnimation
 	{
 	public:
@@ -39,10 +39,10 @@ class USpriteRenderer : public USceneComponent
 
 
 public:
-		USpriteRenderer();
+	USpriteRenderer();
 	~USpriteRenderer();
 
-		USpriteRenderer(const USpriteRenderer& _Other) = delete;
+	USpriteRenderer(const USpriteRenderer& _Other) = delete;
 	USpriteRenderer(USpriteRenderer&& _Other) noexcept = delete;
 	USpriteRenderer& operator=(const USpriteRenderer& _Other) = delete;
 	USpriteRenderer& operator=(USpriteRenderer&& _Other) noexcept = delete;
@@ -51,7 +51,7 @@ public:
 	void BeginPlay() override;
 	void ComponentTick(float _DeltaTime) override;
 
-				template<typename EnumType>
+	template<typename EnumType>
 	void SetOrder(EnumType _Order)
 	{
 		SetOrder(static_cast<int>(_Order));
@@ -65,7 +65,6 @@ public:
 	}
 
 	FVector2D SetSpriteScale(float _Ratio = 2.0f, int _CurIndex = 0);
-
 
 	void CreateAnimation(std::string_view _AnimationName, std::string_view _SpriteName, int _Start, int _End, float Time = 0.1f, bool _Loop = true);
 

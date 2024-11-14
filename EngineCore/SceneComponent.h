@@ -40,6 +40,11 @@ public:
 		Transform.Scale = _Scale;
 	}
 
+	void SetComponentScaleOrigin()
+	{
+		Transform.Scale = { this->GetComponentScale().X, this->GetComponentScale().Y };
+	}
+
 protected:
 
 private:

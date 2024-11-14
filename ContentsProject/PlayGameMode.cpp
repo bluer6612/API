@@ -2,6 +2,8 @@
 #include "PlayGameMode.h"
 #include "Fade.h"
 
+#include "MenuPanelUI.h"
+
 #include "Rusty.h"
 #include "House.h"
 #include "Well.h"
@@ -54,12 +56,17 @@ void APlayGameMode::BeginPlay()
 
 	//타이틀
 	{
-		//TitleLogo* NewActor = AActor::GetWorld()->SpawnActor<TitleLogo>();
+		TitleLogo* NewActor = AActor::GetWorld()->SpawnActor<TitleLogo>();
 	}
 
 	//맵
 	{
 		APlayMap* NewActor = AActor::GetWorld()->SpawnActor<APlayMap>();
+	}
+
+	//패널 메뉴
+	{
+		AMenuPanelUI* NewActor = AActor::GetWorld()->SpawnActor<AMenuPanelUI>();
 	}
 
 	//페이드
@@ -143,7 +150,6 @@ void APlayGameMode::Tick(float _DeltaTime)
 		WallTileMap->DeSerialize(Ser);
 	}
 
-
 	if (true == UEngineInput::GetInst().IsPress('A'))
 	{
 		WallTileMap->AddActorLocation(FVector2D::LEFT * _DeltaTime * 100.0f);
@@ -164,4 +170,3 @@ void APlayGameMode::Tick(float _DeltaTime)
 		WallTileMap->AddActorLocation(FVector2D::DOWN * _DeltaTime * 100.0f);
 	}
 }
-

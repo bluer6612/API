@@ -10,7 +10,7 @@ ABiofuelconverter::ABiofuelconverter()
 		SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
 		SpriteRenderer->SetSprite("Biofuelconverter");
 		SpriteRenderer->CreateAnimation("Idle", "Biofuelconverter", 0, 0, 1.0f);
-		SpriteRenderer->SetComponentScale({ static_cast<float>(55 * 2), static_cast<float>(57 * 2) });
+		SpriteRenderer->SetComponentScaleOrigin();
 		SpriteRenderer->SetComponentLocation({ Location.X, Location.Y });
 	}
 

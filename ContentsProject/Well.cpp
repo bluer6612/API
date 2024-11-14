@@ -10,7 +10,7 @@ AWell::AWell()
 		SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
 		SpriteRenderer->SetSprite("Well");
 		SpriteRenderer->CreateAnimation("Idle", "Well", 0, 2, 2.0f);
-		SpriteRenderer->SetComponentScale({ static_cast<float>(42 * 2), static_cast<float>(36 * 2) });
+		SpriteRenderer->SetComponentScaleOrigin();
 		SpriteRenderer->SetComponentLocation({ Location.X, Location.Y });
 		SpriteRenderer->SetOrder(ERenderOrder::BUILDING);
 	}

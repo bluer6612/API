@@ -11,7 +11,7 @@ AHouse::AHouse()
 		SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
 		SpriteRenderer->SetSprite("004_House.png");
 		SpriteRenderer->CreateAnimation("Idle", "House", 4, 4, 0, false);
-		SpriteRenderer->SetComponentScale({ static_cast<float>(86 * 2), static_cast<float>(96 * 2) });
+		SpriteRenderer->SetComponentScaleOrigin();
 		SpriteRenderer->SetComponentLocation({ ScreenHX, Location.Y });
 		SpriteRenderer->SetOrder(ERenderOrder::BUILDING);
 	}
