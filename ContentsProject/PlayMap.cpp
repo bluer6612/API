@@ -17,6 +17,15 @@ APlayMap::APlayMap()
 	}
 
 	{
+		BackBottomSpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
+		BackBottomSpriteRenderer->SetOrder(ERenderOrder::TITLE);
+		BackBottomSpriteRenderer->SetSprite("WindowBottomBlack.png");
+
+		FVector2D MapScale = BackBottomSpriteRenderer->SetSpriteScale(1.0f);
+		BackBottomSpriteRenderer->SetComponentLocation({ static_cast<float>(ScreenX * 0.5), static_cast<float>(ScreenY - 16.5) });
+	}
+
+	{
 		BackSpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
 		BackSpriteRenderer->SetOrder(ERenderOrder::BACKGROUND);
 		BackSpriteRenderer->SetSprite("GrassMap.png");
