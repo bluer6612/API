@@ -4,7 +4,7 @@
 AMenuUI::AMenuUI()
 {
 	Location.X = static_cast<float>(ScreenX * 0.5) - 197;
-	Location.Y = static_cast<float>(ScreenY * 0.3 * 0.275);
+	Location.Y = ScreenHY;
 
 	{
 		SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();

@@ -8,14 +8,14 @@
 
 ARusty::ARusty()
 {
-	SetActorLocation({ static_cast<float>(ScreenX * 0.5 + -85), static_cast<float>((ScreenY * 0.3) * 0.5 + 40) });
+	SetActorLocation({ static_cast<float>(ScreenX * 0.5 + -85), static_cast<float>((ScreenY - 243 - 36) + 80) });
 
 	{
 		SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
 		SpriteRenderer->SetSprite("RustyGold");
 		SpriteRenderer->CreateAnimation("Idle_Right", "RustyGold", 48, 49, 0.5f);
 		SpriteRenderer->CreateAnimation("Run_Right", "RustyGold", 0, 5, 0.2f);
-		SpriteRenderer->SetOrder(10);
+		SpriteRenderer->SetOrder(ERenderOrder::PLAYER);
 	}
 }
 

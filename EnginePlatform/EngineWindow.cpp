@@ -145,7 +145,7 @@ void UEngineWindow::Create(std::string_view _TitleName, std::string_view _ClassN
         return;
     }
     
-    WindowHandle = CreateWindowA(_ClassName.data(), _TitleName.data(), WS_OVERLAPPED,
+    WindowHandle = CreateWindowA(_ClassName.data(), _TitleName.data(), WS_VISIBLE,
         0, 0, ScreenX, ScreenY, nullptr, nullptr, hInstance, nullptr);
 
     if (nullptr == WindowHandle)
@@ -194,14 +194,15 @@ void UEngineWindow::SetWindowPosAndScale(FVector2D _Pos, FVector2D _Scale)
     WindowSize = _Scale;
 
     RECT Rc = { 0, 0, _Scale.iX(), _Scale.iY() };
-
-    ::SetForegroundWindow(WindowHandle);
-
-    ::LockSetForegroundWindow(1);
                     
      AdjustWindowRect(&Rc, WS_OVERLAPPEDWINDOW, FALSE);
 
-    ::SetWindowPos(WindowHandle, nullptr, _Pos.iX(), _Pos.iY(), Rc.right - Rc.left, Rc.bottom - Rc.top , SWP_NOZORDER);
+     ::SetForegroundWindow(WindowHandle);
+
+    //::BringWindowToTop(WindowHandle);
+
+    ::SetWindowPos(WindowHandle, HWND_TOP, _Pos.iX(), _Pos.iY(), Rc.right - Rc.left, Rc.bottom - Rc.top, SWP_NOSIZE | SWP_SHOWWINDOW);
+
 }
 
 FVector2D UEngineWindow::GetMousePos()
@@ -221,19 +222,7 @@ void UEngineWindow::SetWindowAlpha()
     SetWindowLongA(WindowHandle, GWL_STYLE, style);
 
     long l = GetWindowLongA(WindowHandle, GWL_EXSTYLE);
-    l |= WS_EX_LAYERED;
+    l |= WS_EX_LAYERED | WS_EX_TOPMOST;
     SetWindowLongA(WindowHandle, GWL_EXSTYLE, l);
     SetLayeredWindowAttributes(WindowHandle, RGB(172, 9, 172), 0, LWA_COLORKEY);
-
-    {
-        APPBARDATA appBarData;
-        memset(&appBarData, 0, sizeof(appBarData));
-        appBarData.hWnd = FindWindowA(("Shell_TrayWnd"), NULL);
-        appBarData.cbSize = sizeof(appBarData);
-        appBarData.lParam |= ABS_ALWAYSONTOP;
-        //appBarData.lParam |= ABS_AUTOHIDE;
-        //appBarData.lParam |= ABS_ALWAYSONTOP;
-        //appBarData.lParam |= ABS_AUTOHIDE | ABS_ALWAYSONTOP;
-        ::SHAppBarMessage(ABM_SETSTATE, &appBarData);
-    }
 }

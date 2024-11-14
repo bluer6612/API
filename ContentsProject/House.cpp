@@ -3,8 +3,9 @@
 
 AHouse::AHouse()
 {
+	//Location.Y = static_cast<float>(ScreenY - 89) + 2.5;
 	Location.X = static_cast<float>(ScreenX * 0.5);
-	Location.Y = static_cast<float>(ScreenY * 0.3 * 0.275) + 2.5;
+	Location.Y = ScreenHY + 2.5;
 
 	{
 		SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
@@ -12,7 +13,7 @@ AHouse::AHouse()
 		SpriteRenderer->CreateAnimation("Idle", "House", 4, 4, 0, false);
 		SpriteRenderer->SetComponentScale({ static_cast<float>(86 * 2), static_cast<float>(96 * 2) });
 		SpriteRenderer->SetComponentLocation({ Location.X, Location.Y });
-		SpriteRenderer->SetOrder(10);
+		SpriteRenderer->SetOrder(ERenderOrder::BUILDING);
 	}
 
 	{

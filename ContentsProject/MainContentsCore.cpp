@@ -50,7 +50,8 @@ void MainContentsCore::BeginPlay()
 	DirectoryAdd("Building", "Biofuelconverter");
 
 	UEngineAPICore::GetCore()->GetMainWindow().SetWindowTitle("MainWindow");
-	UEngineAPICore::GetCore()->GetMainWindow().SetWindowPosAndScale({ static_cast <float>(0), (ScreenY - static_cast<float>(ScreenY * 0.34)) }, { static_cast<float>(ScreenX), static_cast<float>(ScreenY * 0.3) });
+	//ScreenY - static_cast<float>(ScreenY * 0.34)=712.8
+	UEngineAPICore::GetCore()->GetMainWindow().SetWindowPosAndScale({ static_cast <float>(0), (ScreenY - static_cast<float>(ScreenY)) }, { static_cast<float>(ScreenX), static_cast<float>(ScreenY) });
 	UEngineAPICore::GetCore()->GetMainWindow().SetWindowAlpha();
 
 	UEngineAPICore::GetCore()->CreateLevel<APlayGameMode, ARusty>("Play");

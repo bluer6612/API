@@ -27,22 +27,22 @@ void APlayGameMode::BeginPlay()
 	Super::BeginPlay();
 
 	//타일
-	{
-		GroundTileMap = GetWorld()->SpawnActor<ATileMap>();
-	}
+	//{
+	//	GroundTileMap = GetWorld()->SpawnActor<ATileMap>();
+	//}
 
-	{
-		WallTileMap = GetWorld()->SpawnActor<ATileMap>();
-		WallTileMap->Create("TileSet", { 48, 8 }, { 48, 40 });
+	//{
+	//	WallTileMap = GetWorld()->SpawnActor<ATileMap>();
+	//	WallTileMap->Create("TileSet", { 48, 8 }, { 48, 40 });
 
-		//for (int y = 0; y < 40; y++)
-		//{
-		//	for (int x = 0; x < 40; x++)
-		//	{
-		//		WallTileMap->SetTileIndex({ y,x }, { 0, 0 }, { 48, 40 }, 1);
-		//	}
-		//}
-	}
+	//	//for (int y = 0; y < 40; y++)
+	//	//{
+	//	//	for (int x = 0; x < 40; x++)
+	//	//	{
+	//	//		WallTileMap->SetTileIndex({ y,x }, { 0, 0 }, { 48, 40 }, 1);
+	//	//	}
+	//	//}
+	//}
 
 	//캐릭터
 	ARusty* Rusty = AActor::GetWorld()->GetPawn<ARusty>();

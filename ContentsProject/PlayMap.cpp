@@ -8,21 +8,21 @@
 APlayMap::APlayMap()
 {
 	{
+		BackTopSpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
+		BackTopSpriteRenderer->SetOrder(ERenderOrder::COLMAP);
+		BackTopSpriteRenderer->SetSprite("WindowTopBlack.png");
+
+		FVector2D MapScale = BackTopSpriteRenderer->SetSpriteScale(1.0f);
+		BackTopSpriteRenderer->SetComponentLocation({ static_cast<float>(ScreenX * 0.5), static_cast<float>(ScreenY * 0.4 - 32) });
+	}
+
+	{
 		BackSpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
 		BackSpriteRenderer->SetOrder(ERenderOrder::BACKGROUND);
 		BackSpriteRenderer->SetSprite("GrassMap.png");
 
 		FVector2D MapScale = BackSpriteRenderer->SetSpriteScale(1.0f);
-		BackSpriteRenderer->SetComponentLocation({ static_cast<float>(ScreenX * 0.5), static_cast<float>(ScreenY * 0.6 * 0.2725)});
-	}
-
-	{
-		BackTopSpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
-		BackTopSpriteRenderer->SetOrder(ERenderOrder::BACKGROUND);
-		BackTopSpriteRenderer->SetSprite("WindowTopBlack.png");
-
-		FVector2D MapScale = BackTopSpriteRenderer->SetSpriteScale(1.0f);
-		BackTopSpriteRenderer->SetComponentLocation({ ScreenX, -30 });
+		BackSpriteRenderer->SetComponentLocation({ static_cast<float>(ScreenX * 0.5), ScreenHY + 108 - 32 });
 	}
 }
 

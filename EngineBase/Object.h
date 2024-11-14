@@ -4,11 +4,11 @@
 class UObject
 {
 public:
-		UObject();
+	UObject();
 
-			virtual ~UObject();
+	virtual ~UObject();
 
-		UObject(const UObject& _Other) = delete;
+	UObject(const UObject& _Other) = delete;
 	UObject(UObject&& _Other) noexcept = delete;
 	UObject& operator=(const UObject& _Other) = delete;
 	UObject& operator=(UObject&& _Other) noexcept = delete;
@@ -23,12 +23,12 @@ public:
 		return Name.c_str();
 	}
 
-		virtual void SetName(std::string_view _Name)
+	virtual void SetName(std::string_view _Name)
 	{
 		Name = _Name.data();
 	}
 
-		virtual bool IsActive()
+	virtual bool IsActive()
 	{
 		return IsActiveValue && false == IsDestroyValue;
 	}
@@ -38,7 +38,7 @@ public:
 		return IsDestroyValue;
 	}
 
-			void Destroy(float _Time = 0.0f)
+	void Destroy(float _Time = 0.0f)
 	{
 		DeathTime = _Time;
 
@@ -71,7 +71,7 @@ public:
 
 	}
 
-			void SetActive(bool _IsActive)
+	void SetActive(bool _IsActive)
 	{
 		IsActiveValue = _IsActive;
 	}

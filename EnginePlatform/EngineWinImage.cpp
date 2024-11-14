@@ -18,7 +18,7 @@ UEngineWinImage::UEngineWinImage()
 
 UEngineWinImage::~UEngineWinImage()
 {
-			if (nullptr != hBitMap)
+	if (nullptr != hBitMap)
 	{
 		DeleteObject(hBitMap);
 		hBitMap = nullptr;
@@ -47,11 +47,11 @@ void UEngineWinImage::Create(UEngineWinImage* _TargetImage,  FVector2D _Scale)
 	HBITMAP NewBitmap = static_cast<HBITMAP>(CreateCompatibleBitmap(_TargetImage->GetDC(), _Scale.iX(), _Scale.iY()));
 
 				
-		HDC NewImageDC = CreateCompatibleDC(_TargetImage->GetDC());
+	HDC NewImageDC = CreateCompatibleDC(_TargetImage->GetDC());
 
 		
-		HBITMAP OldBitMap = static_cast<HBITMAP>(SelectObject(NewImageDC, NewBitmap));
-			DeleteObject(OldBitMap);
+	HBITMAP OldBitMap = static_cast<HBITMAP>(SelectObject(NewImageDC, NewBitmap));
+	DeleteObject(OldBitMap);
 
 	hBitMap = NewBitmap;
 	ImageDC = NewImageDC;
@@ -177,17 +177,17 @@ void UEngineWinImage::Load(UEngineWinImage* _TargetImage, std::string_view _Path
 	if (".PNG" == UpperExt)
 	{
 						
-				ULONG_PTR gidplustoken = 0;
+		ULONG_PTR gidplustoken = 0;
 
-				Gdiplus::GdiplusStartupInput StartupInput;
+		Gdiplus::GdiplusStartupInput StartupInput;
 		Gdiplus::GdiplusStartup(&gidplustoken, &StartupInput, nullptr);
 
 
 		std::wstring WidePath = UEngineString::AnsiToUnicode(_Path);
 
-				Gdiplus::Image* pImage = Gdiplus::Image::FromFile(WidePath.c_str());
+		Gdiplus::Image* pImage = Gdiplus::Image::FromFile(WidePath.c_str());
 
-				Gdiplus::Bitmap* pBitMap = reinterpret_cast<Gdiplus::Bitmap*>(pImage->Clone());
+		Gdiplus::Bitmap* pBitMap = reinterpret_cast<Gdiplus::Bitmap*>(pImage->Clone());
 
 		Gdiplus::Status stat = pBitMap->GetHBITMAP(Gdiplus::Color(255, 255, 0, 255), &NewBitmap);
 
@@ -197,7 +197,7 @@ void UEngineWinImage::Load(UEngineWinImage* _TargetImage, std::string_view _Path
 			return;
 		}
 
-				delete pBitMap;
+		delete pBitMap;
 		delete pImage;
 	}
 	else if (".BMP" == UpperExt)
@@ -212,7 +212,7 @@ void UEngineWinImage::Load(UEngineWinImage* _TargetImage, std::string_view _Path
 		return;
 	}
 
-		HDC NewImageDC = CreateCompatibleDC(_TargetImage->GetDC());
+	HDC NewImageDC = CreateCompatibleDC(_TargetImage->GetDC());
 
 	HBITMAP OldBitMap = static_cast<HBITMAP>(SelectObject(NewImageDC, NewBitmap));
 	DeleteObject(OldBitMap);
@@ -245,7 +245,6 @@ UColor UEngineWinImage::GetColor(FIntPoint _Point, UColor _DefaultColor = UColor
 		return _DefaultColor;
 	}
 
-		
-			UColor ResultColor = ::GetPixel(ImageDC, _Point.X, _Point.Y);
+	UColor ResultColor = ::GetPixel(ImageDC, _Point.X, _Point.Y);
 	return ResultColor;
 }

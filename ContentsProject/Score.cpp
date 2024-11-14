@@ -5,7 +5,7 @@ AScore::AScore()
 {
 	for (size_t i = 0; i < 10; i++)
 	{
-				USpriteRenderer* Sprite = CreateDefaultSubObject<USpriteRenderer>();
+		USpriteRenderer* Sprite = CreateDefaultSubObject<USpriteRenderer>();
 		Sprite->SetCameraEffect(false);
 		Renders.push_back(Sprite);
 	}

@@ -9,10 +9,10 @@
 class ABuilding : public AActor
 {
 public:
-		ABuilding();
+	ABuilding();
 	~ABuilding();
 
-		ABuilding(const ABuilding& _Other) = delete;
+	ABuilding(const ABuilding& _Other) = delete;
 	ABuilding(ABuilding&& _Other) noexcept = delete;
 	ABuilding& operator=(const ABuilding& _Other) = delete;
 	ABuilding& operator=(ABuilding&& _Other) noexcept = delete;

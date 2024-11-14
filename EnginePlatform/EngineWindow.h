@@ -12,6 +12,8 @@
 
 static int ScreenX = GetSystemMetrics(SM_CXSCREEN);
 static int ScreenY = GetSystemMetrics(SM_CYSCREEN);
+static float ScreenHX = ScreenX * 0.5;
+static float ScreenHY = ScreenY - 243 - 36;
 
 class UEngineWindow
 {
@@ -64,17 +66,12 @@ protected:
 private:
 	static HINSTANCE hInstance;
 	static std::map<std::string, WNDCLASSEXA> WindowClasss;
-
-					
-			
-	
-		
 		
 	FVector2D WindowSize;
 
-			UEngineWinImage* BackBufferImage = nullptr;
+	UEngineWinImage* BackBufferImage = nullptr;
 
-			UEngineWinImage* WindowImage = nullptr;
+	UEngineWinImage* WindowImage = nullptr;
 
 	HWND WindowHandle = nullptr;
 };

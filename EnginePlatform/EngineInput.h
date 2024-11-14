@@ -5,11 +5,6 @@
 #include <vector>
 #include <functional>
 
-
-
-
-
-
 enum class KeyEvent
 {
 	Down,
@@ -29,39 +24,12 @@ public:
 	UEngineInput(UEngineInput&& _Other) noexcept = delete;
 	UEngineInput& operator=(const UEngineInput& _Other) = delete;
 	UEngineInput& operator=(UEngineInput&& _Other) noexcept = delete;
-
-			
 	
 	static UEngineInput& GetInst()
-	{
-								
-				static UEngineInput Inst = UEngineInput();
+	{					
+		static UEngineInput Inst = UEngineInput();
 		return Inst;
 	}
-
-
-	//static UEngineInput& GetInst()
-	//{
-	//	return Inst;
-	//}
-
-					//static UEngineInput& GetInst()
-	//{
-	//	if (nullptr == Inst)
-	//	{
-	//		Inst = new UEngineInput();
-	//	}
-	//	return *Inst;
-	//}
-
-			//static void DestroyInst()
-	//{
-	//	if (nullptr != Inst)
-	//	{
-	//		delete Inst;
-	//		Inst = nullptr;
-	//	}
-	//}
 
 	private:
 	class UEngineKey
@@ -69,13 +37,13 @@ public:
 	public:
 		int Key = -1;
 
-				bool IsDown = false;
+		bool IsDown = false;
 
-				bool IsPress = false;
+		bool IsPress = false;
 
-				bool IsUp = false;
+		bool IsUp = false;
 
-				bool IsFree = true;
+		bool IsFree = true;
 
 		float PressTime = 0.0f;
 
@@ -169,10 +137,7 @@ public:
 protected:
 
 private:
-					
-		
-			
-		std::map<int, UEngineKey> Keys;
+	std::map<int, UEngineKey> Keys;
 
 	UEngineInput();
 

@@ -3,9 +3,10 @@
 
 enum class ERenderOrder
 {
-	BACKGROUND = -1000,
-	COLMAP = -999,
-	PLAYER = 0,
+	COLMAP = -1000,
+	BACKGROUND = -999,
+	PLAYER = 9,
+	BUILDING = 10,
 	UI = 10000,
 	TITLE = 11000,
 	FADE = 20000,
