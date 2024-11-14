@@ -13,7 +13,7 @@ APlayMap::APlayMap()
 		BackTopSpriteRenderer->SetSprite("WindowTopBlack.png");
 
 		FVector2D MapScale = BackTopSpriteRenderer->SetSpriteScale(1.0f);
-		BackTopSpriteRenderer->SetComponentLocation({ static_cast<float>(ScreenX * 0.5), static_cast<float>(ScreenY * 0.4 - 32) });
+		BackTopSpriteRenderer->SetComponentLocation({ ScreenHX, static_cast<float>(ScreenY * 0.4 - 32) });
 	}
 
 	{
@@ -22,7 +22,7 @@ APlayMap::APlayMap()
 		BackBottomSpriteRenderer->SetSprite("WindowBottomBlack.png");
 
 		FVector2D MapScale = BackBottomSpriteRenderer->SetSpriteScale(1.0f);
-		BackBottomSpriteRenderer->SetComponentLocation({ static_cast<float>(ScreenX * 0.5), static_cast<float>(ScreenY - 16.5) });
+		BackBottomSpriteRenderer->SetComponentLocation({ ScreenHX, static_cast<float>(ScreenY - 16.5) });
 	}
 
 	{
@@ -31,7 +31,7 @@ APlayMap::APlayMap()
 		BackSpriteRenderer->SetSprite("GrassMap.png");
 
 		FVector2D MapScale = BackSpriteRenderer->SetSpriteScale(1.0f);
-		BackSpriteRenderer->SetComponentLocation({ static_cast<float>(ScreenX * 0.5), ScreenHY + 108 - 32 });
+		BackSpriteRenderer->SetComponentLocation({ ScreenHX, ScreenHY + 108 - 32 });
 	}
 }
 

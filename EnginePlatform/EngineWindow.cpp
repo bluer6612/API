@@ -197,12 +197,9 @@ void UEngineWindow::SetWindowPosAndScale(FVector2D _Pos, FVector2D _Scale)
                     
      AdjustWindowRect(&Rc, WS_OVERLAPPEDWINDOW, FALSE);
 
-     ::SetForegroundWindow(WindowHandle);
+     //::SetForegroundWindow(WindowHandle);
 
-    //::BringWindowToTop(WindowHandle);
-
-    ::SetWindowPos(WindowHandle, HWND_TOP, _Pos.iX(), _Pos.iY(), Rc.right - Rc.left, Rc.bottom - Rc.top, SWP_NOSIZE | SWP_SHOWWINDOW);
-
+    ::SetWindowPos(WindowHandle, HWND_TOP, _Pos.iX(), _Pos.iY(), 0, 0, SWP_NOSIZE | SWP_SHOWWINDOW);
 }
 
 FVector2D UEngineWindow::GetMousePos()

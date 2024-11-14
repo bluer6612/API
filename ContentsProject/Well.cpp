@@ -3,7 +3,7 @@
 
 AWell::AWell()
 {
-	Location.X = static_cast<float>(ScreenX * 0.5);
+	Location.X = ScreenHX;
 	Location.Y = ScreenHY + 159;
 
 	{

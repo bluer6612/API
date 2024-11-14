@@ -3,7 +3,7 @@
 
 AMenuUI::AMenuUI()
 {
-	Location.X = static_cast<float>(ScreenX * 0.5) - 197;
+	Location.X = ScreenHX - 197;
 	Location.Y = ScreenHY;
 
 	{

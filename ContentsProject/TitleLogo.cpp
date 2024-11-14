@@ -34,7 +34,7 @@ TitleLogo::TitleLogo()
 		ButtonSpriteRenderer[1]->SetOrder(ERenderOrder::UI);
 		ButtonSpriteRenderer[1]->SetSprite("UI_TitleMenuButton.png");
 		ButtonSpriteRenderer[1]->SetSpriteScale(2.00f);
-		ButtonSpriteRenderer[1]->SetComponentLocation({ static_cast<float>(ScreenX * 0.5),  static_cast<float>(ScreenY / 3.975) });
+		ButtonSpriteRenderer[1]->SetComponentLocation({ ScreenHX,  static_cast<float>(ScreenY / 3.975) });
 
 		ButtonSpriteRenderer[2] = CreateDefaultSubObject<USpriteRenderer>();
 		ButtonSpriteRenderer[2]->SetOrder(ERenderOrder::UI);
