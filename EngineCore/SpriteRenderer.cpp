@@ -13,8 +13,13 @@ USpriteRenderer::~USpriteRenderer()
 {
 }
 
+// SpriteRenderer : public URenderer
+// MeshRenderer : public URenderer
+// StaticMeshRenderer : public URenderer
 void USpriteRenderer::Render(float _DeltaTime)
 {
+	// 업데이트
+
 	if (nullptr == Sprite)
 	{
 		MSGASSERT("스프라이트가 세팅되지 않은 액터를 랜더링을 할수 없습니다.");
@@ -48,32 +53,39 @@ void USpriteRenderer::Render(float _DeltaTime)
 
 void USpriteRenderer::BeginPlay()
 {
+	// 부모 클래스의 함수를 호출하는걸 깜빡하면 안된다.
+	// 습관되면 가장 언리얼 학습에서 걸림돌이 되는 습관이 된다.
 	Super::BeginPlay();
+
+	// 스프라이트 랜더러가 
 
 	AActor* Actor = GetActor();
 	ULevel* Level = Actor->GetWorld();
 
-	Level->PushRenderer(this);
+	Level->ChangeRenderOrder(this, this->GetOrder());
 }
 
 void USpriteRenderer::ComponentTick(float _DeltaTime)
 {
 	Super::ComponentTick(_DeltaTime);
 
+	// 애니메이션 진행시키는 코드를 ComponentTick으로 옮겼다. 
 	if (nullptr != CurAnimation)
 	{
-		CurAnimation->IsEnd = false;
 		std::vector<int>& Indexs = CurAnimation->FrameIndex;
 		std::vector<float>& Times = CurAnimation->FrameTime;
 
 		Sprite = CurAnimation->Sprite;
 
-		CurAnimation->CurTime += _DeltaTime;
+
+		CurAnimation->CurTime += _DeltaTime * CurAnimationSpeed;
 
 		float CurFrameTime = Times[CurAnimation->CurIndex];
 
+		//                           0.1 0.1 0.1
 		if (CurAnimation->CurTime > CurFrameTime)
 		{
+
 			CurAnimation->CurTime -= CurFrameTime;
 			++CurAnimation->CurIndex;
 
@@ -82,9 +94,13 @@ void USpriteRenderer::ComponentTick(float _DeltaTime)
 				CurAnimation->Events[CurIndex]();
 			}
 
+			// 애니메이션 앤드
 			if (CurAnimation->CurIndex >= Indexs.size())
 			{
 				CurAnimation->IsEnd = true;
+			}
+			else {
+				CurAnimation->IsEnd = false;
 			}
 
 			if (CurAnimation->CurIndex >= Indexs.size())
@@ -104,14 +120,19 @@ void USpriteRenderer::ComponentTick(float _DeltaTime)
 					--CurAnimation->CurIndex;
 				}
 			}
+
 		}
-		
+
+
+		//         2 3 4           0
 		CurIndex = Indexs[CurAnimation->CurIndex];
+		// ++CurAnimation->CurIndex;
 	}
+
 }
 
 void USpriteRenderer::SetSprite(std::string_view _Name, int _CurIndex /*= 0*/)
-{	
+{
 	Sprite = UImageManager::GetInst().FindSprite(_Name);
 
 	if (nullptr == Sprite)
@@ -177,7 +198,7 @@ void USpriteRenderer::SetComponentCrate(USpriteRenderer* _SR, std::string_view _
 	}
 	else if (1 == _Scale.X && 1 == _Scale.Y)
 	{
-		_SR->SetComponentScale({ static_cast<float>(GetComponentScale().X * 0.5), static_cast<float>(GetComponentScale().Y * 0.5)});
+		_SR->SetComponentScale({ static_cast<float>(GetComponentScale().X * 0.5), static_cast<float>(GetComponentScale().Y * 0.5) });
 	}
 	else
 	{
@@ -187,14 +208,9 @@ void USpriteRenderer::SetComponentCrate(USpriteRenderer* _SR, std::string_view _
 	_SR->SetOrder(_Order);
 }
 
+
 void USpriteRenderer::CreateAnimation(std::string_view _AnimationName, std::string_view _SpriteName, int _Start, int _End, float Time /*= 0.1f*/, bool _Loop /*= true*/)
 {
-	if (_Start > _End)
-	{
-		MSGASSERT("애니메이션에서 Start가 End보다 클수는 없습니다. " + std::string(_AnimationName));
-		return;
-	}
-
 	int Inter = 0;
 
 	std::vector<int> Indexs;
@@ -209,6 +225,7 @@ void USpriteRenderer::CreateAnimation(std::string_view _AnimationName, std::stri
 			Times.push_back(Time);
 			++_Start;
 		}
+
 	}
 	else
 	{
@@ -221,8 +238,10 @@ void USpriteRenderer::CreateAnimation(std::string_view _AnimationName, std::stri
 		}
 	}
 
+
 	CreateAnimation(_AnimationName, _SpriteName, Indexs, Times, _Loop);
 }
+
 
 void USpriteRenderer::CreateAnimation(std::string_view _AnimationName, std::string_view _SpriteName, std::vector<int> _Indexs, float _Frame, bool _Loop /*= true*/)
 {
@@ -330,6 +349,7 @@ void USpriteRenderer::SetAnimationEvent(std::string_view _AnimationName, int _Fr
 	}
 
 	ChangeAnimation->Events[_Frame] += _Function;
+
 }
 
 void USpriteRenderer::SetCameraEffectScale(float _Effect)
@@ -337,6 +357,7 @@ void USpriteRenderer::SetCameraEffectScale(float _Effect)
 	CameraEffectScale = _Effect;
 }
 
+// 여러분들이 애니메이션을 하거나
 void USpriteRenderer::SetPivotType(PivotType _Type)
 {
 	if (PivotType::Center == _Type)

@@ -13,9 +13,12 @@ enum class PivotType
 	Top,
 };
 
+// 설명 :
 class USpriteRenderer : public USceneComponent
 {
-	public:
+	// 애가 다 담당한다.
+	// 클래스를 심화분류해서
+public:
 	class FrameAnimation
 	{
 	public:
@@ -64,7 +67,7 @@ public:
 
 	void SetOrder(int _Order);
 
-	int GetOrder()
+	int GetOrder() const
 	{
 		return Order;
 	}
@@ -110,6 +113,16 @@ public:
 		Alpha = _Value;
 	}
 
+	void SetAnimationSpeed(float _Speed)
+	{
+		CurAnimationSpeed = _Speed;
+	}
+
+	void ResetAnimationSpeed()
+	{
+		CurAnimationSpeed = 1.0f;
+	}
+
 	void SetAlphafloat(float _Value)
 	{
 		_Value = UEngineMath::Clamp(_Value, 0.0f, 1.0f);
@@ -123,7 +136,9 @@ private:
 	int CurIndex = 0;
 	bool IsCameraEffect = true;
 	float CameraEffectScale = 1.0f;
+	float CurAnimationSpeed = 1.0f;
 
+	// 다이렉트는 모든 색상을 0~1.0f로 표현한다.
 	unsigned char Alpha = 255;
 
 	FVector2D Pivot = FVector2D::ZERO;

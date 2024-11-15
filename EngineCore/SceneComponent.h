@@ -14,19 +14,19 @@ public:
 	USceneComponent& operator=(const USceneComponent& _Other) = delete;
 	USceneComponent& operator=(USceneComponent&& _Other) noexcept = delete;
 
-	FTransform GetTransform()
+	FTransform GetTransform() const
 	{
 		return Transform;
 	}
 
 	FTransform GetActorTransform();
 
-	FVector2D GetComponentScale()
+	FVector2D GetComponentScale() const
 	{
 		return Transform.Scale;
 	}
 
-	FVector2D GetComponentLocation()
+	FVector2D GetComponentLocation() const
 	{
 		return Transform.Location;
 	}

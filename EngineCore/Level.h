@@ -17,23 +17,23 @@ public:
 };
 
 
-class ULevel
+class ULevel : public UObject
 {
 public:
 	friend class U2DCollision;
 	friend class USpriteRenderer;
 	friend class UEngineAPICore;
-	ULevel();
+		ULevel();
 	~ULevel();
 
-	ULevel(const ULevel& _Other) = delete;
+		ULevel(const ULevel& _Other) = delete;
 	ULevel(ULevel&& _Other) noexcept = delete;
 	ULevel& operator=(ULevel&& _Other) noexcept = delete;
 
 	ULevel& operator=(const ULevel& _Other) = delete;
-	void LevelChangeStart();
+		void LevelChangeStart();
 
-	void LevelChangeEnd();
+		void LevelChangeEnd();
 
 	void Tick(float _DeltaTime);
 	void Render(float _DeltaTime);
@@ -46,10 +46,10 @@ public:
 		ActorType* NewActor = new ActorType();
 
 		AActor* ActorPtr = dynamic_cast<AActor*>(NewActor);
-		ActorPtr->World = this;
+				ActorPtr->World = this;
 
 		BeginPlayList.push_back(ActorPtr);
-		return NewActor;
+						return NewActor;
 	}
 
 	void SetCameraToMainPawn(bool _IsCameraToMainPawn)

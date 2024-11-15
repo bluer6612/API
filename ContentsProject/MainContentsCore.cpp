@@ -5,6 +5,7 @@
 #include <EngineBase/EngineDirectory.h>
 #include <EngineBase/EngineFile.h>
 #include <EngineCore/ImageManager.h>
+#include <EnginePlatform/EngineSound.h>
 
 #include "PlayGameMode.h"
 #include "Rusty.h"
@@ -23,6 +24,7 @@ void MainContentsCore::BeginPlay()
 {
 	UEngineDirectory Dir;
 
+	//이미지 로드
 	if (false == Dir.MoveParentToDirectory("Resources"))
 	{
 		MSGASSERT("리소스 폴더를 찾지 못했습니다.");
@@ -37,6 +39,23 @@ void MainContentsCore::BeginPlay()
 	{
 		std::string FilePath = ImageFiles[i].GetPathToString();
 		UImageManager::GetInst().Load(FilePath);
+	}
+
+	//사운드 로드
+	{
+		UEngineDirectory Dir;
+		if (false == Dir.MoveParentToDirectory("Resources"))
+		{
+			MSGASSERT("리소스 폴더를 찾지 못했습니다.");
+			return;
+		}
+		Dir.Append("Sound");
+		std::vector<UEngineFile> ImageFiles = Dir.GetAllFile();
+		for (size_t i = 0; i < ImageFiles.size(); i++)
+		{
+			std::string FilePath = ImageFiles[i].GetPathToString();
+			UEngineSound::Load(FilePath);
+		}
 	}
 
 	UImageManager::GetInst().CuttingSprite("Text.bmp", { 16, 32 });

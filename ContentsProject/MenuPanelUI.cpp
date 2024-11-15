@@ -37,7 +37,7 @@ AMenuPanelUI::AMenuPanelUI()
 			SpriteRFarmSlot[i] = CreateDefaultSubObject<USpriteRenderer>();
 			SpriteRFarmSlot[i]->SetComponentCrate(SpriteRFarmSlot[i], "000_crop-seed-button.png", {}, { (Location.X - 153 + (Loc * 104)), (Location.Y - 120 + ((Loc / 4) + (i / 4)) * 46)  }, ERenderOrder::UI);
 
-			if (i > 24 - 1)
+			if (i > (24 - 1))
 			{
 				SpriteRFarmSlot[i]->SetActive(false);
 			}

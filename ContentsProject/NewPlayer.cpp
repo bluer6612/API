@@ -5,18 +5,9 @@
 #include <EngineCore/EngineAPICore.h>
 #include <EngineCore/EngineCoreDebug.h>
 #include <EngineCore/2DCollision.h>
-#include "ContentsEnum.h"
+#include "PlayGameMode.h"
 #include "Fade.h"
-
-void ANewPlayer::TestTimeEvent()
-{
-	UEngineDebug::OutPutString("Test");
-
-	// TimeEventer.PushEvent(1.0f, std::bind(&AMonster::TestTimeEvent, this));
-	//AMonster* NewActor = GetWorld()->SpawnActor<AMonster>();
-	//NewActor->SetActorLocation(GetActorLocation() + FVector2D{ 100, 0 });
-}
-
+#include "ContentsEnum.h"
 
 ANewPlayer::ANewPlayer()
 {
@@ -45,8 +36,6 @@ ANewPlayer::ANewPlayer()
 	}
 
 	DebugOn();
-
-	TimeEventer.PushEvent(1.0f, std::bind(&ANewPlayer::TestTimeEvent, this), true);
 }
 
 void ANewPlayer::CollisionEnter(AActor* _ColActor)
@@ -61,7 +50,7 @@ void ANewPlayer::CollisionStay(AActor* _ColActor)
 
 void ANewPlayer::CollisionEnd(AActor* _ColActor)
 {
-	int  a = 0;
+	int a = 0;
 }
 
 ANewPlayer::~ANewPlayer()
@@ -71,10 +60,14 @@ ANewPlayer::~ANewPlayer()
 void ANewPlayer::BeginPlay()
 {
 	Super::BeginPlay();
+
+	BGMPlayer = UEngineSound::Play("anipang_ingame_wav.wav");
+
 	FVector2D Size = UEngineAPICore::GetCore()->GetMainWindow().GetWindowSize();
 	GetWorld()->SetCameraPivot(Size.Half() * -1.0f);
 
 	GetWorld()->SetCameraToMainPawn(false);
+
 	FSM.CreateState(NewPlayerState::Idle, std::bind(&ANewPlayer::Idle, this, std::placeholders::_1),
 		[this]()
 		{
@@ -101,46 +94,32 @@ void ANewPlayer::PlayerCameraCheck()
 	DebugOn();
 }
 
-void ANewPlayer::PlayerGroundCheck(FVector2D _MovePos)
+void ANewPlayer::DirCheck()
 {
-	IsGround = false;
 
-	if (nullptr != ColImage)
+	if (true == UEngineInput::GetInst().IsPress('D'))
 	{
-		FVector2D NextPos = GetActorLocation() + _MovePos;
-
-		NextPos.X = floorf(NextPos.X);
-		NextPos.Y = floorf(NextPos.Y);
-
-		UColor Color = ColImage->GetColor(NextPos, UColor::WHITE);
-		if (Color == UColor::WHITE)
-		{
-			IsGround = false;
-		}
-		else if (Color == UColor::BLACK)
-		{
-			IsGround = true;
-		}
-	}
-}
-
-void ANewPlayer::Gravity(float _DeltaTime)
-{
-	if (false == IsGround)
-	{
-		AddActorLocation(GravityForce * _DeltaTime);
-		GravityForce += FVector2D::DOWN * _DeltaTime * 500.0f;
-	}
-	else
-	{
-		GravityForce = FVector2D::ZERO;
+		DirString = "_Right";
 	}
 
+	if (true == UEngineInput::GetInst().IsPress('A'))
+	{
+		DirString = "_Left";
+	}
 }
 
 void ANewPlayer::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
+	if (true == UEngineInput::GetInst().IsDown(VK_F2))
+	{
+		UEngineDebug::SwitchIsDebug();
+	}
+
+	if (true == UEngineInput::GetInst().IsDown(VK_F3))
+	{
+		BGMPlayer.OnOffSwtich();
+	}
 
 	UEngineDebug::CoreOutPutString("FPS : " + std::to_string(1.0f / _DeltaTime));
 	UEngineDebug::CoreOutPutString("PlayerPos : " + GetActorLocation().ToString());
@@ -155,35 +134,29 @@ void ANewPlayer::Tick(float _DeltaTime)
 		UEngineDebug::SwitchIsDebug();
 	}
 
+	//if (true == UEngineInput::GetInst().IsDown('U'))
+	//{
+	//	AFade::MainFade->FadeIn();
+	//}
+
+	//if (true == UEngineInput::GetInst().IsDown('Y'))
+	//{
+	//	AFade::MainFade->FadeOut();
+	//}
+
 	DirCheck();
+
 	FSM.Update(_DeltaTime);
-}
-
-void ANewPlayer::DirCheck()
-{
-
-	if (true == UEngineInput::GetInst().IsPress('D'))
-	{
-		DirString = "_Right";
-	}
-
-	if (true == UEngineInput::GetInst().IsPress('A'))
-	{
-		DirString = "_Left";
-	}
-
 }
 
 void ANewPlayer::Idle(float _DeltaTime)
 {
-	PlayerCameraCheck();
+		PlayerCameraCheck();
 
 	if (true == UEngineInput::GetInst().IsPress('A') ||
-		true == UEngineInput::GetInst().IsPress('D') ||
-		true == UEngineInput::GetInst().IsPress('W') ||
-		true == UEngineInput::GetInst().IsPress('S'))
+		true == UEngineInput::GetInst().IsPress('D'))
 	{
-		FSM.ChangeState(NewPlayerState::Move);
+						FSM.ChangeState(NewPlayerState::Move);
 		return;
 	}
 }
@@ -202,34 +175,11 @@ void ANewPlayer::Move(float _DeltaTime)
 	if (true == UEngineInput::GetInst().IsPress('A'))
 	{
 		Vector += FVector2D::LEFT;
-	}
-
-	if (true == UEngineInput::GetInst().IsPress('S'))
-	{
-		Vector += FVector2D::DOWN;
-	}
-	if (true == UEngineInput::GetInst().IsPress('W'))
-	{
-		Vector += FVector2D::UP;
-	}
+			}
 
 	Vector.Normalize();
 
-	AddActorLocation(Vector * _DeltaTime * Speed);
-
-	while (true)
-	{
-		UColor Color = ColImage->GetColor(GetActorLocation(), UColor::WHITE);
-		
-		if (Color == UColor::BLACK)
-		{
-			AddActorLocation(FVector2D::UP);
-		}
-		else
-		{
-			break;
-		}
-	}
+		AddActorLocation(Vector * _DeltaTime * Speed);
 
 	if (false == UEngineInput::GetInst().IsPress('A') &&
 		false == UEngineInput::GetInst().IsPress('D') &&

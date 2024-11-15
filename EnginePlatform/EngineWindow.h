@@ -50,7 +50,7 @@ public:
 		return BackBufferImage;
 	}
 
-	inline void SetWindowTitle(std::string_view Text)
+	inline void SetWindowTitle(std::string_view Text)  const
 	{			
 		SetWindowTextA(WindowHandle, Text.data());
 	}

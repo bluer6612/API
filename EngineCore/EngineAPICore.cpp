@@ -3,23 +3,17 @@
 #include <EnginePlatform/EngineInput.h>
 
 #include <EnginePlatform/EngineWindow.h>
+#include <EnginePlatform/EngineSound.h>
 #include <EngineBase/EngineDelegate.h>
 #include <EngineBase/EngineDebug.h>
 
-
+#include <Windows.h>
 
 UEngineAPICore* UEngineAPICore::MainCore = nullptr;
 UContentsCore* UEngineAPICore::UserCore = nullptr;
 
-#include <Windows.h>
-//QueryPerformanceCounter
-
-//QueryPerformanceFrequency
-
-
 UEngineAPICore::UEngineAPICore()
 {
-
 }
 
 UEngineAPICore::~UEngineAPICore()
@@ -37,6 +31,8 @@ UEngineAPICore::~UEngineAPICore()
 	}
 
 	Levels.clear();
+
+	UEngineSound::Release();
 }
 
 
@@ -48,7 +44,7 @@ int UEngineAPICore::EngineStart(HINSTANCE _Inst, UContentsCore* _UserCore)
 
 	UEngineWindow::EngineWindowInit(_Inst);
 
-			UEngineAPICore Core = UEngineAPICore();
+	UEngineAPICore Core = UEngineAPICore();
 	Core.EngineMainWindow.Open();
 	MainCore = &Core;
 
@@ -62,23 +58,32 @@ void UEngineAPICore::EngineBeginPlay()
 	UserCore->BeginPlay();
 }
 
+// 이 함수가 1초에 몇번 실행되냐가 프레임입니다.
 void UEngineAPICore::EngineTick()
 {
 	//AXVidio NewVidio;
 	//NewVidio.Play("AAAA.avi");
 
-				
+	UserCore->Tick();
 
-		UserCore->Tick();
-
-		MainCore->Tick();
-		}
+	// MainCore->TimeCheck();
+	MainCore->Tick();
+	// MainCore->Render();
+	// MainCore->Collision();
+}
 
 void UEngineAPICore::Tick()
 {
+	if (true == IsCurLevelReset)
+	{
+		delete CurLevel;
+		CurLevel = nullptr;
+		IsCurLevelReset = false;
+	}
+
 	if (nullptr != NextLevel)
 	{
-				
+
 		if (nullptr != CurLevel)
 		{
 			CurLevel->LevelChangeEnd();
@@ -89,13 +94,16 @@ void UEngineAPICore::Tick()
 		NextLevel->LevelChangeStart();
 
 		NextLevel = nullptr;
-				DeltaTimer.TimeStart();
+
+		DeltaTimer.TimeStart();
 	}
 
-		DeltaTimer.TimeCheck();
+	DeltaTimer.TimeCheck();
 	float DeltaTime = DeltaTimer.GetDeltaTime();
 
-		UEngineInput::GetInst().KeyCheck(DeltaTime);
+	UEngineSound::Update();
+
+	UEngineInput::GetInst().KeyCheck(DeltaTime);
 
 	if (nullptr == CurLevel)
 	{
@@ -104,34 +112,28 @@ void UEngineAPICore::Tick()
 	}
 
 	UEngineInput::GetInst().EventCheck(DeltaTime);
+
 	CurLevel->Tick(DeltaTime);
-		CurLevel->Render(DeltaTime);
-
-		CurLevel->Collision(DeltaTime);
-
-		CurLevel->Release(DeltaTime);
+	CurLevel->Render(DeltaTime);
+	CurLevel->Collision(DeltaTime);
+	CurLevel->Release(DeltaTime);
 }
 
 
 void UEngineAPICore::OpenLevel(std::string_view _LevelName)
 {
-	std::string ChangeName = _LevelName.data();
+	std::string UpperName = UEngineString::ToUpper(_LevelName);
 
-	//if (true == Levels.contains(ChangeName))
-	//{
-	//	MSGASSERT(ChangeName + "라는 이름의 레벨은 존재하지 않습니다.");
-	//	return;
-	//}
 
-	//				
-	std::map<std::string, class ULevel*>::iterator FindIter = Levels.find(ChangeName);
+	std::map<std::string, class ULevel*>::iterator FindIter = Levels.find(UpperName);
 	std::map<std::string, class ULevel*>::iterator EndIter = Levels.end();
 
 	if (EndIter == FindIter)
 	{
-		MSGASSERT(ChangeName + "라는 이름의 레벨은 존재하지 않습니다.");
+		MSGASSERT(UpperName + " 라는 이름의 레벨은 존재하지 않습니다.");
 		return;
 	}
 
-			NextLevel = FindIter->second;
+	NextLevel = FindIter->second;
+
 }

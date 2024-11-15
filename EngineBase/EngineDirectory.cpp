@@ -29,7 +29,7 @@ std::vector<class UEngineFile> UEngineDirectory::GetAllFile(bool _IsRecursive /*
 {
 	std::vector<class UEngineFile> Result;
 
-		std::filesystem::directory_iterator Diriter = std::filesystem::directory_iterator(Path);
+	std::filesystem::directory_iterator Diriter = std::filesystem::directory_iterator(Path);
 
 	while (false == Diriter._At_end())
 	{

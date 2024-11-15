@@ -63,16 +63,34 @@ void U2DCollision::ComponentTick(float _DeltaTime)
 
 bool U2DCollision::Collision(int _OtherCollisionGroup, std::vector<AActor*>& _Result, FVector2D _NextPos, unsigned int  _Limite)
 {
-		
+			U2DCollision* ThisCollision = this;
+
+	if (false == ThisCollision->IsActive())
+	{
+		return false;
+	}
+
+	
+
 	std::list<class U2DCollision*>& OtherCollisions = GetActor()->GetWorld()->Collisions[_OtherCollisionGroup];
+
 
 	std::list<class U2DCollision*>::iterator StartIter = OtherCollisions.begin();
 	std::list<class U2DCollision*>::iterator EndIter = OtherCollisions.end();
 
 	for (; StartIter != EndIter; ++StartIter)
 	{
-		U2DCollision* ThisCollision = this;
 		U2DCollision* DestCollision = *StartIter;
+
+		if (ThisCollision == DestCollision)
+		{
+			continue;
+		}
+
+		if (false == DestCollision->IsActive())
+		{
+			continue;
+		}
 				FTransform ThisTrans = ThisCollision->GetActorTransform();
 		FTransform DestTrans = DestCollision->GetActorTransform();
 

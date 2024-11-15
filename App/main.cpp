@@ -15,19 +15,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	_In_ int       nCmdShow)
 {
 
-    {
-        APPBARDATA appBarData;
-        memset(&appBarData, 0, sizeof(appBarData));
-        appBarData.hWnd = FindWindowA(("Shell_TrayWnd"), NULL);
-        appBarData.cbSize = sizeof(appBarData);
-        appBarData.lParam |= ABS_ALWAYSONTOP;
-        //appBarData.lParam |= ABS_AUTOHIDE;
-        //appBarData.lParam |= ABS_ALWAYSONTOP;
-        //appBarData.lParam |= ABS_AUTOHIDE | ABS_ALWAYSONTOP;
-        ::SHAppBarMessage(ABM_SETSTATE, &appBarData);
-    }
-
-
 	MainContentsCore User;
 	return UEngineAPICore::EngineStart(hInstance, &User);
 }
