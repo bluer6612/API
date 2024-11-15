@@ -21,7 +21,7 @@ public:
 protected:
 
 private:
-	class USpriteRenderer* SpriteRendererWheel = nullptr;
-	class USpriteRenderer* SpriteRendererDoor = nullptr;
-	class USpriteRenderer* MoneySpriteRenderer = nullptr;;
+	class USpriteRenderer* SpriteRWheel = nullptr;
+	class USpriteRenderer* SpriteRDoor = nullptr;
+	class USpriteRenderer* MoneySpriteR = nullptr;;
 };

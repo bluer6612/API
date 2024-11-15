@@ -10,7 +10,9 @@ enum class ERenderOrder
 	BUILDINGDOWN = 9,
 	BUILDING = 10,
 	BUILDINGUP = 11,
+	UIDOWN = 9999,
 	UI = 10000,
+	UIUP = 10001,
 	TITLE = 11000,
 	FADE = 20000,
 };

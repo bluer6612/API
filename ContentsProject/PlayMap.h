@@ -17,7 +17,7 @@ protected:
 	void Tick(float _DeltaTime) override;
 
 private:
-	USpriteRenderer* BackSpriteRenderer;
-	USpriteRenderer* BackTopSpriteRenderer;
-	USpriteRenderer* BackBottomSpriteRenderer;
+	USpriteRenderer* BackSpriteR;
+	USpriteRenderer* BackTopSpriteR;
+	USpriteRenderer* BackBottomSpriteR;
 };

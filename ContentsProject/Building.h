@@ -20,7 +20,7 @@ public:
 	void ModelAdd(std::string_view _Name, double _X, double _Y, int _Order);
 
 protected:
-	class USpriteRenderer* SpriteRenderer = nullptr;
+	class USpriteRenderer* SpriteR = nullptr;
 	class USpriteRenderer* Sprite[10] = {};
 
 	UFSMStateManager FSM;

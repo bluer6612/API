@@ -8,18 +8,18 @@
 APlayMap::APlayMap()
 {
 	{
-		BackTopSpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
-		BackTopSpriteRenderer->SetComponentCrate(BackTopSpriteRenderer, "WindowTopBlack.png", {}, { ScreenHX, static_cast<float>(ScreenY * 0.4 - 32) }, ERenderOrder::COLMAP);
+		BackTopSpriteR = CreateDefaultSubObject<USpriteRenderer>();
+		BackTopSpriteR->SetComponentCrate(BackTopSpriteR, "WindowTopBlack.png", {}, { ScreenHX, static_cast<float>(ScreenY * 0.4 - 32) }, ERenderOrder::COLMAP);
 	}
 
 	{
-		BackBottomSpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
-		BackBottomSpriteRenderer->SetComponentCrate(BackBottomSpriteRenderer, "WindowBottomBlack.png", { 1, 1 }, { ScreenHX, static_cast<float>(ScreenY - 16.5) }, ERenderOrder::TITLE);
+		BackBottomSpriteR = CreateDefaultSubObject<USpriteRenderer>();
+		BackBottomSpriteR->SetComponentCrate(BackBottomSpriteR, "WindowBottomBlack.png", { 1, 1 }, { ScreenHX, static_cast<float>(ScreenY - 16.5) }, ERenderOrder::TITLE);
 	}
 
 	{
-		BackSpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
-		BackSpriteRenderer->SetComponentCrate(BackSpriteRenderer, "GrassMap.png", { 1, 1 }, { ScreenHX, ScreenHY + 108 - 32 }, ERenderOrder::BACKGROUND);
+		BackSpriteR = CreateDefaultSubObject<USpriteRenderer>();
+		BackSpriteR->SetComponentCrate(BackSpriteR, "GrassMap.png", { 1, 1 }, { ScreenHX, ScreenHY + 108 - 32 }, ERenderOrder::BACKGROUND);
 	}
 }
 
@@ -36,6 +36,6 @@ void APlayMap::Tick(float _DeltaTime)
 
 	if (true == UEngineInput::GetInst().IsDown('Y'))
 	{
-		BackTopSpriteRenderer->SetActiveSwitch();
+		BackTopSpriteR->SetActiveSwitch();
 	}
 }

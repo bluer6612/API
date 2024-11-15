@@ -7,9 +7,9 @@ ABiofuelconverter::ABiofuelconverter()
 	Location.Y = ScreenHY;
 
 	{
-		SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
-		SpriteRenderer->SetComponentCrate(SpriteRenderer, "000_biofuel-converter.png", {}, { Location.X, Location.Y }, ERenderOrder::BUILDING);
-		SpriteRenderer->CreateAnimation("Idle", "Biofuelconverter", 0, 0, 1.0f);
+		SpriteR = CreateDefaultSubObject<USpriteRenderer>();
+		SpriteR->SetComponentCrate(SpriteR, "000_biofuel-converter.png", {}, { Location.X, Location.Y }, ERenderOrder::BUILDING);
+		SpriteR->CreateAnimation("Idle", "Biofuelconverter", 0, 0, 1.0f);
 	}
 
 	{
@@ -33,7 +33,7 @@ void ABiofuelconverter::BeginPlay()
 	FSM.CreateState(NewPlayerState::Idle, std::bind(&ABiofuelconverter::Idle, this, std::placeholders::_1),
 		[this]()
 		{
-			SpriteRenderer->ChangeAnimation("Idle");
+			SpriteR->ChangeAnimation("Idle");
 		}
 	);
 

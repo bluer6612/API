@@ -8,26 +8,26 @@ AHouse::AHouse()
 
 	{
 
-		SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
-		SpriteRenderer->SetComponentCrate(SpriteRenderer, "004_House.png", {}, { ScreenHX, Location.Y + 1 }, ERenderOrder::BUILDING);
-		SpriteRenderer->CreateAnimation("Idle", "House", 4, 4, 0, false);
+		SpriteR = CreateDefaultSubObject<USpriteRenderer>();
+		SpriteR->SetComponentCrate(SpriteR, "004_House.png", {}, { ScreenHX, Location.Y + 1 }, ERenderOrder::BUILDING);
+		SpriteR->CreateAnimation("Idle", "House", 4, 4, 0, false);
 	}
 
 	{
-		SpriteRendererWheel = CreateDefaultSubObject<USpriteRenderer>();
-		SpriteRendererWheel->SetComponentCrate(SpriteRendererWheel, "009_House.png", {}, { ScreenHX, Location.Y + 10 }, ERenderOrder::BUILDINGUP);
-		SpriteRendererWheel->CreateAnimation("Idle_Wheel", "House", 9, 11, 0.5f, false);
+		SpriteRWheel = CreateDefaultSubObject<USpriteRenderer>();
+		SpriteRWheel->SetComponentCrate(SpriteRWheel, "009_House.png", {}, { ScreenHX, Location.Y + 10 }, ERenderOrder::BUILDINGUP);
+		SpriteRWheel->CreateAnimation("Idle_Wheel", "House", 9, 11, 0.5f, false);
 	}
 
 	{
-		SpriteRendererDoor = CreateDefaultSubObject<USpriteRenderer>();
-		SpriteRendererDoor->SetComponentCrate(SpriteRendererDoor, "000_House.png", {}, { ScreenHX, Location.Y + 65 }, ERenderOrder::BUILDINGDOWN);
-		SpriteRendererDoor->CreateAnimation("Idle_Door", "House", 0, 1, 0.5f, false);
+		SpriteRDoor = CreateDefaultSubObject<USpriteRenderer>();
+		SpriteRDoor->SetComponentCrate(SpriteRDoor, "000_House.png", {}, { ScreenHX, Location.Y + 65 }, ERenderOrder::BUILDINGDOWN);
+		SpriteRDoor->CreateAnimation("Idle_Door", "House", 0, 1, 0.5f, false);
 	}
 
 	{
-		MoneySpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
-		MoneySpriteRenderer->SetComponentCrate(MoneySpriteRenderer, "022_Housebiofuelspareparts.png", {}, { ScreenHX,  ScreenHY + 227 }, ERenderOrder::UI);
+		MoneySpriteR = CreateDefaultSubObject<USpriteRenderer>();
+		MoneySpriteR->SetComponentCrate(MoneySpriteR, "022_Housebiofuelspareparts.png", {}, { ScreenHX,  ScreenHY + 227 }, ERenderOrder::UI);
 	}
 
 	{
@@ -62,9 +62,9 @@ void AHouse::BeginPlay()
 	FSM.CreateState(NewPlayerState::Idle, std::bind(&AHouse::Idle, this, std::placeholders::_1),
 		[this]()
 		{
-			SpriteRenderer->ChangeAnimation("Idle");
-			//SpriteRendererWheel->ChangeAnimation("Idle_Wheel");
-			//SpriteRendererDoor->ChangeAnimation("Idle_Door");
+			SpriteR->ChangeAnimation("Idle");
+			//SpriteRWheel->ChangeAnimation("Idle_Wheel");
+			//SpriteRDoor->ChangeAnimation("Idle_Door");
 		}
 	);
 

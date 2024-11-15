@@ -7,9 +7,9 @@ AWell::AWell()
 	Location.Y = ScreenHY + 159;
 
 	{
-		SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
-		SpriteRenderer->SetComponentCrate(SpriteRenderer, "000_welltype.png", {}, { Location.X, Location.Y }, ERenderOrder::BUILDING);
-		SpriteRenderer->CreateAnimation("Idle", "Well", 0, 2, 2.0f);
+		SpriteR = CreateDefaultSubObject<USpriteRenderer>();
+		SpriteR->SetComponentCrate(SpriteR, "000_welltype.png", {}, { Location.X, Location.Y }, ERenderOrder::BUILDING);
+		SpriteR->CreateAnimation("Idle", "Well", 0, 2, 2.0f);
 	}
 }
 
@@ -25,7 +25,7 @@ void AWell::BeginPlay()
 	FSM.CreateState(NewPlayerState::Idle, std::bind(&AWell::Idle, this, std::placeholders::_1),
 		[this]()
 		{
-			SpriteRenderer->ChangeAnimation("Idle");
+			SpriteR->ChangeAnimation("Idle");
 		}
 	);
 

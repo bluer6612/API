@@ -25,7 +25,7 @@ public:
 protected:
 
 private:
-	class USpriteRenderer* SpriteRenderer = nullptr;
+	class USpriteRenderer* SpriteR = nullptr;
 	UFSMStateManager FSM;
 
 	float Speed = 500.0f;

@@ -19,8 +19,8 @@ public:
 protected:
 
 private:
-	USpriteRenderer* LogoSpriteRenderer;
-	USpriteRenderer* TooltipSpriteRenderer;
-	USpriteRenderer* ButtonSpriteRenderer;
+	USpriteRenderer* LogoSpriteR;
+	USpriteRenderer* TooltipSpriteR;
+	USpriteRenderer* ButtonSpriteR;
 };
 

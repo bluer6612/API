@@ -15,8 +15,9 @@ public:
 protected:
 
 private:
-	class USpriteRenderer* SpriteRendererTap = nullptr;
-	class USpriteRenderer* SpriteRendererResourcesBar = nullptr;
+	class USpriteRenderer* SpriteRTap = nullptr;
+	class USpriteRenderer* SpriteRResourcesBar = nullptr;
+	class USpriteRenderer* SpriteRFarmSlot[44] = {};
 	
 };
 

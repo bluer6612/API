@@ -11,11 +11,11 @@ ARusty::ARusty()
 	SetActorLocation({ static_cast<float>(ScreenX * 0.5 + -85), static_cast<float>((ScreenY - 243 - 36) + 80) });
 
 	{
-		SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
-		SpriteRenderer->SetSprite("RustyGold");
-		SpriteRenderer->CreateAnimation("Idle_Right", "RustyGold", 48, 49, 0.5f);
-		SpriteRenderer->CreateAnimation("Run_Right", "RustyGold", 0, 5, 0.2f);
-		SpriteRenderer->SetOrder(ERenderOrder::PLAYER);
+		SpriteR = CreateDefaultSubObject<USpriteRenderer>();
+		SpriteR->SetSprite("RustyGold");
+		SpriteR->CreateAnimation("Idle_Right", "RustyGold", 48, 49, 0.5f);
+		SpriteR->CreateAnimation("Run_Right", "RustyGold", 0, 5, 0.2f);
+		SpriteR->SetOrder(ERenderOrder::PLAYER);
 	}
 }
 
@@ -33,14 +33,14 @@ void ARusty::BeginPlay()
 	FSM.CreateState(NewPlayerState::Idle, std::bind(&ARusty::Idle, this, std::placeholders::_1),
 		[this]()
 		{
-			SpriteRenderer->ChangeAnimation("Idle_Right");
+			SpriteR->ChangeAnimation("Idle_Right");
 		}
 	);
 
 	FSM.CreateState(NewPlayerState::Move, std::bind(&ARusty::Move, this, std::placeholders::_1),
 		[this]()
 		{
-			SpriteRenderer->ChangeAnimation("Run_Right");
+			SpriteR->ChangeAnimation("Run_Right");
 		}
 	);
 
