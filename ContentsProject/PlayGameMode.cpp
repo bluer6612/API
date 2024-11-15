@@ -150,23 +150,23 @@ void APlayGameMode::Tick(float _DeltaTime)
 		WallTileMap->DeSerialize(Ser);
 	}
 
-	if (true == UEngineInput::GetInst().IsPress('A'))
-	{
-		WallTileMap->AddActorLocation(FVector2D::LEFT * _DeltaTime * 100.0f);
-	}
+	//if (true == UEngineInput::GetInst().IsPress('A'))
+	//{
+	//	WallTileMap->AddActorLocation(FVector2D::LEFT * _DeltaTime * 100.0f);
+	//}
 
-	if (true == UEngineInput::GetInst().IsPress('D'))
-	{
-		WallTileMap->AddActorLocation(FVector2D::RIGHT * _DeltaTime * 100.0f);
-	}
+	//if (true == UEngineInput::GetInst().IsPress('D'))
+	//{
+	//	WallTileMap->AddActorLocation(FVector2D::RIGHT * _DeltaTime * 100.0f);
+	//}
 
-	if (true == UEngineInput::GetInst().IsPress('W'))
-	{
-		WallTileMap->AddActorLocation(FVector2D::UP * _DeltaTime * 100.0f);
-	}
+	//if (true == UEngineInput::GetInst().IsPress('W'))
+	//{
+	//	WallTileMap->AddActorLocation(FVector2D::UP * _DeltaTime * 100.0f);
+	//}
 
-	if (true == UEngineInput::GetInst().IsPress('S'))
-	{
-		WallTileMap->AddActorLocation(FVector2D::DOWN * _DeltaTime * 100.0f);
-	}
+	//if (true == UEngineInput::GetInst().IsPress('S'))
+	//{
+	//	WallTileMap->AddActorLocation(FVector2D::DOWN * _DeltaTime * 100.0f);
+	//}
 }

@@ -31,15 +31,42 @@ AMenuPanelUI::AMenuPanelUI()
 	}
 
 	{
+		Sprite[index] = CreateDefaultSubObject<USpriteRenderer>();
+		Sprite[index]->SetComponentCrate(Sprite[index], "003_MenuPanel_Font.png", {32 , 16}, { Location.X + 103, static_cast<float>((Location.Y + 130)) }, ERenderOrder::UIUP);
+		++index;
+	}
+
+	{
 		int Loc = 0;
+		int Loc2 = 0;
 		for (size_t i = 0; i < 44; ++i)
 		{
-			SpriteRFarmSlot[i] = CreateDefaultSubObject<USpriteRenderer>();
-			SpriteRFarmSlot[i]->SetComponentCrate(SpriteRFarmSlot[i], "000_crop-seed-button.png", {}, { (Location.X - 153 + (Loc * 104)), (Location.Y - 120 + ((Loc / 4) + (i / 4)) * 46)  }, ERenderOrder::UI);
+			//Ã¶°Å ¹öÆ°
+			if (3 == i)
+			{
+				Loc = 0;
+				Loc2 = 1;
+			}
+			else if (4 == i)
+			{
+				Loc2 = 0;
+			}
+			else if (42 == i)
+			{
+				Loc = 0;
+				Loc2 = 1;
+			}
+			else if (43 == i)
+			{
+				Loc2 = 0;
+			}
+
+			//SpriteRFarmSlot[i] = CreateDefaultSubObject<USpriteRenderer>();
+			//SpriteRFarmSlot[i]->SetComponentCrate(SpriteRFarmSlot[i], "000_crop-seed-button.png", {}, { (Location.X - 153 + (Loc * 104)), (Location.Y - 120 + ((Loc / 4) + ((i / 4) + Loc2)) * 46) }, ERenderOrder::UI);
 
 			if (i > (24 - 1))
 			{
-				SpriteRFarmSlot[i]->SetActive(false);
+				//SpriteRFarmSlot[i]->SetActive(false);
 			}
 
 			++Loc;
@@ -48,6 +75,21 @@ AMenuPanelUI::AMenuPanelUI()
 				Loc = 0;
 			}
 		}
+
+		Loc = 0;
+		Loc2 = 0;
+		for (size_t i = 44; i < 48; ++i)
+		{
+			SpriteRFarmSlot[i] = CreateDefaultSubObject<USpriteRenderer>();
+			SpriteRFarmSlot[i]->SetComponentCrate(SpriteRFarmSlot[i], "001_crop-seed-button.png", { 51, 51 }, { (Location.X - 170 + (3 * 104) + (Loc * 53)), (Location.Y - 116 + (Loc / 5 * 53)) }, ERenderOrder::UI);;
+
+			++Loc;
+			if (46 == i)
+			{
+				Loc2 = 11;
+			}
+		}
+
 	}
 }
 
