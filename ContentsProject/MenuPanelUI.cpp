@@ -16,8 +16,8 @@ AMenuPanelUI::AMenuPanelUI()
 	{
 		SpriteRendererTap = CreateDefaultSubObject<USpriteRenderer>();
 		SpriteRendererTap->SetSprite("001_MenuPanel.png");
-		SpriteRendererTap->SetComponentScale({ static_cast<float>(94), static_cast<float>(246) });
-		SpriteRendererTap->SetComponentLocation({ Location.X - 256 + 4, Location.Y });
+		SpriteRendererTap->SetComponentScale({ static_cast<float>(94), static_cast<float>(296) });
+		SpriteRendererTap->SetComponentLocation({ Location.X - 256 + 5, Location.Y - 2 });
 	}
 }
 

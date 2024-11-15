@@ -12,7 +12,7 @@ AHouse::AHouse()
 		SpriteRenderer->SetSprite("004_House.png");
 		SpriteRenderer->CreateAnimation("Idle", "House", 4, 4, 0, false);
 		SpriteRenderer->SetComponentScaleOrigin();
-		SpriteRenderer->SetComponentLocation({ ScreenHX, Location.Y });
+		SpriteRenderer->SetComponentLocation({ ScreenHX, Location.Y + 1 });
 		SpriteRenderer->SetOrder(ERenderOrder::BUILDING);
 	}
 
