@@ -2,9 +2,10 @@
 #include "ActorComponent.h"
 
 class USceneComponent : public UActorComponent
+
 {
 public:
-	
+
 	USceneComponent();
 	~USceneComponent();
 

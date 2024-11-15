@@ -8,16 +8,17 @@ AMenuPanelUI::AMenuPanelUI()
 
 	{
 		SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
-		SpriteRenderer->SetSprite("000_MenuPanel.png");
-		SpriteRenderer->SetComponentScaleOrigin();
-		SpriteRenderer->SetComponentLocation({ Location.X, Location.Y });
+		SpriteRenderer->SetComponentCrate(SpriteRenderer, "000_MenuPanel.png", {}, { Location.X, Location.Y }, ERenderOrder::BUILDING);
 	}
 
 	{
 		SpriteRendererTap = CreateDefaultSubObject<USpriteRenderer>();
-		SpriteRendererTap->SetSprite("001_MenuPanel.png");
-		SpriteRendererTap->SetComponentScale({ static_cast<float>(94), static_cast<float>(296) });
-		SpriteRendererTap->SetComponentLocation({ Location.X - 256 + 5, Location.Y - 2 });
+		SpriteRendererTap->SetComponentCrate(SpriteRendererTap, "001_MenuPanel.png", {94, 296}, { Location.X - 256 + 5, Location.Y - 2 }, ERenderOrder::BUILDING);
+	}
+
+	{
+		SpriteRendererResourcesBar = CreateDefaultSubObject<USpriteRenderer>();
+		SpriteRendererResourcesBar->SetComponentCrate(SpriteRendererResourcesBar, "002_MenuPanel.png", {}, { Location.X, (Location.Y - 2) }, ERenderOrder::BUILDING);
 	}
 }
 

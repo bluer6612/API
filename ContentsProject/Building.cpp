@@ -9,7 +9,7 @@ ABuilding::~ABuilding()
 {
 }
 
-void ABuilding::ModelAdd(std::string _Name, double _X, double _Y, int _Order)
+void ABuilding::ModelAdd(std::string_view _Name, double _X, double _Y, int _Order)
 {
 	Model[index] = CreateDefaultSubObject<USpriteRenderer>();
 	Model[index]->SetSprite(_Name);

@@ -2,8 +2,9 @@
 #include "SceneComponent.h"
 #include "EngineSprite.h"
 #include <EngineBase/EngineDelegate.h>
-#include <map>
 #include <EngineBase/EngineMath.h>
+#include <ContentsProject/ContentsEnum.h>
+#include <map>
 
 enum class PivotType
 {
@@ -51,6 +52,10 @@ public:
 	void BeginPlay() override;
 	void ComponentTick(float _DeltaTime) override;
 
+	void SetSprite(std::string_view _Name, int _CurIndex = 0);
+
+	FVector2D SetSpriteScale(float _Ratio = 2.0f, int _CurIndex = 0);
+
 	template<typename EnumType>
 	void SetOrder(EnumType _Order)
 	{
@@ -64,7 +69,7 @@ public:
 		return Order;
 	}
 
-	FVector2D SetSpriteScale(float _Ratio = 2.0f, int _CurIndex = 0);
+	void SetComponentCrate(USpriteRenderer* _SR, std::string_view _Model, FVector2D _Scale, FVector2D _Location, ERenderOrder _Order);
 
 	void CreateAnimation(std::string_view _AnimationName, std::string_view _SpriteName, int _Start, int _End, float Time = 0.1f, bool _Loop = true);
 
@@ -94,7 +99,6 @@ public:
 	void SetPivotType(PivotType _Type);
 
 	void SetCameraEffectScale(float _Effect);
-	void SetSprite(std::string_view _Name, int _CurIndex = 0);
 
 	bool IsCurAnimationEnd()
 	{

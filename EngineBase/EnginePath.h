@@ -21,14 +21,13 @@ public:
 
 	std::string GetPathToString();
 
-		std::string GetFileName();
+	std::string GetFileName();
 
-		std::string GetDirectoryName();
+	std::string GetDirectoryName();
 
-		std::string GetExtension();
+	std::string GetExtension();
 
-
-								bool MoveParentToDirectory(std::string_view _Path);
+	bool MoveParentToDirectory(std::string_view _Path);
 
 	bool IsDirectory();
 

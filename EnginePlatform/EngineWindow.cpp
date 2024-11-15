@@ -2,23 +2,6 @@
 #include "EngineWindow.h"
 #include <EngineBase/EngineDebug.h>
 
-//class AActor
-//{
-//};
-//
-//class Player : public AActor
-//{
-//
-//};
-
-
-//#ifdef _WINDOWS
-//#include <Windows.h>
-//#elseif _리눅스
-//#include <Windows.h>
-//#elseif 안드로이드
-//#endif 
-
 HINSTANCE UEngineWindow::hInstance = nullptr;
 std::map<std::string, WNDCLASSEXA> UEngineWindow::WindowClasss;
 int WindowCount = 0;

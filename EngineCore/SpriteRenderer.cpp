@@ -168,6 +168,21 @@ void USpriteRenderer::SetOrder(int _Order)
 	}
 }
 
+void USpriteRenderer::SetComponentCrate(USpriteRenderer* _SR, std::string_view _Model, FVector2D _Scale, FVector2D _Location, ERenderOrder _Order)
+{
+	_SR->SetSprite(_Model);
+	if (FVector2D::ZERO == _Scale)
+	{
+		_SR->SetComponentScaleOrigin();
+	}
+	else
+	{
+		_SR->SetComponentScale(_Scale);
+	}
+	_SR->SetComponentLocation(_Location);
+	_SR->SetOrder(_Order);
+}
+
 void USpriteRenderer::CreateAnimation(std::string_view _AnimationName, std::string_view _SpriteName, int _Start, int _End, float Time /*= 0.1f*/, bool _Loop /*= true*/)
 {
 	if (_Start > _End)
@@ -190,7 +205,6 @@ void USpriteRenderer::CreateAnimation(std::string_view _AnimationName, std::stri
 			Times.push_back(Time);
 			++_Start;
 		}
-
 	}
 	else
 	{
@@ -203,10 +217,8 @@ void USpriteRenderer::CreateAnimation(std::string_view _AnimationName, std::stri
 		}
 	}
 
-
 	CreateAnimation(_AnimationName, _SpriteName, Indexs, Times, _Loop);
 }
-
 
 void USpriteRenderer::CreateAnimation(std::string_view _AnimationName, std::string_view _SpriteName, std::vector<int> _Indexs, float _Frame, bool _Loop /*= true*/)
 {
@@ -314,7 +326,6 @@ void USpriteRenderer::SetAnimationEvent(std::string_view _AnimationName, int _Fr
 	}
 
 	ChangeAnimation->Events[_Frame] += _Function;
-
 }
 
 void USpriteRenderer::SetCameraEffectScale(float _Effect)

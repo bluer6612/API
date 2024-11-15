@@ -4,9 +4,7 @@
 class UEngineString
 {
 public:
-	
 	~UEngineString();
-
 	
 	UEngineString(const UEngineString& _Other) = delete;
 	UEngineString(UEngineString&& _Other) noexcept = delete;

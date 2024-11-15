@@ -17,7 +17,7 @@ public:
 	ABuilding& operator=(const ABuilding& _Other) = delete;
 	ABuilding& operator=(ABuilding&& _Other) noexcept = delete;
 
-	void ModelAdd(std::string _Name, double _X, double _Y, int _Order);
+	void ModelAdd(std::string_view _Name, double _X, double _Y, int _Order);
 
 protected:
 	class USpriteRenderer* SpriteRenderer = nullptr;

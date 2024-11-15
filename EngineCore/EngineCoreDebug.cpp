@@ -12,9 +12,7 @@ namespace UEngineDebug
 		FVector2D Pos;
 	};
 
-
-		std::vector<DebugTextInfo> DebugTexts;
-
+	std::vector<DebugTextInfo> DebugTexts;
 
 	FVector2D EngineTextPos = FVector2D::ZERO;
 

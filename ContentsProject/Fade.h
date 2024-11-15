@@ -7,17 +7,17 @@ public:
 	static AFade* MainFade;
 
 public:
-		AFade();
+	AFade();
 	~AFade();
 
-		AFade(const AFade& _Other) = delete;
+	AFade(const AFade& _Other) = delete;
 	AFade(AFade&& _Other) noexcept = delete;
 	AFade& operator=(const AFade& _Other) = delete;
 	AFade& operator=(AFade&& _Other) noexcept = delete;
 
-		void FadeIn();
+	void FadeIn();
 
-		void FadeOut();
+	void FadeOut();
 
 protected:
 
