@@ -21,6 +21,7 @@ public:
 
 protected:
 	class USpriteRenderer* SpriteRenderer = nullptr;
+	class USpriteRenderer* Sprite[10] = {};
 
 	UFSMStateManager FSM;
 

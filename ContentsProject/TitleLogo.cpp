@@ -5,39 +5,22 @@
 
 TitleLogo::TitleLogo()
 {
+	Location.X = ScreenHX;
+	Location.Y = ScreenHY;
 	{
 		LogoSpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
-		LogoSpriteRenderer->SetOrder(ERenderOrder::TITLE);
-		LogoSpriteRenderer->SetSprite("UI_Logo.png");
-
-		LogoSpriteRenderer->SetComponentLocation({ ScreenX / 2,  static_cast<int>(ScreenY / 13.6) });
+		LogoSpriteRenderer->SetComponentCrate(LogoSpriteRenderer, "UI_Logo.png", { }, { ScreenHX,  static_cast<float>(Location.Y - 10) }, ERenderOrder::TITLE);
 	}
 
 	{
 		TooltipSpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
-		TooltipSpriteRenderer->SetOrder(ERenderOrder::UI);
-		TooltipSpriteRenderer->SetSprite("UI_LogoTooltip.png");
-
-		TooltipSpriteRenderer->SetSpriteScale(1.0f);
-		TooltipSpriteRenderer->SetComponentLocation({ ScreenX / 2,  static_cast<int>(ScreenY / 5.8) });
+		TooltipSpriteRenderer->SetComponentCrate(TooltipSpriteRenderer, "UI_LogoTooltip.png", { 1, 1 }, { ScreenHX,  static_cast<float>(Location.Y + 99) }, ERenderOrder::UI);
 	}
 
 	{
-		ButtonSpriteRenderer[0] = CreateDefaultSubObject<USpriteRenderer>();
-		ButtonSpriteRenderer[0]->SetOrder(ERenderOrder::UI);
-		ButtonSpriteRenderer[0]->SetSprite("UI_TitleMenuButton.png");
-		ButtonSpriteRenderer[0]->SetComponentLocation({ static_cast<float>(ScreenX * 0.43),  static_cast<float>(ScreenY / 3.975) });
-
-		ButtonSpriteRenderer[1] = CreateDefaultSubObject<USpriteRenderer>();
-		ButtonSpriteRenderer[1]->SetOrder(ERenderOrder::UI);
-		ButtonSpriteRenderer[1]->SetSprite("UI_TitleMenuButton.png");
-		ButtonSpriteRenderer[1]->SetComponentLocation({ ScreenHX,  static_cast<float>(ScreenY / 3.975) });
-
-		ButtonSpriteRenderer[2] = CreateDefaultSubObject<USpriteRenderer>();
-		ButtonSpriteRenderer[2]->SetOrder(ERenderOrder::UI);
-		ButtonSpriteRenderer[2]->SetSprite("UI_TitleMenuButton.png");
-		ButtonSpriteRenderer[2]->SetComponentLocation({ static_cast<float>(ScreenX * 0.57),  static_cast<float>(ScreenY / 3.975) });
-	}
+		ButtonSpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
+		ButtonSpriteRenderer->SetComponentCrate(ButtonSpriteRenderer, "UI_TitleMenuButton.png", { 1, 1 }, { ScreenHX, Location.Y + 230 - 41 }, ERenderOrder::UI);
+		}
 }
 
 TitleLogo::~TitleLogo()
@@ -52,8 +35,6 @@ void TitleLogo::Tick(float _DeltaTime)
 	{
 		LogoSpriteRenderer->SetActiveSwitch();
 		TooltipSpriteRenderer->SetActiveSwitch();
-		ButtonSpriteRenderer[0]->SetActiveSwitch();
-		ButtonSpriteRenderer[1]->SetActiveSwitch();
-		ButtonSpriteRenderer[2]->SetActiveSwitch();
+		ButtonSpriteRenderer->SetActiveSwitch();
 	}
 }

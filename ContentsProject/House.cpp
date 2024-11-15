@@ -9,33 +9,25 @@ AHouse::AHouse()
 	{
 
 		SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
-		SpriteRenderer->SetSprite("004_House.png");
+		SpriteRenderer->SetComponentCrate(SpriteRenderer, "004_House.png", {}, { ScreenHX, Location.Y + 1 }, ERenderOrder::BUILDING);
 		SpriteRenderer->CreateAnimation("Idle", "House", 4, 4, 0, false);
-		SpriteRenderer->SetComponentScaleOrigin();
-		SpriteRenderer->SetComponentLocation({ ScreenHX, Location.Y + 1 });
-		SpriteRenderer->SetOrder(ERenderOrder::BUILDING);
 	}
 
 	{
 		SpriteRendererWheel = CreateDefaultSubObject<USpriteRenderer>();
-		SpriteRendererWheel->SetSprite("009_House.png");
+		SpriteRendererWheel->SetComponentCrate(SpriteRendererWheel, "009_House.png", {}, { ScreenHX, Location.Y + 10 }, ERenderOrder::BUILDINGUP);
 		SpriteRendererWheel->CreateAnimation("Idle_Wheel", "House", 9, 11, 0.5f, false);
-		SpriteRendererWheel->SetComponentLocation({ ScreenHX, Location.Y + 10 });
-		SpriteRendererWheel->SetOrder(11);
 	}
 
 	{
 		SpriteRendererDoor = CreateDefaultSubObject<USpriteRenderer>();
-		SpriteRendererDoor->SetSprite("000_House.png");
+		SpriteRendererDoor->SetComponentCrate(SpriteRendererDoor, "000_House.png", {}, { ScreenHX, Location.Y + 65 }, ERenderOrder::BUILDINGDOWN);
 		SpriteRendererDoor->CreateAnimation("Idle_Door", "House", 0, 1, 0.5f, false);
-		SpriteRendererDoor->SetComponentLocation({ ScreenHX, Location.Y + 67 });
 	}
 
 	{
 		MoneySpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
-		MoneySpriteRenderer->SetSprite("022_Housebiofuelspareparts.png");
-		MoneySpriteRenderer->SetComponentLocation({ ScreenHX,  ScreenHY + 227 });
-		MoneySpriteRenderer->SetOrder(ERenderOrder::UI);
+		MoneySpriteRenderer->SetComponentCrate(MoneySpriteRenderer, "022_Housebiofuelspareparts.png", {}, { ScreenHX,  ScreenHY + 227 }, ERenderOrder::UI);
 	}
 
 	{

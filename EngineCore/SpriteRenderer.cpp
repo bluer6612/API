@@ -124,7 +124,7 @@ void USpriteRenderer::SetSprite(std::string_view _Name, int _CurIndex /*= 0*/)
 
 	FVector2D Scale = GetComponentScale();
 
-	if (Scale.X == 0)
+	if (FVector2D::ZERO == Scale)
 	{
 		SetSpriteScale(2.0f, _CurIndex);
 	}
@@ -174,6 +174,10 @@ void USpriteRenderer::SetComponentCrate(USpriteRenderer* _SR, std::string_view _
 	if (FVector2D::ZERO == _Scale)
 	{
 		_SR->SetComponentScaleOrigin();
+	}
+	else if (1 == _Scale.X && 1 == _Scale.Y)
+	{
+		_SR->SetComponentScale({ static_cast<float>(GetComponentScale().X * 0.5), static_cast<float>(GetComponentScale().Y * 0.5)});
 	}
 	else
 	{

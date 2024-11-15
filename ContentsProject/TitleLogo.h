@@ -1,8 +1,9 @@
 #pragma once
 #include <EngineCore/Actor.h>
 #include <EngineCore/SpriteRenderer.h>
+#include "Building.h"
 
-class TitleLogo : public AActor
+class TitleLogo : public ABuilding
 {
 public:
 	TitleLogo();
@@ -20,6 +21,6 @@ protected:
 private:
 	USpriteRenderer* LogoSpriteRenderer;
 	USpriteRenderer* TooltipSpriteRenderer;
-	USpriteRenderer* ButtonSpriteRenderer[3];
+	USpriteRenderer* ButtonSpriteRenderer;
 };
 

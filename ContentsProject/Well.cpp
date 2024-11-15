@@ -8,8 +8,8 @@ AWell::AWell()
 
 	{
 		SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
-		SpriteRenderer->CreateAnimation("Idle", "Well", 0, 2, 2.0f);
 		SpriteRenderer->SetComponentCrate(SpriteRenderer, "000_welltype.png", {}, { Location.X, Location.Y }, ERenderOrder::BUILDING);
+		SpriteRenderer->CreateAnimation("Idle", "Well", 0, 2, 2.0f);
 	}
 }
 

@@ -9,29 +9,17 @@ APlayMap::APlayMap()
 {
 	{
 		BackTopSpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
-		BackTopSpriteRenderer->SetOrder(ERenderOrder::COLMAP);
-		BackTopSpriteRenderer->SetSprite("WindowTopBlack.png");
-
-		FVector2D MapScale = BackTopSpriteRenderer->SetSpriteScale(1.0f);
-		BackTopSpriteRenderer->SetComponentLocation({ ScreenHX, static_cast<float>(ScreenY * 0.4 - 32) });
+		BackTopSpriteRenderer->SetComponentCrate(BackTopSpriteRenderer, "WindowTopBlack.png", {}, { ScreenHX, static_cast<float>(ScreenY * 0.4 - 32) }, ERenderOrder::COLMAP);
 	}
 
 	{
 		BackBottomSpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
-		BackBottomSpriteRenderer->SetOrder(ERenderOrder::TITLE);
-		BackBottomSpriteRenderer->SetSprite("WindowBottomBlack.png");
-
-		FVector2D MapScale = BackBottomSpriteRenderer->SetSpriteScale(1.0f);
-		BackBottomSpriteRenderer->SetComponentLocation({ ScreenHX, static_cast<float>(ScreenY - 16.5) });
+		BackBottomSpriteRenderer->SetComponentCrate(BackBottomSpriteRenderer, "WindowBottomBlack.png", { 1, 1 }, { ScreenHX, static_cast<float>(ScreenY - 16.5) }, ERenderOrder::TITLE);
 	}
 
 	{
 		BackSpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
-		BackSpriteRenderer->SetOrder(ERenderOrder::BACKGROUND);
-		BackSpriteRenderer->SetSprite("GrassMap.png");
-
-		FVector2D MapScale = BackSpriteRenderer->SetSpriteScale(1.0f);
-		BackSpriteRenderer->SetComponentLocation({ ScreenHX, ScreenHY + 108 - 32 });
+		BackSpriteRenderer->SetComponentCrate(BackSpriteRenderer, "GrassMap.png", { 1, 1 }, { ScreenHX, ScreenHY + 108 - 32 }, ERenderOrder::BACKGROUND);
 	}
 }
 

@@ -7,19 +7,28 @@ AMenuPanelUI::AMenuPanelUI()
 	Location.Y = ScreenHY + 93;
 
 	{
-		SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
-		SpriteRenderer->SetComponentCrate(SpriteRenderer, "000_MenuPanel.png", {}, { Location.X, Location.Y }, ERenderOrder::BUILDING);
+		Sprite[0] = CreateDefaultSubObject<USpriteRenderer>();
+		Sprite[0]->SetComponentCrate(Sprite[0], "000_MenuPanel.png", {}, { Location.X, Location.Y }, ERenderOrder::UI);
+		++index;
 	}
 
 	{
-		SpriteRendererTap = CreateDefaultSubObject<USpriteRenderer>();
-		SpriteRendererTap->SetComponentCrate(SpriteRendererTap, "001_MenuPanel.png", {94, 296}, { Location.X - 256 + 5, Location.Y - 2 }, ERenderOrder::BUILDING);
+		Sprite[index] = CreateDefaultSubObject<USpriteRenderer>();
+		Sprite[index]->SetComponentCrate(Sprite[index], "002_MenuPanel.png", { 1, 1 }, { Location.X - 256 + 5, static_cast<float>(Location.Y - 2) }, ERenderOrder::UI);
+		++index;
 	}
 
 	{
-		SpriteRendererResourcesBar = CreateDefaultSubObject<USpriteRenderer>();
-		SpriteRendererResourcesBar->SetComponentCrate(SpriteRendererResourcesBar, "002_MenuPanel.png", {}, { Location.X, (Location.Y - 2) }, ERenderOrder::BUILDING);
+		Sprite[index] = CreateDefaultSubObject<USpriteRenderer>();
+		Sprite[index]->SetComponentCrate(Sprite[index], "001_MenuPanel.png", { 1, 1 }, { Location.X, Location.Y }, ERenderOrder::UI);
+		++index;
 	}
+	{
+		Sprite[index] = CreateDefaultSubObject<USpriteRenderer>();
+		Sprite[index]->SetComponentCrate(Sprite[index], "003_MenuPanel.png", {}, { Location.X + 1, (Location.Y + 126) }, ERenderOrder::UI);
+		++index;
+	}
+
 }
 
 AMenuPanelUI::~AMenuPanelUI() 
