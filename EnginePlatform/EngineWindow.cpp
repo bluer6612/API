@@ -17,10 +17,29 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         EndPaint(hWnd, &ps);
     }
     break;
-    //case WM_SIZING:
-    //{
-        //}
-    break;
+    //case WM_HSCROLL:
+    //    switch (LOWORD(wParam))
+    //    {
+    //    case SB_LINELEFT:
+    //        PanelFarmScrollPos = max(0, PanelFarmScrollPos - 1);
+    //        break;
+    //    case SB_PAGELEFT:
+    //        PanelFarmScrollPos = max(0, PanelFarmScrollPos - 5);
+    //        break;
+    //    case SB_LINERIGHT:
+    //        PanelFarmScrollPos = min(255, PanelFarmScrollPos + 1);
+    //        break;
+    //    case SB_PAGERIGHT:
+    //        PanelFarmScrollPos = min(255, PanelFarmScrollPos + 5);
+    //        break;
+    //    case SB_THUMBTRACK:
+    //        PanelFarmScrollPos = HIWORD(wParam);
+    //        break;
+    //    }
+
+    //    SetScrollPanelFarmScroll(WindowHandle, SB_CTL, PanelFarmScrollPos, TRUE);
+    //    InvalidateRect(hWnd, NULL, TRUE);
+    //    UpdateWindow(hWnd);
     case WM_DESTROY:
         --WindowCount;
         break;
@@ -141,6 +160,9 @@ void UEngineWindow::Create(std::string_view _TitleName, std::string_view _ClassN
 
     WindowImage = new UEngineWinImage();
     WindowImage->Create(WindowMainDC);
+
+    WindowHandle2 = CreateWindowA("scrollbar", NULL, WS_VISIBLE | SBS_HORZ, 100, ScreenHY, 30, 200, WindowHandle, nullptr, hInstance, nullptr);
+    SetScrollRange(WindowHandle2, SB_CTL, 0, 255, TRUE);
 }
 
 void UEngineWindow::Open(std::string_view _TitleName /*= "Window"*/)

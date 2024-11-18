@@ -35,7 +35,6 @@ UEngineAPICore::~UEngineAPICore()
 	UEngineSound::Release();
 }
 
-
 int UEngineAPICore::EngineStart(HINSTANCE _Inst, UContentsCore* _UserCore)
 {
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
@@ -58,12 +57,8 @@ void UEngineAPICore::EngineBeginPlay()
 	UserCore->BeginPlay();
 }
 
-// 이 함수가 1초에 몇번 실행되냐가 프레임입니다.
 void UEngineAPICore::EngineTick()
 {
-	//AXVidio NewVidio;
-	//NewVidio.Play("AAAA.avi");
-
 	UserCore->Tick();
 
 	// MainCore->TimeCheck();
@@ -124,7 +119,6 @@ void UEngineAPICore::OpenLevel(std::string_view _LevelName)
 {
 	std::string UpperName = UEngineString::ToUpper(_LevelName);
 
-
 	std::map<std::string, class ULevel*>::iterator FindIter = Levels.find(UpperName);
 	std::map<std::string, class ULevel*>::iterator EndIter = Levels.end();
 
@@ -135,5 +129,4 @@ void UEngineAPICore::OpenLevel(std::string_view _LevelName)
 	}
 
 	NextLevel = FindIter->second;
-
 }

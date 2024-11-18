@@ -84,7 +84,6 @@ public:
 		return NewLevel;
 	}
 
-
 	template<typename GameModeType, typename MainPawnType>
 	void ResetLevel(std::string_view _LevelName)
 	{
@@ -128,10 +127,7 @@ public:
 		Levels.erase(FindIter);
 	}
 
-
 	void OpenLevel(std::string_view _LevelName);
-
-
 
 protected:
 

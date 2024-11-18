@@ -9,7 +9,6 @@
 #include <EngineBase/EngineMath.h>
 #include "EngineWinImage.h"
 
-
 static int ScreenX = GetSystemMetrics(SM_CXSCREEN);
 static int ScreenY = GetSystemMetrics(SM_CYSCREEN);
 static float ScreenHX = ScreenX * 0.5;
@@ -50,6 +49,11 @@ public:
 		return BackBufferImage;
 	}
 
+	HWND GetWindowHandle() const
+	{
+		return WindowHandle2;
+	}
+
 	inline void SetWindowTitle(std::string_view Text)  const
 	{			
 		SetWindowTextA(WindowHandle, Text.data());
@@ -74,6 +78,10 @@ private:
 	UEngineWinImage* WindowImage = nullptr;
 
 	HWND WindowHandle = nullptr;
+
+	HWND WindowHandle2 = nullptr;
+
+	int PanelFarmScrollPos = 0;
 };
 
 
