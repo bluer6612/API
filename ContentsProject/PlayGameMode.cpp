@@ -76,18 +76,18 @@ void APlayGameMode::BeginPlay()
 	//{
 	//	AScore* NewActor = GetWorld()->SpawnActor<AScore>();
 
-	//	NewActor->SetActorLocation({900, 900});
-	//	NewActor->SetTextSpriteName("Text.bmp");
+	//	NewActor->SetActorLocation({1600, 800});
+	//	NewActor->SetTextSpriteName("Text.png");
 	//	NewActor->SetOrder(ERenderOrder::UI);
-	//	NewActor->SetTextScale({ 5, 10 });
-	//	NewActor->SetValue(45362784);
+	//	NewActor->SetTextScale({ 7, 14 });
+	//	NewActor->SetValue(134567890);
 	//}
 
 	//ÆäÀÌµå
 	//{
 	//	AFade* Actor = GetWorld()->SpawnActor<AFade>();
 	//	Actor->FadeOut();
-	//}
+	//} 
 }
 
 void APlayGameMode::Tick(float _DeltaTime)

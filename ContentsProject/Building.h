@@ -6,6 +6,8 @@
 #include <EngineCore/EngineAPICore.h>
 #include "ContentsEnum.h"
 
+static const int CropsCount = 44;
+
 class ABuilding : public AActor
 {
 public:

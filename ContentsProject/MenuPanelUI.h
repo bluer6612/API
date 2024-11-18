@@ -17,8 +17,9 @@ protected:
 private:
 	class USpriteRenderer* SpriteRTap = nullptr;
 	class USpriteRenderer* SpriteRResourcesBar = nullptr;
-	class USpriteRenderer* SpriteRFarmSlot[48] = {};
-	class USpriteRenderer* SpriteRFarmCrops[48] = {};
+	class USpriteRenderer* SpriteRFarmSlot[CropsCount] = {};
+	class USpriteRenderer* SpriteRFarmCrops[CropsCount] = {};
+	class USpriteRenderer* SpriteRFarmCoin[CropsCount] = {};
 	
 };
 

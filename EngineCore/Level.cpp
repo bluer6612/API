@@ -17,8 +17,7 @@ ULevel::ULevel()
 
 ULevel::~ULevel()
 {
-	{
-				
+	{		
 		std::list<AActor*>::iterator StartIter = BeginPlayList.begin();
 		std::list<AActor*>::iterator EndIter = BeginPlayList.end();
 
@@ -28,8 +27,6 @@ ULevel::~ULevel()
 			delete CurActor;
 		}
 	}
-
-
 
 	std::list<AActor*>::iterator StartIter = AllActors.begin();
 	std::list<AActor*>::iterator EndIter = AllActors.end();
@@ -61,13 +58,9 @@ void ULevel::BeginPlayCheck()
 		BeginPlayList.clear();
 
 		Renderers;
-
-				AActor::ComponentBeginPlay();
-
+		AActor::ComponentBeginPlay();
 		Renderers;
 	}
-
-
 }
 
 void ULevel::LevelChangeStart()
@@ -82,8 +75,7 @@ void ULevel::LevelChangeStart()
 			for (; StartIter != EndIter; ++StartIter)
 			{
 				AActor* CurActor = *StartIter;
-
-								CurActor->LevelChangeStart();
+				CurActor->LevelChangeStart();
 			}
 		}
 
@@ -94,12 +86,10 @@ void ULevel::LevelChangeStart()
 			for (; StartIter != EndIter; ++StartIter)
 			{
 				AActor* CurActor = *StartIter;
-
-								CurActor->LevelChangeStart();
+				CurActor->LevelChangeStart();
 			}
 		}
 	}
-
 }
 
 void ULevel::LevelChangeEnd()
@@ -112,7 +102,6 @@ void ULevel::LevelChangeEnd()
 			for (; StartIter != EndIter; ++StartIter)
 			{
 				AActor* CurActor = *StartIter;
-
 				CurActor->LevelChangeEnd();
 			}
 		}
@@ -124,8 +113,7 @@ void ULevel::LevelChangeEnd()
 			for (; StartIter != EndIter; ++StartIter)
 			{
 				AActor* CurActor = *StartIter;
-
-								CurActor->LevelChangeEnd();
+				CurActor->LevelChangeEnd();
 			}
 		}
 	}
@@ -157,12 +145,10 @@ void ULevel::Tick(float _DeltaTime)
 void ULevel::Render(float _DeltaTime)
 {
 	ScreenClear();
-
-		
 		
 	if (true == IsCameraToMainPawn)
 	{
-				CameraPos = MainPawn->GetTransform().Location + CameraPivot;
+		CameraPos = MainPawn->GetTransform().Location + CameraPivot;
 	}
 
 
@@ -202,9 +188,9 @@ void ULevel::Collision(float _DeltaTime)
 		int Left = Data.Left;
 		int Right = Data.Right;
 		
-				std::list<class U2DCollision*>& LeftList = CheckCollisions[Left];
+		std::list<class U2DCollision*>& LeftList = CheckCollisions[Left];
 
-				std::list<class U2DCollision*>& RightList = Collisions[Right];
+		std::list<class U2DCollision*>& RightList = Collisions[Right];
 
 		std::list<class U2DCollision*>::iterator StartLeftIter = LeftList.begin();
 		std::list<class U2DCollision*>::iterator EndLeftIter = LeftList.end();
@@ -245,7 +231,7 @@ void ULevel::Collision(float _DeltaTime)
 
 void ULevel::Release(float _DeltaTime)
 {
-		std::list<AActor*>::iterator StartIter = AllActors.begin();
+	std::list<AActor*>::iterator StartIter = AllActors.begin();
 	std::list<AActor*>::iterator EndIter = AllActors.end();
 
 	for (; StartIter != EndIter; ++StartIter)
@@ -265,7 +251,7 @@ void ULevel::Release(float _DeltaTime)
 			std::list<class U2DCollision*>::iterator CollisionStartIter = CollisionList.begin();
 			std::list<class U2DCollision*>::iterator CollisionEndIter = CollisionList.end();
 
-						for (; CollisionStartIter != CollisionEndIter; )
+			for (; CollisionStartIter != CollisionEndIter; )
 			{
 				if (false == (*CollisionStartIter)->IsDestroy())
 				{
@@ -273,7 +259,7 @@ void ULevel::Release(float _DeltaTime)
 					continue;
 				}
 
-																CollisionStartIter = CollisionList.erase(CollisionStartIter);
+				CollisionStartIter = CollisionList.erase(CollisionStartIter);
 			}
 		}
 	}
@@ -289,7 +275,7 @@ void ULevel::Release(float _DeltaTime)
 			std::list<class U2DCollision*>::iterator CollisionStartIter = CollisionList.begin();
 			std::list<class U2DCollision*>::iterator CollisionEndIter = CollisionList.end();
 
-						for (; CollisionStartIter != CollisionEndIter; )
+			for (; CollisionStartIter != CollisionEndIter; )
 			{
 				if (false == (*CollisionStartIter)->IsDestroy())
 				{
@@ -297,7 +283,7 @@ void ULevel::Release(float _DeltaTime)
 					continue;
 				}
 
-																CollisionStartIter = CollisionList.erase(CollisionStartIter);
+				CollisionStartIter = CollisionList.erase(CollisionStartIter);
 			}
 		}
 	}
@@ -313,7 +299,7 @@ void ULevel::Release(float _DeltaTime)
 			std::list<class USpriteRenderer*>::iterator RenderStartIter = RendererList.begin();
 			std::list<class USpriteRenderer*>::iterator RenderEndIter = RendererList.end();
 
-						for (; RenderStartIter != RenderEndIter; )
+			for (; RenderStartIter != RenderEndIter; )
 			{
 				if (false == (*RenderStartIter)->IsDestroy())
 				{
@@ -321,7 +307,7 @@ void ULevel::Release(float _DeltaTime)
 					continue;
 				}
 
-																RenderStartIter = RendererList.erase(RenderStartIter);
+				RenderStartIter = RendererList.erase(RenderStartIter);
 			}
 		}
 	}
@@ -334,7 +320,6 @@ void ULevel::Release(float _DeltaTime)
 		{
 			AActor* CurActor = *StartIter;
 
-
 			if (false == CurActor->IsDestroy())
 			{
 				CurActor->ReleaseCheck(_DeltaTime);
@@ -342,7 +327,7 @@ void ULevel::Release(float _DeltaTime)
 				continue;
 			}
 
-						delete CurActor;
+			delete CurActor;
 			StartIter = AllActors.erase(StartIter);
 		}
 	}
@@ -359,7 +344,7 @@ void ULevel::ScreenClear()
 
 void ULevel::DoubleBuffering()
 {
-		UEngineWindow& MainWindow = UEngineAPICore::GetCore()->GetMainWindow();
+	UEngineWindow& MainWindow = UEngineAPICore::GetCore()->GetMainWindow();
 
 	UEngineWinImage* WindowImage = MainWindow.GetWindowImage();
 	UEngineWinImage* BackBufferImage = MainWindow.GetBackBuffer();
@@ -368,8 +353,7 @@ void ULevel::DoubleBuffering()
 	Trans.Location = MainWindow.GetWindowSize().Half();
 	Trans.Scale = MainWindow.GetWindowSize();
 
-		BackBufferImage->CopyToBit(WindowImage, Trans);
-
+	BackBufferImage->CopyToBit(WindowImage, Trans);
 }
 
 void ULevel::PushRenderer(class USpriteRenderer* _Renderer)
@@ -395,12 +379,7 @@ void ULevel::PushCheckCollision(class U2DCollision* _Collision)
 
 void ULevel::ChangeRenderOrder(class USpriteRenderer* _Renderer, int _PrevOrder)
 {
-	//std::vector<int> Value;
-		//Value.remove
-
-			Renderers[_PrevOrder].remove(_Renderer);
+	Renderers[_PrevOrder].remove(_Renderer);
 
 	Renderers[_Renderer->GetOrder()].push_back(_Renderer);
-
-
 }
