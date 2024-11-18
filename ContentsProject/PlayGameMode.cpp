@@ -1,6 +1,7 @@
 #include "PreCompile.h"
 #include "PlayGameMode.h"
 #include "Fade.h"
+#include "Score.h"
 
 #include "MenuPanelUI.h"
 
@@ -71,6 +72,16 @@ void APlayGameMode::BeginPlay()
 	{
 		AMenuPanelUI* NewActor = AActor::GetWorld()->SpawnActor<AMenuPanelUI>();
 	}
+
+	//{
+	//	AScore* NewActor = GetWorld()->SpawnActor<AScore>();
+
+	//	NewActor->SetActorLocation({900, 900});
+	//	NewActor->SetTextSpriteName("Text.bmp");
+	//	NewActor->SetOrder(ERenderOrder::UI);
+	//	NewActor->SetTextScale({ 5, 10 });
+	//	NewActor->SetValue(45362784);
+	//}
 
 	//∆‰¿ÃµÂ
 	//{

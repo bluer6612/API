@@ -17,7 +17,6 @@ ARusty::ARusty()
 		SpriteR->CreateAnimation("Idle_Right", "RustyGold", 48, 49, 0.5f);
 		SpriteR->CreateAnimation("Run_Right", "RustyGold", 0, 5, 0.2f);
 		SpriteR->SetOrder(ERenderOrder::PLAYER);
-		SpriteR->SetAlphafloat(0.5);
 	}
 }
 
