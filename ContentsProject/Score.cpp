@@ -11,7 +11,6 @@ AScore::AScore()
 	}
 }
 
-
 AScore::~AScore()
 {
 }
@@ -41,21 +40,18 @@ void AScore::SetOrder(int _Order)
 	{
 		Renders[i]->SetOrder(_Order);
 	}
-
 }
 
 void AScore::SetValue(int _Score)
 {
 	std::string Number = std::to_string(_Score);
 
-			if (Renders.size() <= Number.size())
+	if (Renders.size() <= Number.size())
 	{
 		MSGASSERT("자리수를 넘겼습니다.");
 		return;
 	}
 
-		
-	
 	FVector2D Pos = FVector2D::ZERO;
 
 	for (size_t i = 0; i < Number.size(); i++)
@@ -64,7 +60,7 @@ void AScore::SetValue(int _Score)
 		Renders[i]->SetSprite(TextSpriteName, Value);
 		Renders[i]->SetComponentScale(TextScale);
 		Renders[i]->SetComponentLocation(Pos);
-		Pos.X += TextScale.X;
+		Pos.X += TextScale.X + 1;
 		Renders[i]->SetActive(true);
 	}
 
@@ -72,5 +68,4 @@ void AScore::SetValue(int _Score)
 	{
 		Renders[i]->SetActive(false);
 	}
-
 }
