@@ -8,10 +8,10 @@
 class ANewPlayer : public AActor
 {
 public:
-		ANewPlayer();
+	ANewPlayer();
 	~ANewPlayer();
 
-		ANewPlayer(const ANewPlayer& _Other) = delete;
+	ANewPlayer(const ANewPlayer& _Other) = delete;
 	ANewPlayer(ANewPlayer&& _Other) noexcept = delete;
 	ANewPlayer& operator=(const ANewPlayer& _Other) = delete;
 	ANewPlayer& operator=(ANewPlayer&& _Other) noexcept = delete;
@@ -23,18 +23,12 @@ public:
 
 	void Idle(float _DeltaTime);
 	void Move(float _DeltaTime);
-	void Attack(float _DeltaTime);
-	void Jump(float _DeltaTime);
 
 	void SetColImage(std::string_view _ColImageName);
 
 	void PlayerCameraCheck();
-	void PlayerGroundCheck(FVector2D MovePos);
-
-	void Gravity(float _DeltaTime);
-
 	
-		void CollisionEnter(AActor* _ColActor);
+	void CollisionEnter(AActor* _ColActor);
 	void CollisionStay(AActor* _ColActor);
 	void CollisionEnd(AActor* _ColActor);
 

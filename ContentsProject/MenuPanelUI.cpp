@@ -81,12 +81,15 @@ AMenuPanelUI::AMenuPanelUI()
 		for (size_t i = 44; i < 48; ++i)
 		{
 			SpriteRFarmSlot[i] = CreateDefaultSubObject<USpriteRenderer>();
-			SpriteRFarmSlot[i]->SetComponentCrate(SpriteRFarmSlot[i], "001_crop-seed-button.png", { 51, 51 }, { (Location.X - 170 + (3 * 104) + (Loc * 53)), (Location.Y - 116 + (Loc / 5 * 53)) }, ERenderOrder::UI);;
+			SpriteRFarmSlot[i]->SetComponentCrate(SpriteRFarmSlot[i], "001_crop-seed-button.png", { 51, 51 }, { (Location.X - 170 + (3 * 104) + (Loc * 53)), (Location.Y - 116 + ((Loc2 / 5) * 53)) }, ERenderOrder::UI);;
 
 			++Loc;
-			if (46 == i)
+			if (45 == i)
 			{
-				Loc2 = 11;
+				Loc = 0;
+				Loc2 = 45;
+				//45인데 잠시 24로 해둠
+				Loc2 = 24;
 			}
 		}
 

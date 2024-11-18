@@ -41,7 +41,6 @@ public:
 		}
 	};
 
-
 public:
 	USpriteRenderer();
 	~USpriteRenderer();

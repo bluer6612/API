@@ -26,14 +26,13 @@ void AFade::FadeChange()
 	float DeltaTime = UEngineAPICore::GetCore()->GetDeltaTime();
 	FadeValue += DeltaTime * 0.5F * FadeDir;
 	BackSpriteRenderer->SetAlphafloat(FadeValue);
-
 }
 
 void AFade::FadeIn()
 {
 	FadeValue = 0.0f;
 	FadeDir = 1.0f;
-	TimeEventer.PushEvent(2.0f , std::bind(&AFade::FadeChange, this), true, false);
+	TimeEventer.PushEvent(2.0f, std::bind(&AFade::FadeChange, this), true, false);
 }
 
 void AFade::FadeOut()

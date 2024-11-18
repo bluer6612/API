@@ -46,6 +46,9 @@ void APlayGameMode::BeginPlay()
 	//	//}
 	//}
 
+	//BGM
+	//BGMPlayer = UEngineSound::Play("Rustys_Retirement_-_Full_OST_Master.wav");
+
 	//Ä³¸¯ÅÍ
 	ARusty* Rusty = AActor::GetWorld()->GetPawn<ARusty>();
 

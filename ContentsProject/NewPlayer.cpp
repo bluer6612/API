@@ -61,7 +61,7 @@ void ANewPlayer::BeginPlay()
 {
 	Super::BeginPlay();
 
-	BGMPlayer = UEngineSound::Play("anipang_ingame_wav.wav");
+	BGMPlayer = UEngineSound::Play("Rustys_Retirement_-_Full_OST_Master.wav");
 
 	FVector2D Size = UEngineAPICore::GetCore()->GetMainWindow().GetWindowSize();
 	GetWorld()->SetCameraPivot(Size.Half() * -1.0f);

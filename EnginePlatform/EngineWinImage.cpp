@@ -7,9 +7,7 @@
 #include <objidl.h>
 #include <gdiplus.h>
 
-
 #pragma comment(lib, "Msimg32.lib")
-
 #pragma comment(lib, "Gdiplus.lib")
 
 UEngineWinImage::UEngineWinImage()
@@ -29,7 +27,6 @@ UEngineWinImage::~UEngineWinImage()
 		DeleteDC(ImageDC);
 		ImageDC = nullptr;
 	}
-
 }
 
 void UEngineWinImage::Create(UEngineWinImage* _TargetImage,  FVector2D _Scale)
@@ -39,17 +36,11 @@ void UEngineWinImage::Create(UEngineWinImage* _TargetImage,  FVector2D _Scale)
 		MSGASSERT("Main windowDC를 넣지않고 이미지를 생성하려고 했습니다");
 		return;
 	}
-
-				
-				
-	
 	
 	HBITMAP NewBitmap = static_cast<HBITMAP>(CreateCompatibleBitmap(_TargetImage->GetDC(), _Scale.iX(), _Scale.iY()));
 
-				
 	HDC NewImageDC = CreateCompatibleDC(_TargetImage->GetDC());
 
-		
 	HBITMAP OldBitMap = static_cast<HBITMAP>(SelectObject(NewImageDC, NewBitmap));
 	DeleteObject(OldBitMap);
 
@@ -89,14 +80,11 @@ void UEngineWinImage::CopyToBit(UEngineWinImage* _TargetImage, const FTransform&
 		0,
 		SRCCOPY);
 
-	
 	FVector2D Vector;
 }
 
 void UEngineWinImage::CopyToTrans(UEngineWinImage* _TargetImage, const FTransform& _RenderTrans, const FTransform& _LTImageTrans, UColor _Color /*= UColor(255, 0, 255, 255)*/)
 {
-	
-		
 	HDC CopyDC = ImageDC;
 	HDC TargetDC = _TargetImage->ImageDC;
 
@@ -134,8 +122,6 @@ void UEngineWinImage::CopyToAlpha(UEngineWinImage* _TargetImage,
 	const FTransform& _LTImageTrans,
 	unsigned char _Alpha)
 {
-
-				
 					
 	BLENDFUNCTION BLEND;
 	BLEND.BlendOp = AC_SRC_OVER;
@@ -163,11 +149,7 @@ void UEngineWinImage::CopyToAlpha(UEngineWinImage* _TargetImage,
 }
 
 void UEngineWinImage::Load(UEngineWinImage* _TargetImage, std::string_view _Path)
-{
-					
-									
-		
-						
+{	
 	UEnginePath Path = _Path;
 
 	std::string UpperExt = UEngineString::ToUpper(Path.GetExtension());
@@ -175,13 +157,11 @@ void UEngineWinImage::Load(UEngineWinImage* _TargetImage, std::string_view _Path
 	HBITMAP NewBitmap = nullptr;
 
 	if (".PNG" == UpperExt)
-	{
-						
+	{			
 		ULONG_PTR gidplustoken = 0;
 
 		Gdiplus::GdiplusStartupInput StartupInput;
 		Gdiplus::GdiplusStartup(&gidplustoken, &StartupInput, nullptr);
-
 
 		std::wstring WidePath = UEngineString::AnsiToUnicode(_Path);
 

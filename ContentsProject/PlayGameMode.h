@@ -25,5 +25,7 @@ private:
 	class AScore* Score;
 	ATileMap* WallTileMap = nullptr;
 	ATileMap* GroundTileMap = nullptr;
+
+	USoundPlayer BGMPlayer;
 };
 
