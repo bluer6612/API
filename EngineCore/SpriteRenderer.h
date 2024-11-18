@@ -73,6 +73,8 @@ public:
 
 	void SetComponentCrate(USpriteRenderer* _SR, std::string_view _Model, FVector2D _Scale, FVector2D _Location, ERenderOrder _Order);
 
+	void SetComponentCrate(USpriteRenderer* _SR, std::string_view _Model, int _index, FVector2D _Scale, FVector2D _Location, ERenderOrder _Order);
+
 	void CreateAnimation(std::string_view _AnimationName, std::string_view _SpriteName, int _Start, int _End, float Time = 0.1f, bool _Loop = true);
 
 	void CreateAnimation(std::string_view _AnimationName, std::string_view _SpriteName, std::vector<int> _Indexs, std::vector<float> _Frame, bool _Loop = true);

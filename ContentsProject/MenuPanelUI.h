@@ -18,6 +18,7 @@ private:
 	class USpriteRenderer* SpriteRTap = nullptr;
 	class USpriteRenderer* SpriteRResourcesBar = nullptr;
 	class USpriteRenderer* SpriteRFarmSlot[48] = {};
+	class USpriteRenderer* SpriteRFarmCrops[48] = {};
 	
 };
 
