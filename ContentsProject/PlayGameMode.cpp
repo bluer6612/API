@@ -47,7 +47,7 @@ void APlayGameMode::BeginPlay()
 	//}
 
 	//BGM
-	//BGMPlayer = UEngineSound::Play("Rustys_Retirement_-_Full_OST_Master.wav");
+	BGMPlayer = UEngineSound::Play("Echo-metal-1.wav");
 
 	//캐릭터
 	ARusty* Rusty = AActor::GetWorld()->GetPawn<ARusty>();
@@ -59,7 +59,7 @@ void APlayGameMode::BeginPlay()
 
 	//타이틀
 	{
-		TitleLogo* NewActor = AActor::GetWorld()->SpawnActor<TitleLogo>();
+		//TitleLogo* NewActor = AActor::GetWorld()->SpawnActor<TitleLogo>();
 	}
 
 	//맵

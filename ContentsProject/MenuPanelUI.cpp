@@ -61,12 +61,12 @@ AMenuPanelUI::AMenuPanelUI()
 				Loc2 = 0;
 			}
 
-			//SpriteRFarmSlot[i] = CreateDefaultSubObject<USpriteRenderer>();
-			//SpriteRFarmSlot[i]->SetComponentCrate(SpriteRFarmSlot[i], "000_crop-seed-button.png", {}, { (Location.X - 153 + (Loc * 104)), (Location.Y - 120 + ((Loc / 4) + ((i / 4) + Loc2)) * 46) }, ERenderOrder::UI);
+			SpriteRFarmSlot[i] = CreateDefaultSubObject<USpriteRenderer>();
+			SpriteRFarmSlot[i]->SetComponentCrate(SpriteRFarmSlot[i], "000_crop-seed-button.png", {}, { (Location.X - 153 + (Loc * 104)), (Location.Y - 120 + ((Loc / 4) + ((i / 4) + Loc2)) * 46) }, ERenderOrder::UI);
 
 			if (i > (24 - 1))
 			{
-				//SpriteRFarmSlot[i]->SetActive(false);
+				SpriteRFarmSlot[i]->SetActive(false);
 			}
 
 			++Loc;
@@ -78,18 +78,16 @@ AMenuPanelUI::AMenuPanelUI()
 
 		Loc = 0;
 		Loc2 = 0;
-		for (size_t i = 44; i < 48; ++i)
+		for (size_t i = 44; i < 46; ++i)
 		{
 			SpriteRFarmSlot[i] = CreateDefaultSubObject<USpriteRenderer>();
-			SpriteRFarmSlot[i]->SetComponentCrate(SpriteRFarmSlot[i], "001_crop-seed-button.png", { 51, 51 }, { (Location.X - 170 + (3 * 104) + (Loc * 53)), (Location.Y - 116 + ((Loc2 / 5) * 53)) }, ERenderOrder::UI);;
+			SpriteRFarmSlot[i]->SetComponentCrate(SpriteRFarmSlot[i], "001_crop-seed-button.png", { 50, 44 }, { (Location.X - 179 + (3 * 104) + (Loc * 52)), (Location.Y - 120 + ((Loc2 / 5) * 53)) }, ERenderOrder::UI);;
 
 			++Loc;
 			if (45 == i)
 			{
 				Loc = 0;
 				Loc2 = 45;
-				//45인데 잠시 24로 해둠
-				Loc2 = 24;
 			}
 		}
 

@@ -59,6 +59,7 @@ void MainContentsCore::BeginPlay()
 	}
 
 	UImageManager::GetInst().CuttingSprite("Text.bmp", { 16, 32 });
+	UImageManager::GetInst().CuttingSprite("000_farming crops.png", { 16, 32 });
 
 	DirectoryAdd("", "TileMap");
 	DirectoryAdd("", "Title");
