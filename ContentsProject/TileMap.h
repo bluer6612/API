@@ -59,6 +59,8 @@ public:
 
 	void SetTileLocation(FVector2D _Location, int _SpriteIndex);
 
+	FIntPoint GetTileLocationIndex(FVector2D _Location);
+
 	Tile* GetTileLocation(FVector2D _Location);
 
 	void SetTileIndex(FIntPoint _Index, int _SpriteIndex);

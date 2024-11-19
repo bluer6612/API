@@ -60,6 +60,12 @@ void APlayGameMode::BeginPlay()
 		}
 	}
 
+	{
+		SpriteRFarmInfo = CreateDefaultSubObject<USpriteRenderer>();
+		SpriteRFarmInfo->SetComponentCrate(SpriteRFarmInfo, "Info", 0, { 1 , 1 }, { static_cast<float>(ScreenX - 256 + 22) - 341, (ScreenHY + 93 - 2) }, ERenderOrder::UIUP);
+		SpriteRFarmInfo->SetActive(false);
+	}
+
 	//BGM
 	BGMPlayer = UEngineSound::Play("Echo-metal-1.wav");
 
@@ -111,6 +117,15 @@ void APlayGameMode::Tick(float _DeltaTime)
 
 	if (nullptr != PanelButtonTile->GetTileLocation(MousePos))
 	{
+		{	
+			FIntPoint Point = PanelButtonTile->GetTileLocationIndex(MousePos);
+			SpriteRFarmInfo->SetSprite("Info", Point.X * Point.Y);
+			SpriteRFarmInfo->SetActive(true);
+		}
+	}
+	else
+	{
+		SpriteRFarmInfo->SetActive(false);
 	}
 
 

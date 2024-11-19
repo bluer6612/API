@@ -23,6 +23,7 @@ protected:
 
 private:
 	class AScore* Score = nullptr;
+	class USpriteRenderer* SpriteRFarmInfo = nullptr;
 	ATileMap* GroundTileMap = nullptr;
 	ATileMap* PanelButtonTile = nullptr;
 

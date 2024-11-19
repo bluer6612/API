@@ -176,21 +176,7 @@ void USpriteRenderer::SetOrder(int _Order)
 
 void USpriteRenderer::SetComponentCrate(USpriteRenderer* _SR, std::string_view _Model, FVector2D _Scale, FVector2D _Location, ERenderOrder _Order)
 {
-	_SR->SetSprite(_Model);
-	if (FVector2D::ZERO == _Scale)
-	{
-		_SR->SetComponentScaleOrigin();
-	}
-	else if (1 == _Scale.X && 1 == _Scale.Y)
-	{
-		_SR->SetComponentScale({ static_cast<float>(GetComponentScale().X * 0.5), static_cast<float>(GetComponentScale().Y * 0.5) });
-	}
-	else
-	{
-		_SR->SetComponentScale(_Scale);
-	}
-	_SR->SetComponentLocation(_Location);
-	_SR->SetOrder(_Order);
+	SetComponentCrate(_SR, _Model, 0, _Scale, _Location, _Order);
 }
 
 void USpriteRenderer::SetComponentCrate(USpriteRenderer* _SR, std::string_view _Model, int _index, FVector2D _Scale, FVector2D _Location, ERenderOrder _Order)

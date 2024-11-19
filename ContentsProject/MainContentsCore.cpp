@@ -64,6 +64,7 @@ void MainContentsCore::BeginPlay()
 	DirectoryAdd("", "TileMap");
 	DirectoryAdd("", "Title");
 	DirectoryAdd("", "Menu");
+	DirectoryAdd("Menu\\farm", "Info");
 	DirectoryAdd("Character", "RustyGold");
 	DirectoryAdd("Building", "House");
 	DirectoryAdd("Building", "Well");
