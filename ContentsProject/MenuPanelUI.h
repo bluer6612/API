@@ -12,6 +12,13 @@ public:
 	AMenuPanelUI& operator=(const AMenuPanelUI& _Other) = delete;
 	AMenuPanelUI& operator=(AMenuPanelUI&& _Other) noexcept = delete;
 
+	USpriteRenderer* GetSpriteRFarmInfo() const
+	{
+		return SpriteRFarmInfo;
+	}
+
+	class USpriteRenderer* SpriteRFarmInfo = nullptr;
+
 protected:
 
 private:
@@ -20,6 +27,5 @@ private:
 	class USpriteRenderer* SpriteRFarmSlot[CropsCount] = {};
 	class USpriteRenderer* SpriteRFarmCrops[CropsCount] = {};
 	class USpriteRenderer* SpriteRFarmCoin[CropsCount] = {};
-	class USpriteRenderer* SpriteRFarmInfo = nullptr;
 };
 

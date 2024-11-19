@@ -22,7 +22,7 @@ protected:
 	void Tick(float _DeltaTime) override;
 
 private:
-	class AScore* Score;
+	class AScore* Score = nullptr;
 	ATileMap* GroundTileMap = nullptr;
 	ATileMap* PanelButtonTile = nullptr;
 

@@ -212,7 +212,6 @@ void USpriteRenderer::SetComponentCrate(USpriteRenderer* _SR, std::string_view _
 	_SR->SetOrder(_Order);
 }
 
-
 void USpriteRenderer::CreateAnimation(std::string_view _AnimationName, std::string_view _SpriteName, int _Start, int _End, float Time /*= 0.1f*/, bool _Loop /*= true*/)
 {
 	int Inter = 0;
@@ -243,7 +242,6 @@ void USpriteRenderer::CreateAnimation(std::string_view _AnimationName, std::stri
 
 	CreateAnimation(_AnimationName, _SpriteName, Indexs, Times, _Loop);
 }
-
 
 void USpriteRenderer::CreateAnimation(std::string_view _AnimationName, std::string_view _SpriteName, std::vector<int> _Indexs, float _Frame, bool _Loop /*= true*/)
 {

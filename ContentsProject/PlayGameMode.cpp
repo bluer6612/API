@@ -49,7 +49,7 @@ void APlayGameMode::BeginPlay()
 
 		PanelButtonTile = GetWorld()->SpawnActor<ATileMap>();
 		PanelButtonTile->SetActorLocation({ Location.X, Location.Y });
-		PanelButtonTile->Create("TileMap", { 4, CropsCount / 4 }, { 102, 44 });
+		PanelButtonTile->Create("EmptyTile.png", { 4, CropsCount / 4 }, { 102, 44 });
 
 		for (int y = 0; y < 4; y++)
 		{
@@ -83,7 +83,7 @@ void APlayGameMode::BeginPlay()
 
 	//패널 메뉴
 	{
-		//AMenuPanelUI* NewActor = AActor::GetWorld()->SpawnActor<AMenuPanelUI>();
+		AMenuPanelUI* NewActor = AActor::GetWorld()->SpawnActor<AMenuPanelUI>();
 	}
 
 	//{
@@ -111,79 +111,78 @@ void APlayGameMode::Tick(float _DeltaTime)
 
 	if (nullptr != PanelButtonTile->GetTileLocation(MousePos))
 	{
-		int a = 0;
 	}
 
 
-	if (true == UEngineInput::GetInst().IsPress('R'))
+	//if (true == UEngineInput::GetInst().IsPress('R'))
+	//{
+	//	UEngineSerializer _Ser;
+	//	GroundTileMap->Serialize(_Ser);
+	//	UEngineDirectory Dir;
+
+	//	if (false == Dir.MoveParentToDirectory("Resources"))
+	//	{
+	//		MSGASSERT("리소스 폴더를 찾지 못했습니다.");
+	//		return;
+	//	}
+
+	//	Dir.Append("Data");
+
+	//	std::string SaveFilePath = Dir.GetPathToString() + "\\MapData.Data";
+	//	UEngineFile NewFile = SaveFilePath;
+	//	NewFile.FileOpen("wb");
+	//	NewFile.Write(_Ser);
+	//}
+
+	//if (true == UEngineInput::GetInst().IsPress('P'))
+	//{
+	//	UEngineRandom Random;
+	//	for (size_t y = 0; y < 10; y++)
+	//	{
+	//		int Value = Random.RandomInt(0, 100);
+	//		UEngineDebug::OutPutString(std::to_string(Value));
+	//	}
+	//}
+
+	//if (true == UEngineInput::GetInst().IsPress('T'))
+	//{
+	//	UEngineDirectory Dir;
+
+	//	if (false == Dir.MoveParentToDirectory("Resources"))
+	//	{
+	//		MSGASSERT("리소스 폴더를 찾지 못했습니다.");
+	//		return;
+	//	}
+
+	//	Dir.Append("Data");
+
+	//	std::string SaveFilePath = Dir.GetPathToString() + "\\MapData.Data";
+	//	UEngineFile NewFile = SaveFilePath;
+	//	NewFile.FileOpen("rb");
+
+	//	UEngineSerializer Ser;
+	//	NewFile.Read(Ser);
+
+	//	GroundTileMap->DeSerialize(Ser);
+	//}
+
+	if (true == UEngineInput::GetInst().IsPress('A'))
 	{
-		UEngineSerializer _Ser;
-		GroundTileMap->Serialize(_Ser);
-		UEngineDirectory Dir;
-
-		if (false == Dir.MoveParentToDirectory("Resources"))
-		{
-			MSGASSERT("리소스 폴더를 찾지 못했습니다.");
-			return;
-		}
-
-		Dir.Append("Data");
-
-		std::string SaveFilePath = Dir.GetPathToString() + "\\MapData.Data";
-		UEngineFile NewFile = SaveFilePath;
-		NewFile.FileOpen("wb");
-		NewFile.Write(_Ser);
+		GroundTileMap->AddActorLocation(FVector2D::LEFT * _DeltaTime * 100.0f);
 	}
 
-	if (true == UEngineInput::GetInst().IsPress('P'))
+	if (true == UEngineInput::GetInst().IsPress('D'))
 	{
-		UEngineRandom Random;
-		for (size_t y = 0; y < 10; y++)
-		{
-			int Value = Random.RandomInt(0, 100);
-			UEngineDebug::OutPutString(std::to_string(Value));
-		}
+		GroundTileMap->AddActorLocation(FVector2D::RIGHT * _DeltaTime * 100.0f);
 	}
 
-	if (true == UEngineInput::GetInst().IsPress('T'))
+	if (true == UEngineInput::GetInst().IsPress('W'))
 	{
-		UEngineDirectory Dir;
-
-		if (false == Dir.MoveParentToDirectory("Resources"))
-		{
-			MSGASSERT("리소스 폴더를 찾지 못했습니다.");
-			return;
-		}
-
-		Dir.Append("Data");
-
-		std::string SaveFilePath = Dir.GetPathToString() + "\\MapData.Data";
-		UEngineFile NewFile = SaveFilePath;
-		NewFile.FileOpen("rb");
-
-		UEngineSerializer Ser;
-		NewFile.Read(Ser);
-
-		GroundTileMap->DeSerialize(Ser);
+		GroundTileMap->AddActorLocation(FVector2D::UP * _DeltaTime * 100.0f);
 	}
 
-	//if (true == UEngineInput::GetInst().IsPress('A'))
-	//{
-	//	GroundTileMap->AddActorLocation(FVector2D::LEFT * _DeltaTime * 100.0f);
-	//}
-
-	//if (true == UEngineInput::GetInst().IsPress('D'))
-	//{
-	//	GroundTileMap->AddActorLocation(FVector2D::RIGHT * _DeltaTime * 100.0f);
-	//}
-
-	//if (true == UEngineInput::GetInst().IsPress('W'))
-	//{
-	//	GroundTileMap->AddActorLocation(FVector2D::UP * _DeltaTime * 100.0f);
-	//}
-
-	//if (true == UEngineInput::GetInst().IsPress('S'))
-	//{
-	//	GroundTileMap->AddActorLocation(FVector2D::DOWN * _DeltaTime * 100.0f);
-	//}
+	if (true == UEngineInput::GetInst().IsPress('S'))
+	{
+		GroundTileMap->AddActorLocation(FVector2D::DOWN * _DeltaTime * 100.0f);
+	}
 }
