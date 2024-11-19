@@ -135,9 +135,4 @@
       <UniqueIdentifier>{0968278a-21c6-494b-901e-ba95b20d1de3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
-  <ItemGroup>
-    <Text Include="GameMode.txt">
-      <Filter>ContentsObject\GameMode</Filter>
-    </Text>
-  </ItemGroup>
 </Project>

@@ -23,8 +23,8 @@ protected:
 
 private:
 	class AScore* Score;
-	ATileMap* WallTileMap = nullptr;
 	ATileMap* GroundTileMap = nullptr;
+	ATileMap* PanelButtonTile = nullptr;
 
 	USoundPlayer BGMPlayer;
 };

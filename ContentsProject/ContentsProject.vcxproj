@@ -261,9 +261,6 @@
       </SubType>
     </ClCompile>
   </ItemGroup>
-  <ItemGroup>
-    <Text Include="GameMode.txt" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

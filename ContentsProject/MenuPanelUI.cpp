@@ -78,7 +78,6 @@ AMenuPanelUI::AMenuPanelUI()
 
 			SpriteRFarmCoin[i] = CreateDefaultSubObject<USpriteRenderer>();
 			SpriteRFarmCoin[i]->SetComponentCrate(SpriteRFarmCoin[i], "uiresourceicons_7.png", {}, { (Location.X - 153 + 39 + (Loc * 104)), (Location.Y - 120 + 16 + ((i / 4) + Loc2) * 46) }, ERenderOrder::UI);
-			
 
 			if (i > (24 - 1))
 			{

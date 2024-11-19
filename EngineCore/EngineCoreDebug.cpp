@@ -12,9 +12,7 @@ namespace UEngineDebug
 		FVector2D Pos;
 	};
 
-
-		std::vector<DebugTextInfo> DebugTexts;
-
+	std::vector<DebugTextInfo> DebugTexts;
 
 	FVector2D EngineTextPos = FVector2D::ZERO;
 
@@ -41,7 +39,7 @@ namespace UEngineDebug
 			return;
 		}
 
-				DebugTexts.push_back({ _Text.data(), EngineTextPos});
+		DebugTexts.push_back({ _Text.data(), EngineTextPos});
 		EngineTextPos.Y += 20;
 	}
 
@@ -81,7 +79,7 @@ namespace UEngineDebug
 			return;
 		}
 
-				UEngineWinImage* BackBuffer = UEngineAPICore::GetCore()->GetMainWindow().GetBackBuffer();
+		UEngineWinImage* BackBuffer = UEngineAPICore::GetCore()->GetMainWindow().GetBackBuffer();
 
 		for (size_t i = 0; i < DebugTexts.size(); i++)
 		{
@@ -94,7 +92,6 @@ namespace UEngineDebug
 
 		for (size_t i = 0; i < DebugPoses.size(); i++)
 		{
-
 			EDebugPosType Type = DebugPoses[i].Type;
 
 			FVector2D LT = DebugPoses[i].Trans.CenterLeftTop();
@@ -113,9 +110,7 @@ namespace UEngineDebug
 		}
 
 		DebugPoses.clear();
-
 	}
-
 
 	void CoreDebugBox(FTransform _Trans)
 	{

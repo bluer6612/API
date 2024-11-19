@@ -32,18 +32,30 @@ void APlayGameMode::BeginPlay()
 	//타일
 	{
 		GroundTileMap = GetWorld()->SpawnActor<ATileMap>();
-	}
-
-	{
-		WallTileMap = GetWorld()->SpawnActor<ATileMap>();
-		WallTileMap->SetActorLocation({ static_cast<float>(0), static_cast<float>(ScreenY - 298 - 36 - 2) });
-		WallTileMap->Create("button-bg-with-border.png", { 53, 8 }, { 36, 36 });
+		GroundTileMap->SetActorLocation({ static_cast<float>(0), static_cast<float>(ScreenY - 298 - 36 - 2) });
+		GroundTileMap->Create("EmptyTile.png", { 53, 8 }, { 36, 36 });
 
 		for (int y = 0; y < 53; y++)
 		{
 			for (int x = 0; x < 8; x++)
 			{
-				WallTileMap->SetTileIndex({ y, x }, { 0, 0 }, { 36, 36 }, 0);
+				GroundTileMap->SetTileIndex({ y, x }, { 0, 0 }, { 36, 36 }, 0);
+			}
+		}
+	}
+
+	{
+		FVector2D Location = { static_cast<float>(ScreenX) - 256 + 22 - 153 - 51 , ScreenHY + 93 - 120 - 22 };
+
+		PanelButtonTile = GetWorld()->SpawnActor<ATileMap>();
+		PanelButtonTile->SetActorLocation({ Location.X, Location.Y });
+		PanelButtonTile->Create("000_crop-seed-button.png", { 4, CropsCount / 4 }, { 102, 44 });
+
+		for (int y = 0; y < 4; y++)
+		{
+			for (int x = 0; x < CropsCount / 4; x++)
+			{
+				PanelButtonTile->SetTileIndex({ y, x }, { 0, 0 }, { 102, 44 }, 0);
 			}
 		}
 	}
@@ -71,7 +83,7 @@ void APlayGameMode::BeginPlay()
 
 	//패널 메뉴
 	{
-		AMenuPanelUI* NewActor = AActor::GetWorld()->SpawnActor<AMenuPanelUI>();
+		//AMenuPanelUI* NewActor = AActor::GetWorld()->SpawnActor<AMenuPanelUI>();
 	}
 
 	//{
@@ -95,16 +107,16 @@ void APlayGameMode::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 
-	//if (true == UEngineInput::GetInst().IsPress(VK_LBUTTON))
-	//{
-	//	FVector2D MousePos = UEngineAPICore::GetCore()->GetMainWindow().GetMousePos();
-	//	WallTileMap->SetTileLocation(MousePos, 1);
-	//}
+	if (true == UEngineInput::GetInst().IsPress(VK_LBUTTON))
+	{
+		FVector2D MousePos = UEngineAPICore::GetCore()->GetMainWindow().GetMousePos();
+		PanelButtonTile->SetTileLocation(MousePos, 1);
+	}
 
 	//if (true == UEngineInput::GetInst().IsPress(VK_RBUTTON))
 	//{
 	//	FVector2D MousePos = UEngineAPICore::GetCore()->GetMainWindow().GetMousePos();
-	//	Tile* Tile = WallTileMap->GetTileRef(MousePos);
+	//	Tile* Tile = GroundTileMap->GetTileRef(MousePos);
 	//	if (nullptr != Tile->SpriteRenderer)
 	//	{
 	//		Tile->SpriteRenderer->Destroy(5.0f);
@@ -116,7 +128,7 @@ void APlayGameMode::Tick(float _DeltaTime)
 	if (true == UEngineInput::GetInst().IsPress('R'))
 	{
 		UEngineSerializer _Ser;
-		WallTileMap->Serialize(_Ser);
+		GroundTileMap->Serialize(_Ser);
 		UEngineDirectory Dir;
 
 		if (false == Dir.MoveParentToDirectory("Resources"))
@@ -136,7 +148,7 @@ void APlayGameMode::Tick(float _DeltaTime)
 	if (true == UEngineInput::GetInst().IsPress('P'))
 	{
 		UEngineRandom Random;
-		for (size_t i = 0; i < 10; i++)
+		for (size_t y = 0; y < 10; y++)
 		{
 			int Value = Random.RandomInt(0, 100);
 			UEngineDebug::OutPutString(std::to_string(Value));
@@ -162,26 +174,26 @@ void APlayGameMode::Tick(float _DeltaTime)
 		UEngineSerializer Ser;
 		NewFile.Read(Ser);
 
-		WallTileMap->DeSerialize(Ser);
+		GroundTileMap->DeSerialize(Ser);
 	}
 
 	//if (true == UEngineInput::GetInst().IsPress('A'))
 	//{
-	//	WallTileMap->AddActorLocation(FVector2D::LEFT * _DeltaTime * 100.0f);
+	//	GroundTileMap->AddActorLocation(FVector2D::LEFT * _DeltaTime * 100.0f);
 	//}
 
 	//if (true == UEngineInput::GetInst().IsPress('D'))
 	//{
-	//	WallTileMap->AddActorLocation(FVector2D::RIGHT * _DeltaTime * 100.0f);
+	//	GroundTileMap->AddActorLocation(FVector2D::RIGHT * _DeltaTime * 100.0f);
 	//}
 
 	//if (true == UEngineInput::GetInst().IsPress('W'))
 	//{
-	//	WallTileMap->AddActorLocation(FVector2D::UP * _DeltaTime * 100.0f);
+	//	GroundTileMap->AddActorLocation(FVector2D::UP * _DeltaTime * 100.0f);
 	//}
 
 	//if (true == UEngineInput::GetInst().IsPress('S'))
 	//{
-	//	WallTileMap->AddActorLocation(FVector2D::DOWN * _DeltaTime * 100.0f);
+	//	GroundTileMap->AddActorLocation(FVector2D::DOWN * _DeltaTime * 100.0f);
 	//}
 }
