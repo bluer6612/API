@@ -39,7 +39,7 @@ void APlayGameMode::BeginPlay()
 		{
 			for (int x = 0; x < 8; x++)
 			{
-				GroundTileMap->SetTileIndex({ y, x }, { 0, 0 }, { 36, 36 }, 0);
+				GroundTileMap->SetTileIndex({ y, x }, { 0, 0 }, { 36, 36 }, { 0, 0 }, 0);
 			}
 		}
 	}
@@ -49,13 +49,13 @@ void APlayGameMode::BeginPlay()
 
 		PanelButtonTile = GetWorld()->SpawnActor<ATileMap>();
 		PanelButtonTile->SetActorLocation({ Location.X, Location.Y });
-		PanelButtonTile->Create("000_crop-seed-button.png", { 4, CropsCount / 4 }, { 102, 44 });
+		PanelButtonTile->Create("EmptyTile.png", { 4, CropsCount / 4 }, { 102, 44 });
 
 		for (int y = 0; y < 4; y++)
 		{
 			for (int x = 0; x < CropsCount / 4; x++)
 			{
-				PanelButtonTile->SetTileIndex({ y, x }, { 0, 0 }, { 102, 44 }, 0);
+				PanelButtonTile->SetTileIndex({ y, x }, { 0, 0 }, { 102, 44 }, { 2, 2 }, 0);
 			}
 		}
 	}
