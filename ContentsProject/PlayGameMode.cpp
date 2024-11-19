@@ -49,12 +49,22 @@ void APlayGameMode::BeginPlay()
 
 		PanelButtonTile = GetWorld()->SpawnActor<ATileMap>();
 		PanelButtonTile->SetActorLocation({ Location.X, Location.Y });
-		PanelButtonTile->Create("EmptyTile.png", { 4, CropsCount / 4 }, { 102, 44 });
+		PanelButtonTile->Create("000_MenuPanel.png", { 4, CropsCount / 4 }, { 102, 44 });
 
-		for (int y = 0; y < 4; y++)
+		int i = 0;
+		for (int x = 0; x < CropsCount / 4; x++)
 		{
-			for (int x = 0; x < CropsCount / 4; x++)
+			for (int y = 0; y < 4; y++)
+			//for (int x = 0; x < CropsCount / 4; x++)
 			{
+				++i;
+				if (i == 4)
+				{
+					++x;
+					y = 0;
+					//continue;
+				}
+
 				PanelButtonTile->SetTileIndex({ y, x }, { 0, 0 }, { 102, 44 }, { 2, 2 }, 0);
 			}
 		}
@@ -89,7 +99,7 @@ void APlayGameMode::BeginPlay()
 
 	//패널 메뉴
 	{
-		AMenuPanelUI* NewActor = AActor::GetWorld()->SpawnActor<AMenuPanelUI>();
+		//AMenuPanelUI* NewActor = AActor::GetWorld()->SpawnActor<AMenuPanelUI>();
 	}
 
 	//{
