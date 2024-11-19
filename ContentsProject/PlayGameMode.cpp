@@ -49,7 +49,7 @@ void APlayGameMode::BeginPlay()
 
 		PanelButtonTile = GetWorld()->SpawnActor<ATileMap>();
 		PanelButtonTile->SetActorLocation({ Location.X, Location.Y });
-		PanelButtonTile->Create("EmptyTile.png", { 4, CropsCount / 4 }, { 102, 44 });
+		PanelButtonTile->Create("TileMap", { 4, CropsCount / 4 }, { 102, 44 });
 
 		for (int y = 0; y < 4; y++)
 		{
@@ -83,7 +83,7 @@ void APlayGameMode::BeginPlay()
 
 	//패널 메뉴
 	{
-		AMenuPanelUI* NewActor = AActor::GetWorld()->SpawnActor<AMenuPanelUI>();
+		//AMenuPanelUI* NewActor = AActor::GetWorld()->SpawnActor<AMenuPanelUI>();
 	}
 
 	//{
@@ -107,22 +107,12 @@ void APlayGameMode::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 
-	if (true == UEngineInput::GetInst().IsDown(VK_LBUTTON))
+	FVector2D MousePos = UEngineAPICore::GetCore()->GetMainWindow().GetMousePos();
+
+	if (nullptr != PanelButtonTile->GetTileLocation(MousePos))
 	{
-		FVector2D MousePos = UEngineAPICore::GetCore()->GetMainWindow().GetMousePos();
-
+		int a = 0;
 	}
-
-	//if (true == UEngineInput::GetInst().IsPress(VK_RBUTTON))
-	//{
-	//	FVector2D MousePos = UEngineAPICore::GetCore()->GetMainWindow().GetMousePos();
-	//	Tile* Tile = GroundTileMap->GetTileRef(MousePos);
-	//	if (nullptr != Tile->SpriteRenderer)
-	//	{
-	//		Tile->SpriteRenderer->Destroy(5.0f);
-	//		Tile->SpriteRenderer = nullptr;
-	//	}
-	//}
 
 
 	if (true == UEngineInput::GetInst().IsPress('R'))
