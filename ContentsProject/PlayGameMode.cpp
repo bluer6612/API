@@ -119,6 +119,7 @@ void APlayGameMode::Tick(float _DeltaTime)
 	{
 		{	
 			FIntPoint Point = PanelButtonTile->GetTileLocationIndex(MousePos);
+			Point = PanelButtonTile->GetCalIndex(Point);
 			SpriteRFarmInfo->SetSprite("Info", Point.X * Point.Y);
 			SpriteRFarmInfo->SetActive(true);
 		}

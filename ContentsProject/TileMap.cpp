@@ -106,6 +106,20 @@ void ATileMap::SetTileIndex(FIntPoint _Index, FVector2D _Pivot, FVector2D _Sprit
 	AllTiles[_Index.Y][_Index.X].SpriteIndex = _SpriteIndex;
 }
 
+FIntPoint ATileMap::GetCalIndex(FIntPoint _Index)
+{
+	if (_Index.X == 0 && _Index.Y != 0)
+	{
+		++_Index.X;
+	}
+	else if (_Index.X != 0 && _Index.Y == 0)
+	{
+		++_Index.Y;
+	}
+
+	return _Index;
+}
+
 FIntPoint ATileMap::GetTileLocationIndex(FVector2D _Location)
 {
 	FVector2D TilePos = _Location - GetActorLocation();
