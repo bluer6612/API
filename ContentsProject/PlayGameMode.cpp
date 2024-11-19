@@ -83,7 +83,7 @@ void APlayGameMode::BeginPlay()
 
 	//패널 메뉴
 	{
-		//AMenuPanelUI* NewActor = AActor::GetWorld()->SpawnActor<AMenuPanelUI>();
+		AMenuPanelUI* NewActor = AActor::GetWorld()->SpawnActor<AMenuPanelUI>();
 	}
 
 	//{
@@ -110,13 +110,7 @@ void APlayGameMode::Tick(float _DeltaTime)
 	if (true == UEngineInput::GetInst().IsDown(VK_LBUTTON))
 	{
 		FVector2D MousePos = UEngineAPICore::GetCore()->GetMainWindow().GetMousePos();
-		//PanelButtonTile->GetTileRef(MousePos);
-		Tile* Tile = PanelButtonTile->GetTileRef(MousePos);
-		if (nullptr != Tile->SpriteRenderer)
-		{
-			Tile->SpriteRenderer->Destroy(1.0f);
-			Tile->SpriteRenderer = nullptr;
-		}
+
 	}
 
 	//if (true == UEngineInput::GetInst().IsPress(VK_RBUTTON))

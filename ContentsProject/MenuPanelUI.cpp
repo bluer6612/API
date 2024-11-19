@@ -37,6 +37,13 @@ AMenuPanelUI::AMenuPanelUI()
 	}
 
 	{
+		SpriteRFarmInfo = CreateDefaultSubObject<USpriteRenderer>();
+		SpriteRFarmInfo->SetComponentCrate(SpriteRFarmInfo, "000_Crops_Info.png", { 1 , 1 }, { Location.X - 341, static_cast<float>((Location.Y - 2)) }, ERenderOrder::UIUP);
+		SpriteRFarmInfo->SetActive(false);
+		++index;
+	}
+
+	{
 		int Loc = 0;
 		int Loc2 = 0;
 		int j = 0;
@@ -108,7 +115,6 @@ AMenuPanelUI::AMenuPanelUI()
 				Loc2 = 45;
 			}
 		}
-
 	}
 }
 

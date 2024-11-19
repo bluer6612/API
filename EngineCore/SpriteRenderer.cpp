@@ -18,8 +18,6 @@ USpriteRenderer::~USpriteRenderer()
 // StaticMeshRenderer : public URenderer
 void USpriteRenderer::Render(float _DeltaTime)
 {
-	// 업데이트
-
 	if (nullptr == Sprite)
 	{
 		MSGASSERT("스프라이트가 세팅되지 않은 액터를 랜더링을 할수 없습니다.");
@@ -40,7 +38,6 @@ void USpriteRenderer::Render(float _DeltaTime)
 
 	Trans.Location += Pivot;
 
-
 	if (Alpha == 255)
 	{
 		CurData.Image->CopyToTrans(BackBufferImage, Trans, CurData.Transform);
@@ -53,11 +50,7 @@ void USpriteRenderer::Render(float _DeltaTime)
 
 void USpriteRenderer::BeginPlay()
 {
-	// 부모 클래스의 함수를 호출하는걸 깜빡하면 안된다.
-	// 습관되면 가장 언리얼 학습에서 걸림돌이 되는 습관이 된다.
 	Super::BeginPlay();
-
-	// 스프라이트 랜더러가 
 
 	AActor* Actor = GetActor();
 	ULevel* Level = Actor->GetWorld();
@@ -69,14 +62,12 @@ void USpriteRenderer::ComponentTick(float _DeltaTime)
 {
 	Super::ComponentTick(_DeltaTime);
 
-	// 애니메이션 진행시키는 코드를 ComponentTick으로 옮겼다. 
 	if (nullptr != CurAnimation)
 	{
 		std::vector<int>& Indexs = CurAnimation->FrameIndex;
 		std::vector<float>& Times = CurAnimation->FrameTime;
 
 		Sprite = CurAnimation->Sprite;
-
 
 		CurAnimation->CurTime += _DeltaTime * CurAnimationSpeed;
 
@@ -85,7 +76,6 @@ void USpriteRenderer::ComponentTick(float _DeltaTime)
 		//                           0.1 0.1 0.1
 		if (CurAnimation->CurTime > CurFrameTime)
 		{
-
 			CurAnimation->CurTime -= CurFrameTime;
 			++CurAnimation->CurIndex;
 
@@ -120,15 +110,10 @@ void USpriteRenderer::ComponentTick(float _DeltaTime)
 					--CurAnimation->CurIndex;
 				}
 			}
-
 		}
 
-
-		//         2 3 4           0
 		CurIndex = Indexs[CurAnimation->CurIndex];
-		// ++CurAnimation->CurIndex;
 	}
-
 }
 
 void USpriteRenderer::SetSprite(std::string_view _Name, int _CurIndex /*= 0*/)
@@ -244,7 +229,6 @@ void USpriteRenderer::CreateAnimation(std::string_view _AnimationName, std::stri
 			Times.push_back(Time);
 			++_Start;
 		}
-
 	}
 	else
 	{
@@ -256,7 +240,6 @@ void USpriteRenderer::CreateAnimation(std::string_view _AnimationName, std::stri
 			++_End;
 		}
 	}
-
 
 	CreateAnimation(_AnimationName, _SpriteName, Indexs, Times, _Loop);
 }
@@ -305,7 +288,6 @@ void USpriteRenderer::CreateAnimation(std::string_view _AnimationName, std::stri
 	NewAnimation.Reset();
 
 	FrameAnimations.insert({ UpperName ,NewAnimation });
-
 }
 
 void USpriteRenderer::ChangeAnimation(std::string_view _AnimationName, bool _Force /*= false*/)
