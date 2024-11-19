@@ -29,24 +29,24 @@ void APlayGameMode::BeginPlay()
 {
 	Super::BeginPlay();
 
-	////타일
-	//{
-	//	GroundTileMap = GetWorld()->SpawnActor<ATileMap>();
-	//}
+	//타일
+	{
+		GroundTileMap = GetWorld()->SpawnActor<ATileMap>();
+	}
 
-	//{
-	//	WallTileMap = GetWorld()->SpawnActor<ATileMap>();
-	//	WallTileMap->SetActorLocation({ static_cast<float>(0), static_cast<float>(ScreenY - (ScreenHY - 440)) });
-	//	WallTileMap->Create("button-bg-with-border.png", { 48, 8 }, { 40, 40 });
+	{
+		WallTileMap = GetWorld()->SpawnActor<ATileMap>();
+		WallTileMap->SetActorLocation({ static_cast<float>(0), static_cast<float>(ScreenY - 298 - 36 - 2) });
+		WallTileMap->Create("button-bg-with-border.png", { 53, 8 }, { 36, 36 });
 
-	//	for (int y = 0; y < 48; y++)
-	//	{
-	//		for (int x = 0; x < 8; x++)
-	//		{
-	//			WallTileMap->SetTileIndex({ y, x }, { 0, 0 }, { 40, 40 }, 0);
-	//		}
-	//	}
-	//}
+		for (int y = 0; y < 53; y++)
+		{
+			for (int x = 0; x < 8; x++)
+			{
+				WallTileMap->SetTileIndex({ y, x }, { 0, 0 }, { 36, 36 }, 0);
+			}
+		}
+	}
 
 	//BGM
 	BGMPlayer = UEngineSound::Play("Echo-metal-1.wav");

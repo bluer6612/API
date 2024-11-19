@@ -33,9 +33,4 @@ void APlayMap::Tick(float _DeltaTime)
 
 	UEngineDebug::CoreOutPutString("FPS : " + std::to_string(1.0f / _DeltaTime));
 	UEngineDebug::CoreOutPutString("PlayerPos : " + GetActorLocation().ToString());
-
-	if (true == UEngineInput::GetInst().IsDown('Y'))
-	{
-		BackTopSpriteR->SetActiveSwitch();
-	}
 }
