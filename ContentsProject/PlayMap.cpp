@@ -19,12 +19,12 @@ APlayMap::APlayMap()
 
 	{
 		BackSpriteR = CreateDefaultSubObject<USpriteRenderer>();
-		BackSpriteR->SetComponentCrate(BackSpriteR, "GrassMap.png", { 1, 1 }, { ScreenHX, ScreenHY + 105 }, ERenderOrder::BACKGROUND);
+		BackSpriteR->SetComponentCrate(BackSpriteR, "GrassMap.png", { 1, 1 }, { ScreenHX, ScreenHY + 92 }, ERenderOrder::BACKGROUND);
 	}
 }
 
 APlayMap::~APlayMap()
-{
+{ 
 }
 
 void APlayMap::Tick(float _DeltaTime)

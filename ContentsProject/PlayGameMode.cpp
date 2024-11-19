@@ -29,22 +29,23 @@ void APlayGameMode::BeginPlay()
 {
 	Super::BeginPlay();
 
-	//타일
+	////타일
 	//{
 	//	GroundTileMap = GetWorld()->SpawnActor<ATileMap>();
 	//}
 
 	//{
 	//	WallTileMap = GetWorld()->SpawnActor<ATileMap>();
-	//	WallTileMap->Create("TileSet", { 48, 8 }, { 48, 40 });
+	//	WallTileMap->SetActorLocation({ static_cast<float>(0), static_cast<float>(ScreenY - (ScreenHY - 440)) });
+	//	WallTileMap->Create("button-bg-with-border.png", { 48, 8 }, { 40, 40 });
 
-	//	//for (int y = 0; y < 40; y++)
-	//	//{
-	//	//	for (int x = 0; x < 40; x++)
-	//	//	{
-	//	//		WallTileMap->SetTileIndex({ y,x }, { 0, 0 }, { 48, 40 }, 1);
-	//	//	}
-	//	//}
+	//	for (int y = 0; y < 48; y++)
+	//	{
+	//		for (int x = 0; x < 8; x++)
+	//		{
+	//			WallTileMap->SetTileIndex({ y, x }, { 0, 0 }, { 40, 40 }, 0);
+	//		}
+	//	}
 	//}
 
 	//BGM
