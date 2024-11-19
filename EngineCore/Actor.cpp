@@ -31,7 +31,6 @@ void AActor::ComponentBeginPlay()
 
 		ComponentList.clear();
 	}
-
 }
 
 AActor::AActor()
@@ -40,7 +39,7 @@ AActor::AActor()
 
 AActor::~AActor()
 {
-		std::list<UActorComponent*>::iterator StartIter = Components.begin();
+	std::list<UActorComponent*>::iterator StartIter = Components.begin();
 	std::list<UActorComponent*>::iterator EndIter = Components.end();
 	for (; StartIter != EndIter; ++StartIter)
 	{
@@ -103,7 +102,7 @@ void AActor::ReleaseCheck(float _DeltaTime)
 {
 	UObject::ReleaseCheck(_DeltaTime);
 
-		std::list<UActorComponent*>::iterator StartIter = Components.begin();
+	std::list<UActorComponent*>::iterator StartIter = Components.begin();
 	std::list<UActorComponent*>::iterator EndIter = Components.end();
 	for (; StartIter != EndIter; )
 	{
@@ -116,7 +115,7 @@ void AActor::ReleaseCheck(float _DeltaTime)
 			continue;
 		}
 
-				delete Component;
+		delete Component;
 		StartIter = Components.erase(StartIter);
 	}
 }

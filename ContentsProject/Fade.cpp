@@ -14,7 +14,6 @@ AFade::AFade()
 	FVector2D MapScale = BackSpriteRenderer->SetSpriteScale(1.0f);
 	BackSpriteRenderer->SetComponentLocation(MapScale.Half());
 	BackSpriteRenderer->SetCameraEffect(false);
-		
 }
 
 AFade::~AFade()

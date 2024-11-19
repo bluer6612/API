@@ -107,10 +107,16 @@ void APlayGameMode::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 
-	if (true == UEngineInput::GetInst().IsPress(VK_LBUTTON))
+	if (true == UEngineInput::GetInst().IsDown(VK_LBUTTON))
 	{
 		FVector2D MousePos = UEngineAPICore::GetCore()->GetMainWindow().GetMousePos();
-		PanelButtonTile->SetTileLocation(MousePos, 1);
+		//PanelButtonTile->GetTileRef(MousePos);
+		Tile* Tile = PanelButtonTile->GetTileRef(MousePos);
+		if (nullptr != Tile->SpriteRenderer)
+		{
+			Tile->SpriteRenderer->Destroy(1.0f);
+			Tile->SpriteRenderer = nullptr;
+		}
 	}
 
 	//if (true == UEngineInput::GetInst().IsPress(VK_RBUTTON))

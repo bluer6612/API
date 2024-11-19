@@ -1,7 +1,6 @@
 #include "PreCompile.h"
 #include "EngineInput.h"
 
-
 void UEngineInput::UEngineKey::KeyCheck(float _DeltaTime)
 {
 	if (0 != GetAsyncKeyState(Key))
@@ -21,7 +20,6 @@ void UEngineInput::UEngineKey::KeyCheck(float _DeltaTime)
 			IsFree = false;
 			IsUp = false;
 		}
-
 	}
 	else 
 	{
@@ -40,7 +38,6 @@ void UEngineInput::UEngineKey::KeyCheck(float _DeltaTime)
 			IsFree = true;
 			IsUp = false;
 		}
-
 	}
 }
 
@@ -241,6 +238,4 @@ void UEngineInput::BindAction(int _KeyIndex, KeyEvent _EventType, std::function<
 	default:
 		break;
 	}
-
-
 }

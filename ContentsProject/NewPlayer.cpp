@@ -151,12 +151,12 @@ void ANewPlayer::Tick(float _DeltaTime)
 
 void ANewPlayer::Idle(float _DeltaTime)
 {
-		PlayerCameraCheck();
+	PlayerCameraCheck();
 
 	if (true == UEngineInput::GetInst().IsPress('A') ||
 		true == UEngineInput::GetInst().IsPress('D'))
 	{
-						FSM.ChangeState(NewPlayerState::Move);
+		FSM.ChangeState(NewPlayerState::Move);
 		return;
 	}
 }
@@ -175,11 +175,11 @@ void ANewPlayer::Move(float _DeltaTime)
 	if (true == UEngineInput::GetInst().IsPress('A'))
 	{
 		Vector += FVector2D::LEFT;
-			}
+	}
 
 	Vector.Normalize();
 
-		AddActorLocation(Vector * _DeltaTime * Speed);
+	AddActorLocation(Vector * _DeltaTime * Speed);
 
 	if (false == UEngineInput::GetInst().IsPress('A') &&
 		false == UEngineInput::GetInst().IsPress('D') &&
