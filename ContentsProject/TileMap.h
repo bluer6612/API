@@ -14,6 +14,7 @@ public:
 	FVector2D Scale;
 	FVector2D Pivot;
 	int SpriteIndex;
+	int TileIndex = 0;
 
 	void Serialize(UEngineSerializer& _Ser)
 	{
@@ -46,7 +47,6 @@ public:
 class ATileMap : public AActor, public ISerializObject
 {
 public:
-	
 	ATileMap();
 	~ATileMap();
 
@@ -57,16 +57,14 @@ public:
 
 	void Create(std::string_view _Sprite, FIntPoint _Count, FVector2D _TileSize);
 
-	void SetTileLocation(FVector2D _Location, int _SpriteIndex);
-
-	FIntPoint GetCalIndex(FIntPoint _Index);
-
-	FIntPoint GetTileLocationIndex(FVector2D _Location);
-
 	Tile* GetTileLocation(FVector2D _Location);
 
-	void SetTileIndex(FIntPoint _Index, int _SpriteIndex);
-	void SetTileIndex(FIntPoint _Index, FVector2D _Pivot, FVector2D _SpriteScale, FIntPoint _Location, int _SpriteIndex);
+	FIntPoint GetIndex(FVector2D _Location);
+
+	int GetTileIndex(FVector2D _Location);
+
+	void SetTileSpriteIndex(FIntPoint _Index, int _SpriteIndex);
+	void SetTileSpriteIndex(FIntPoint _Index, FVector2D _Pivot, FVector2D _SpriteScale, FIntPoint _Location, FVector2D _LocationPivot, int _SpriteIndex, int _TileIndex = 0);
 
 	Tile* GetTileRef(FIntPoint _Index);
 	Tile* GetTileRef(FVector2D _Location);

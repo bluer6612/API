@@ -17,6 +17,11 @@
 #include <EngineCore/Level.h>
 #include <EngineCore/EngineAPICore.h>
 
+#include <EnginePlatform/EngineSound.h>
+#include "TitleLogo.h"
+#include "PlayMap.h"
+#include "TileMap.h"
+
 APlayGameMode::APlayGameMode()
 {
 }
@@ -39,7 +44,7 @@ void APlayGameMode::BeginPlay()
 		{
 			for (int x = 0; x < 8; x++)
 			{
-				GroundTileMap->SetTileIndex({ y, x }, { 0, 0 }, { 36, 36 }, { 0, 0 }, 0);
+				GroundTileMap->SetTileSpriteIndex({ y, x }, { 0, 0 }, { 36, 36 }, { 0, 0 }, { 0,0 }, 0);
 			}
 		}
 	}
@@ -52,20 +57,31 @@ void APlayGameMode::BeginPlay()
 		PanelButtonTile->Create("000_MenuPanel.png", { 4, CropsCount / 4 }, { 102, 44 });
 
 		int i = 0;
+		int PlusX = 0;
+		int PlusY = 0;
 		for (int x = 0; x < CropsCount / 4; x++)
 		{
 			for (int y = 0; y < 4; y++)
-			//for (int x = 0; x < CropsCount / 4; x++)
 			{
-				++i;
-				if (i == 4)
+				if (i == 3)
 				{
-					++x;
-					y = 0;
-					//continue;
+					//--PlusX;
+					//PlusY += 46;
 				}
 
-				PanelButtonTile->SetTileIndex({ y, x }, { 0, 0 }, { 102, 44 }, { 2, 2 }, 0);
+				PanelButtonTile->SetTileSpriteIndex({ y, x }, { 0, 0 }, { 102, 44 }, { 2, 2 }, { 104 * PlusX, PlusY }, 0, i);
+
+				if (0 > PlusX)
+				{
+					++PlusX;
+				}
+
+				if (i == 3)
+				{
+					//PlusY -= 46;
+				}
+
+				++i;
 			}
 		}
 	}
@@ -128,9 +144,7 @@ void APlayGameMode::Tick(float _DeltaTime)
 	if (nullptr != PanelButtonTile->GetTileLocation(MousePos))
 	{
 		{	
-			FIntPoint Point = PanelButtonTile->GetTileLocationIndex(MousePos);
-			Point = PanelButtonTile->GetCalIndex(Point);
-			SpriteRFarmInfo->SetSprite("Info", Point.X * Point.Y);
+			SpriteRFarmInfo->SetSprite("Info", PanelButtonTile->GetTileIndex(MousePos));
 			SpriteRFarmInfo->SetActive(true);
 		}
 	}

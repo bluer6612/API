@@ -1,8 +1,6 @@
 #pragma once
 #include <EngineCore/GameMode.h>
 #include <EnginePlatform/EngineSound.h>
-#include "TitleLogo.h"
-#include "PlayMap.h"
 #include "TileMap.h"
 
 class APlayGameMode : public AGameMode

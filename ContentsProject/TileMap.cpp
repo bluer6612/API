@@ -1,6 +1,8 @@
 #include "PreCompile.h"
 #include "TileMap.h"
 
+#include <EngineBase/EngineMath.h>
+
 ATileMap::ATileMap()
 {
 }
@@ -12,8 +14,8 @@ ATileMap::~ATileMap()
 void ATileMap::Create(std::string_view _Sprite, FIntPoint _Count, FVector2D _TileSize)
 {
 	SpriteName = _Sprite;
-	TileSize = _TileSize;
 	TileCount = _Count;
+	TileSize = _TileSize;
 
 	AllTiles.resize(_Count.Y);
 
@@ -33,20 +35,6 @@ FIntPoint ATileMap::LocationToIndex(FVector2D _Location)
 	FVector2D Location = _Location / TileSize;
 
 	return FIntPoint(Location.iX(), Location.iY());
-}
-
-void ATileMap::SetTileLocation(FVector2D _Location, int _SpriteIndex)
-{
-	FVector2D TilePos = _Location - GetActorLocation();
-
-	FIntPoint Point = LocationToIndex(TilePos);
-
-	if (true == IsIndexOver(Point))
-	{
-		return;
-	}
-
-	SetTileIndex(Point, _SpriteIndex);
 }
 
 bool ATileMap::IsIndexOver(FIntPoint _Index)
@@ -74,12 +62,12 @@ bool ATileMap::IsIndexOver(FIntPoint _Index)
 	return false;
 }
 
-void ATileMap::SetTileIndex(FIntPoint _Index, int _SpriteIndex)
+void ATileMap::SetTileSpriteIndex(FIntPoint _Index, int _SpriteIndex)
 {
-	SetTileIndex(_Index, { 0,0 }, TileSize, { 0, 0 }, _SpriteIndex);
+	SetTileSpriteIndex(_Index, { 0,0 }, TileSize, { 0, 0 }, { 0,0 }, _SpriteIndex);
 }
 
-void ATileMap::SetTileIndex(FIntPoint _Index, FVector2D _Pivot, FVector2D _SpriteScale, FIntPoint _Location, int _SpriteIndex)
+void ATileMap::SetTileSpriteIndex(FIntPoint _Index, FVector2D _Pivot, FVector2D _SpriteScale, FIntPoint _Location, FVector2D _LocationPivot, int _SpriteIndex, int _TileIndex)
 {
 	if (true == IsIndexOver(_Index))
 	{
@@ -93,40 +81,35 @@ void ATileMap::SetTileIndex(FIntPoint _Index, FVector2D _Pivot, FVector2D _Sprit
 		AllTiles[_Index.Y][_Index.X].SpriteRenderer = NewSpriteRenderer;
 	}
 
-	USpriteRenderer* FindSprite =  AllTiles[_Index.Y][_Index.X].SpriteRenderer;
+	USpriteRenderer* FindSprite = AllTiles[_Index.Y][_Index.X].SpriteRenderer;
 	FindSprite->SetSprite(SpriteName, _SpriteIndex);
 
-	FVector2D TileLocation = IndexToTileLocation(_Index, _Location);
+	FVector2D TileLocation = IndexToTileLocation(_Index, _Location /*+ _LocationPivot.ConvertToPoint()*/);
 	FindSprite->SetComponentScale(_SpriteScale);
 	FindSprite->SetOrder(_Index.Y);
 
-	AllTiles[_Index.Y][_Index.X].SpriteRenderer->SetComponentLocation(TileLocation + TileSize.Half() + _Pivot);
+	AllTiles[_Index.Y][_Index.X].SpriteRenderer->SetComponentLocation(TileLocation + TileSize.Half() + _Pivot/* + _LocationPivot*/);
 	AllTiles[_Index.Y][_Index.X].Pivot = _Pivot;
 	AllTiles[_Index.Y][_Index.X].Scale = _SpriteScale;
 	AllTiles[_Index.Y][_Index.X].SpriteIndex = _SpriteIndex;
+	AllTiles[_Index.Y][_Index.X].TileIndex = _TileIndex;
 }
 
-FIntPoint ATileMap::GetCalIndex(FIntPoint _Index)
+FIntPoint ATileMap::GetIndex(FVector2D _Location)
 {
-	if (_Index.X == 0 && _Index.Y != 0)
-	{
-		++_Index.X;
-	}
-	else if (_Index.X != 0 && _Index.Y == 0)
-	{
-		++_Index.Y;
-	}
-
-	return _Index;
+	return LocationToIndex(_Location - GetActorLocation());
 }
 
-FIntPoint ATileMap::GetTileLocationIndex(FVector2D _Location)
+int ATileMap::GetTileIndex(FVector2D _Location)
 {
-	FVector2D TilePos = _Location - GetActorLocation();
+	FIntPoint _Index = GetIndex(_Location);
 
-	FIntPoint _Index = LocationToIndex(TilePos);
+	if (true == IsIndexOver(_Index))
+	{
+		return 0;
+	}
 
-	return _Index;
+	return AllTiles[_Index.Y][_Index.X].TileIndex;
 }
 
 Tile* ATileMap::GetTileLocation(FVector2D _Location)
@@ -183,7 +166,7 @@ void ATileMap::DeSerialize(UEngineSerializer& _Ser)
 	{
 		for (int x = 0; x < LoadTiles[y].size(); x++)
 		{
-			SetTileIndex({x, y}, LoadTiles[y][x].Pivot, LoadTiles[y][x].Scale, { 0, 0 }, LoadTiles[y][x].SpriteIndex);
+			SetTileSpriteIndex({ x, y }, LoadTiles[y][x].Pivot, LoadTiles[y][x].Scale, { 0, 0 }, { 0,0 }, LoadTiles[y][x].SpriteIndex);
 		}
 	}
 }

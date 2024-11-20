@@ -376,8 +376,6 @@ public:
 		Y += _Other.Y;
 		return *this;
 	}
-
-
 };
 
 
