@@ -128,9 +128,7 @@ void USpriteRenderer::SetSprite(std::string_view _Name, int _CurIndex /*= 0*/)
 
 	CurIndex = _CurIndex;
 
-	FVector2D Scale = GetComponentScale();
-
-	if (FVector2D::ZERO == Scale)
+	if (FVector2D::ZERO == GetComponentScale())
 	{
 		SetSpriteScale(2.0f, _CurIndex);
 	}

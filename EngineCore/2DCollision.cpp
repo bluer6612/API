@@ -131,8 +131,7 @@ void U2DCollision::SetCollisionStay(std::function<void(AActor*)> _Function)
 	if (nullptr != GetActor()->GetWorld())
 	{
 		Level->PushCheckCollision(this);
-	}
-
+	}s
 }
 
 void U2DCollision::SetCollisionEnd(std::function<void(AActor*)> _Function)
@@ -145,7 +144,6 @@ void U2DCollision::SetCollisionEnd(std::function<void(AActor*)> _Function)
 	{
 		Level->PushCheckCollision(this);
 	}
-
 }
 
 void U2DCollision::CollisionEventCheck(class U2DCollision* _Other)

@@ -93,21 +93,21 @@ AMenuPanelUI::AMenuPanelUI()
 			++j;
 		}
 
-		Loc = 0;
-		Loc2 = 0;
-		for (size_t i = CropsCount; i < CropsCount + 4; ++i)
-		//for (size_t i = 44; i < 46; ++i)
-		{
-			SpriteRFarmSlot[i] = CreateDefaultSubObject<USpriteRenderer>();
-			SpriteRFarmSlot[i]->SetComponentCrate(SpriteRFarmSlot[i], "001_crop-seed-button.png", { 50, 44 }, { (Location.X - 179 + (3 * 104) + (Loc * 52)), (Location.Y - 120 + ((Loc2 / 5) * 53)) }, ERenderOrder::UI);;
+		//Loc = 0;
+		//Loc2 = 0;
+		//for (int i = CropsCount; i < CropsCount + 4; ++i)
+		////for (size_t i = 44; i < 46; ++i)
+		//{
+		//	SpriteRFarmSlot[i] = CreateDefaultSubObject<USpriteRenderer>();
+		//	SpriteRFarmSlot[i]->SetComponentCrate(SpriteRFarmSlot[i], "001_crop-seed-button.png", { 50, 44 }, { (Location.X - 179 + (3 * 104) + (Loc * 52)), (Location.Y - 120 + ((Loc2 / 5) * 53)) }, ERenderOrder::UI);;
 
-			++Loc;
-			if (45 == i)
-			{
-				Loc = 0;
-				Loc2 = 45;
-			}
-		}
+		//	++Loc;
+		//	if (45 == i)
+		//	{
+		//		Loc = 0;
+		//		Loc2 = 45;
+		//	}
+		//}
 	}
 }
 

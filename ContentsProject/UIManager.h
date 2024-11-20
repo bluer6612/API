@@ -7,14 +7,6 @@ enum class UICollisionGroup
 	UI,
 };
 
-enum class ButtonType
-{
-	MIL,
-	APPLE,
-
-};
-
-
 // Ό³Έν :
 class AUIManager : public AActor
 {

@@ -1,9 +1,11 @@
 #include "PreCompile.h"
 #include "UIManager.h"
-#include <EngineCore/SpriteRenderer.h>
-#include "MenuPanelUI.h"
-#include <EngineCore/2DCollision.h>
 
+#include "MenuPanelUI.h"
+#include "TitleLogo.h"
+
+#include <EngineCore/SpriteRenderer.h>
+#include <EngineCore/2DCollision.h>
 #include <EngineCore/EngineAPICore.h>
 
 AUIManager::AUIManager()
@@ -30,7 +32,8 @@ AUIManager::AUIManager()
 
 	Test.resize(CropsCount / 4);
 
-	for (int y = 0; y < CropsCount / 4; y++)
+	int Index = 0;
+	for (int y = 0; y < 6; y++)
 	{
 		Test[y].resize(MenuCountY);
 
@@ -45,8 +48,9 @@ AUIManager::AUIManager()
 			Collision->SetCollisionEnter(std::bind(&AUIManager::PanelButtonTileEnter, this, std::placeholders::_1, FIntPoint(x, y)));
 			Collision->SetCollisionEnd(std::bind(&AUIManager::PanelButtonTileEnd, this, std::placeholders::_1, FIntPoint(x, y)));
 
-			//Collision->DebugOn();
+			Collision->DebugOn();
 
+			++Index;
 			StartPos.X += 104;
 		}
 
@@ -54,17 +58,18 @@ AUIManager::AUIManager()
 		StartPos.Y += 46;
 	}
 
-	// Test[0][0] = "밀";
-	// Test[0][1] = "사과";
+	Test[0][0] = 0;
+	Test[0][1] = 1;
 }
 
 void AUIManager::PanelButtonTileEnter(AActor* _Actor, FIntPoint _Index)
 {
+
 	SpriteRFarmInfo->SetActive(true);
 
-	//if (Test[_Index.Y][_Index.X] == "밀")
+	if (Test[_Index.Y][_Index.X] == 0)
 	{
-		int a = 0;
+		SpriteRFarmInfo->SetSprite("Info", _U2DCollision->GetSpriteIndex());
 	}
 }
 
@@ -82,6 +87,11 @@ void AUIManager::BeginPlay()
 	Super::BeginPlay();
 
 	AMenuPanelUI* NewActor = AActor::GetWorld()->SpawnActor<AMenuPanelUI>();
+
+	//타이틀
+	{
+		//TitleLogo* NewActor = AActor::GetWorld()->SpawnActor<TitleLogo>();
+	}
 }
 
 void AUIManager::Tick(float _DeltaTime)

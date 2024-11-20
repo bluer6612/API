@@ -78,6 +78,13 @@ public:
 		return CollisionType;
 	}
 
+	int GetSpriteIndex() const
+	{
+		return SpriteIndex;
+	}
+
+	std::function<void(AActor*)> GetCollisionEnter();
+
 	void SetCollisionEnter(std::function<void(AActor*)> _Function);
 	void SetCollisionStay(std::function<void(AActor*)> _Function);
 	void SetCollisionEnd(std::function<void(AActor*)> _Function);
@@ -89,6 +96,7 @@ private:
 
 	ECollisionType CollisionType = ECollisionType::CirCle;
 	int CollisionGroup = -1;
+	int SpriteIndex = 0;
 
 	std::set<U2DCollision*> CollisionCheckSet;
 

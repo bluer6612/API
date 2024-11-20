@@ -3,8 +3,6 @@
 #include "Fade.h"
 #include "Score.h"
 
-#include "MenuPanelUI.h"
-
 #include "Rusty.h"
 #include "House.h"
 #include "Well.h"
@@ -18,7 +16,7 @@
 #include <EngineCore/EngineAPICore.h>
 
 #include <EnginePlatform/EngineSound.h>
-#include "TitleLogo.h"
+
 #include "PlayMap.h"
 #include "TileMap.h"
 #include "UIManager.h"
@@ -65,11 +63,6 @@ void APlayGameMode::BeginPlay()
 	AHouse* House = AActor::GetWorld()->SpawnActor<AHouse>();
 	AWell* Well = AActor::GetWorld()->SpawnActor<AWell>();
 	ABiofuelconverter* Biofuelconverter = AActor::GetWorld()->SpawnActor<ABiofuelconverter>();
-
-	//Å¸ÀÌÆ²
-	{
-		//TitleLogo* NewActor = AActor::GetWorld()->SpawnActor<TitleLogo>();
-	}
 
 	//¸Ê
 	{
