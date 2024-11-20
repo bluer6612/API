@@ -151,6 +151,10 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="UIManager.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Biofuelconverter.h">
       <SubType>
       </SubType>
@@ -205,6 +209,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="UIManager.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Biofuelconverter.cpp">
       <SubType>
       </SubType>

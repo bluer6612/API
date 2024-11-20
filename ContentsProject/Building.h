@@ -7,6 +7,7 @@
 #include "ContentsEnum.h"
 
 static const int CropsCount = 44;
+static const int MenuCountY = 4;
 
 class ABuilding : public AActor
 {

@@ -21,6 +21,7 @@
 #include "TitleLogo.h"
 #include "PlayMap.h"
 #include "TileMap.h"
+#include "UIManager.h"
 
 APlayGameMode::APlayGameMode()
 {
@@ -50,47 +51,9 @@ void APlayGameMode::BeginPlay()
 	}
 
 	{
-		FVector2D Location = { static_cast<float>(ScreenX) - 256 + 22 - 153 - 51 , ScreenHY + 93 - 120 - 22 };
-
-		PanelButtonTile = GetWorld()->SpawnActor<ATileMap>();
-		PanelButtonTile->SetActorLocation({ Location.X, Location.Y });
-		PanelButtonTile->Create("000_MenuPanel.png", { 4, CropsCount / 4 }, { 102, 44 });
-
-		int i = 0;
-		int PlusX = 0;
-		int PlusY = 0;
-		for (int x = 0; x < CropsCount / 4; x++)
-		{
-			for (int y = 0; y < 4; y++)
-			{
-				if (i == 3)
-				{
-					//--PlusX;
-					//PlusY += 46;
-				}
-
-				PanelButtonTile->SetTileSpriteIndex({ y, x }, { 0, 0 }, { 102, 44 }, { 2, 2 }, { 104 * PlusX, PlusY }, 0, i);
-
-				if (0 > PlusX)
-				{
-					++PlusX;
-				}
-
-				if (i == 3)
-				{
-					//PlusY -= 46;
-				}
-
-				++i;
-			}
-		}
+		GetWorld()->SpawnActor<AUIManager>();
 	}
 
-	{
-		SpriteRFarmInfo = CreateDefaultSubObject<USpriteRenderer>();
-		SpriteRFarmInfo->SetComponentCrate(SpriteRFarmInfo, "Info", 0, { 1 , 1 }, { static_cast<float>(ScreenX - 256 + 22) - 341, (ScreenHY + 93 - 2) }, ERenderOrder::UIUP);
-		SpriteRFarmInfo->SetActive(false);
-	}
 
 	//BGM
 	BGMPlayer = UEngineSound::Play("Echo-metal-1.wav");
@@ -114,9 +77,6 @@ void APlayGameMode::BeginPlay()
 	}
 
 	//패널 메뉴
-	{
-		//AMenuPanelUI* NewActor = AActor::GetWorld()->SpawnActor<AMenuPanelUI>();
-	}
 
 	//{
 	//	AScore* NewActor = GetWorld()->SpawnActor<AScore>();
@@ -141,17 +101,17 @@ void APlayGameMode::Tick(float _DeltaTime)
 
 	FVector2D MousePos = UEngineAPICore::GetCore()->GetMainWindow().GetMousePos();
 
-	if (nullptr != PanelButtonTile->GetTileLocation(MousePos))
-	{
-		{	
-			SpriteRFarmInfo->SetSprite("Info", PanelButtonTile->GetTileIndex(MousePos));
-			SpriteRFarmInfo->SetActive(true);
-		}
-	}
-	else
-	{
-		SpriteRFarmInfo->SetActive(false);
-	}
+	//if (nullptr != PanelButtonTile->GetTileLocation(MousePos))
+	//{
+	//	{	
+	//		SpriteRFarmInfo->SetSprite("Info", PanelButtonTile->GetTileIndex(MousePos));
+	//		SpriteRFarmInfo->SetActive(true);
+	//	}
+	//}
+	//else
+	//{
+	//	SpriteRFarmInfo->SetActive(false);
+	//}
 
 
 	//if (true == UEngineInput::GetInst().IsPress('R'))

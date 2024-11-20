@@ -49,6 +49,9 @@
     <ClInclude Include="MenuPanelUI.h">
       <Filter>ContentsObject\UI</Filter>
     </ClInclude>
+    <ClInclude Include="UIManager.h">
+      <Filter>ContentsObject\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -97,6 +100,9 @@
       <Filter>ContentsObject\Global</Filter>
     </ClCompile>
     <ClCompile Include="MenuPanelUI.cpp">
+      <Filter>ContentsObject\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UIManager.cpp">
       <Filter>ContentsObject\UI</Filter>
     </ClCompile>
   </ItemGroup>
