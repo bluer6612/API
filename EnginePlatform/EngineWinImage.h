@@ -62,4 +62,3 @@ private:
 
 	BITMAP Info;
 };
-

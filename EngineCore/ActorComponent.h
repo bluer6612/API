@@ -35,7 +35,6 @@ public:
 		return UObject::IsDestroy() || GetActor()->IsDestroy();
 	}
 
-
 protected:
 
 private:

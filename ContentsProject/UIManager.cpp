@@ -24,7 +24,7 @@ AUIManager::AUIManager()
 		SpriteRFarmInfo->SetActive(false);
 	}
 
-	FVector2D Location = { static_cast<float>(ScreenX) - 256 - 130 , ScreenHY + 93 - 120 - 22 };
+	FVector2D Location = { static_cast<float>(ScreenX) - (104 * 4) + 29 , ScreenHY + 93 - 120 };
 
 	FVector2D StartPos = Location;
 
@@ -41,12 +41,11 @@ AUIManager::AUIManager()
 			Collision->SetCollisionType(ECollisionType::Rect);
 			Collision->SetComponentLocation(StartPos);
 			Collision->SetComponentScale({ 102, 44 });
-			Collision->SetAlphafloat(0.5f);
 
 			Collision->SetCollisionEnter(std::bind(&AUIManager::PanelButtonTileEnter, this, std::placeholders::_1, FIntPoint(x, y)));
 			Collision->SetCollisionEnd(std::bind(&AUIManager::PanelButtonTileEnd, this, std::placeholders::_1, FIntPoint(x, y)));
 
-			Collision->DebugOn();
+			//Collision->DebugOn();
 
 			StartPos.X += 104;
 		}
