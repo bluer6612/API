@@ -54,6 +54,8 @@ public:
 	void BeginPlay() override;
 	void ComponentTick(float _DeltaTime) override;
 
+	void SetSprite(std::string_view _Name, FIntPoint _CurIndex);
+
 	void SetSprite(std::string_view _Name, int _CurIndex = 0);
 
 	FVector2D SetSpriteScale(float _Ratio = 2.0f, int _CurIndex = 0);
@@ -135,6 +137,7 @@ protected:
 private:
 	int Order = 0;
 	int CurIndex = 0;
+	FIntPoint SpriteIndex = { 0, 0 };
 	bool IsCameraEffect = true;
 	float CameraEffectScale = 1.0f;
 	float CurAnimationSpeed = 1.0f;

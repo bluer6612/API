@@ -32,7 +32,6 @@ AUIManager::AUIManager()
 
 	Test.resize(CropsCount / 4);
 
-	int Index = 0;
 	for (int y = 0; y < 6; y++)
 	{
 		Test[y].resize(MenuCountY);
@@ -50,7 +49,8 @@ AUIManager::AUIManager()
 
 			Collision->DebugOn();
 
-			++Index;
+			FarmInfoIndex;
+
 			StartPos.X += 104;
 		}
 
@@ -69,7 +69,7 @@ void AUIManager::PanelButtonTileEnter(AActor* _Actor, FIntPoint _Index)
 
 	if (Test[_Index.Y][_Index.X] == 0)
 	{
-		SpriteRFarmInfo->SetSprite("Info", _U2DCollision->GetSpriteIndex());
+		SpriteRFarmInfo->SetSprite("Info", _Index);
 	}
 }
 

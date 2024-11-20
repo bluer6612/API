@@ -7,10 +7,16 @@ enum class UICollisionGroup
 	UI,
 };
 
+
 // Ό³Έν :
 class AUIManager : public AActor
 {
 public:
+	class FarmInfo
+	{
+		FIntPoint FPIndex;
+		int IntIndex = 0;
+	};
 	// constrcuter destructer
 	AUIManager();
 	~AUIManager();
@@ -33,6 +39,8 @@ private:
 	class U2DCollision* CursorCollision = nullptr;
 
 	class USpriteRenderer* SpriteRFarmInfo = nullptr;
+
+	FarmInfo FarmInfoIndex;
 
 	std::vector<std::vector<int>> Test;
 };
