@@ -21,4 +21,3 @@ private:
 	class USpriteRenderer* SpriteRFarmCrops[CropsCount] = {};
 	class USpriteRenderer* SpriteRFarmCoin[CropsCount] = {};
 };
-

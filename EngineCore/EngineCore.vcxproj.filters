@@ -40,6 +40,9 @@
     <ClInclude Include="PathFindAStar.h">
       <Filter>Contents</Filter>
     </ClInclude>
+    <ClInclude Include="GlobalVariable.h">
+      <Filter>Global</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Actor.cpp">
@@ -81,6 +84,9 @@
     <ClCompile Include="PathFindAStar.cpp">
       <Filter>Contents</Filter>
     </ClCompile>
+    <ClCompile Include="GlobalVariable.cpp">
+      <Filter>Global</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Object">
@@ -115,6 +121,9 @@
     </Filter>
     <Filter Include="Contents">
       <UniqueIdentifier>{9cf87540-4d5e-42b7-839d-c770087a1327}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Global">
+      <UniqueIdentifier>{4d6b2822-a626-4dba-ad27-3520ea9171a7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

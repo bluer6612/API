@@ -9,10 +9,10 @@
 #include <EngineBase/EngineMath.h>
 #include "EngineWinImage.h"
 
-static int ScreenX = GetSystemMetrics(SM_CXSCREEN);
-static int ScreenY = GetSystemMetrics(SM_CYSCREEN);
-static float ScreenHX = ScreenX * 0.5;
-static float ScreenHY = ScreenY - 243 - 36;
+static const int ScreenX = GetSystemMetrics(SM_CXSCREEN);
+static const int ScreenY = GetSystemMetrics(SM_CYSCREEN);
+static const float ScreenHX = ScreenX * 0.5;
+static const float ScreenHY = ScreenY - 243 - 36;
 
 class UEngineWindow
 {
@@ -24,7 +24,6 @@ public:
 	
 	UEngineWindow();
 	~UEngineWindow();
-
 	
 	UEngineWindow(const UEngineWindow& _Other) = delete;
 	UEngineWindow(UEngineWindow&& _Other) noexcept = delete;

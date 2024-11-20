@@ -5,7 +5,6 @@ class USceneComponent : public UActorComponent
 
 {
 public:
-
 	USceneComponent();
 	~USceneComponent();
 
@@ -46,9 +45,22 @@ public:
 		Transform.Scale = { this->GetComponentScale().X, this->GetComponentScale().Y };
 	}
 
+	void SetAlphaChar(unsigned char _Value)
+	{
+		Alpha = _Value;
+	}
+
+	void SetAlphafloat(float _Value)
+	{
+		_Value = UEngineMath::Clamp(_Value, 0.0f, 1.0f);
+		Alpha = static_cast<unsigned char>(_Value * 255.0f);
+	}
+
 protected:
+	unsigned char Alpha = 255;
 
 private:
 	FTransform Transform;
+
 };
 

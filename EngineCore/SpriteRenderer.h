@@ -109,11 +109,6 @@ public:
 		return CurAnimation->IsEnd;
 	}
 
-	void SetAlphaChar(unsigned char _Value)
-	{
-		Alpha = _Value;
-	}
-
 	void SetAnimationSpeed(float _Speed)
 	{
 		CurAnimationSpeed = _Speed;
@@ -124,12 +119,6 @@ public:
 		CurAnimationSpeed = 1.0f;
 	}
 
-	void SetAlphafloat(float _Value)
-	{
-		_Value = UEngineMath::Clamp(_Value, 0.0f, 1.0f);
-		Alpha = static_cast<unsigned char>(_Value * 255.0f);
-	}
-
 protected:
 
 private:
@@ -138,9 +127,6 @@ private:
 	bool IsCameraEffect = true;
 	float CameraEffectScale = 1.0f;
 	float CurAnimationSpeed = 1.0f;
-
-	// 다이렉트는 모든 색상을 0~1.0f로 표현한다.
-	unsigned char Alpha = 255;
 
 	FVector2D Pivot = FVector2D::ZERO;
 

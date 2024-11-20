@@ -4,10 +4,8 @@
 #include <EnginePlatform/EngineInput.h>
 #include <EngineCore/SpriteRenderer.h>
 #include <EngineCore/EngineAPICore.h>
+#include <EngineCore/GlobalVariable.h>
 #include "ContentsEnum.h"
-
-static const int CropsCount = 44;
-static const int MenuCountY = 4;
 
 class ABuilding : public AActor
 {

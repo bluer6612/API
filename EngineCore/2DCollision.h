@@ -22,12 +22,12 @@ public:
 	void ComponentTick(float _DeltaTime) override;
 
 	template<typename EnumType>
-	EnumType GetGroup()
+	EnumType GetGroup() const
 	{
 		return static_cast<EnumType>(CollisionGroup);
 	}
 
-	int GetGroup()
+	int GetGroup() const
 	{
 		return CollisionGroup;
 	}
@@ -66,14 +66,14 @@ public:
 		return Result;
 	}
 
-	bool Collision(int _OtherCollisionGroup, std::vector<AActor*>& _Result, FVector2D _NextDir, unsigned int  _Limite);
+	bool Collision(int _OtherCollisionGroup, std::vector<AActor*>& _Result, FVector2D _NextDir, unsigned int _Limite);
 
 	void SetCollisionType(ECollisionType _CollisionType)
 	{
 		CollisionType = _CollisionType;
 	}
 
-	ECollisionType GetCollisionType()
+	ECollisionType GetCollisionType() const
 	{
 		return CollisionType;
 	}
@@ -96,6 +96,3 @@ private:
 	std::function<void(AActor*)> Stay;
 	std::function<void(AActor*)> End;
 };
-
-//	   MonsterBody,
-

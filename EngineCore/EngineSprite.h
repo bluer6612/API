@@ -13,11 +13,9 @@ public:
 		FTransform Transform;
 	};
 
-	
 	UEngineSprite();
 	~UEngineSprite();
 
-	
 	UEngineSprite(const UEngineSprite& _Other) = delete;
 	UEngineSprite(UEngineSprite&& _Other) noexcept = delete;
 	UEngineSprite& operator=(const UEngineSprite& _Other) = delete;
