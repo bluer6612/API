@@ -7,6 +7,7 @@
 #include <EngineCore/SpriteRenderer.h>
 #include <EngineCore/2DCollision.h>
 #include <EngineCore/EngineAPICore.h>
+#include <EnginePlatform/EngineInput.h>
 
 AUIManager::AUIManager()
 {
@@ -20,12 +21,14 @@ AUIManager::AUIManager()
 		//CursorCollision->DebugOn();
 	}
 
+	//농사 마우스 on 시 설명
 	{
 		SRFarmInfo = CreateDefaultSubObject<USpriteRenderer>();
 		SRFarmInfo->SetComponentCrate(SRFarmInfo, "FarmInfo", 0, { 1 , 1 }, { static_cast<float>(ScreenX - 256 + 22) - 341, (ScreenHY + 93 - 2) }, ERenderOrder::UIUP);
 		SRFarmInfo->SetActive(false);
 	}
 
+	//농사 마우스 on 시 음영 처리
 	{
 		SRButtonBlack = CreateDefaultSubObject<USpriteRenderer>();
 		SRButtonBlack->SetComponentCrate(SRButtonBlack, "003_crop-seed-button_Black.png", {}, { static_cast<float>(ScreenX) - (104 * 4) + 29 , ScreenHY + 93 - 120 }, ERenderOrder::UIUP);
@@ -83,30 +86,6 @@ AUIManager::AUIManager()
 	}
 }
 
-void AUIManager::PanelButtonTileEnter(AActor* _Actor, FTransform _Index)
-{
-	SRFarmInfo->SetSprite("FarmInfo", _Index.Scale.X);
-	SRFarmInfo->SetActive(true);
-
-	SRButtonBlack->SetComponentLocation({ _Index.Location.X, _Index.Location.Y });
-	SRButtonBlack->SetActive(true);
-}
-
-void AUIManager::PanelButtonTileStay(AActor* _Actor, FTransform _Index)
-{
-	SRFarmInfo->SetSprite("FarmInfo", _Index.Scale.X);
-	SRFarmInfo->SetActive(true);
-
-	SRButtonBlack->SetComponentLocation({ _Index.Location.X, _Index.Location.Y });
-	SRButtonBlack->SetActive(true);
-}
-
-void AUIManager::PanelButtonTileEnd(AActor* _Actor, FTransform _Index)
-{
-	SRFarmInfo->SetActive(false);
-	SRButtonBlack->SetActive(false);
-}
-
 AUIManager::~AUIManager()
 {
 }
@@ -129,4 +108,33 @@ void AUIManager::Tick(float _DeltaTime)
 
 	FVector2D MousePos = UEngineAPICore::GetCore()->GetMainWindow().GetMousePos();
 	CursorCollision->SetComponentLocation(MousePos);
+
+	if (true == UEngineInput::GetInst().IsDown(VK_LBUTTON))
+	{
+		//CursorCollision->CollisionEventCheck()
+	}
+}
+
+void AUIManager::PanelButtonTileEnter(AActor* _Actor, FTransform _Index)
+{
+	SRFarmInfo->SetSprite("FarmInfo", _Index.Scale.X);
+	SRFarmInfo->SetActive(true);
+
+	SRButtonBlack->SetComponentLocation({ _Index.Location.X, _Index.Location.Y });
+	SRButtonBlack->SetActive(true);
+}
+
+void AUIManager::PanelButtonTileStay(AActor* _Actor, FTransform _Index)
+{
+	SRFarmInfo->SetSprite("FarmInfo", _Index.Scale.X);
+	SRFarmInfo->SetActive(true);
+
+	SRButtonBlack->SetComponentLocation({ _Index.Location.X, _Index.Location.Y });
+	SRButtonBlack->SetActive(true);
+}
+
+void AUIManager::PanelButtonTileEnd(AActor* _Actor, FTransform _Index)
+{
+	SRFarmInfo->SetActive(false);
+	SRButtonBlack->SetActive(false);
 }

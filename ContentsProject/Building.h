@@ -1,11 +1,9 @@
 #pragma once
 #include <EngineCore/Actor.h>
+
 #include <EngineBase/FSMStateManager.h>
-#include <EnginePlatform/EngineInput.h>
 #include <EngineCore/SpriteRenderer.h>
-#include <EngineCore/EngineAPICore.h>
 #include <EngineCore/GlobalVariable.h>
-#include "ContentsEnum.h"
 
 class ABuilding : public AActor
 {

@@ -1,6 +1,9 @@
 #include "PreCompile.h"
 #include "Croppatch.h"
 
+#include <EngineCore/2DCollision.h>
+#include "UIManager.h"
+
 ACroppatch::ACroppatch()
 {
 	Location.X = ScreenHX - 180;
@@ -9,6 +12,18 @@ ACroppatch::ACroppatch()
 	{
 		SpriteR = CreateDefaultSubObject<USpriteRenderer>();
 		SpriteR->SetComponentCrate(SpriteR, "croppatch0.png", {}, { Location.X, Location.Y }, ERenderOrder::BUILDING);
+	}
+
+	{
+		U2DCollision* Collision = CreateDefaultSubObject<U2DCollision>();
+		Collision->SetCollisionGroup(UICollisionGroup::Panel);
+		Collision->SetCollisionType(ECollisionType::Rect);
+		//Collision->SetComponentLocation(StartPos);
+		//Collision->SetComponentScale({ 102, 44 });
+
+		//Collision->SetCollisionEnter(std::bind(&AUIManager::PanelButtonTileEnter, this, std::placeholders::_1, FTransform(FVector2D(Index, 0), FVector2D(StartPos))));
+		//Collision->SetCollisionStay(std::bind(&AUIManager::PanelButtonTileStay, this, std::placeholders::_1, FTransform(FVector2D(Index, 0), FVector2D(StartPos))));
+		//Collision->SetCollisionEnd(std::bind(&AUIManager::PanelButtonTileEnd, this, std::placeholders::_1, FTransform(FVector2D(Index, 0), FVector2D(StartPos))));
 	}
 }
 

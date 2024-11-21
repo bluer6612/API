@@ -1,6 +1,9 @@
 #include "PreCompile.h"
 #include "Building.h"
 
+#include <EngineCore/EngineAPICore.h>
+#include "ContentsEnum.h"
+
 ABuilding::ABuilding()
 {
 }

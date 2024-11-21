@@ -20,12 +20,12 @@ public:
 	void ComponentTick(float _DeltaTime) override;
 
 	template<typename EnumType>
-	EnumType GetGroup()
+	EnumType GetGroup() const
 	{
 		return static_cast<EnumType>(CollisionGroup);
 	}
 
-	int GetGroup()
+	int GetGroup() const
 	{
 		return CollisionGroup;
 	}
@@ -73,7 +73,7 @@ public:
 		CollisionType = _CollisionType;
 	}
 
-	ECollisionType GetCollisionType()
+	ECollisionType GetCollisionType() const
 	{
 		return CollisionType;
 	}
