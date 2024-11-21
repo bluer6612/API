@@ -115,12 +115,12 @@ void AUIManager::Tick(float _DeltaTime)
 	Super::Tick(_DeltaTime);
 
 	FVector2D MousePos = UEngineAPICore::GetCore()->GetMainWindow().GetMousePos();
-	CursorCollision->SetComponentLocation(MousePos);
-	CursorImage->SetComponentLocation({ MousePos.X - 5, MousePos.Y - 24 });
 
-	if (true == UEngineInput::GetInst().IsDown(VK_LBUTTON))
+	if ( true == UEngineInput::GetInst().IsDown(VK_LBUTTON))
 	{
-		//CursorCollision->CollisionEventCheck()
+
+		CursorCollision->SetComponentLocation(MousePos);
+		//CursorImage->SetComponentLocation({ MousePos.X - 5, MousePos.Y - 24 });
 	}
 }
 
