@@ -67,7 +67,6 @@ void USpriteRenderer::ComponentTick(float _DeltaTime)
 {
 	Super::ComponentTick(_DeltaTime);
 
-	// 애니메이션 진행시키는 코드를 ComponentTick으로 옮겼다. 
 	if (nullptr != CurAnimation)
 	{
 		CurAnimation->IsEnd = false;
@@ -123,19 +122,6 @@ void USpriteRenderer::ComponentTick(float _DeltaTime)
 	}
 }
 
-void USpriteRenderer::SetSprite(std::string_view _Name, FIntPoint _CurIndex)
-{
-	Sprite = UImageManager::GetInst().FindSprite(_Name);
-
-	if (nullptr == Sprite)
-	{
-		MSGASSERT("로드하지 않은 스프라이트를 사용하려고 했습니다" + std::string(_Name));
-		return;
-	}
-
-	SpriteIndex = _CurIndex;
-}
-
 void USpriteRenderer::SetSprite(std::string_view _Name, int _CurIndex /*= 0*/)
 {
 	Sprite = UImageManager::GetInst().FindSprite(_Name);
@@ -147,7 +133,6 @@ void USpriteRenderer::SetSprite(std::string_view _Name, int _CurIndex /*= 0*/)
 	}
 
 	CurIndex = _CurIndex;
-	SpriteIndex = _CurIndex;
 
 	if (FVector2D::ZERO == GetComponentScale())
 	{
@@ -155,7 +140,7 @@ void USpriteRenderer::SetSprite(std::string_view _Name, int _CurIndex /*= 0*/)
 	}
 }
 
-FVector2D USpriteRenderer::SetSpriteScale(float _Ratio /*= 1.0f*/, int _CurIndex /*= 0*/)
+FVector2D USpriteRenderer::SetSpriteScale(float _Ratio /*= 2.0f*/, int _CurIndex /*= 0*/)
 {
 	if (nullptr == Sprite)
 	{

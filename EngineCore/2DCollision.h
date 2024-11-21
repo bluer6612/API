@@ -2,20 +2,14 @@
 #include "SceneComponent.h"
 #include <set>
 
-// 매쉬 충돌. 
-
-
-// 설명 :
 class U2DCollision : public USceneComponent
 {
 public:
 	friend class ULevel;
 
-	// constrcuter destructer
 	U2DCollision();
 	~U2DCollision();
 
-	// delete Function
 	U2DCollision(const U2DCollision& _Other) = delete;
 	U2DCollision(U2DCollision&& _Other) noexcept = delete;
 	U2DCollision& operator=(const U2DCollision& _Other) = delete;
@@ -36,8 +30,6 @@ public:
 		return CollisionGroup;
 	}
 
-	// 충돌체에게 충돌그룹을 지정안해주는건 의미가 없다.
-	// 중간에 충돌 그룹이 바뀌어야 되면 이야기 부탁.
 	template<typename EnumType>
 	void SetCollisionGroup(EnumType _CollisionGroup)
 	{

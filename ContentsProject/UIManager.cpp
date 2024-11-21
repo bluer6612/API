@@ -16,7 +16,7 @@ AUIManager::AUIManager()
 		CursorCollision = CreateDefaultSubObject<U2DCollision>();
 		CursorCollision->SetCollisionGroup(UICollisionGroup::Cursor);
 		CursorCollision->SetCollisionType(ECollisionType::Rect);
-		CursorCollision->SetComponentScale({ 5, 5 });
+		CursorCollision->SetComponentScale({ 0.025f, 0.025f });
 		//CursorCollision->DebugOn();
 	}
 
@@ -26,16 +26,14 @@ AUIManager::AUIManager()
 		SpriteRFarmInfo->SetActive(false);
 	}
 
-	FVector2D Location = { static_cast<float>(ScreenX) - (104 * 4) + 29 , ScreenHY + 93 - 120 };
+	Test.resize(CropsCount);
 
+	FVector2D Location = { static_cast<float>(ScreenX) - (104 * 4) + 29 , ScreenHY + 93 - 120 };
 	FVector2D StartPos = Location;
 
-	Test.resize(CropsCount / 4);
-
+	int Index = 0;
 	for (int y = 0; y < 6; y++)
 	{
-		Test[y].resize(MenuCountY);
-
 		for (int x = 0; x < MenuCountY; x++)
 		{
 			U2DCollision* Collision = CreateDefaultSubObject<U2DCollision>();
@@ -44,33 +42,31 @@ AUIManager::AUIManager()
 			Collision->SetComponentLocation(StartPos);
 			Collision->SetComponentScale({ 102, 44 });
 
-			Collision->SetCollisionEnter(std::bind(&AUIManager::PanelButtonTileEnter, this, std::placeholders::_1, FIntPoint(x, y)));
-			Collision->SetCollisionEnd(std::bind(&AUIManager::PanelButtonTileEnd, this, std::placeholders::_1, FIntPoint(x, y)));
+			Collision->SetCollisionEnter(std::bind(&AUIManager::PanelButtonTileEnter, this, std::placeholders::_1, FIntPoint(Index, 0)));
+			Collision->SetCollisionStay(std::bind(&AUIManager::PanelButtonTileStay, this, std::placeholders::_1, FIntPoint(Index, 0)));
+			Collision->SetCollisionEnd(std::bind(&AUIManager::PanelButtonTileEnd, this, std::placeholders::_1, FIntPoint(Index, 0)));
 
 			Collision->DebugOn();
 
-			FarmInfoIndex;
-
+			++Index;
 			StartPos.X += 104;
 		}
 
 		StartPos.X = Location.X;
 		StartPos.Y += 46;
 	}
-
-	Test[0][0] = 0;
-	Test[0][1] = 1;
 }
 
 void AUIManager::PanelButtonTileEnter(AActor* _Actor, FIntPoint _Index)
 {
-
+	SpriteRFarmInfo->SetSprite("Info", _Index.X);
 	SpriteRFarmInfo->SetActive(true);
+}
 
-	if (Test[_Index.Y][_Index.X] == 0)
-	{
-		SpriteRFarmInfo->SetSprite("Info", _Index);
-	}
+void AUIManager::PanelButtonTileStay(AActor* _Actor, FIntPoint _Index)
+{
+	SpriteRFarmInfo->SetSprite("Info", _Index.X);
+	SpriteRFarmInfo->SetActive(true);
 }
 
 void AUIManager::PanelButtonTileEnd(AActor* _Actor, FIntPoint _Index)

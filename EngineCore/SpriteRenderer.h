@@ -16,11 +16,8 @@ enum class PivotType
 	LeftTop,
 };
 
-// 설명 :
 class USpriteRenderer : public USceneComponent
 {
-	// 애가 다 담당한다.
-	// 클래스를 심화분류해서
 public:
 	class FrameAnimation
 	{
@@ -47,11 +44,9 @@ public:
 
 
 public:
-	// constrcuter destructer
 	USpriteRenderer();
 	~USpriteRenderer();
 
-	// delete Function
 	USpriteRenderer(const USpriteRenderer& _Other) = delete;
 	USpriteRenderer(USpriteRenderer&& _Other) noexcept = delete;
 	USpriteRenderer& operator=(const USpriteRenderer& _Other) = delete;
@@ -60,8 +55,6 @@ public:
 	void Render(float _DeltaTime);
 	void BeginPlay() override;
 	void ComponentTick(float _DeltaTime) override;
-
-	void SetSprite(std::string_view _Name, FIntPoint _CurIndex);
 
 	void SetSprite(std::string_view _Name, int _CurIndex = 0);
 
@@ -84,15 +77,12 @@ public:
 
 	void SetComponentCrate(USpriteRenderer* _SR, std::string_view _Model, int _index, FVector2D _Scale, FVector2D _Location, ERenderOrder _Order);
 
-	FVector2D SetSpriteScale(float _Ratio = 1.0f, int _CurIndex = 0);
-
 	void CreateAnimation(std::string_view _AnimationName, std::string_view _SpriteName, int _Start, int _End, float Time = 0.1f, bool _Loop = true);
 
 	void CreateAnimation(std::string_view _AnimationName, std::string_view _SpriteName, std::vector<int> _Indexs, std::vector<float> _Frame, bool _Loop = true);
 
 	void CreateAnimation(std::string_view _AnimationName, std::string_view _SpriteName, std::vector<int> _Indexs, float _Frame, bool _Loop = true);
 
-	// 내가 Idle인데 Idle 바꾸라고 했다. 
 	void ChangeAnimation(std::string_view _AnimationName, bool _Force = false);
 
 	void SetAnimationEvent(std::string_view _AnimationName, int _Frame, std::function<void()> _Function);
@@ -112,16 +102,12 @@ public:
 	void SetPivotType(PivotType _Type);
 
 	void SetCameraEffectScale(float _Effect);
-	void SetSprite(std::string_view _Name, int _CurIndex = 0);
 
-	// 애니메이션이 실행되고 있다면.
-	// 그 애니메이션이 끝난 순간을 체크하고 싶은것.
 	bool IsCurAnimationEnd()
 	{
 		return CurAnimation->IsEnd;
 	}
 
-	// 0 완전투명 255면 불투명
 	void SetAlphaChar(unsigned char _Value)
 	{
 		Alpha = _Value;
@@ -152,13 +138,9 @@ private:
 	float CameraEffectScale = 1.0f;
 	float CurAnimationSpeed = 1.0f;
 
-	FIntPoint SpriteIndex = { 0, 0 };
-
-	// 다이렉트는 모든 색상을 0~1.0f로 표현한다.
 	unsigned char Alpha = 255;
 
 	FVector2D Pivot = FVector2D(0.5f, 0.5f);
-	// FVector2D PivotRealScale = FVector2D::ZERO;
 
 	class UEngineSprite* Sprite = nullptr;
 
