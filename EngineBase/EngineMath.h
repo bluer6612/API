@@ -36,6 +36,12 @@ public:
 		else
 			return value;
 	}
+
+	template <typename DataType>
+	static DataType Lerp(DataType A, DataType B, DataType Alpha)
+	{
+		return A * (1 - Alpha) + B * Alpha;
+	}
 };
 
 class FVector2D
@@ -240,6 +246,16 @@ public:
 		Stream += "]";
 		return Stream;
 	}
+
+	static FVector2D Lerp(FVector2D _A, FVector2D _B, float _Alpha)
+	{
+		FVector2D Result;
+		_Alpha = UEngineMath::Clamp(_Alpha, 0.0f, 1.0f);
+		Result.X = UEngineMath::Lerp(_A.X, _B.X, _Alpha);
+		Result.Y = UEngineMath::Lerp(_A.Y, _B.Y, _Alpha);
+		return Result;
+	}
+
 };
 
 enum class ECollisionType
@@ -376,6 +392,8 @@ public:
 		Y += _Other.Y;
 		return *this;
 	}
+
+
 };
 
 

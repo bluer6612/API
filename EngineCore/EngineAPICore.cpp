@@ -12,6 +12,7 @@
 UEngineAPICore* UEngineAPICore::MainCore = nullptr;
 UContentsCore* UEngineAPICore::UserCore = nullptr;
 
+
 UEngineAPICore::UEngineAPICore()
 {
 }
@@ -43,7 +44,7 @@ int UEngineAPICore::EngineStart(HINSTANCE _Inst, UContentsCore* _UserCore)
 
 	UEngineWindow::EngineWindowInit(_Inst);
 
-	UEngineAPICore Core = UEngineAPICore();
+			UEngineAPICore Core = UEngineAPICore();
 	Core.EngineMainWindow.Open();
 	MainCore = &Core;
 
@@ -61,10 +62,7 @@ void UEngineAPICore::EngineTick()
 {
 	UserCore->Tick();
 
-	// MainCore->TimeCheck();
 	MainCore->Tick();
-	// MainCore->Render();
-	// MainCore->Collision();
 }
 
 void UEngineAPICore::Tick()
@@ -78,7 +76,6 @@ void UEngineAPICore::Tick()
 
 	if (nullptr != NextLevel)
 	{
-
 		if (nullptr != CurLevel)
 		{
 			CurLevel->LevelChangeEnd();
@@ -89,12 +86,14 @@ void UEngineAPICore::Tick()
 		NextLevel->LevelChangeStart();
 
 		NextLevel = nullptr;
-
 		DeltaTimer.TimeStart();
 	}
 
 	DeltaTimer.TimeCheck();
+
 	float DeltaTime = DeltaTimer.GetDeltaTime();
+
+	DeltaTime *= GlobalTimeScale;
 
 	UEngineSound::Update();
 

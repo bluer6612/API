@@ -36,7 +36,12 @@ void USpriteRenderer::Render(float _DeltaTime)
 		Trans.Location = Trans.Location - (Level->CameraPos * CameraEffectScale);
 	}
 
-	Trans.Location += Pivot;
+	FVector2D PivotRealScale;
+	//                 소수점 버림
+	PivotRealScale.X = std::floorf((0.5f - Pivot.X) * Trans.Scale.X);
+	PivotRealScale.Y = std::floorf((0.5f - Pivot.Y) * Trans.Scale.Y);
+
+	Trans.Location += PivotRealScale;
 
 	if (Alpha == 255)
 	{
@@ -62,8 +67,10 @@ void USpriteRenderer::ComponentTick(float _DeltaTime)
 {
 	Super::ComponentTick(_DeltaTime);
 
+	// 애니메이션 진행시키는 코드를 ComponentTick으로 옮겼다. 
 	if (nullptr != CurAnimation)
 	{
+		CurAnimation->IsEnd = false;
 		std::vector<int>& Indexs = CurAnimation->FrameIndex;
 		std::vector<float>& Times = CurAnimation->FrameTime;
 
@@ -315,7 +322,6 @@ void USpriteRenderer::ChangeAnimation(std::string_view _AnimationName, bool _For
 	Sprite = CurAnimation->Sprite;
 }
 
-
 void USpriteRenderer::SetAnimationEvent(std::string_view _AnimationName, int _Frame, std::function<void()> _Function)
 {
 	std::string UpperName = UEngineString::ToUpper(_AnimationName);
@@ -354,7 +360,6 @@ void USpriteRenderer::SetCameraEffectScale(float _Effect)
 	CameraEffectScale = _Effect;
 }
 
-// 여러분들이 애니메이션을 하거나
 void USpriteRenderer::SetPivotType(PivotType _Type)
 {
 	if (PivotType::Center == _Type)
@@ -369,19 +374,30 @@ void USpriteRenderer::SetPivotType(PivotType _Type)
 		return;
 	}
 
-	UEngineSprite::USpriteData CurData = Sprite->GetSpriteData(CurIndex);
-
 	switch (_Type)
 	{
+	case PivotType::Center:
+		Pivot.X = 0.5f;
+		Pivot.Y = 0.5f;
+		break;
 	case PivotType::Bot:
-		Pivot.X = 0.0f;
-		Pivot.Y -= CurData.Transform.Scale.Y * 0.5f;
+		Pivot.X = 0.5f;
+		Pivot.Y = 1.0f;
 		break;
 	case PivotType::Top:
+		Pivot.X = 0.5f;
+		Pivot.Y = 0.0f;
+		break;
+	case PivotType::LeftTop:
 		Pivot.X = 0.0f;
-		Pivot.Y += CurData.Transform.Scale.Y * 0.5f;
+		Pivot.Y = 0.0f;
 		break;
 	default:
 		break;
 	}
+}
+
+void USpriteRenderer::SetPivotValue(FVector2D _Value)
+{
+	Pivot = _Value;
 }

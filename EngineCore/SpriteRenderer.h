@@ -1,16 +1,19 @@
 #pragma once
 #include "SceneComponent.h"
 #include "EngineSprite.h"
+
+#include <map>
 #include <EngineBase/EngineDelegate.h>
 #include <EngineBase/EngineMath.h>
 #include <ContentsProject/ContentsEnum.h>
-#include <map>
 
 enum class PivotType
 {
 	Center,
+	Left,
 	Bot,
 	Top,
+	LeftTop,
 };
 
 // 설명 :
@@ -38,13 +41,17 @@ public:
 			CurIndex = 0;
 			CurTime = 0;
 			ResultIndex = 0;
+			IsEnd = false;
 		}
 	};
 
+
 public:
+	// constrcuter destructer
 	USpriteRenderer();
 	~USpriteRenderer();
 
+	// delete Function
 	USpriteRenderer(const USpriteRenderer& _Other) = delete;
 	USpriteRenderer(USpriteRenderer&& _Other) noexcept = delete;
 	USpriteRenderer& operator=(const USpriteRenderer& _Other) = delete;
@@ -77,12 +84,15 @@ public:
 
 	void SetComponentCrate(USpriteRenderer* _SR, std::string_view _Model, int _index, FVector2D _Scale, FVector2D _Location, ERenderOrder _Order);
 
+	FVector2D SetSpriteScale(float _Ratio = 1.0f, int _CurIndex = 0);
+
 	void CreateAnimation(std::string_view _AnimationName, std::string_view _SpriteName, int _Start, int _End, float Time = 0.1f, bool _Loop = true);
 
 	void CreateAnimation(std::string_view _AnimationName, std::string_view _SpriteName, std::vector<int> _Indexs, std::vector<float> _Frame, bool _Loop = true);
 
 	void CreateAnimation(std::string_view _AnimationName, std::string_view _SpriteName, std::vector<int> _Indexs, float _Frame, bool _Loop = true);
 
+	// 내가 Idle인데 Idle 바꾸라고 했다. 
 	void ChangeAnimation(std::string_view _AnimationName, bool _Force = false);
 
 	void SetAnimationEvent(std::string_view _AnimationName, int _Frame, std::function<void()> _Function);
@@ -97,20 +107,25 @@ public:
 		IsCameraEffect = _Value;
 	}
 
-	void SetPivot(FVector2D _Pivot)
-	{
-		Pivot = _Pivot;
-	}
+	void SetPivotValue(FVector2D _Value);
 
 	void SetPivotType(PivotType _Type);
 
 	void SetCameraEffectScale(float _Effect);
+	void SetSprite(std::string_view _Name, int _CurIndex = 0);
 
+	// 애니메이션이 실행되고 있다면.
+	// 그 애니메이션이 끝난 순간을 체크하고 싶은것.
 	bool IsCurAnimationEnd()
 	{
 		return CurAnimation->IsEnd;
 	}
 
+	// 0 완전투명 255면 불투명
+	void SetAlphaChar(unsigned char _Value)
+	{
+		Alpha = _Value;
+	}
 	void SetAnimationSpeed(float _Speed)
 	{
 		CurAnimationSpeed = _Speed;
@@ -121,14 +136,10 @@ public:
 		CurAnimationSpeed = 1.0f;
 	}
 
-	void SetAlphaChar(unsigned char _Value)
-	{
-		Alpha = _Value;
-	}
-
 	void SetAlphafloat(float _Value)
 	{
 		_Value = UEngineMath::Clamp(_Value, 0.0f, 1.0f);
+
 		Alpha = static_cast<unsigned char>(_Value * 255.0f);
 	}
 
@@ -137,13 +148,17 @@ protected:
 private:
 	int Order = 0;
 	int CurIndex = 0;
-	FIntPoint SpriteIndex = { 0, 0 };
 	bool IsCameraEffect = true;
 	float CameraEffectScale = 1.0f;
 	float CurAnimationSpeed = 1.0f;
+
+	FIntPoint SpriteIndex = { 0, 0 };
+
+	// 다이렉트는 모든 색상을 0~1.0f로 표현한다.
 	unsigned char Alpha = 255;
 
-	FVector2D Pivot = FVector2D::ZERO;
+	FVector2D Pivot = FVector2D(0.5f, 0.5f);
+	// FVector2D PivotRealScale = FVector2D::ZERO;
 
 	class UEngineSprite* Sprite = nullptr;
 

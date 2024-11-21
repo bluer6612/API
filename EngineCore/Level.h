@@ -1,6 +1,7 @@
 #pragma once
 #include "GameMode.h"
 
+
 class CollisionLinkData
 {
 public:
@@ -14,7 +15,6 @@ public:
 		__int64 Key;
 	};
 };
-
 
 class ULevel : public UObject
 {
@@ -31,6 +31,7 @@ public:
 	ULevel& operator=(ULevel&& _Other) noexcept = delete;
 
 	ULevel& operator=(const ULevel& _Other) = delete;
+
 	void LevelChangeStart();
 
 	void LevelChangeEnd();
@@ -104,7 +105,6 @@ public:
 		return dynamic_cast<ConvertType*>(GameMode);
 	}
 
-
 	template<typename LeftEnumType, typename RightEnumType>
 	static void CollisionGroupLink(LeftEnumType _Left, RightEnumType _Right)
 	{
@@ -119,7 +119,7 @@ public:
 
 		for (size_t i = 0; i < CollisionLink.size(); i++)
 		{
-			if (CollisionLink[i].Key == _Right)
+			if (CollisionLink[i].Key == LinkData.Key)
 			{
 				return;
 			}
@@ -128,6 +128,29 @@ public:
 		CollisionLink.push_back(LinkData);
 	}
 
+	template<typename ActorType>
+	std::list<ActorType*> GetActorsFromClass()
+	{
+		std::list<ActorType*> Result;
+
+		std::list<AActor*>::iterator StartIter = AllActors.begin();
+		std::list<AActor*>::iterator EndIter = AllActors.end();
+
+		for (; StartIter != EndIter; ++StartIter)
+		{
+			AActor* CurActor = *StartIter;
+
+			ActorType* ConvertActor = dynamic_cast<ActorType*>(CurActor);
+
+			if (nullptr == ConvertActor)
+			{
+				continue;
+			}
+
+			Result.push_back(ConvertActor);
+		}
+		return Result;
+	}
 
 protected:
 
@@ -148,14 +171,10 @@ private:
 
 		BeginPlayList.push_back(GameMode);
 		BeginPlayList.push_back(MainPawn);
-
-		//GameMode->BeginPlay();
-		//MainPawn->BeginPlay();
-		//AllActors.push_back(GameMode);
-		//AllActors.push_back(MainPawn);
 	}
 
 	void PushRenderer(class USpriteRenderer* _Renderer);
+
 	void ChangeRenderOrder(class USpriteRenderer* _Renderer, int _PrevOrder);
 
 	void PushCollision(class U2DCollision* _Collision);
@@ -174,7 +193,9 @@ private:
 	std::list<AActor*> BeginPlayList;
 
 	bool IsCameraToMainPawn = true;
+
 	FVector2D CameraPos;
+
 	FVector2D CameraPivot;
 
 	std::map<int, std::list<class USpriteRenderer*>> Renderers;
@@ -182,7 +203,6 @@ private:
 	std::map<int, std::list<class U2DCollision*>> Collisions;
 
 	static std::vector<CollisionLinkData> CollisionLink;
-	
+
 	std::map<int, std::list<class U2DCollision*>> CheckCollisions;
 };
-
