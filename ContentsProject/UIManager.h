@@ -4,7 +4,10 @@
 enum class UICollisionGroup
 {
 	Cursor,
-	UI,
+	Ground,
+	Building,
+	Farm,
+	Panel,
 };
 
 // Ό³Έν :
@@ -24,15 +27,16 @@ protected:
 
 	void Tick(float _DeltaTime);
 
-	void PanelButtonTileEnter(AActor* _Actor, FIntPoint _Index);
-	void PanelButtonTileStay(AActor* _Actor, FIntPoint _Index);
-	void PanelButtonTileEnd(AActor* _Actor, FIntPoint _Index);
+	void PanelButtonTileEnter(AActor* _Actor, FTransform _Index);
+	void PanelButtonTileStay(AActor* _Actor, FTransform _Index);
+	void PanelButtonTileEnd(AActor* _Actor, FTransform _Index);
 
 private:
 	class U2DCollision* CursorCollision = nullptr;
 
-	class USpriteRenderer* SpriteRFarmInfo = nullptr;
+	class USpriteRenderer* SRFarmInfo = nullptr;
+	class USpriteRenderer* SRButtonBlack = nullptr;
 
-	std::vector<std::vector<int>> Test;
+	std::vector<std::vector<int>> FarmInfoIndex;
 };
 

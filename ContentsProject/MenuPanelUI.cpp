@@ -49,9 +49,9 @@ AMenuPanelUI::AMenuPanelUI()
 				Loc = 0;
 				Loc2 = 1;
 			}
-			else if (4 == i)
+			else if (0 == (i - 3) % 4)
 			{
-				Loc2 = 0;
+				Loc2 = 1;
 			}
 			else if (42 == i)
 			{
@@ -62,35 +62,39 @@ AMenuPanelUI::AMenuPanelUI()
 			{
 				Loc2 = 0;
 			}
+			else 
+			{
+				Loc2 = 0;
+			}
 
 			SpriteRFarmSlot[i] = CreateDefaultSubObject<USpriteRenderer>();
 			SpriteRFarmSlot[i]->SetComponentCrate(SpriteRFarmSlot[i], "000_crop-seed-button.png", {}, { (Location.X - 153 + (Loc * 104)), (Location.Y - 120 + ((i / 4) + Loc2) * 46) }, ERenderOrder::UI);
+
+			SpriteRFarmCoin[i] = CreateDefaultSubObject<USpriteRenderer>();
+			SpriteRFarmCoin[i]->SetComponentCrate(SpriteRFarmCoin[i], "uiresourceicons_7.png", {}, { (Location.X - 153 + 39 + (Loc * 104)), (Location.Y - 120 + 16 + ((i / 4) + Loc2) * 46) }, ERenderOrder::UI);
 
 			SpriteRFarmCrops[i] = CreateDefaultSubObject<USpriteRenderer>();
 			if (i < 3)
 			{
 				SpriteRFarmCrops[i]->SetComponentCrate(SpriteRFarmCrops[i], "Crops.png", j * 11 + 1, {}, { (Location.X - 153 - 29 + (Loc * 104)), (Location.Y - 120 - 16 + ((i / 4) + Loc2) * 46) }, ERenderOrder::UI);
+				SpriteRFarmCoin[i]->SetSprite("uiresourceicons_0.png");
 			}
 			else
 			{
 				SpriteRFarmCrops[i]->SetComponentCrate(SpriteRFarmCrops[i], "Crops.png", j * 11, {}, { (Location.X - 153 - 29 + (Loc * 104)), (Location.Y - 120 - 16 + ((i / 4) + Loc2) * 46) }, ERenderOrder::UI);
 			}
-
-			SpriteRFarmCoin[i] = CreateDefaultSubObject<USpriteRenderer>();
-			SpriteRFarmCoin[i]->SetComponentCrate(SpriteRFarmCoin[i], "uiresourceicons_7.png", {}, { (Location.X - 153 + 39 + (Loc * 104)), (Location.Y - 120 + 16 + ((i / 4) + Loc2) * 46) }, ERenderOrder::UI);
-
-			if (i > (24 - 1))
+			if (i > (24 - 2))
 			{
 				SpriteRFarmSlot[i]->SetActive(false);
 			}
+
+			++j;
 
 			++Loc;
 			if (4 <= Loc)
 			{
 				Loc = 0;
 			}
-
-			++j;
 		}
 
 		//Loc = 0;

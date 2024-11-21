@@ -97,13 +97,13 @@ void APlayGameMode::Tick(float _DeltaTime)
 	//if (nullptr != PanelButtonTile->GetTileLocation(MousePos))
 	//{
 	//	{	
-	//		SpriteRFarmInfo->SetSprite("Info", PanelButtonTile->GetTileIndex(MousePos));
-	//		SpriteRFarmInfo->SetActive(true);
+	//		SRFarmInfo->SetSprite("FarmInfo", PanelButtonTile->GetTileIndex(MousePos));
+	//		SRFarmInfo->SetActive(true);
 	//	}
 	//}
 	//else
 	//{
-	//	SpriteRFarmInfo->SetActive(false);
+	//	SRFarmInfo->SetActive(false);
 	//}
 
 
