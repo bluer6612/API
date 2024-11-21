@@ -29,6 +29,7 @@ AUIManager::AUIManager()
 	{
 		SRButtonBlack = CreateDefaultSubObject<USpriteRenderer>();
 		SRButtonBlack->SetComponentCrate(SRButtonBlack, "003_crop-seed-button_Black.png", {}, { static_cast<float>(ScreenX) - (104 * 4) + 29 , ScreenHY + 93 - 120 }, ERenderOrder::UIUP);
+		SRButtonBlack->SetAlphafloat(0.35f);
 		SRButtonBlack->SetActive(false);
 	}
 

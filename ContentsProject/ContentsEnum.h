@@ -13,6 +13,7 @@ enum class ERenderOrder
 	UIDOWN = 9999,
 	UI = 10000,
 	UIUP = 10001,
+	UITOP = 10002,
 	TITLE = 11000,
 	FADE = 20000,
 };
