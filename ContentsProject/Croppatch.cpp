@@ -16,10 +16,10 @@ ACroppatch::ACroppatch()
 
 	{
 		U2DCollision* Collision = CreateDefaultSubObject<U2DCollision>();
-		Collision->SetCollisionGroup(UICollisionGroup::Panel);
+		Collision->SetCollisionGroup(UICollisionGroup::Croppatch);
 		Collision->SetCollisionType(ECollisionType::Rect);
-		//Collision->SetComponentLocation(StartPos);
-		//Collision->SetComponentScale({ 102, 44 });
+		Collision->SetComponentLocation(Location);
+		Collision->SetComponentScale({ 144, 144 });
 
 		//Collision->SetCollisionEnter(std::bind(&AUIManager::PanelButtonTileEnter, this, std::placeholders::_1, FTransform(FVector2D(Index, 0), FVector2D(StartPos))));
 		//Collision->SetCollisionStay(std::bind(&AUIManager::PanelButtonTileStay, this, std::placeholders::_1, FTransform(FVector2D(Index, 0), FVector2D(StartPos))));

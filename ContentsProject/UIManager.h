@@ -6,7 +6,7 @@ enum class UICollisionGroup
 	Cursor,
 	Ground,
 	Building,
-	Farm,
+	Croppatch,
 	Panel,
 };
 
@@ -33,6 +33,7 @@ protected:
 
 private:
 	class U2DCollision* CursorCollision = nullptr;
+	class USpriteRenderer* CursorImage = nullptr;
 
 	class USpriteRenderer* SRFarmInfo = nullptr;
 	class USpriteRenderer* SRButtonBlack = nullptr;

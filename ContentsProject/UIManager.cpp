@@ -13,11 +13,19 @@ AUIManager::AUIManager()
 {
 	{
 		GetWorld()->CollisionGroupLink(UICollisionGroup::Panel, UICollisionGroup::Cursor);
+		GetWorld()->CollisionGroupLink(UICollisionGroup::Building, UICollisionGroup::Cursor);
+		GetWorld()->CollisionGroupLink(UICollisionGroup::Croppatch, UICollisionGroup::Cursor);
+		
 
 		CursorCollision = CreateDefaultSubObject<U2DCollision>();
 		CursorCollision->SetCollisionGroup(UICollisionGroup::Cursor);
 		CursorCollision->SetCollisionType(ECollisionType::Rect);
 		CursorCollision->SetComponentScale({ 1, 1 });
+
+		CursorImage = CreateDefaultSubObject<USpriteRenderer>();
+		CursorImage->SetSprite("Crops.png", 3);
+		CursorImage->SetComponentScale({ 32, 64 });
+		CursorImage->SetActive(false);
 		//CursorCollision->DebugOn();
 	}
 
@@ -108,6 +116,7 @@ void AUIManager::Tick(float _DeltaTime)
 
 	FVector2D MousePos = UEngineAPICore::GetCore()->GetMainWindow().GetMousePos();
 	CursorCollision->SetComponentLocation(MousePos);
+	CursorImage->SetComponentLocation({ MousePos.X - 5, MousePos.Y - 24 });
 
 	if (true == UEngineInput::GetInst().IsDown(VK_LBUTTON))
 	{
