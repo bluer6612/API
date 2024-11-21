@@ -71,6 +71,11 @@ void APlayGameMode::BeginPlay()
 		APlayMap* NewActor = AActor::GetWorld()->SpawnActor<APlayMap>();
 	}
 
+	//UIManager
+	{
+		AUIManager* NewActor = AActor::GetWorld()->SpawnActor<AUIManager>();
+	}
+
 	//패널 메뉴
 
 	//{

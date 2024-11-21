@@ -23,9 +23,7 @@ ACroppatch::ACroppatch()
 		Collision->SetComponentLocation(Location);
 		Collision->SetComponentScale({ 144, 144 });
 
-		Collision->SetCollisionEnter(std::bind(&ACroppatch::ClickEnter, this, std::placeholders::_1, FVector2D({1, 1})));
-		Collision->SetCollisionStay(std::bind(&ACroppatch::ClickStay, this, std::placeholders::_1, FVector2D({1, 1})));
-		Collision->SetCollisionEnd(std::bind(&ACroppatch::ClickEnd, this, std::placeholders::_1, FVector2D({1, 1})));
+		Collision->SetCollisionEnter(std::bind(&ACroppatch::ClickEnter, this, std::placeholders::_1, FVector2D({ Location })));
 	}
 }
 
@@ -38,30 +36,7 @@ void ACroppatch::ClickEnter(AActor* _Actor, FVector2D _Index)
 	FVector2D MousePos = UEngineAPICore::GetCore()->GetMainWindow().GetMousePos();
 
 	if (true == UEngineInput::GetInst().IsDown(VK_LBUTTON))
-	{/*
-		CursorImage->SetActive(true);
-		CursorImage->SetComponentLocation({ MousePos.X - 5, MousePos.Y - 24 });*/
-		++_Index.X;
-	}
-}
-
-void ACroppatch::ClickStay(AActor* _Actor, FVector2D _Index)
-{
-	FVector2D MousePos = UEngineAPICore::GetCore()->GetMainWindow().GetMousePos();
-
-	if (true == UEngineInput::GetInst().IsDown(VK_LBUTTON))
 	{
-		++_Index.X;
-	}
-}
-
-void ACroppatch::ClickEnd(AActor* _Actor, FVector2D _Index)
-{
-	FVector2D MousePos = UEngineAPICore::GetCore()->GetMainWindow().GetMousePos();
-
-	if (true == UEngineInput::GetInst().IsDown(VK_LBUTTON))
-	{
-		++_Index.X;
 	}
 }
 

@@ -22,8 +22,10 @@ public:
 	AUIManager& operator=(const AUIManager& _Other) = delete;
 	AUIManager& operator=(AUIManager&& _Other) noexcept = delete;
 
-	class U2DCollision* CursorCollision = nullptr;
-	class USpriteRenderer* CursorImage = nullptr;
+	USpriteRenderer* GetCursorImage()
+	{
+		return CursorImage;
+	}
 
 protected:
 	void BeginPlay();
@@ -35,6 +37,8 @@ protected:
 	void PanelButtonTileEnd(AActor* _Actor, FTransform _Index);
 
 private:
+	class U2DCollision* CursorCollision = nullptr;
+	class USpriteRenderer* CursorImage = nullptr;
 
 	class USpriteRenderer* SRFarmInfo = nullptr;
 	class USpriteRenderer* SRButtonBlack = nullptr;

@@ -11,38 +11,32 @@
 
 AUIManager::AUIManager()
 {
-	{
-		GetWorld()->CollisionGroupLink(UICollisionGroup::Panel, UICollisionGroup::Cursor);
-		GetWorld()->CollisionGroupLink(UICollisionGroup::Building, UICollisionGroup::Cursor);
-		GetWorld()->CollisionGroupLink(UICollisionGroup::Croppatch, UICollisionGroup::Cursor);
+	GetWorld()->CollisionGroupLink(UICollisionGroup::Panel, UICollisionGroup::Cursor);
+	GetWorld()->CollisionGroupLink(UICollisionGroup::Building, UICollisionGroup::Cursor);
+	GetWorld()->CollisionGroupLink(UICollisionGroup::Croppatch, UICollisionGroup::Cursor);
 		
+	CursorCollision = CreateDefaultSubObject<U2DCollision>();
+	CursorCollision->SetCollisionGroup(UICollisionGroup::Cursor);
+	CursorCollision->SetCollisionType(ECollisionType::Rect);
+	CursorCollision->SetComponentScale({ 1, 1 });
+	//CursorCollision->DebugOn();
 
-		CursorCollision = CreateDefaultSubObject<U2DCollision>();
-		CursorCollision->SetCollisionGroup(UICollisionGroup::Cursor);
-		CursorCollision->SetCollisionType(ECollisionType::Rect);
-		CursorCollision->SetComponentScale({ 1, 1 });
-
-		CursorImage = CreateDefaultSubObject<USpriteRenderer>();
-		CursorImage->SetSprite("Crops.png", 3);
-		CursorImage->SetComponentScale({ 32, 64 });
-		CursorImage->SetActive(false);
-		//CursorCollision->DebugOn();
-	}
+	//농사 모드 씨앗 이미지
+	CursorImage = CreateDefaultSubObject<USpriteRenderer>();
+	CursorImage->SetSprite("Crops.png", 3);
+	CursorImage->SetComponentScale({ 32, 64 });
+	CursorImage->DebugOn();
 
 	//농사 마우스 on 시 설명
-	{
-		SRFarmInfo = CreateDefaultSubObject<USpriteRenderer>();
-		SRFarmInfo->SetComponentCrate(SRFarmInfo, "FarmInfo", 0, { 1 , 1 }, { static_cast<float>(ScreenX - 256 + 22) - 341, (ScreenHY + 93 - 2) }, ERenderOrder::UIUP);
-		SRFarmInfo->SetActive(false);
-	}
+	SRFarmInfo = CreateDefaultSubObject<USpriteRenderer>();
+	SRFarmInfo->SetComponentCrate(SRFarmInfo, "FarmInfo", 0, { 1 , 1 }, { static_cast<float>(ScreenX - 256 + 22) - 341, (ScreenHY + 93 - 2) }, ERenderOrder::UIUP);
+	SRFarmInfo->SetActive(false);
 
 	//농사 마우스 on 시 음영 처리
-	{
-		SRButtonBlack = CreateDefaultSubObject<USpriteRenderer>();
-		SRButtonBlack->SetComponentCrate(SRButtonBlack, "003_crop-seed-button_Black.png", {}, { static_cast<float>(ScreenX) - (104 * 4) + 29 , ScreenHY + 93 - 120 }, ERenderOrder::UIUP);
-		SRButtonBlack->SetAlphafloat(0.35f);
-		SRButtonBlack->SetActive(false);
-	}
+	SRButtonBlack = CreateDefaultSubObject<USpriteRenderer>();
+	SRButtonBlack->SetComponentCrate(SRButtonBlack, "003_crop-seed-button_Black.png", {}, { static_cast<float>(ScreenX) - (104 * 4) + 29 , ScreenHY + 93 - 120 }, ERenderOrder::UIUP);
+	SRButtonBlack->SetAlphafloat(0.35f);
+	SRButtonBlack->SetActive(false);
 
 
 	//농사 패널 버튼
@@ -121,6 +115,15 @@ void AUIManager::Tick(float _DeltaTime)
 
 		CursorCollision->SetComponentLocation(MousePos);
 		//CursorImage->SetComponentLocation({ MousePos.X - 5, MousePos.Y - 24 });
+	}
+}
+
+void AUIManager::CroppatchClickEnter(AActor* _Actor, FVector2D _Index)
+{
+	FVector2D MousePos = UEngineAPICore::GetCore()->GetMainWindow().GetMousePos();
+
+	if (true == UEngineInput::GetInst().IsDown(VK_LBUTTON))
+	{
 	}
 }
 
