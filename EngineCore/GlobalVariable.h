@@ -1,7 +1,7 @@
 #pragma once
 
 static const int CropsCount = 44;
-static const int MenuCountY = 4;
+static const int CropsCountY = 4;
 
 // Ό³Έν :
 class UGlobalVariable

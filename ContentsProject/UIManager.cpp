@@ -16,7 +16,7 @@ AUIManager::AUIManager()
 		CursorCollision = CreateDefaultSubObject<U2DCollision>();
 		CursorCollision->SetCollisionGroup(UICollisionGroup::Cursor);
 		CursorCollision->SetCollisionType(ECollisionType::Rect);
-		CursorCollision->SetComponentScale({ 0.025f, 0.025f });
+		CursorCollision->SetComponentScale({ 1, 1 });
 		//CursorCollision->DebugOn();
 	}
 
@@ -34,7 +34,7 @@ AUIManager::AUIManager()
 	int Index = 0;
 	for (int y = 0; y < 6; y++)
 	{
-		for (int x = 0; x < MenuCountY; x++)
+		for (int x = 0; x < 4; x++)
 		{
 			U2DCollision* Collision = CreateDefaultSubObject<U2DCollision>();
 			Collision->SetCollisionGroup(UICollisionGroup::UI);
@@ -46,14 +46,29 @@ AUIManager::AUIManager()
 			Collision->SetCollisionStay(std::bind(&AUIManager::PanelButtonTileStay, this, std::placeholders::_1, FIntPoint(Index, 0)));
 			Collision->SetCollisionEnd(std::bind(&AUIManager::PanelButtonTileEnd, this, std::placeholders::_1, FIntPoint(Index, 0)));
 
-			Collision->DebugOn();
+			//Collision->DebugOn();
 
 			++Index;
-			StartPos.X += 104;
+			
+			if ((6 * 4) - 1 == Index)
+			{
+				break;
+			}
+			else if (3 == Index)
+			{
+				StartPos.X = Location.X;
+				StartPos.Y += 46;
+			}
+			else if (0 == (Index - 3) % 4 && 4 != Index)
+			{
+				StartPos.X = Location.X;
+				StartPos.Y += 46;
+			}
+			else
+			{
+				StartPos.X += 104;
+			}
 		}
-
-		StartPos.X = Location.X;
-		StartPos.Y += 46;
 	}
 }
 
