@@ -151,6 +151,10 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Croppatch.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="UIManager.h">
       <SubType>
       </SubType>
@@ -209,6 +213,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Croppatch.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="UIManager.cpp">
       <SubType>
       </SubType>

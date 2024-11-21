@@ -52,6 +52,9 @@
     <ClInclude Include="UIManager.h">
       <Filter>ContentsObject\UI</Filter>
     </ClInclude>
+    <ClInclude Include="Croppatch.h">
+      <Filter>ContentsObject\Building</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -104,6 +107,9 @@
     </ClCompile>
     <ClCompile Include="UIManager.cpp">
       <Filter>ContentsObject\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Croppatch.cpp">
+      <Filter>ContentsObject\Building</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

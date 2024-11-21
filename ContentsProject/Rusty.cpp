@@ -9,7 +9,7 @@
 
 ARusty::ARusty()
 {
-	SetActorLocation({ static_cast<float>(ScreenX * 0.5 + -85), static_cast<float>((ScreenY - 243 - 36) + 80) });
+	SetActorLocation({ static_cast<float>(ScreenX * 0.5 - 85), static_cast<float>((ScreenY - 243) + 76) });
 
 	{
 		SpriteR = CreateDefaultSubObject<USpriteRenderer>();

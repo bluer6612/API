@@ -7,6 +7,7 @@
 #include "House.h"
 #include "Well.h"
 #include "Biofuelconverter.h"
+#include "Croppatch.h"
 
 #include <EngineBase/EngineFile.h>
 #include <EngineBase/EngineDirectory.h>
@@ -63,6 +64,7 @@ void APlayGameMode::BeginPlay()
 	AHouse* House = AActor::GetWorld()->SpawnActor<AHouse>();
 	AWell* Well = AActor::GetWorld()->SpawnActor<AWell>();
 	ABiofuelconverter* Biofuelconverter = AActor::GetWorld()->SpawnActor<ABiofuelconverter>();
+	ACroppatch* Croppatch = AActor::GetWorld()->SpawnActor<ACroppatch>();
 
 	//¸Ê
 	{
