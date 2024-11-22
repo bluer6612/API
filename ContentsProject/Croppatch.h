@@ -1,6 +1,7 @@
 #pragma once
 #include "Building.h"
 #include "UIManager.h"
+#include "TileMap.h"
 
 // Ό³Έν :
 class ACroppatch : public ABuilding
@@ -20,11 +21,10 @@ public:
 
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
-
-	void Idle(float _DeltaTime);
 protected:
 
 private:
-	USpriteRenderer* CroppatchTile[16] = {};
+	ATileMap* CroppatchTile = nullptr;
+	USpriteRenderer* CroppatchTileImage[16] = {};
 };
 

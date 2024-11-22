@@ -19,7 +19,6 @@
 #include <EnginePlatform/EngineSound.h>
 
 #include "PlayMap.h"
-#include "TileMap.h"
 #include "UIManager.h"
 
 APlayGameMode::APlayGameMode()
@@ -38,14 +37,14 @@ void APlayGameMode::BeginPlay()
 	{
 		GroundTileMap = GetWorld()->SpawnActor<ATileMap>();
 		GroundTileMap->SetActorLocation({ static_cast<float>(0), static_cast<float>(ScreenY - 298 - 36 - 2) });
-		GroundTileMap->Create("EmptyTile.png", { 53, 8 }, { 36, 36 });
-		//GroundTileMap->Create("GridTile.png", { 53, 8 }, { 36, 36 });
+		GroundTileMap->Create("grid.png", { 53, 8 }, { 36, 36 });
+		//GroundTileMap->Create("EmptyTile.png", { 53, 8 }, { 36, 36 });
 
 		for (int y = 0; y < 53; y++)
 		{
 			for (int x = 0; x < 8; x++)
 			{
-				GroundTileMap->SetTileSpriteIndex({ y, x }, { 0, 0 }, { 36, 36 }, { 0, 0 }, { 0,0 }, 0);
+				GroundTileMap->SetTileSpriteIndex({ y, x }, { }, { 36, 36 }, { }, { 0,0 }, 0);
 			}
 		}
 	}
@@ -106,6 +105,20 @@ void APlayGameMode::Tick(float _DeltaTime)
 	Super::Tick(_DeltaTime);
 
 	FVector2D MousePos = UEngineAPICore::GetCore()->GetMainWindow().GetMousePos();
+
+	//if (nullptr != PanelButtonTile->GetTileLocation(MousePos))
+	//{
+	//	{	
+	//		SRFarmInfo->SetSprite("FarmInfo", PanelButtonTile->GetTileIndex(MousePos));
+	//		SRFarmInfo->SetActive(true);
+	//	}
+	//}
+	//else
+	//{
+	//	SRFarmInfo->SetActive(false);
+	//}
+
+
 
 	//if (true == UEngineInput::GetInst().IsPress('R'))
 	//{

@@ -4,6 +4,7 @@
 #include <EngineCore/EngineAPICore.h>
 #include <EnginePlatform/EngineInput.h>
 #include <EngineCore/2DCollision.h>
+
 #include "UIManager.h"
 
 ACroppatch::ACroppatch()
@@ -13,7 +14,7 @@ ACroppatch::ACroppatch()
 
 	{
 		SpriteR = CreateDefaultSubObject<USpriteRenderer>();
-		SpriteR->SetComponentCrate(SpriteR, "croppatch0.png", {}, { Location }, ERenderOrder::BUILDING);
+		SpriteR->SetComponentCrate(SpriteR, "croppatch0.png", {}, Location, ERenderOrder::BUILDING);
 	}
 
 	Location.X = Location.X - 48;
@@ -24,9 +25,10 @@ ACroppatch::ACroppatch()
 
 		int Index = 0;
 
-		for (int y = 4; y > 0; --y)
+
+		for (int y = 0; y < 4; ++y)
 		{
-			for (int x = 4; x > 0; --x)
+			for (int x = 0; x < 4; ++x)
 			{
 				U2DCollision* Collision = CreateDefaultSubObject<U2DCollision>();
 				Collision->SetCollisionGroup(UICollisionGroup::Croppatch);
@@ -36,9 +38,9 @@ ACroppatch::ACroppatch()
 
 				Collision->SetCollisionStay(std::bind(&ACroppatch::ClickEnter, this, std::placeholders::_1, FTransform(FVector2D(Index, 0), FVector2D(StartPos))));
 
-				CroppatchTile[Index] = CreateDefaultSubObject<USpriteRenderer>();
-				CroppatchTile[Index]->SetComponentCrate(CroppatchTile[Index], "gridsmall.png", { 36, 36 }, { StartPos }, ERenderOrder::BUILDINGUP);
-				CroppatchTile[Index]->SetAlphafloat(0.75f);
+				//CroppatchTileImage[Index] = CreateDefaultSubObject<USpriteRenderer>();
+				//CroppatchTileImage[Index]->SetComponentCrate(CroppatchTileImage[Index], "gridsmall.png", { 36, 36 }, { StartPos }, ERenderOrder::BUILDINGUP);
+				//CroppatchTileImage[Index]->SetAlphafloat(0.75f);
 				//CroppatchTile[Index]->SetActive(false);
 
 				StartPos.X += 32;
@@ -70,6 +72,28 @@ void ACroppatch::ClickEnter(AActor* _Actor, FTransform _Index)
 void ACroppatch::BeginPlay()
 {
 	Super::BeginPlay();
+
+	CroppatchTile = GetWorld()->SpawnActor<ATileMap>();
+	CroppatchTile->SetActorLocation(Location);
+	CroppatchTile->Create("gridsmall.png", { 4, 4 }, { 32, 32 });
+
+	FVector2D StartPos = Location;
+
+	int Index = 0;
+	for (int y = 0; y < 4; ++y)
+	{
+		for (int x = 0; x < 4; ++x)
+		{
+			CroppatchTile->SetTileSpriteIndex({ y, x }, { }, { 32, 32 }, {  }, { 4, 4 }, 0);
+
+			StartPos.X += 32;
+
+			++Index;
+		}
+
+		StartPos.X = Location.X;
+		StartPos.Y += 32;
+	}
 }
 
 void ACroppatch::Tick(float _DeltaTime)
@@ -77,8 +101,4 @@ void ACroppatch::Tick(float _DeltaTime)
 	Super::Tick(_DeltaTime);
 
 	//FSM.Update(_DeltaTime);
-}
-
-void ACroppatch::Idle(float _DeltaTime)
-{
 }

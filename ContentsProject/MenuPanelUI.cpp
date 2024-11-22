@@ -8,7 +8,7 @@ AMenuPanelUI::AMenuPanelUI()
 
 	{
 		Sprite[index] = CreateDefaultSubObject<USpriteRenderer>();
-		Sprite[index]->SetComponentCrate(Sprite[index], "000_MenuPanel.png", {}, { Location.X, Location.Y }, ERenderOrder::UI);
+		Sprite[index]->SetComponentCrate(Sprite[index], "000_MenuPanel.png", {}, Location, ERenderOrder::UI);
 		++index;
 	}
 

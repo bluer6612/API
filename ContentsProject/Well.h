@@ -4,10 +4,10 @@
 class AWell : public ABuilding
 {
 public:
-		AWell();
+	AWell();
 	~AWell();
 
-		AWell(const AWell& _Other) = delete;
+	AWell(const AWell& _Other) = delete;
 	AWell(AWell&& _Other) noexcept = delete;
 	AWell& operator=(const AWell& _Other) = delete;
 	AWell& operator=(AWell&& _Other) noexcept = delete;

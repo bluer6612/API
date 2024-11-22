@@ -4,7 +4,6 @@
 class AHouse : public ABuilding
 {
 public:
-	
 	AHouse();
 	~AHouse();
 	

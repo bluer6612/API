@@ -8,7 +8,7 @@ ABiofuelconverter::ABiofuelconverter()
 
 	{
 		SpriteR = CreateDefaultSubObject<USpriteRenderer>();
-		SpriteR->SetComponentCrate(SpriteR, "000_biofuel-converter.png", {}, { Location.X, Location.Y }, ERenderOrder::BUILDING);
+		SpriteR->SetComponentCrate(SpriteR, "000_biofuel-converter.png", {}, Location, ERenderOrder::BUILDING);
 		SpriteR->CreateAnimation("Idle", "Biofuelconverter", 0, 0, 1.0f);
 	}
 

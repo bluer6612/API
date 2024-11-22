@@ -4,11 +4,8 @@
     <ClInclude Include="PreCompile.h">
       <Filter>PreCompile</Filter>
     </ClInclude>
-    <ClInclude Include="MainContentsCore.h">
-      <Filter>Core</Filter>
-    </ClInclude>
     <ClInclude Include="PlayGameMode.h">
-      <Filter>ContentsObject\GameMode</Filter>
+      <Filter>ContentsObject\Manager</Filter>
     </ClInclude>
     <ClInclude Include="PlayMap.h">
       <Filter>ContentsObject\Play</Filter>
@@ -49,25 +46,25 @@
     <ClInclude Include="MenuPanelUI.h">
       <Filter>ContentsObject\UI</Filter>
     </ClInclude>
-    <ClInclude Include="UIManager.h">
-      <Filter>ContentsObject\UI</Filter>
-    </ClInclude>
     <ClInclude Include="Croppatch.h">
       <Filter>ContentsObject\Building</Filter>
     </ClInclude>
     <ClInclude Include="BuildingManager.h">
-      <Filter>ContentsObject\Building</Filter>
+      <Filter>ContentsObject\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="UIManager.h">
+      <Filter>ContentsObject\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="MainContentsCore.h">
+      <Filter>Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
       <Filter>PreCompile</Filter>
     </ClCompile>
-    <ClCompile Include="MainContentsCore.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
     <ClCompile Include="PlayGameMode.cpp">
-      <Filter>ContentsObject\GameMode</Filter>
+      <Filter>ContentsObject\Manager</Filter>
     </ClCompile>
     <ClCompile Include="PlayMap.cpp">
       <Filter>ContentsObject\Play</Filter>
@@ -108,14 +105,17 @@
     <ClCompile Include="MenuPanelUI.cpp">
       <Filter>ContentsObject\UI</Filter>
     </ClCompile>
-    <ClCompile Include="UIManager.cpp">
-      <Filter>ContentsObject\UI</Filter>
-    </ClCompile>
     <ClCompile Include="Croppatch.cpp">
       <Filter>ContentsObject\Building</Filter>
     </ClCompile>
     <ClCompile Include="BuildingManager.cpp">
-      <Filter>ContentsObject\Building</Filter>
+      <Filter>ContentsObject\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="UIManager.cpp">
+      <Filter>ContentsObject\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="MainContentsCore.cpp">
+      <Filter>Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -127,9 +127,6 @@
     </Filter>
     <Filter Include="Core">
       <UniqueIdentifier>{a1cc2534-c12e-4252-9e7c-aafe5e50e75c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ContentsObject\GameMode">
-      <UniqueIdentifier>{853cd216-882a-48b9-a584-a08e11d0a3b2}</UniqueIdentifier>
     </Filter>
     <Filter Include="ContentsObject\Play">
       <UniqueIdentifier>{25b203e5-44e3-4be7-8e4a-69c99e422435}</UniqueIdentifier>
@@ -151,6 +148,9 @@
     </Filter>
     <Filter Include="ContentsObject\UI">
       <UniqueIdentifier>{0968278a-21c6-494b-901e-ba95b20d1de3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ContentsObject\Manager">
+      <UniqueIdentifier>{853cd216-882a-48b9-a584-a08e11d0a3b2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

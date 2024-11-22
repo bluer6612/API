@@ -51,9 +51,9 @@ AUIManager::AUIManager()
 		FVector2D StartPos = Location;
 
 		int Index = 0;
-		for (int y = 0; y < 6; y++)
+		for (int y = 0; y < 6; ++y)
 		{
-			for (int x = 0; x < 4; x++)
+			for (int x = 0; x < 4; ++x)
 			{
 				U2DCollision* Collision = CreateDefaultSubObject<U2DCollision>();
 				Collision->SetCollisionGroup(UICollisionGroup::Panel);
@@ -100,7 +100,7 @@ void AUIManager::BeginPlay()
 {
 	Super::BeginPlay();
 
-	AMenuPanelUI* NewActor = AActor::GetWorld()->SpawnActor<AMenuPanelUI>();
+	//AMenuPanelUI* NewActor = AActor::GetWorld()->SpawnActor<AMenuPanelUI>();
 
 	//≈∏¿Ã∆≤
 	{
