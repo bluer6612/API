@@ -100,11 +100,18 @@ void AUIManager::BeginPlay()
 {
 	Super::BeginPlay();
 
-	//AMenuPanelUI* NewActor = AActor::GetWorld()->SpawnActor<AMenuPanelUI>();
+	AMenuPanelUI* NewActor = AActor::GetWorld()->SpawnActor<AMenuPanelUI>();
 
 	//Å¸ÀÌÆ²
 	{
 		//TitleLogo* NewActor = AActor::GetWorld()->SpawnActor<TitleLogo>();
+	}
+
+	ACroppatch* Croppatch = nullptr;
+	{
+		Croppatch = GetWorld()->SpawnActor<ACroppatch>();
+
+		this->SetCroppatch(Croppatch);
 	}
 }
 
@@ -116,6 +123,15 @@ void AUIManager::Tick(float _DeltaTime)
 
 	CursorCollision->SetComponentLocation(MousePos);
 	CursorImage->SetComponentLocation({ MousePos.X - 5, MousePos.Y - 24 });
+
+	if (true == UEngineInput::GetInst().IsDown(VK_LBUTTON))
+	{
+		if (nullptr != Croppatch->GetCroppatchTile()->GetTileLocation(MousePos))
+		{
+			SRFarmInfo->SetSprite("FarmInfo", Croppatch->GetCroppatchTile()->GetTileIndex(MousePos));
+			SRFarmInfo->SetActive(true);
+		}
+	}
 }
 
 void AUIManager::PanelButtonTileEnter(AActor* _Actor, FTransform _Index)
@@ -129,6 +145,8 @@ void AUIManager::PanelButtonTileEnter(AActor* _Actor, FTransform _Index)
 
 void AUIManager::PanelButtonTileStay(AActor* _Actor, FTransform _Index)
 {
+	FVector2D MousePos = UEngineAPICore::GetCore()->GetMainWindow().GetMousePos();
+
 	SRFarmInfo->SetSprite("FarmInfo", _Index.Scale.X);
 	SRFarmInfo->SetActive(true);
 

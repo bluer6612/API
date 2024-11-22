@@ -104,20 +104,6 @@ void APlayGameMode::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 
-	FVector2D MousePos = UEngineAPICore::GetCore()->GetMainWindow().GetMousePos();
-
-	//if (nullptr != PanelButtonTile->GetTileLocation(MousePos))
-	//{
-	//	{	
-	//		SRFarmInfo->SetSprite("FarmInfo", PanelButtonTile->GetTileIndex(MousePos));
-	//		SRFarmInfo->SetActive(true);
-	//	}
-	//}
-	//else
-	//{
-	//	SRFarmInfo->SetActive(false);
-	//}
-
 
 
 	//if (true == UEngineInput::GetInst().IsPress('R'))

@@ -21,6 +21,12 @@ public:
 
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
+
+	ATileMap* GetCroppatchTile() const
+	{
+		return CroppatchTile;
+	}
+
 protected:
 
 private:

@@ -1,6 +1,7 @@
 #pragma once
 #include <EngineCore/Actor.h>
 #include "BuildingManager.h"
+#include "Croppatch.h"
 
 enum class UICollisionGroup
 {
@@ -37,6 +38,11 @@ public:
 		BuildingManager = _BuildingManager;
 	}
 
+	void SetCroppatch(ACroppatch* const _Croppatch)
+	{
+		Croppatch = _Croppatch;
+	}
+
 protected:
 	void BeginPlay();
 
@@ -53,6 +59,7 @@ private:
 	class USpriteRenderer* SRButtonBlack = nullptr;
 
 	ABuildingManager* BuildingManager = nullptr;
+	ACroppatch* Croppatch = nullptr;
 
 	std::vector<std::vector<int>> FarmInfoIndex;
 };

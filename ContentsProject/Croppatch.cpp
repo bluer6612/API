@@ -84,7 +84,7 @@ void ACroppatch::BeginPlay()
 	{
 		for (int x = 0; x < 4; ++x)
 		{
-			CroppatchTile->SetTileSpriteIndex({ y, x }, { }, { 32, 32 }, {  }, { 4, 4 }, 0);
+			CroppatchTile->SetTileSpriteIndex({ y, x }, { }, { 32, 32 }, {  }, { 4, 4 }, 0, 0, ERenderOrder::BUILDINGUP);
 
 			StartPos.X += 32;
 
@@ -92,6 +92,28 @@ void ACroppatch::BeginPlay()
 		}
 
 		StartPos.X = Location.X;
+		StartPos.Y += 32;
+	}
+
+	CroppatchTile->SetActorLocation(Location);
+	CroppatchTile->Create("gridsmall.png", { 4, 4 }, { 32, 32 });
+
+	StartPos = Location;
+	StartPos.X -= 250;
+
+	Index = 0;
+	for (int y = 0; y < 4; ++y)
+	{
+		for (int x = 0; x < 4; ++x)
+		{
+			CroppatchTile->SetTileSpriteIndex({ y, x }, { }, { 32, 32 }, {  }, { 4, 4 }, 0, 0, ERenderOrder::BUILDINGUP);
+
+			StartPos.X += 32;
+
+			++Index;
+		}
+
+		StartPos.X = Location.X - 250;
 		StartPos.Y += 32;
 	}
 }

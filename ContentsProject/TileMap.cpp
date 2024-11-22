@@ -67,7 +67,7 @@ void ATileMap::SetTileSpriteIndex(FIntPoint _Index, int _SpriteIndex)
 	SetTileSpriteIndex(_Index, { 0,0 }, TileSize, { 0, 0 }, { 0,0 }, _SpriteIndex);
 }
 
-void ATileMap::SetTileSpriteIndex(FIntPoint _Index, FVector2D _Pivot, FVector2D _SpriteScale, FIntPoint _Location, FVector2D _LocationPivot, int _SpriteIndex, int _TileIndex)
+void ATileMap::SetTileSpriteIndex(FIntPoint _Index, FVector2D _Pivot, FVector2D _SpriteScale, FIntPoint _Location, FVector2D _LocationPivot, int _SpriteIndex, int _TileIndex, ERenderOrder _SpriteOrder)
 {
 	if (true == IsIndexOver(_Index))
 	{
@@ -83,10 +83,10 @@ void ATileMap::SetTileSpriteIndex(FIntPoint _Index, FVector2D _Pivot, FVector2D 
 
 	USpriteRenderer* FindSprite = AllTiles[_Index.Y][_Index.X].SpriteRenderer;
 	FindSprite->SetSprite(SpriteName, _SpriteIndex);
+	FindSprite->SetComponentScale(_SpriteScale);
+	FindSprite->SetOrder(_SpriteOrder);
 
 	FVector2D TileLocation = IndexToTileLocation(_Index, _Location /*+ _LocationPivot.ConvertToPoint()*/);
-	FindSprite->SetComponentScale(_SpriteScale);
-	FindSprite->SetOrder(_Index.Y);
 
 	AllTiles[_Index.Y][_Index.X].SpriteRenderer->SetComponentLocation(TileLocation + TileSize.Half() + _Pivot/* + _LocationPivot*/);
 	AllTiles[_Index.Y][_Index.X].Pivot = _Pivot;
