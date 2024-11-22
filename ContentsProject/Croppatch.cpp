@@ -63,7 +63,7 @@ void ACroppatch::ClickEnter(AActor* _Actor, FTransform _Index)
 	if (true == UEngineInput::GetInst().IsDown(VK_LBUTTON))
 	{
 		int a = 0;
-		++_Index.Scale.X;
+
 	}
 }
 
