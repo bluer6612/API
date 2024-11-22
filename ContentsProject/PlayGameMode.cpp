@@ -38,7 +38,8 @@ void APlayGameMode::BeginPlay()
 	{
 		GroundTileMap = GetWorld()->SpawnActor<ATileMap>();
 		GroundTileMap->SetActorLocation({ static_cast<float>(0), static_cast<float>(ScreenY - 298 - 36 - 2) });
-		GroundTileMap->Create("GridTile.png", { 53, 8 }, { 36, 36 });
+		GroundTileMap->Create("EmptyTile.png", { 53, 8 }, { 36, 36 });
+		//GroundTileMap->Create("GridTile.png", { 53, 8 }, { 36, 36 });
 
 		for (int y = 0; y < 53; y++)
 		{
@@ -66,13 +67,17 @@ void APlayGameMode::BeginPlay()
 	BGMPlayer = UEngineSound::Play("Echo-metal-1.wav");
 
 	//캐릭터
-	ARusty* Rusty = AActor::GetWorld()->GetPawn<ARusty>();
+	{
+		ARusty* Rusty = AActor::GetWorld()->GetPawn<ARusty>();
+	}
 
 	//건물
-	AHouse* House = AActor::GetWorld()->SpawnActor<AHouse>();
-	AWell* Well = AActor::GetWorld()->SpawnActor<AWell>();
-	ABiofuelconverter* Biofuelconverter = AActor::GetWorld()->SpawnActor<ABiofuelconverter>();
-	ACroppatch* Croppatch = AActor::GetWorld()->SpawnActor<ACroppatch>();
+	{
+		AHouse* House = AActor::GetWorld()->SpawnActor<AHouse>();
+		AWell* Well = AActor::GetWorld()->SpawnActor<AWell>();
+		ABiofuelconverter* Biofuelconverter = AActor::GetWorld()->SpawnActor<ABiofuelconverter>();
+		ACroppatch* Croppatch = AActor::GetWorld()->SpawnActor<ACroppatch>();
+	}
 
 	//맵
 	{

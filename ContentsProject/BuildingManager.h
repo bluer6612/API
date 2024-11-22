@@ -2,14 +2,12 @@
 #include "Building.h"
 
 // Ό³Έν :
-class ABuildingManager : public AActor
+class ABuildingManager : public ABuilding
 {
 public:
-	// constrcuter destructer
 	ABuildingManager();
 	~ABuildingManager();
 
-	// delete Function
 	ABuildingManager(const ABuildingManager& _Other) = delete;
 	ABuildingManager(ABuildingManager&& _Other) noexcept = delete;
 	ABuildingManager& operator=(const ABuildingManager& _Other) = delete;

@@ -32,7 +32,7 @@ public:
 
 	void PanelButtonTileEnter(AActor* _Actor, FTransform _Index);
 
-	void SetBuildingManager(ABuildingManager* _BuildingManager)
+	void SetBuildingManager(ABuildingManager* const _BuildingManager)
 	{
 		BuildingManager = _BuildingManager;
 	}
@@ -52,8 +52,8 @@ private:
 	class USpriteRenderer* SRFarmInfo = nullptr;
 	class USpriteRenderer* SRButtonBlack = nullptr;
 
-	std::vector<std::vector<int>> FarmInfoIndex;
-
 	ABuildingManager* BuildingManager = nullptr;
+
+	std::vector<std::vector<int>> FarmInfoIndex;
 };
 

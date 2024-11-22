@@ -16,7 +16,7 @@ public:
 	ACroppatch& operator=(const ACroppatch& _Other) = delete;
 	ACroppatch& operator=(ACroppatch&& _Other) noexcept = delete;
 
-	void ClickEnter(AActor* _Actor, FVector2D _Index);
+	void ClickEnter(AActor* _Actor, FTransform _Index);
 
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
@@ -25,6 +25,6 @@ public:
 protected:
 
 private:
-
+	USpriteRenderer* CroppatchTile[16] = {};
 };
 
