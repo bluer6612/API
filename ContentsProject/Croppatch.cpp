@@ -13,7 +13,7 @@ ACroppatch::ACroppatch()
 
 	{
 		SpriteR = CreateDefaultSubObject<USpriteRenderer>();
-		SpriteR->SetComponentCrate(SpriteR, "croppatch0.png", {}, { Location.X, Location.Y }, ERenderOrder::BUILDING);
+		SpriteR->SetComponentCrate(SpriteR, "croppatch0.png", {}, { Location }, ERenderOrder::BUILDING);
 	}
 
 	{
@@ -24,6 +24,10 @@ ACroppatch::ACroppatch()
 		Collision->SetComponentScale({ 144, 144 });
 
 		Collision->SetCollisionEnter(std::bind(&ACroppatch::ClickEnter, this, std::placeholders::_1, FVector2D({ Location })));
+		Collision->SetCollisionStay(std::bind(&ACroppatch::ClickEnter, this, std::placeholders::_1, FVector2D({ Location })));
+		Collision->SetCollisionEnd(std::bind(&ACroppatch::ClickEnter, this, std::placeholders::_1, FVector2D({ Location })));
+		//Collision->SetCollisionEnter(std::bind(&AUIManager::CroppatchClickEnter, this, std::placeholders::_1, FVector2D({ Location })));
+		//Collision->SetCollisionEnter(std::bind(&AUIManager::PanelButtonTileEnter, this, std::placeholders::_1, FTransform(FVector2D(1, 0), FVector2D(Location))));
 	}
 }
 
@@ -37,6 +41,7 @@ void ACroppatch::ClickEnter(AActor* _Actor, FVector2D _Index)
 
 	if (true == UEngineInput::GetInst().IsDown(VK_LBUTTON))
 	{
+		int a = 0;
 	}
 }
 

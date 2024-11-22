@@ -25,5 +25,10 @@ private:
 	ATileMap* PanelButtonTile = nullptr;
 
 	USoundPlayer BGMPlayer;
+
+	int Value = 20;
+
+	// std::vector<std::vector<>>
+	// ABuilding* 
 };
 

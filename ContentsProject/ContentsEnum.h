@@ -16,6 +16,7 @@ enum class ERenderOrder
 	UITOP = 10002,
 	TITLE = 11000,
 	FADE = 20000,
+	CURSOR = 30000,
 };
 
 enum class ECollisionGroup

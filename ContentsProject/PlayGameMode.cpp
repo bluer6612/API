@@ -38,7 +38,7 @@ void APlayGameMode::BeginPlay()
 	{
 		GroundTileMap = GetWorld()->SpawnActor<ATileMap>();
 		GroundTileMap->SetActorLocation({ static_cast<float>(0), static_cast<float>(ScreenY - 298 - 36 - 2) });
-		GroundTileMap->Create("EmptyTile.png", { 53, 8 }, { 36, 36 });
+		GroundTileMap->Create("GridTile.png", { 53, 8 }, { 36, 36 });
 
 		for (int y = 0; y < 53; y++)
 		{
@@ -49,8 +49,21 @@ void APlayGameMode::BeginPlay()
 		}
 	}
 
+	AUIManager* UIManager = nullptr;
+	ABuildingManager* BManager = nullptr;
+
+
 	{
-		GetWorld()->SpawnActor<AUIManager>();
+		UIManager = GetWorld()->SpawnActor<AUIManager>();
+
+		UIManager->SetValuePtr(&Value);
+	}
+
+
+	{
+		BManager = GetWorld()->SpawnActor<ABuildingManager>();
+
+		UIManager->SetBManager(BManager);
 	}
 
 

@@ -14,6 +14,8 @@ enum class UICollisionGroup
 class AUIManager : public AActor
 {
 public:
+	friend class ACroppatch;
+
 	AUIManager();
 	~AUIManager();
 
@@ -27,12 +29,19 @@ public:
 		return CursorImage;
 	}
 
+	void CroppatchClickEnter(AActor* _Actor, FVector2D _Index);
+	void PanelButtonTileEnter(AActor* _Actor, FTransform _Index);
+
+	void SetValuePtr(int* _Value)
+	{
+		Value = _Value;
+	}
+
 protected:
 	void BeginPlay();
 
 	void Tick(float _DeltaTime);
 
-	void PanelButtonTileEnter(AActor* _Actor, FTransform _Index);
 	void PanelButtonTileStay(AActor* _Actor, FTransform _Index);
 	void PanelButtonTileEnd(AActor* _Actor, FTransform _Index);
 
@@ -44,5 +53,9 @@ private:
 	class USpriteRenderer* SRButtonBlack = nullptr;
 
 	std::vector<std::vector<int>> FarmInfoIndex;
+
+	int* Value = nullptr;
+
+	// ABuildingManager* BManager = nullptr;
 };
 

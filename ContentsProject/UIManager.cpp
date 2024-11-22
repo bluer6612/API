@@ -25,7 +25,10 @@ AUIManager::AUIManager()
 	CursorImage = CreateDefaultSubObject<USpriteRenderer>();
 	CursorImage->SetSprite("Crops.png", 3);
 	CursorImage->SetComponentScale({ 32, 64 });
-	CursorImage->DebugOn();
+	CursorImage->SetOrder(ERenderOrder::CURSOR);
+	CursorImage->SetActive(false);
+
+	//CursorImage->DebugOn();
 
 	//농사 마우스 on 시 설명
 	SRFarmInfo = CreateDefaultSubObject<USpriteRenderer>();
@@ -110,22 +113,19 @@ void AUIManager::Tick(float _DeltaTime)
 
 	FVector2D MousePos = UEngineAPICore::GetCore()->GetMainWindow().GetMousePos();
 
-	if ( true == UEngineInput::GetInst().IsDown(VK_LBUTTON))
-	{
-
-		CursorCollision->SetComponentLocation(MousePos);
-		//CursorImage->SetComponentLocation({ MousePos.X - 5, MousePos.Y - 24 });
-	}
+	CursorCollision->SetComponentLocation(MousePos);
+	CursorImage->SetComponentLocation({ MousePos.X - 5, MousePos.Y - 24 });
 }
 
-void AUIManager::CroppatchClickEnter(AActor* _Actor, FVector2D _Index)
-{
-	FVector2D MousePos = UEngineAPICore::GetCore()->GetMainWindow().GetMousePos();
-
-	if (true == UEngineInput::GetInst().IsDown(VK_LBUTTON))
-	{
-	}
-}
+//void AUIManager::CroppatchClickEnter(AActor* _Actor, FIntPoint _Index)
+//{
+//	FVector2D MousePos = UEngineAPICore::GetCore()->GetMainWindow().GetMousePos();
+//
+//	if (true == UEngineInput::GetInst().IsDown(VK_LBUTTON))
+//	{
+//		int a = 0;
+//	}
+//}
 
 void AUIManager::PanelButtonTileEnter(AActor* _Actor, FTransform _Index)
 {
@@ -143,6 +143,12 @@ void AUIManager::PanelButtonTileStay(AActor* _Actor, FTransform _Index)
 
 	SRButtonBlack->SetComponentLocation({ _Index.Location.X, _Index.Location.Y });
 	SRButtonBlack->SetActive(true);
+
+	if (true == UEngineInput::GetInst().IsDown(VK_LBUTTON))
+	{
+		CursorImage->SetSprite("Crops.png", 3 + 11 * _Index.Scale.X);
+		CursorImage->SetActive(true);
+	}
 }
 
 void AUIManager::PanelButtonTileEnd(AActor* _Actor, FTransform _Index)

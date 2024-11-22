@@ -6,6 +6,8 @@
 class ACroppatch : public ABuilding
 {
 public:
+	friend class AUIManager;
+
 	ACroppatch();
 	~ACroppatch();
 
