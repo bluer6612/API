@@ -32,9 +32,9 @@ public:
 	void CroppatchClickEnter(AActor* _Actor, FVector2D _Index);
 	void PanelButtonTileEnter(AActor* _Actor, FTransform _Index);
 
-	void SetValuePtr(int* _Value)
+	void SetBuildingManager(ABuildingManager* _BuildingManager)
 	{
-		Value = _Value;
+		BuildingManager = _BuildingManager;
 	}
 
 protected:
@@ -56,6 +56,6 @@ private:
 
 	int* Value = nullptr;
 
-	// ABuildingManager* BManager = nullptr;
+	ABuildingManager* BuildingManager = nullptr;
 };
 

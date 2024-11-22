@@ -21,6 +21,7 @@
 #include "PlayMap.h"
 #include "TileMap.h"
 #include "UIManager.h"
+#include "BuildingManager.h"
 
 APlayGameMode::APlayGameMode()
 {
@@ -49,21 +50,21 @@ void APlayGameMode::BeginPlay()
 		}
 	}
 
+	//ºôµù ¸Å´ÏÁ®
 	AUIManager* UIManager = nullptr;
-	ABuildingManager* BManager = nullptr;
-
+	ABuildingManager* BuildingManager = nullptr;
 
 	{
 		UIManager = GetWorld()->SpawnActor<AUIManager>();
 
-		UIManager->SetValuePtr(&Value);
+		UIManager->SetBuildingManager(&BuildingManager);
 	}
 
 
 	{
-		BManager = GetWorld()->SpawnActor<ABuildingManager>();
+		BuildingManager = GetWorld()->SpawnActor<ABuildingManager>();
 
-		UIManager->SetBManager(BManager);
+		UIManager->SetBuildingManager(BuildingManager);
 	}
 
 

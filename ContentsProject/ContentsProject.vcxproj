@@ -151,6 +151,10 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BuildingManager.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Croppatch.h">
       <SubType>
       </SubType>
@@ -213,6 +217,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BuildingManager.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Croppatch.cpp">
       <SubType>
       </SubType>
