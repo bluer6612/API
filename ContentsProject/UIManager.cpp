@@ -118,16 +118,6 @@ void AUIManager::Tick(float _DeltaTime)
 	CursorImage->SetComponentLocation({ MousePos.X - 5, MousePos.Y - 24 });
 }
 
-//void AUIManager::CroppatchClickEnter(AActor* _Actor, FIntPoint _Index)
-//{
-//	FVector2D MousePos = UEngineAPICore::GetCore()->GetMainWindow().GetMousePos();
-//
-//	if (true == UEngineInput::GetInst().IsDown(VK_LBUTTON))
-//	{
-//		int a = 0;
-//	}
-//}
-
 void AUIManager::PanelButtonTileEnter(AActor* _Actor, FTransform _Index)
 {
 	SRFarmInfo->SetSprite("FarmInfo", _Index.Scale.X);

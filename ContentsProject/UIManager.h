@@ -30,7 +30,6 @@ public:
 		return CursorImage;
 	}
 
-	void CroppatchClickEnter(AActor* _Actor, FVector2D _Index);
 	void PanelButtonTileEnter(AActor* _Actor, FTransform _Index);
 
 	void SetBuildingManager(ABuildingManager* _BuildingManager)
@@ -54,8 +53,6 @@ private:
 	class USpriteRenderer* SRButtonBlack = nullptr;
 
 	std::vector<std::vector<int>> FarmInfoIndex;
-
-	int* Value = nullptr;
 
 	ABuildingManager* BuildingManager = nullptr;
 };

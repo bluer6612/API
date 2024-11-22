@@ -49,13 +49,14 @@ void APlayGameMode::BeginPlay()
 		}
 	}
 
-	//빌딩 매니져
+	//UIManager
 	AUIManager* UIManager = nullptr;
 	ABuildingManager* BuildingManager = nullptr;
 	{
 		UIManager = GetWorld()->SpawnActor<AUIManager>();
 	}
 
+	//빌딩 Manager
 	{
 		BuildingManager = GetWorld()->SpawnActor<ABuildingManager>();
 		UIManager->SetBuildingManager(BuildingManager);
@@ -77,13 +78,6 @@ void APlayGameMode::BeginPlay()
 	{
 		APlayMap* NewActor = AActor::GetWorld()->SpawnActor<APlayMap>();
 	}
-
-	//UIManager
-	{
-		AUIManager* NewActor = AActor::GetWorld()->SpawnActor<AUIManager>();
-	}
-
-	//패널 메뉴
 
 	//{
 	//	AScore* NewActor = GetWorld()->SpawnActor<AScore>();
@@ -107,19 +101,6 @@ void APlayGameMode::Tick(float _DeltaTime)
 	Super::Tick(_DeltaTime);
 
 	FVector2D MousePos = UEngineAPICore::GetCore()->GetMainWindow().GetMousePos();
-
-	//if (nullptr != PanelButtonTile->GetTileLocation(MousePos))
-	//{
-	//	{	
-	//		SRFarmInfo->SetSprite("FarmInfo", PanelButtonTile->GetTileIndex(MousePos));
-	//		SRFarmInfo->SetActive(true);
-	//	}
-	//}
-	//else
-	//{
-	//	SRFarmInfo->SetActive(false);
-	//}
-
 
 	//if (true == UEngineInput::GetInst().IsPress('R'))
 	//{

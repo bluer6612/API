@@ -20,4 +20,3 @@ protected:
 private:
 	std::vector<std::vector<ABuilding*>> Buildinglist;
 };
-
