@@ -1,7 +1,8 @@
 #pragma once
+#include "Building.h"
 
 // Ό³Έν :
-class ABuildingManager
+class ABuildingManager : public AActor
 {
 public:
 	// constrcuter destructer
@@ -17,6 +18,6 @@ public:
 protected:
 
 private:
-
+	std::vector<std::vector<ABuilding*>> Buildinglist;
 };
 

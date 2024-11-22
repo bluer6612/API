@@ -21,7 +21,6 @@
 #include "PlayMap.h"
 #include "TileMap.h"
 #include "UIManager.h"
-#include "BuildingManager.h"
 
 APlayGameMode::APlayGameMode()
 {
@@ -53,20 +52,14 @@ void APlayGameMode::BeginPlay()
 	//ºôµù ¸Å´ÏÁ®
 	AUIManager* UIManager = nullptr;
 	ABuildingManager* BuildingManager = nullptr;
-
 	{
 		UIManager = GetWorld()->SpawnActor<AUIManager>();
-
-		UIManager->SetBuildingManager(&BuildingManager);
 	}
-
 
 	{
 		BuildingManager = GetWorld()->SpawnActor<ABuildingManager>();
-
 		UIManager->SetBuildingManager(BuildingManager);
 	}
-
 
 	//BGM
 	BGMPlayer = UEngineSound::Play("Echo-metal-1.wav");

@@ -1,5 +1,6 @@
 #pragma once
 #include <EngineCore/Actor.h>
+#include "BuildingManager.h"
 
 enum class UICollisionGroup
 {

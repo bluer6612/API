@@ -30,14 +30,14 @@ FVector2D ATileMap::IndexToTileLocation(FIntPoint _Index, FIntPoint _Location)
 	return FVector2D(_Index.X * TileSize.X + _Index.X * _Location.X, _Index.Y * TileSize.Y + _Index.Y * _Location.Y);
 }
 
-FIntPoint ATileMap::LocationToIndex(FVector2D _Location)
+FIntPoint ATileMap::LocationToIndex(const FVector2D _Location)
 {
 	FVector2D Location = _Location / TileSize;
 
 	return FIntPoint(Location.iX(), Location.iY());
 }
 
-bool ATileMap::IsIndexOver(FIntPoint _Index)
+bool ATileMap::IsIndexOver(FIntPoint _Index) const
 {
 	if (0 > _Index.X)
 	{

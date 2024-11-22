@@ -73,12 +73,12 @@ public:
 		CameraPos += _Value;
 	}
 
-	FVector2D GetCameraPivot()
+	FVector2D GetCameraPivot() const
 	{
 		return CameraPivot;
 	}
 
-	FVector2D GetCameraPos()
+	FVector2D GetCameraPos() const
 	{
 		return CameraPos;
 	}
