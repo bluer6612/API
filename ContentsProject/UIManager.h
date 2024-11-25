@@ -35,8 +35,6 @@ public:
 		return CursorImage;
 	}
 
-	void PanelButtonTileEnter(AActor* _Actor, FTransform _Index);
-
 	void SetBuildingManager(ABuildingManager* const _BuildingManager)
 	{
 		BuildingManager = _BuildingManager;
@@ -52,6 +50,9 @@ protected:
 
 	void Tick(float _DeltaTime);
 
+	void TapButtonStay(AActor* _Actor, FTransform _Index);
+
+	void PanelButtonTileEnter(AActor* _Actor, FTransform _Index);
 	void PanelButtonTileStay(AActor* _Actor, FTransform _Index);
 	void PanelButtonTileEnd(AActor* _Actor, FTransform _Index);
 
@@ -61,6 +62,7 @@ private:
 
 	class USpriteRenderer* SRFarmInfo = nullptr;
 	class USpriteRenderer* SRButtonBlack = nullptr;
+	class USpriteRenderer* SRTapWhite = nullptr;
 
 	ABuildingManager* BuildingManager = nullptr;
 	ACroppatch* Croppatch = nullptr;
@@ -69,6 +71,7 @@ private:
 	USpriteRenderer* CroppatchTileImage[1000] = {};
 
 	int NowSelectCrops = -1;
+	int NowSelectTap = 1;
 
 	std::vector<std::vector<int>> FarmInfoIndex;
 };

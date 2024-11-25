@@ -33,7 +33,7 @@ AUIManager::AUIManager()
 
 	//농사 마우스 on 시 설명
 	SRFarmInfo = CreateDefaultSubObject<USpriteRenderer>();
-	SRFarmInfo->SetComponentCrate(SRFarmInfo, "FarmInfo", 0, { 1 , 1 }, { static_cast<float>(ScreenX - 256 + 22) - 341, (ScreenHY + 93 - 2) }, ERenderOrder::UIUP);
+	SRFarmInfo->SetComponentCrate(SRFarmInfo, "FarmInfo", 0, { 1 , 1 }, { static_cast<float>(ScreenX - 575), (ScreenHY + 91) }, ERenderOrder::UIUP);
 	SRFarmInfo->SetActive(false);
 
 	//농사 마우스 on 시 음영 처리
@@ -42,7 +42,41 @@ AUIManager::AUIManager()
 	SRButtonBlack->SetAlphafloat(0.35f);
 	SRButtonBlack->SetActive(false);
 
+	SRTapWhite = CreateDefaultSubObject<USpriteRenderer>();
+	SRTapWhite->SetComponentCrate(SRTapWhite, "004_MenuPanel_pressed.png", {}, { static_cast<float>(ScreenX - 480), (ScreenHY - 5) }, ERenderOrder::UIUP);
 
+	//농사 탭 버튼
+	{
+		FVector2D Location = { static_cast<float>(ScreenX - 480), (ScreenHY - 5) };
+		FVector2D StartPos = Location;
+
+		int Index = 0;
+		for (int y = 0; y < 2; ++y)
+		{
+			for (int x = 0; x < 5; ++x)
+			{
+
+				U2DCollision* Collision = CreateDefaultSubObject<U2DCollision>();
+				Collision->SetCollisionGroup(UICollisionGroup::Panel);
+				Collision->SetCollisionType(ECollisionType::Rect);
+				Collision->SetComponentLocation(StartPos);
+				Collision->SetComponentScale({ 36, 36 });
+
+				Collision->SetCollisionStay(std::bind(&AUIManager::TapButtonStay, this, std::placeholders::_1, FTransform(FVector2D(Index, 0), FVector2D(StartPos))));
+
+				if (3 == x && 1 == y)
+				{
+					break;
+				}
+
+				++Index;
+				StartPos.Y += 48;
+			}
+
+			StartPos.X -= 32;
+			StartPos.Y = Location.Y + 24;
+		}
+	}
 	//농사 패널 버튼
 	{
 		FarmInfoIndex.resize(CropsCount);
@@ -183,6 +217,23 @@ void AUIManager::Tick(float _DeltaTime)
 			}
 		}
 	}
+
+	if (true == UEngineInput::GetInst().IsDown(VK_RBUTTON))
+	{
+		NowSelectCrops = -1;
+		CursorImage->SetActive(false);
+	}
+}
+
+void AUIManager::TapButtonStay(AActor* _Actor, FTransform _Index)
+{
+	FVector2D MousePos = UEngineAPICore::GetCore()->GetMainWindow().GetMousePos();
+
+	if (true == UEngineInput::GetInst().IsDown(VK_LBUTTON))
+	{
+		NowSelectTap = _Index.Scale.X;
+		SRTapWhite->SetComponentLocation({ _Index.Location.X, _Index.Location.Y });
+	}
 }
 
 void AUIManager::PanelButtonTileEnter(AActor* _Actor, FTransform _Index)
@@ -192,8 +243,6 @@ void AUIManager::PanelButtonTileEnter(AActor* _Actor, FTransform _Index)
 
 	SRButtonBlack->SetComponentLocation({ _Index.Location.X, _Index.Location.Y });
 	SRButtonBlack->SetActive(true);
-
-	NowSelectCrops = -1;
 }
 
 void AUIManager::PanelButtonTileStay(AActor* _Actor, FTransform _Index)
