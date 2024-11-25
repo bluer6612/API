@@ -25,7 +25,7 @@ void ATileMap::Create(std::string_view _Sprite, FIntPoint _Count, FVector2D _Til
 	}
 }
 
-FVector2D ATileMap::IndexToTileLocation(FIntPoint _Index, FIntPoint _Location)
+FVector2D ATileMap::IndexToTileLocation(FIntPoint _Index, FVector2D _Location)
 {
 	return FVector2D(_Index.X * TileSize.X + _Index.X * _Location.X, _Index.Y * TileSize.Y + _Index.Y * _Location.Y);
 }
@@ -67,7 +67,7 @@ void ATileMap::SetTileSpriteIndex(FIntPoint _Index, int _SpriteIndex)
 	SetTileSpriteIndex(_Index, { 0,0 }, TileSize, { 0, 0 }, { 0,0 }, _SpriteIndex);
 }
 
-void ATileMap::SetTileSpriteIndex(FIntPoint _Index, FVector2D _Pivot, FVector2D _SpriteScale, FIntPoint _Location, FVector2D _LocationPivot, int _SpriteIndex, int _TileIndex, ERenderOrder _SpriteOrder)
+void ATileMap::SetTileSpriteIndex(FIntPoint _Index, FVector2D _Pivot, FVector2D _SpriteScale, FVector2D _Location, FVector2D _LocationPivot, int _SpriteIndex, int _TileIndex, ERenderOrder _SpriteOrder)
 {
 	if (true == IsIndexOver(_Index))
 	{

@@ -100,7 +100,7 @@ void AUIManager::BeginPlay()
 {
 	Super::BeginPlay();
 
-	AMenuPanelUI* NewActor = AActor::GetWorld()->SpawnActor<AMenuPanelUI>();
+	//AMenuPanelUI* NewActor = AActor::GetWorld()->SpawnActor<AMenuPanelUI>();
 
 	//타이틀
 	{
@@ -113,6 +113,32 @@ void AUIManager::BeginPlay()
 
 		this->SetCroppatch(Croppatch);
 	}
+
+	//농지용 타일
+	{
+		FVector2D Location = { static_cast<float>(4), static_cast<float>(ScreenY - 298 - 36 + 2) };
+		FVector2D StartPos = Location;
+
+		CroppatchTile = GetWorld()->SpawnActor<ATileMap>();
+		CroppatchTile->SetActorLocation(Location);
+		CroppatchTile->Create("gridsmall.png", { 52, 8 }, { 32, 32 });
+
+		int Index = 0;
+		for (int y = 0; y < 52; ++y)
+		{
+			for (int x = 0; x < 8; ++x)
+			{
+				CroppatchTile->SetTileSpriteIndex({ y, x }, { }, { 32, 32 }, { 2, 2 }, {  }, 0, 0, ERenderOrder::BUILDINGUP);
+
+				StartPos.X += 36;
+
+				++Index;
+			}
+
+			StartPos.X = Location.X;
+			StartPos.Y += 36;
+		}
+	}
 }
 
 void AUIManager::Tick(float _DeltaTime)
@@ -124,14 +150,14 @@ void AUIManager::Tick(float _DeltaTime)
 	CursorCollision->SetComponentLocation(MousePos);
 	CursorImage->SetComponentLocation({ MousePos.X - 5, MousePos.Y - 24 });
 
-	if (true == UEngineInput::GetInst().IsDown(VK_LBUTTON))
-	{
-		if (nullptr != Croppatch->GetCroppatchTile()->GetTileLocation(MousePos))
-		{
-			SRFarmInfo->SetSprite("FarmInfo", Croppatch->GetCroppatchTile()->GetTileIndex(MousePos));
-			SRFarmInfo->SetActive(true);
-		}
-	}
+	//if (true == UEngineInput::GetInst().IsDown(VK_LBUTTON))
+	//{
+	//	if (nullptr != Croppatch->GetCroppatchTile()->GetTileLocation(MousePos))
+	//	{
+	//		SRFarmInfo->SetSprite("FarmInfo", Croppatch->GetCroppatchTile()->GetTileIndex(MousePos));
+	//		SRFarmInfo->SetActive(true);
+	//	}
+	//}
 }
 
 void AUIManager::PanelButtonTileEnter(AActor* _Actor, FTransform _Index)
@@ -164,4 +190,22 @@ void AUIManager::PanelButtonTileEnd(AActor* _Actor, FTransform _Index)
 {
 	SRFarmInfo->SetActive(false);
 	SRButtonBlack->SetActive(false);
+}
+
+
+void AUIManager::CroppatchTileStay(AActor* _Actor, FTransform _Index)
+{
+	FVector2D MousePos = UEngineAPICore::GetCore()->GetMainWindow().GetMousePos();
+
+	SRFarmInfo->SetSprite("FarmInfo", _Index.Scale.X);
+	SRFarmInfo->SetActive(true);
+
+	SRButtonBlack->SetComponentLocation({ _Index.Location.X, _Index.Location.Y });
+	SRButtonBlack->SetActive(true);
+
+	if (true == UEngineInput::GetInst().IsDown(VK_LBUTTON))
+	{
+		CursorImage->SetSprite("Crops.png", 3 + 11 * _Index.Scale.X);
+		CursorImage->SetActive(true);
+	}
 }

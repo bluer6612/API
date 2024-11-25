@@ -2,6 +2,7 @@
 #include <EngineCore/Actor.h>
 #include "BuildingManager.h"
 #include "Croppatch.h"
+#include "TileMap.h"
 
 enum class UICollisionGroup
 {
@@ -51,6 +52,8 @@ protected:
 	void PanelButtonTileStay(AActor* _Actor, FTransform _Index);
 	void PanelButtonTileEnd(AActor* _Actor, FTransform _Index);
 
+	void CroppatchTileStay(AActor* _Actor, FTransform _Index);
+
 private:
 	class U2DCollision* CursorCollision = nullptr;
 	class USpriteRenderer* CursorImage = nullptr;
@@ -60,6 +63,8 @@ private:
 
 	ABuildingManager* BuildingManager = nullptr;
 	ACroppatch* Croppatch = nullptr;
+
+	ATileMap* CroppatchTile = nullptr;
 
 	std::vector<std::vector<int>> FarmInfoIndex;
 };

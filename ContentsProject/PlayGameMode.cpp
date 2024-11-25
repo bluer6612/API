@@ -36,7 +36,7 @@ void APlayGameMode::BeginPlay()
 	//Å¸ÀÏ
 	{
 		GroundTileMap = GetWorld()->SpawnActor<ATileMap>();
-		GroundTileMap->SetActorLocation({ static_cast<float>(0), static_cast<float>(ScreenY - 298 - 36 - 2) });
+		GroundTileMap->SetActorLocation({ static_cast<float>(0), static_cast<float>(ScreenY - 296 - TaskbarY) });
 		GroundTileMap->Create("grid.png", { 53, 8 }, { 36, 36 });
 		//GroundTileMap->Create("EmptyTile.png", { 53, 8 }, { 36, 36 });
 

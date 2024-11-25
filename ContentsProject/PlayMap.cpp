@@ -19,7 +19,7 @@ APlayMap::APlayMap()
 
 	{
 		BackSpriteR = CreateDefaultSubObject<USpriteRenderer>();
-		BackSpriteR->SetComponentCrate(BackSpriteR, "GrassMap.png", { 1, 1 }, { ScreenHX, ScreenHY + 92 }, ERenderOrder::BACKGROUND);
+		BackSpriteR->SetComponentCrate(BackSpriteR, "GrassMap.png", { 1, 1 }, { ScreenHX, static_cast<float>(ScreenY - 148 - TaskbarY) }, ERenderOrder::BACKGROUND);
 	}
 }
 
