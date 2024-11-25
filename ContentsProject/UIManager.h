@@ -68,7 +68,7 @@ private:
 	ATileMap* CroppatchTile = nullptr;
 	USpriteRenderer* CroppatchTileImage[1000] = {};
 
-	int NowSelectCrops = 0;
+	int NowSelectCrops = -1;
 
 	std::vector<std::vector<int>> FarmInfoIndex;
 };

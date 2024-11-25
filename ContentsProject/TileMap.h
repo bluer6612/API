@@ -3,7 +3,6 @@
 #include <EngineCore/SpriteRenderer.h>
 #include <EngineBase/EngineSerializer.h>
 
-
 class Tile : public ISerializObject
 {
 public:
@@ -79,6 +78,36 @@ public:
 
 	void DeSerialize(UEngineSerializer& _Ser);
 
+	void SetCropsIndex(int _CropsIndex)
+	{
+		CropsIndex = _CropsIndex;
+	}
+
+	int GetCropsIndex() const
+	{
+		return CropsIndex;
+	}
+
+	void SetGrow(int _Grow)
+	{
+		Grow = _Grow;
+	}
+
+	int GetGrow() const
+	{
+		return Grow;
+	}
+
+	void SetTime(int _Time)
+	{
+		Time = _Time;
+	}
+
+	int GetTime() const
+	{
+		return Time;
+	}
+
 protected:
 
 private:
@@ -86,6 +115,10 @@ private:
 	std::string SpriteName;
 	FVector2D TileSize;
 	std::vector<std::vector<Tile>> AllTiles;
+
+	int CropsIndex = 0;
+	int Grow = 0;
+	int Time = 0;
 };
 
 

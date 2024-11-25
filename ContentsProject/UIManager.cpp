@@ -102,7 +102,7 @@ void AUIManager::BeginPlay()
 
 	//패널
 	{
-		//AMenuPanelUI* NewActor = AActor::GetWorld()->SpawnActor<AMenuPanelUI>();
+		AMenuPanelUI* NewActor = AActor::GetWorld()->SpawnActor<AMenuPanelUI>();
 	}
 
 	//타이틀
@@ -139,7 +139,7 @@ void AUIManager::BeginPlay()
 				CroppatchTileImage[Index]->SetComponentCrate(CroppatchTileImage[Index], "gridsmall.png", { 34, 34 }, { StartPos }, ERenderOrder::BUILDINGUP);
 				CroppatchTileImage[Index]->SetComponentScale({33.f, 33.f});
 				CroppatchTileImage[Index]->SetAlphafloat(0.75f);
-				//CroppatchTileImage[Index]->SetActive(false);
+				CroppatchTileImage[Index]->SetActive(false);
 
 				StartPos.X += 34;
 				++Index;
@@ -160,17 +160,26 @@ void AUIManager::Tick(float _DeltaTime)
 	CursorCollision->SetComponentLocation(MousePos);
 	CursorImage->SetComponentLocation({ MousePos.X - 5, MousePos.Y - 24 });
 
-	if (true == UEngineInput::GetInst().IsPress(VK_LBUTTON))
+	if (true == UEngineInput::GetInst().IsPress(VK_LBUTTON) && -1 != NowSelectCrops)
 	{
 		if (nullptr != CroppatchTile->GetTileLocation(MousePos))
 		{
 			if (CropsNeedMoney[NowSelectCrops] <= Money)
 			{
-				Money -= CropsNeedMoney[NowSelectCrops];
+				int Index = CroppatchTile->GetTileIndex(MousePos);
 
-				int index = CroppatchTile->GetTileIndex(MousePos);
+				if (0 == CroppatchTile->GetCropsIndex())
+				{
+					Money -= CropsNeedMoney[NowSelectCrops];
 
-				CroppatchTileImage[index]->SetSprite("Crops.png", 4 + 11 * NowSelectCrops);
+					CroppatchTile->SetCropsIndex(NowSelectCrops);
+					CroppatchTile->SetGrow(0);
+					CroppatchTile->SetTime(CropsNeedGrowTime[Index]);
+
+					CroppatchTileImage[Index]->SetActive(true);
+					CroppatchTileImage[Index]->SetSprite("Crops.png", 3 + 11 * NowSelectCrops);
+					CroppatchTileImage[Index]->SetComponentScale({ 32, 64 });
+				}
 			}
 		}
 	}
@@ -183,6 +192,8 @@ void AUIManager::PanelButtonTileEnter(AActor* _Actor, FTransform _Index)
 
 	SRButtonBlack->SetComponentLocation({ _Index.Location.X, _Index.Location.Y });
 	SRButtonBlack->SetActive(true);
+
+	NowSelectCrops = -1;
 }
 
 void AUIManager::PanelButtonTileStay(AActor* _Actor, FTransform _Index)
@@ -197,7 +208,7 @@ void AUIManager::PanelButtonTileStay(AActor* _Actor, FTransform _Index)
 
 	if (true == UEngineInput::GetInst().IsDown(VK_LBUTTON))
 	{
-		if (1 == _Index.Scale.X)
+		if (0 == _Index.Scale.X)
 		{
 			NowSelectCrops = _Index.Scale.X;
 			CursorImage->SetSprite("Crops.png", 3 + 11 * NowSelectCrops);

@@ -133,6 +133,7 @@ protected:
 
 private:
 	int Order = 0;
+
 	int CurIndex = 0;
 	bool IsCameraEffect = true;
 	float CameraEffectScale = 1.0f;
