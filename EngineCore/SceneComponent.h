@@ -35,6 +35,11 @@ public:
 		Transform.Location = _Location;
 	}
 
+	void AddComponentLocation(FVector2D _Direction)
+	{
+		Transform.Location += _Direction;
+	}
+
 	void SetComponentScale(FVector2D _Scale)
 	{
 		Transform.Scale = _Scale;

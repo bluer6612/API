@@ -10,8 +10,6 @@
 #include <EngineCore/EngineAPICore.h>
 #include <EnginePlatform/EngineInput.h>
 
-AUIManager* AUIManager::UIManager = nullptr;
-
 AUIManager::AUIManager()
 {
 
@@ -236,13 +234,14 @@ void AUIManager::Tick(float _DeltaTime)
 
 void AUIManager::TapButtonInAndOut()
 {
-	FVector2D Location = SRTapWhite->GetComponentLocation();
-
-	for (int i = 0; i < 4; ++i)
+	if (4 > TapTimer)
 	{
-		SRTapWhite->SetComponentLocation({ Location.X + (116 * (i + 1)), Location.Y });
+		FVector2D Location = SRTapWhite->GetComponentLocation();
 
+		SRTapWhite->AddComponentLocation({ 116, 0 });
 		MenuPanelUI->AddActorLocation({ 116, 0 });
+
+		++TapTimer;
 	}
 }
 
@@ -256,12 +255,12 @@ void AUIManager::TapButtonStay(AActor* _Actor, FTransform _Index)
 
 		if (-1 != NowSelectTap)
 		{
-			SRTapWhite->SetActive(true);
 			SRTapWhite->SetComponentLocation({ _Index.Location.X, _Index.Location.Y });
 		}
 		else
 		{
-			TimeEventer.PushEvent(1.0f, std::bind(&AUIManager::TapButtonInAndOut(), this), true, false);
+			TapTimer = 0;
+			TimeEventer.PushEvent(1.0f, std::bind(&AUIManager::TapButtonInAndOut, this), true, false);
 		}
 	}
 }
