@@ -159,7 +159,7 @@ void AUIManager::Tick(float _DeltaTime)
 	CursorCollision->SetComponentLocation(MousePos);
 	CursorImage->SetComponentLocation({ MousePos.X - 5, MousePos.Y - 24 });
 
-	if (true == UEngineInput::GetInst().IsDown(VK_LBUTTON))
+	if (true == UEngineInput::GetInst().IsPress(VK_LBUTTON))
 	{
 		if (nullptr != CroppatchTile->GetTileLocation(MousePos))
 		{
@@ -167,7 +167,9 @@ void AUIManager::Tick(float _DeltaTime)
 			{
 				Money -= CropsNeedMoney[NowSelectCrops];
 
-				CroppatchTileImage[CroppatchTile->GetTileIndex(MousePos)]->SetSprite("Crops.png", 4 + 11 * NowSelectCrops);
+				int index = CroppatchTile->GetTileIndex(MousePos);
+
+				CroppatchTileImage[index]->SetSprite("Crops.png", 4 + 11 * NowSelectCrops);
 			}
 		}
 	}
