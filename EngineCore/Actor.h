@@ -88,7 +88,6 @@ private:
 	class ULevel* World = nullptr;
 	FTransform Transform;
 
-
 	std::list<class UActorComponent*> Components;
 };
 

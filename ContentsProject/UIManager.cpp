@@ -10,8 +10,11 @@
 #include <EngineCore/EngineAPICore.h>
 #include <EnginePlatform/EngineInput.h>
 
+AUIManager* AUIManager::UIManager = nullptr;
+
 AUIManager::AUIManager()
 {
+
 	GetWorld()->CollisionGroupLink(UICollisionGroup::Panel, UICollisionGroup::Cursor);
 	GetWorld()->CollisionGroupLink(UICollisionGroup::Building, UICollisionGroup::Cursor);
 	GetWorld()->CollisionGroupLink(UICollisionGroup::Croppatch, UICollisionGroup::Cursor);
@@ -20,7 +23,6 @@ AUIManager::AUIManager()
 	CursorCollision->SetCollisionGroup(UICollisionGroup::Cursor);
 	CursorCollision->SetCollisionType(ECollisionType::Rect);
 	CursorCollision->SetComponentScale({ 1, 1 });
-	//CursorCollision->DebugOn();
 
 	//농사 모드 씨앗 이미지
 	CursorImage = CreateDefaultSubObject<USpriteRenderer>();
@@ -28,8 +30,6 @@ AUIManager::AUIManager()
 	CursorImage->SetComponentScale({ 34, 64 });
 	CursorImage->SetOrder(ERenderOrder::CURSOR);
 	CursorImage->SetActive(false);
-
-	//CursorImage->DebugOn();
 
 	//농사 마우스 on 시 설명
 	SRFarmInfo = CreateDefaultSubObject<USpriteRenderer>();
@@ -47,6 +47,15 @@ AUIManager::AUIManager()
 
 	//농사 탭 버튼
 	{
+		//패널 X 버튼
+		U2DCollision* Collision = CreateDefaultSubObject<U2DCollision>();
+		Collision->SetCollisionGroup(UICollisionGroup::Panel);
+		Collision->SetCollisionType(ECollisionType::Rect);
+		Collision->SetComponentLocation({ static_cast<float>(ScreenX - 475), (ScreenHY - 44) });
+		Collision->SetComponentScale({ 16, 16 });
+
+		Collision->SetCollisionStay(std::bind(&AUIManager::TapButtonStay, this, std::placeholders::_1, FTransform(FVector2D(-1, 0), FVector2D({}))));
+
 		FVector2D Location = { static_cast<float>(ScreenX - 480), (ScreenHY - 5) };
 		FVector2D StartPos = Location;
 
@@ -55,7 +64,6 @@ AUIManager::AUIManager()
 		{
 			for (int x = 0; x < 5; ++x)
 			{
-
 				U2DCollision* Collision = CreateDefaultSubObject<U2DCollision>();
 				Collision->SetCollisionGroup(UICollisionGroup::Panel);
 				Collision->SetCollisionType(ECollisionType::Rect);
@@ -99,8 +107,6 @@ AUIManager::AUIManager()
 				Collision->SetCollisionStay(std::bind(&AUIManager::PanelButtonTileStay, this, std::placeholders::_1, FTransform(FVector2D(Index, 0), FVector2D(StartPos))));
 				Collision->SetCollisionEnd(std::bind(&AUIManager::PanelButtonTileEnd, this, std::placeholders::_1, FTransform(FVector2D(Index, 0), FVector2D(StartPos))));
 
-				//Collision->DebugOn();
-
 				++Index;
 
 				if ((6 * 4) - 1 == Index)
@@ -134,14 +140,17 @@ void AUIManager::BeginPlay()
 {
 	Super::BeginPlay();
 
-	//패널
-	{
-		AMenuPanelUI* NewActor = AActor::GetWorld()->SpawnActor<AMenuPanelUI>();
-	}
-
 	//타이틀
 	{
 		//TitleLogo* NewActor = AActor::GetWorld()->SpawnActor<TitleLogo>();
+	}
+
+	//패널
+	AMenuPanelUI* MenuPanelUI = nullptr;
+	{
+		MenuPanelUI = GetWorld()->SpawnActor<AMenuPanelUI>();
+
+		this->SetMenuPanelUI(MenuPanelUI);
 	}
 
 	ACroppatch* Croppatch = nullptr;
@@ -225,6 +234,18 @@ void AUIManager::Tick(float _DeltaTime)
 	}
 }
 
+void AUIManager::TapButtonInAndOut()
+{
+	FVector2D Location = SRTapWhite->GetComponentLocation();
+
+	for (int i = 0; i < 4; ++i)
+	{
+		SRTapWhite->SetComponentLocation({ Location.X + (116 * (i + 1)), Location.Y });
+
+		MenuPanelUI->AddActorLocation({ 116, 0 });
+	}
+}
+
 void AUIManager::TapButtonStay(AActor* _Actor, FTransform _Index)
 {
 	FVector2D MousePos = UEngineAPICore::GetCore()->GetMainWindow().GetMousePos();
@@ -232,7 +253,16 @@ void AUIManager::TapButtonStay(AActor* _Actor, FTransform _Index)
 	if (true == UEngineInput::GetInst().IsDown(VK_LBUTTON))
 	{
 		NowSelectTap = _Index.Scale.X;
-		SRTapWhite->SetComponentLocation({ _Index.Location.X, _Index.Location.Y });
+
+		if (-1 != NowSelectTap)
+		{
+			SRTapWhite->SetActive(true);
+			SRTapWhite->SetComponentLocation({ _Index.Location.X, _Index.Location.Y });
+		}
+		else
+		{
+			TimeEventer.PushEvent(1.0f, std::bind(&AUIManager::TapButtonInAndOut(), this), true, false);
+		}
 	}
 }
 

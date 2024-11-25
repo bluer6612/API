@@ -12,6 +12,11 @@ public:
 	AMenuPanelUI& operator=(const AMenuPanelUI& _Other) = delete;
 	AMenuPanelUI& operator=(AMenuPanelUI&& _Other) noexcept = delete;
 
+	USpriteRenderer* GetSprite(int _index) const
+	{
+		return Sprite[_index];
+	}
+
 protected:
 
 private:

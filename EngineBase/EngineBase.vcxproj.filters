@@ -16,7 +16,8 @@
     <ClInclude Include="PreCompile.h">
       <Filter>PreCompile</Filter>
     </ClInclude>
-    <ClInclude Include="EngineTimer.h">
+    <ClInclude Include="Engine
+			   .h">
       <Filter>Time</Filter>
     </ClInclude>
     <ClInclude Include="EngineDirectory.h">

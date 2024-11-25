@@ -18,6 +18,11 @@ public:
 
 	void ModelAdd(std::string_view _Name, double _X, double _Y, int _Order);
 
+	class ABuilding* GetBuilding()
+	{
+		return this;
+	}
+
 protected:
 	UFSMStateManager FSM;
 	class USpriteRenderer* SpriteR = nullptr;

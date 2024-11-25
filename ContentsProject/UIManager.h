@@ -3,6 +3,7 @@
 #include "BuildingManager.h"
 #include "Croppatch.h"
 #include "TileMap.h"
+#include "MenuPanelUI.h"
 
 enum class UICollisionGroup
 {
@@ -22,6 +23,8 @@ class AUIManager : public AActor
 public:
 	friend class ACroppatch;
 
+	static AUIManager* UIManager;
+
 	AUIManager();
 	~AUIManager();
 
@@ -30,9 +33,18 @@ public:
 	AUIManager& operator=(const AUIManager& _Other) = delete;
 	AUIManager& operator=(AUIManager&& _Other) noexcept = delete;
 
+	void BeginPlay();
+
+	void Tick(float _DeltaTime);
+
 	USpriteRenderer* GetCursorImage()
 	{
 		return CursorImage;
+	}
+
+	void SetMenuPanelUI(AMenuPanelUI* const _MenuPanelUI)
+	{
+		MenuPanelUI = _MenuPanelUI;
 	}
 
 	void SetBuildingManager(ABuildingManager* const _BuildingManager)
@@ -45,16 +57,14 @@ public:
 		Croppatch = _Croppatch;
 	}
 
-protected:
-	void BeginPlay();
-
-	void Tick(float _DeltaTime);
-
+	void TapButtonInAndOut();
 	void TapButtonStay(AActor* _Actor, FTransform _Index);
 
 	void PanelButtonTileEnter(AActor* _Actor, FTransform _Index);
 	void PanelButtonTileStay(AActor* _Actor, FTransform _Index);
 	void PanelButtonTileEnd(AActor* _Actor, FTransform _Index);
+
+protected:
 
 private:
 	class U2DCollision* CursorCollision = nullptr;
@@ -64,6 +74,7 @@ private:
 	class USpriteRenderer* SRButtonBlack = nullptr;
 	class USpriteRenderer* SRTapWhite = nullptr;
 
+	AMenuPanelUI* MenuPanelUI = nullptr;
 	ABuildingManager* BuildingManager = nullptr;
 	ACroppatch* Croppatch = nullptr;
 
@@ -75,4 +86,3 @@ private:
 
 	std::vector<std::vector<int>> FarmInfoIndex;
 };
-
