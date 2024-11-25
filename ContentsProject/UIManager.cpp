@@ -25,7 +25,7 @@ AUIManager::AUIManager()
 	//³ó»ç ¸ðµå ¾¾¾Ñ ÀÌ¹ÌÁö
 	CursorImage = CreateDefaultSubObject<USpriteRenderer>();
 	CursorImage->SetSprite("Crops.png", 3);
-	CursorImage->SetComponentScale({ 32, 64 });
+	CursorImage->SetComponentScale({ 34, 64 });
 	CursorImage->SetOrder(ERenderOrder::CURSOR);
 	CursorImage->SetActive(false);
 
@@ -125,27 +125,28 @@ void AUIManager::BeginPlay()
 
 		CroppatchTile = GetWorld()->SpawnActor<ATileMap>();
 		CroppatchTile->SetActorLocation(Location);
-		CroppatchTile->Create("gridsmall.png", { 59, 8 }, { 36, 36 });
+		CroppatchTile->Create("EmptyTile.png", { 56, 8 }, { 34, 34 });
 
 		int Index = 0;
 
-		for (int y = 0; y < 59; ++y)
+		for (int y = 0; y < 8; ++y)
 		{
-			for (int x = 0; x < 8; ++x)
+			for (int x = 0; x < 56; ++x)
 			{
-				CroppatchTile->SetTileSpriteIndex({ y, x }, { }, { 36, 36 }, { -4, -4 }, { }, 0, Index, ERenderOrder::BUILDINGUP);
+				CroppatchTile->SetTileSpriteIndex({ x, y }, { }, { 34, 34 }, { }, { }, 0, Index, ERenderOrder::BUILDINGUP);
 
 				CroppatchTileImage[Index] = CreateDefaultSubObject<USpriteRenderer>();
-				CroppatchTileImage[Index]->SetComponentCrate(CroppatchTileImage[Index], "gridsmall2.png", { 36, 36 }, { StartPos }, ERenderOrder::BUILDINGUP);
+				CroppatchTileImage[Index]->SetComponentCrate(CroppatchTileImage[Index], "gridsmall.png", { 34, 34 }, { StartPos }, ERenderOrder::BUILDINGUP);
+				CroppatchTileImage[Index]->SetComponentScale({33.f, 33.f});
 				CroppatchTileImage[Index]->SetAlphafloat(0.75f);
 				//CroppatchTileImage[Index]->SetActive(false);
 
-				StartPos.Y += 32;
+				StartPos.X += 34;
 				++Index;
 			}
 
-			StartPos.Y = Location2.Y;
-			StartPos.X += 32;
+			StartPos.X = Location2.X;
+			StartPos.Y += 34;
 		}
 	}
 }
