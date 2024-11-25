@@ -52,8 +52,6 @@ protected:
 	void PanelButtonTileStay(AActor* _Actor, FTransform _Index);
 	void PanelButtonTileEnd(AActor* _Actor, FTransform _Index);
 
-	void CroppatchTileStay(AActor* _Actor, FTransform _Index);
-
 private:
 	class U2DCollision* CursorCollision = nullptr;
 	class USpriteRenderer* CursorImage = nullptr;
@@ -65,6 +63,7 @@ private:
 	ACroppatch* Croppatch = nullptr;
 
 	ATileMap* CroppatchTile = nullptr;
+	USpriteRenderer* CroppatchTileImage[1000] = {};
 
 	std::vector<std::vector<int>> FarmInfoIndex;
 };
