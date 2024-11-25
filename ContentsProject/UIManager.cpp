@@ -133,7 +133,7 @@ void AUIManager::BeginPlay()
 		{
 			for (int x = 0; x < 8; ++x)
 			{
-				CroppatchTile->SetTileSpriteIndex({ y, x }, { }, { 36, 36 }, { -4, -4 }, { }, 0, 0, ERenderOrder::BUILDINGUP);
+				CroppatchTile->SetTileSpriteIndex({ y, x }, { }, { 36, 36 }, { -4, -4 }, { }, 0, Index, ERenderOrder::BUILDINGUP);
 
 				CroppatchTileImage[Index] = CreateDefaultSubObject<USpriteRenderer>();
 				CroppatchTileImage[Index]->SetComponentCrate(CroppatchTileImage[Index], "gridsmall2.png", { 36, 36 }, { StartPos }, ERenderOrder::BUILDINGUP);
@@ -163,8 +163,12 @@ void AUIManager::Tick(float _DeltaTime)
 	{
 		if (nullptr != CroppatchTile->GetTileLocation(MousePos))
 		{
-			SRFarmInfo->SetSprite("FarmInfo", CroppatchTile->GetTileIndex(MousePos));
-			SRFarmInfo->SetActive(true);
+			if (CropsNeedMoney[NowSelectCrops] <= Money)
+			{
+				Money -= CropsNeedMoney[NowSelectCrops];
+
+				CroppatchTileImage[CroppatchTile->GetTileIndex(MousePos)]->SetSprite("Crops.png", 4 + 11 * NowSelectCrops);
+			}
 		}
 	}
 }
@@ -190,8 +194,12 @@ void AUIManager::PanelButtonTileStay(AActor* _Actor, FTransform _Index)
 
 	if (true == UEngineInput::GetInst().IsDown(VK_LBUTTON))
 	{
-		CursorImage->SetSprite("Crops.png", 3 + 11 * _Index.Scale.X);
-		CursorImage->SetActive(true);
+		if (1 == _Index.Scale.X)
+		{
+			NowSelectCrops = _Index.Scale.X;
+			CursorImage->SetSprite("Crops.png", 3 + 11 * NowSelectCrops);
+			CursorImage->SetActive(true);
+		}
 	}
 }
 

@@ -13,6 +13,9 @@ enum class UICollisionGroup
 	Panel,
 };
 
+static int Money = 400;
+static int bio = 8;
+
 // Ό³Έν :
 class AUIManager : public AActor
 {
@@ -64,6 +67,8 @@ private:
 
 	ATileMap* CroppatchTile = nullptr;
 	USpriteRenderer* CroppatchTileImage[1000] = {};
+
+	int NowSelectCrops = 0;
 
 	std::vector<std::vector<int>> FarmInfoIndex;
 };
