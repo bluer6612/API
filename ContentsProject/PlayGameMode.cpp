@@ -37,14 +37,14 @@ void APlayGameMode::BeginPlay()
 	{
 		GroundTileMap = GetWorld()->SpawnActor<ATileMap>();
 		GroundTileMap->SetActorLocation({ static_cast<float>(0), static_cast<float>(ScreenY - 296 - TaskbarY) });
-		GroundTileMap->Create("grid.png", { 53, 8 }, { 36, 36 });
+		GroundTileMap->Create("grid.png", { 53, 8 }, { 32, 32 });
 		//GroundTileMap->Create("EmptyTile.png", { 53, 8 }, { 36, 36 });
 
 		for (int y = 0; y < 53; y++)
 		{
 			for (int x = 0; x < 8; x++)
 			{
-				GroundTileMap->SetTileSpriteIndex({ y, x }, { }, { 36, 36 }, { }, { 0,0 }, 0);
+				GroundTileMap->SetTileSpriteIndex({ y, x }, { }, { 32, 32 }, { 4, 4 }, { 0,0 }, 0);
 			}
 		}
 	}

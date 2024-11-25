@@ -86,9 +86,9 @@ void ATileMap::SetTileSpriteIndex(FIntPoint _Index, FVector2D _Pivot, FVector2D 
 	FindSprite->SetComponentScale(_SpriteScale);
 	FindSprite->SetOrder(_SpriteOrder);
 
-	FVector2D TileLocation = IndexToTileLocation(_Index, _Location /*+ _LocationPivot.ConvertToPoint()*/);
+	FVector2D TileLocation = IndexToTileLocation(_Index, _Location + _LocationPivot);
 
-	AllTiles[_Index.Y][_Index.X].SpriteRenderer->SetComponentLocation(TileLocation + TileSize.Half() + _Pivot/* + _LocationPivot*/);
+	AllTiles[_Index.Y][_Index.X].SpriteRenderer->SetComponentLocation(TileLocation + TileSize.Half() + _Pivot + _LocationPivot);
 	AllTiles[_Index.Y][_Index.X].Pivot = _Pivot;
 	AllTiles[_Index.Y][_Index.X].Scale = _SpriteScale;
 	AllTiles[_Index.Y][_Index.X].SpriteIndex = _SpriteIndex;

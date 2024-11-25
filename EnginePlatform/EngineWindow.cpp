@@ -207,7 +207,7 @@ void UEngineWindow::SetWindowPosAndScale(FVector2D _Pos, FVector2D _Scale)
     ::SetWindowPos(WindowHandle, HWND_TOP, _Pos.iX(), _Pos.iY(), 0, 0, SWP_NOSIZE | SWP_SHOWWINDOW);
 }
 
-FVector2D UEngineWindow::GetMousePos()
+FVector2D UEngineWindow::GetMousePos() const
 {
     POINT MousePoint;
 
@@ -217,7 +217,7 @@ FVector2D UEngineWindow::GetMousePos()
     return FVector2D(MousePoint.x, MousePoint.y);
 }
 
-void UEngineWindow::SetWindowAlpha()
+void UEngineWindow::SetWindowAlpha() const
 {
     long style = ::GetWindowLongA(WindowHandle, GWL_STYLE);
     style &= ~WS_CAPTION;

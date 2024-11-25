@@ -116,27 +116,38 @@ void AUIManager::BeginPlay()
 
 	//농지용 타일
 	{
-		FVector2D Location = { static_cast<float>(4), static_cast<float>(ScreenY - 298 - 36 + 2) };
-		FVector2D StartPos = Location;
+		FVector2D Location = { static_cast<float>(0), static_cast<float>(ScreenY - 298 - 36 + 4) };
 
 		CroppatchTile = GetWorld()->SpawnActor<ATileMap>();
 		CroppatchTile->SetActorLocation(Location);
-		CroppatchTile->Create("gridsmall.png", { 52, 8 }, { 32, 32 });
+		CroppatchTile->Create("gridsmall.png", { 59, 8 }, { 36, 36 });
 
-		int Index = 0;
-		for (int y = 0; y < 52; ++y)
+		float Index = 0;
+		for (int y = 0; y < 59; ++y)
 		{
 			for (int x = 0; x < 8; ++x)
 			{
-				CroppatchTile->SetTileSpriteIndex({ y, x }, { }, { 32, 32 }, { 2, 2 }, {  }, 0, 0, ERenderOrder::BUILDINGUP);
+				if (4 == x)
+				{
+					Index -= 4;
+				}
+				else if (5 == x)
+				{
+					Index += 1;
+				}
+				else if (6 == x)
+				{
+					Index += 0.5;
+				}
+				else if (7 == x)
+				{
+					Index += 0.25;
+				}
 
-				StartPos.X += 36;
-
-				++Index;
+				CroppatchTile->SetTileSpriteIndex({ y, x }, { }, { 36, 36 }, { static_cast<float>(-4), -4 - Index }, { }, 0, 0, ERenderOrder::BUILDINGUP);
 			}
 
-			StartPos.X = Location.X;
-			StartPos.Y += 36;
+			Index = 0;
 		}
 	}
 }
