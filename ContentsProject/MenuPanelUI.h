@@ -20,4 +20,5 @@ private:
 	class USpriteRenderer* SpriteRFarmSlot[CropsCount] = {};
 	class USpriteRenderer* SpriteRFarmCrops[CropsCount] = {};
 	class USpriteRenderer* SpriteRFarmCoin[CropsCount] = {};
+	class USpriteRenderer* Sprite[10] = {};
 };

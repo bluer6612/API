@@ -9,7 +9,7 @@
 #include <EngineBase/EngineMath.h>
 #include "EngineWinImage.h"
 
-static const int TaskbarY = 42;
+static const int TaskbarY = 40;
 static const int ScreenX = GetSystemMetrics(SM_CXSCREEN); // 1920
 static const int ScreenY = GetSystemMetrics(SM_CYSCREEN); // 1080
 static const float ScreenHX = ScreenX * 0.5; // 1920 * 0.5

@@ -120,37 +120,20 @@ void AUIManager::BeginPlay()
 	//³óÁö¿ë Å¸ÀÏ
 	{
 		FVector2D Location = { static_cast<float>(0), static_cast<float>(ScreenY - 298 - 36 + 4) };
-		FVector2D StartPos = Location;
+		FVector2D Location2 = { static_cast<float>(17), static_cast<float>(ScreenY - 298 - 36 + 4 + 17) };
+		FVector2D StartPos = Location2;
 
 		CroppatchTile = GetWorld()->SpawnActor<ATileMap>();
 		CroppatchTile->SetActorLocation(Location);
 		CroppatchTile->Create("gridsmall.png", { 59, 8 }, { 36, 36 });
 
 		int Index = 0;
-		float loc = 0;
 
 		for (int y = 0; y < 59; ++y)
 		{
 			for (int x = 0; x < 8; ++x)
 			{
-				if (4 == x)
-				{
-					loc -= 4;
-				}
-				else if (5 == x)
-				{
-					loc += 1;
-				}
-				else if (6 == x)
-				{
-					loc += 0.5;
-				}
-				else if (7 == x)
-				{
-					loc += 0.25;
-				}
-
-				CroppatchTile->SetTileSpriteIndex({ y, x }, { }, { 36, 36 }, { static_cast<float>(-4), -4 - loc }, { }, 0, 0, ERenderOrder::BUILDINGUP);
+				CroppatchTile->SetTileSpriteIndex({ y, x }, { }, { 36, 36 }, { -4, -4 }, { }, 0, 0, ERenderOrder::BUILDINGUP);
 
 				CroppatchTileImage[Index] = CreateDefaultSubObject<USpriteRenderer>();
 				CroppatchTileImage[Index]->SetComponentCrate(CroppatchTileImage[Index], "gridsmall2.png", { 36, 36 }, { StartPos }, ERenderOrder::BUILDINGUP);
@@ -161,9 +144,8 @@ void AUIManager::BeginPlay()
 				++Index;
 			}
 
-			StartPos.Y = Location.Y;
+			StartPos.Y = Location2.Y;
 			StartPos.X += 32;
-			loc = 0;
 		}
 	}
 }
