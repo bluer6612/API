@@ -16,11 +16,15 @@ public:
 
 	void Tick(float _DeltaTime);
 
+	void TitleButtonEnter(AActor* _Actor, FVector2D _Index);
+	void TitleButtonStay(AActor* _Actor, FVector2D _Index);
+
 protected:
 
 private:
 	USpriteRenderer* LogoSpriteR;
 	USpriteRenderer* TooltipSpriteR;
 	USpriteRenderer* ButtonSpriteR;
+	USpriteRenderer* ButtonBorderSpriteR;
 };
 
