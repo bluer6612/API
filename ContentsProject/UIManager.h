@@ -57,7 +57,8 @@ public:
 		Croppatch = _Croppatch;
 	}
 
-	void TapButtonInAndOut();
+	void TapButtonIn();
+	void TapButtonOut();
 	void TapButtonStay(AActor* _Actor, FTransform _Index);
 
 	void PanelButtonTileEnter(AActor* _Actor, FTransform _Index);

@@ -232,7 +232,7 @@ void AUIManager::Tick(float _DeltaTime)
 	}
 }
 
-void AUIManager::TapButtonInAndOut()
+void AUIManager::TapButtonIn()
 {
 	if (4 > TapTimer)
 	{
@@ -245,6 +245,19 @@ void AUIManager::TapButtonInAndOut()
 	}
 }
 
+void AUIManager::TapButtonOut()
+{
+	if (0 < TapTimer)
+	{
+		FVector2D Location = SRTapWhite->GetComponentLocation();
+
+		SRTapWhite->AddComponentLocation({ -116, 0 });
+		MenuPanelUI->AddActorLocation({ -116, 0 });
+
+		--TapTimer;
+	}
+}
+
 void AUIManager::TapButtonStay(AActor* _Actor, FTransform _Index)
 {
 	FVector2D MousePos = UEngineAPICore::GetCore()->GetMainWindow().GetMousePos();
@@ -253,14 +266,19 @@ void AUIManager::TapButtonStay(AActor* _Actor, FTransform _Index)
 	{
 		NowSelectTap = _Index.Scale.X;
 
+		if (0 == TapTimer)
+		{
+			TimeEventer.PushEvent(1.0f, std::bind(&AUIManager::TapButtonIn, this), true, false);
+		}
+		else if (4 == TapTimer)
+		{
+			TimeEventer.PushEvent(0.5f, std::bind(&AUIManager::TapButtonOut, this), true, false);
+		}
+
+		//X 버튼이 아니면 화이트 이동
 		if (-1 != NowSelectTap)
 		{
 			SRTapWhite->SetComponentLocation({ _Index.Location.X, _Index.Location.Y });
-		}
-		else
-		{
-			TapTimer = 0;
-			TimeEventer.PushEvent(1.0f, std::bind(&AUIManager::TapButtonInAndOut, this), true, false);
 		}
 	}
 }
