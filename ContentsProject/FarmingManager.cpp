@@ -58,16 +58,16 @@ void AFarmingManager::Tick(float _DeltaTime)
 							Crops->SetWater(0);
 							Crops->SetWaterNeed(true);
 							Crops->SetWaterSprite(CropsImage->GetComponentLocation());
-
+							
 							CropsImage->SetSprite("Crops.png", (3 + Crops->GetProgress()) + 11 * Index);
 						}
 						else
 						{
+							CropsImage->SetSprite("gridsmall.png");
+							CropsImage->SetAlphafloat(0.75f);
 							CropsImage->SetActive(false);
-							Crops->CropsReset(0, 0);
 
-							delete Crops;
-							Crops = nullptr;
+							Crops->CropsReset(0, 0);
 						}
 					}
 					else if (1 <= Crops->GetTime() / (6 - Progress))

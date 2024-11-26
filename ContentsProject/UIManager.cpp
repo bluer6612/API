@@ -186,6 +186,7 @@ void AUIManager::BeginPlay()
 
 				CroppatchTileImage[Index] = CreateDefaultSubObject<USpriteRenderer>();
 				CroppatchTileImage[Index]->SetComponentCrate(CroppatchTileImage[Index], "gridsmall.png", { 34, 34 }, { StartPos }, ERenderOrder::BUILDINGUP);
+				CroppatchTileImage[Index]->SetPivotType(PivotType::Bot);
 				CroppatchTileImage[Index]->SetComponentScale({33.f, 33.f});
 				CroppatchTileImage[Index]->SetAlphafloat(0.75f);
 				CroppatchTileImage[Index]->SetActive(false);
@@ -229,6 +230,7 @@ void AUIManager::Tick(float _DeltaTime)
 					CroppatchTileImage[Index]->SetActive(true);
 					CroppatchTileImage[Index]->SetSprite("Crops.png", 3 + 11 * NowSelectCrops);
 					CroppatchTileImage[Index]->SetComponentScale({ 32, 64 });
+					CroppatchTileImage[Index]->SetAlphafloat(1.f);
 
 					CropsAllVector.push_back(CroppatchTile);
 				}

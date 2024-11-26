@@ -367,7 +367,7 @@ void USpriteRenderer::SetPivotType(PivotType _Type)
 		break;
 	case PivotType::Bot:
 		Pivot.X = 0.5f;
-		Pivot.Y = 1.0f;
+		Pivot.Y = 0.85f;
 		break;
 	case PivotType::Top:
 		Pivot.X = 0.5f;
