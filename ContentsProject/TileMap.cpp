@@ -62,11 +62,12 @@ bool ATileMap::IsIndexOver(FIntPoint _Index) const
 	return false;
 }
 
-void ATileMap::SetTileSprite(ATileMap* _ATileMap, std::string_view _Sprite, int _SpriteIndex)
+void ATileMap::SetTileSprite(FVector2D _Location, std::string_view _Sprite, int _SpriteIndex)
 {
-	FIntPoint _Index = _ATileMap->TileCount;
+	//FIntPoint _Index = GetIndex(_Location);
+	FIntPoint _Index = LocationToIndex(_Location);
 
-	USpriteRenderer* FindSprite = AllTiles[_Index.Y][_Index.X].SpriteRenderer;
+	USpriteRenderer* FindSprite = AllTiles[_Index.X][_Index.Y].SpriteRenderer;
 	FindSprite->SetSprite(_Sprite, _SpriteIndex);
 }
 
@@ -93,6 +94,10 @@ void ATileMap::SetTileSpriteIndex(FIntPoint _Index, FVector2D _Pivot, FVector2D 
 	FindSprite->SetSprite(SpriteName, _SpriteIndex);
 	FindSprite->SetComponentScale(_SpriteScale);
 	FindSprite->SetOrder(_SpriteOrder);
+	if ("EmptyTile.png" == SpriteName)
+	{
+		FindSprite->SetAlphafloat(0.25f);
+	}
 
 	FVector2D TileLocation = IndexToTileLocation(_Index, _Location + _LocationPivot);
 

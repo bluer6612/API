@@ -62,7 +62,7 @@ public:
 
 	int GetTileIndex(FVector2D _Location);
 
-	void SetTileSprite(ATileMap* _ATileMap, std::string_view _Sprite, int _SpriteIndex);
+	void SetTileSprite(FVector2D _Location, std::string_view _Sprite, int _SpriteIndex);
 
 	void SetTileSpriteIndex(FIntPoint _Index, int _SpriteIndex);
 	void SetTileSpriteIndex(FIntPoint _Index, FVector2D _Pivot, FVector2D _SpriteScale, FVector2D _Location, FVector2D _LocationPivot, int _SpriteIndex, int _TileIndex = 0, ERenderOrder _SpriteOrder = ERenderOrder::ZERO);
@@ -130,13 +130,15 @@ public:
 	{
 		WaterNeed = _WaterNeed;
 
+		FVector2D a = this->GetActorLocation();
+
 		if (true == WaterNeed)
 		{
-			this->SetTileSprite(this, "EmptyTile.png", 0);
+			this->SetTileSprite(this->GetActorLocation(), "EmptyTile.png", 0);
 		}
 		else
 		{
-			this->SetTileSprite(this, "WaterDirt.png", 0);
+			this->SetTileSprite(this->GetActorLocation(), "WaterDirt.png", 0);
 		}
 	}
 

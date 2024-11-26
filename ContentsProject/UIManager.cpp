@@ -42,7 +42,7 @@ AUIManager::AUIManager()
 	SRTapWhite = CreateDefaultSubObject<USpriteRenderer>();
 	SRTapWhite->SetComponentCrate(SRTapWhite, "004_MenuPanel_pressed.png", {}, { static_cast<float>(ScreenX - 480), (ScreenHY - 5) }, ERenderOrder::UIUP);
 
-	//농사 탭 버튼
+	//패널 탭 버튼
 	{
 		//패널 X 버튼
 		{
@@ -57,6 +57,7 @@ AUIManager::AUIManager()
 			PanelAllVector.push_back(Collision);
 		}
 
+		//패널 탭 버튼 1~9
 		FVector2D Location = { static_cast<float>(ScreenX - 480), (ScreenHY - 5) };
 		FVector2D StartPos = Location;
 
@@ -165,7 +166,7 @@ void AUIManager::BeginPlay()
 		this->SetCroppatch(Croppatch);
 	}
 
-	//농지용 타일
+	//농사 타일
 	{
 		FVector2D Location = { static_cast<float>(0), static_cast<float>(ScreenY - 298 - 36 + 4) };
 		FVector2D Location2 = { static_cast<float>(17), static_cast<float>(ScreenY - 298 - 36 + 4 + 17) };
@@ -221,6 +222,8 @@ void AUIManager::Tick(float _DeltaTime)
 					Money -= CropsNeedMoney[NowSelectCrops];
 
 					CroppatchTile->CropsReset(Index, NowSelectCrops);
+
+					CroppatchTile->SetWaterNeed(false);
 
 					CroppatchTileImage[Index]->SetActive(true);
 					CroppatchTileImage[Index]->SetSprite("Crops.png", 3 + 11 * NowSelectCrops);
@@ -353,7 +356,7 @@ void AUIManager::PanelButtonTileStay(AActor* _Actor, FTransform _Index)
 
 	if (true == UEngineInput::GetInst().IsDown(VK_LBUTTON))
 	{
-		if (0 == _Index.Scale.X)
+		//if (0 == _Index.Scale.X)
 		{
 			NowSelectCrops = _Index.Scale.X;
 			CursorImage->SetSprite("Crops.png", 3 + 11 * NowSelectCrops);
