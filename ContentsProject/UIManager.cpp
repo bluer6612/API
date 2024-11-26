@@ -224,6 +224,7 @@ void AUIManager::Tick(float _DeltaTime)
 					CroppatchTile->CropsReset(Index, NowSelectCrops);
 
 					CroppatchTile->SetWaterNeed(false);
+					CroppatchTile->SetWaterSprite(CroppatchTileImage[Index]->GetComponentLocation());
 
 					CroppatchTileImage[Index]->SetActive(true);
 					CroppatchTileImage[Index]->SetSprite("Crops.png", 3 + 11 * NowSelectCrops);

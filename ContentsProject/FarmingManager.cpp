@@ -57,6 +57,7 @@ void AFarmingManager::Tick(float _DeltaTime)
 							Crops->SetProgress(0);
 							Crops->SetWater(0);
 							Crops->SetWaterNeed(true);
+							Crops->SetWaterSprite(CropsImage->GetComponentLocation());
 
 							CropsImage->SetSprite("Crops.png", (3 + Crops->GetProgress()) + 11 * Index);
 						}
@@ -77,6 +78,7 @@ void AFarmingManager::Tick(float _DeltaTime)
 						if (0 == Progress % CropsNeedWater[Index] && 0 != Progress)
 						{
 							Crops->SetWaterNeed(true);
+							Crops->SetWaterSprite(CropsImage->GetComponentLocation());
 						}
 					}
 				}

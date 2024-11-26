@@ -62,13 +62,19 @@ bool ATileMap::IsIndexOver(FIntPoint _Index) const
 	return false;
 }
 
-void ATileMap::SetTileSprite(FVector2D _Location, std::string_view _Sprite, int _SpriteIndex)
+void ATileMap::SetWaterSprite(FVector2D _Location)
 {
-	//FIntPoint _Index = GetIndex(_Location);
 	FIntPoint _Index = LocationToIndex(_Location);
 
-	USpriteRenderer* FindSprite = AllTiles[_Index.X][_Index.Y].SpriteRenderer;
-	FindSprite->SetSprite(_Sprite, _SpriteIndex);
+	USpriteRenderer* FindSprite = AllTiles[_Index.Y][_Index.X].SpriteRenderer;
+	if (true == WaterNeed)
+	{
+		FindSprite->SetSprite("EmptyTile.png");
+	}
+	else
+	{
+		FindSprite->SetSprite("WaterDirt.png");
+	}
 }
 
 void ATileMap::SetTileSpriteIndex(FIntPoint _Index, int _SpriteIndex)
