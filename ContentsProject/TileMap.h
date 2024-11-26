@@ -88,6 +88,11 @@ public:
 		return CropsIndex;
 	}
 
+	void AddWater(int _Water)
+	{
+		Water += _Water;
+	}
+
 	void SetWater(int _Water)
 	{
 		Water = _Water;
@@ -98,6 +103,11 @@ public:
 		return Water;
 	}
 
+	void AddGrow(int _Grow)
+	{
+		Grow += _Grow;
+	}
+
 	void SetGrow(int _Grow)
 	{
 		Grow = _Grow;
@@ -106,6 +116,11 @@ public:
 	int GetGrow() const
 	{
 		return Grow;
+	}
+
+	void AddTime(int _Time)
+	{
+		Time += _Time;
 	}
 
 	void SetTime(int _Time)

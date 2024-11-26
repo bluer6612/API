@@ -24,7 +24,6 @@ public:
 	friend class ACroppatch;
 
 	static AUIManager* UIManager;
-	static ATileMap* CroppatchTile;
 
 	AUIManager();
 	~AUIManager();
@@ -78,14 +77,16 @@ private:
 
 	AMenuPanelUI* MenuPanelUI = nullptr;
 	ABuildingManager* BuildingManager = nullptr;
-	ACroppatch* Croppatch = nullptr;
 
+	ACroppatch* Croppatch = nullptr;
+	ATileMap* CroppatchTile;
 	USpriteRenderer* CroppatchTileImage[1000] = {};
 
 	int NowSelectCrops = -1;
 	int NowSelectTap = 1;
 	int TapTimer = 0;
 
+	std::vector<class ATileMap*> CropsAllVector;
 	std::vector<class U2DCollision*> PanelAllVector;
 	std::vector<std::vector<int>> FarmInfoIndex;
 };

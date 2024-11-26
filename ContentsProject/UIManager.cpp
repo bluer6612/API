@@ -228,6 +228,8 @@ void AUIManager::Tick(float _DeltaTime)
 					CroppatchTileImage[Index]->SetActive(true);
 					CroppatchTileImage[Index]->SetSprite("Crops.png", 3 + 11 * NowSelectCrops);
 					CroppatchTileImage[Index]->SetComponentScale({ 32, 64 });
+
+					CropsAllVector.push_back(CroppatchTile);
 				}
 			}
 		}

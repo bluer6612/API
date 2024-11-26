@@ -19,6 +19,7 @@ void AFarmingManager::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 
+	_DeltaTime += 0.0001f;
 	//AUIManager::CroppatchTile;
 
 }
