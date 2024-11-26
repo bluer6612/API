@@ -46,13 +46,17 @@ AUIManager::AUIManager()
 	//³ó»ç ÅÇ ¹öÆ°
 	{
 		//ÆÐ³Î X ¹öÆ°
-		U2DCollision* Collision = CreateDefaultSubObject<U2DCollision>();
-		Collision->SetCollisionGroup(UICollisionGroup::Panel);
-		Collision->SetCollisionType(ECollisionType::Rect);
-		Collision->SetComponentLocation({ static_cast<float>(ScreenX - 475), (ScreenHY - 44) });
-		Collision->SetComponentScale({ 16, 16 });
+		{
+			U2DCollision* Collision = CreateDefaultSubObject<U2DCollision>();
+			Collision->SetCollisionGroup(UICollisionGroup::Panel);
+			Collision->SetCollisionType(ECollisionType::Rect);
+			Collision->SetComponentLocation({ static_cast<float>(ScreenX - 475), (ScreenHY - 44) });
+			Collision->SetComponentScale({ 16, 16 });
 
-		Collision->SetCollisionStay(std::bind(&AUIManager::TapButtonStay, this, std::placeholders::_1, FTransform(FVector2D(-1, 0), FVector2D({}))));
+			Collision->SetCollisionStay(std::bind(&AUIManager::TapButtonStay, this, std::placeholders::_1, FTransform(FVector2D(-1, 0), FVector2D({}))));
+
+			PanelAllVector.push_back(Collision);
+		}
 
 		FVector2D Location = { static_cast<float>(ScreenX - 480), (ScreenHY - 5) };
 		FVector2D StartPos = Location;
@@ -69,6 +73,8 @@ AUIManager::AUIManager()
 				Collision->SetComponentScale({ 36, 36 });
 
 				Collision->SetCollisionStay(std::bind(&AUIManager::TapButtonStay, this, std::placeholders::_1, FTransform(FVector2D(Index, 0), FVector2D(StartPos))));
+
+				PanelAllVector.push_back(Collision);
 
 				if (3 == x && 1 == y)
 				{
@@ -246,18 +252,26 @@ void AUIManager::TapButtonIn()
 			std::vector<U2DCollision*>::iterator StartIter = PanelAllVector.begin();
 			std::vector<U2DCollision*>::iterator EndIter = PanelAllVector.end();
 
-			for (; StartIter != EndIter; ++StartIter)
+			for (int i = 0; i < PanelAllVector.size(); ++i)
 			{
-				U2DCollision* CurRes = *StartIter;
-				
-				if (nullptr != CurRes)
-				{
-					CurRes->AddComponentLocation({ 116, 0 });
-				}
+				PanelAllVector[i]->AddComponentLocation({ 116, 0 });
+				PanelAllVector[i]->SetActive(false);
 			}
 		}
 
 		++TapTimer;
+	}
+	else
+	{
+		{
+			std::vector<class U2DCollision*>::iterator StartIter = PanelAllVector.begin();
+			std::vector<class U2DCollision*>::iterator EndIter = PanelAllVector.end();
+
+			for (int i = 0; i < PanelAllVector.size(); ++i)
+			{
+				PanelAllVector[i]->SetActive(true);
+			}
+		}
 	}
 }
 
@@ -272,20 +286,26 @@ void AUIManager::TapButtonOut()
 			std::vector<class U2DCollision*>::iterator StartIter = PanelAllVector.begin();
 			std::vector<class U2DCollision*>::iterator EndIter = PanelAllVector.end();
 
-			for (; StartIter != EndIter; ++StartIter)
+			for (int i = 0; i < PanelAllVector.size(); ++i)
 			{
-				//std::vector<class U2DCollision*>::iterator CurRes = StartIter->second;
-				//U2DCollision* CurRes = StartIter->second;
-				U2DCollision* CurRes = *StartIter;
-
-				if (nullptr != CurRes)
-				{
-					CurRes->AddComponentLocation({ -116, 0 });
-				}
+				PanelAllVector[i]->AddComponentLocation({ -116, 0 });
+				PanelAllVector[i]->SetActive(false);
 			}
 		}
 
 		--TapTimer;
+	}
+	else
+	{
+		{
+			std::vector<class U2DCollision*>::iterator StartIter = PanelAllVector.begin();
+			std::vector<class U2DCollision*>::iterator EndIter = PanelAllVector.end();
+
+			for (int i = 0; i < PanelAllVector.size(); ++i)
+			{
+				PanelAllVector[i]->SetActive(true);
+			}
+		}
 	}
 }
 
