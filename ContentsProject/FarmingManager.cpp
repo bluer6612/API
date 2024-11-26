@@ -35,36 +35,50 @@ void AFarmingManager::Tick(float _DeltaTime)
 			for (int i = 0; i < UIManager->CropsAllVector.size(); i++)
 			{
 				ATileMap* Crops = UIManager->CropsAllVector[i];
-				int Index = Crops->GetCropsIndex();
 
 				USpriteRenderer* CropsImage = UIManager->CroppatchTileImage[Crops->GetTileIndex()];
 
-				Crops->AddTime(1.0f);
-
-				if (CropsNeedGrowTime[Index] <= Crops->GetTime())
+				if (false == Crops->GetWaterNeed())
 				{
-					Money += CropsSellMoney[Index];
+					int Index = Crops->GetCropsIndex();
+					int Progress = Crops->GetProgress();
 
-					if (CropsNeedRegrow[Index] > Crops->GetGrow())
-					{
-						Crops->AddGrow();
-						Crops->SetProgress(0);
-						Crops->SetWater(0);
-						CropsImage->SetSprite("Crops.png", (3 + Crops->GetProgress()) + 11 * Index);
-					}
-					else
-					{
-						CropsImage->SetActive(false);
-						Crops->CropsReset(0, 0);
+					Crops->AddTime(1.0f);
 
-						delete Crops;
-						Crops = nullptr;
+					if (CropsNeedGrowTime[Index] <= Crops->GetTime())
+					{
+						Money += CropsSellMoney[Index];
+
+						Crops->SetTime(0);
+
+						if (CropsNeedRegrow[Index] > Crops->GetGrow())
+						{
+							Crops->AddGrow();
+							Crops->SetProgress(0);
+							Crops->SetWater(0);
+							Crops->SetWaterNeed(true);
+
+							CropsImage->SetSprite("Crops.png", (3 + Crops->GetProgress()) + 11 * Index);
+						}
+						else
+						{
+							CropsImage->SetActive(false);
+							Crops->CropsReset(0, 0);
+
+							delete Crops;
+							Crops = nullptr;
+						}
 					}
-				}
-				else if (1 <= Crops->GetTime() / (6 - Crops->GetProgress()))
-				{
-					Crops->AddProgress();
-					CropsImage->SetSprite("Crops.png", (3 + Crops->GetProgress()) + 11 * Index);
+					else if (1 <= Crops->GetTime() / (6 - Progress))
+					{
+						Crops->AddProgress();
+						CropsImage->SetSprite("Crops.png", (3 + Progress) + 11 * Index);
+
+						if (0 == Progress % CropsNeedWater[Index] && 0 != Progress)
+						{
+							Crops->SetWaterNeed(true);
+						}
+					}
 				}
 			}
 		}

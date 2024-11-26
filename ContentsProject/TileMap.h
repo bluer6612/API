@@ -62,6 +62,8 @@ public:
 
 	int GetTileIndex(FVector2D _Location);
 
+	void SetTileSprite(ATileMap* _ATileMap, std::string_view _Sprite, int _SpriteIndex);
+
 	void SetTileSpriteIndex(FIntPoint _Index, int _SpriteIndex);
 	void SetTileSpriteIndex(FIntPoint _Index, FVector2D _Pivot, FVector2D _SpriteScale, FVector2D _Location, FVector2D _LocationPivot, int _SpriteIndex, int _TileIndex = 0, ERenderOrder _SpriteOrder = ERenderOrder::ZERO);
 
@@ -84,6 +86,7 @@ public:
 		this->SetCropsIndex(_CropsIndex);
 		this->SetGrow(0);
 		this->SetWater(0);
+		this->SetWaterNeed(true);
 		this->SetProgress(0);
 		this->SetTime(0);
 	}
@@ -121,6 +124,25 @@ public:
 	int GetWater() const
 	{
 		return Water;
+	}
+
+	void SetWaterNeed(bool _WaterNeed)
+	{
+		WaterNeed = _WaterNeed;
+
+		if (true == WaterNeed)
+		{
+			this->SetTileSprite(this, "EmptyTile.png", 0);
+		}
+		else
+		{
+			this->SetTileSprite(this, "WaterDirt.png", 0);
+		}
+	}
+
+	bool GetWaterNeed() const
+	{
+		return WaterNeed;
 	}
 
 	void AddGrow()
@@ -179,6 +201,7 @@ private:
 	int TileIndex = 0;
 	int CropsIndex = 0;
 	int Water = 0;
+	bool WaterNeed = true;
 	int Grow = 0;
 	int Progress = 0;
 	float Time = 0;

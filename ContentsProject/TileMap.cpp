@@ -62,6 +62,14 @@ bool ATileMap::IsIndexOver(FIntPoint _Index) const
 	return false;
 }
 
+void ATileMap::SetTileSprite(ATileMap* _ATileMap, std::string_view _Sprite, int _SpriteIndex)
+{
+	FIntPoint _Index = _ATileMap->TileCount;
+
+	USpriteRenderer* FindSprite = AllTiles[_Index.Y][_Index.X].SpriteRenderer;
+	FindSprite->SetSprite(_Sprite, _SpriteIndex);
+}
+
 void ATileMap::SetTileSpriteIndex(FIntPoint _Index, int _SpriteIndex)
 {
 	SetTileSpriteIndex(_Index, { 0,0 }, TileSize, { 0, 0 }, { 0,0 }, _SpriteIndex);
