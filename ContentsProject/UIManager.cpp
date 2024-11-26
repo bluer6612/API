@@ -105,6 +105,8 @@ AUIManager::AUIManager()
 				Collision->SetCollisionStay(std::bind(&AUIManager::PanelButtonTileStay, this, std::placeholders::_1, FTransform(FVector2D(Index, 0), FVector2D(StartPos))));
 				Collision->SetCollisionEnd(std::bind(&AUIManager::PanelButtonTileEnd, this, std::placeholders::_1, FTransform(FVector2D(Index, 0), FVector2D(StartPos))));
 
+				PanelAllVector.push_back(Collision);
+
 				++Index;
 
 				if ((6 * 4) - 1 == Index)
@@ -215,7 +217,8 @@ void AUIManager::Tick(float _DeltaTime)
 
 					CroppatchTile->SetCropsIndex(NowSelectCrops);
 					CroppatchTile->SetGrow(0);
-					CroppatchTile->SetTime(CropsNeedGrowTime[Index]);
+					CroppatchTile->SetWater(0);
+					CroppatchTile->SetTime(CropsNeedGrowTime[NowSelectCrops]);
 
 					CroppatchTileImage[Index]->SetActive(true);
 					CroppatchTileImage[Index]->SetSprite("Crops.png", 3 + 11 * NowSelectCrops);
@@ -236,10 +239,23 @@ void AUIManager::TapButtonIn()
 {
 	if (4 > TapTimer)
 	{
-		FVector2D Location = SRTapWhite->GetComponentLocation();
-
-		SRTapWhite->AddComponentLocation({ 116, 0 });
 		MenuPanelUI->AddActorLocation({ 116, 0 });
+		SRTapWhite->AddComponentLocation({ 116, 0 });
+
+		{
+			std::vector<U2DCollision*>::iterator StartIter = PanelAllVector.begin();
+			std::vector<U2DCollision*>::iterator EndIter = PanelAllVector.end();
+
+			for (; StartIter != EndIter; ++StartIter)
+			{
+				U2DCollision* CurRes = *StartIter;
+				
+				if (nullptr != CurRes)
+				{
+					CurRes->AddComponentLocation({ 116, 0 });
+				}
+			}
+		}
 
 		++TapTimer;
 	}
@@ -249,10 +265,25 @@ void AUIManager::TapButtonOut()
 {
 	if (0 < TapTimer)
 	{
-		FVector2D Location = SRTapWhite->GetComponentLocation();
-
-		SRTapWhite->AddComponentLocation({ -116, 0 });
 		MenuPanelUI->AddActorLocation({ -116, 0 });
+		SRTapWhite->AddComponentLocation({ -116, 0 });
+
+		{
+			std::vector<class U2DCollision*>::iterator StartIter = PanelAllVector.begin();
+			std::vector<class U2DCollision*>::iterator EndIter = PanelAllVector.end();
+
+			for (; StartIter != EndIter; ++StartIter)
+			{
+				//std::vector<class U2DCollision*>::iterator CurRes = StartIter->second;
+				//U2DCollision* CurRes = StartIter->second;
+				U2DCollision* CurRes = *StartIter;
+
+				if (nullptr != CurRes)
+				{
+					CurRes->AddComponentLocation({ -116, 0 });
+				}
+			}
+		}
 
 		--TapTimer;
 	}

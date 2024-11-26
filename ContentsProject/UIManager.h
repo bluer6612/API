@@ -86,5 +86,6 @@ private:
 	int NowSelectTap = 1;
 	int TapTimer = 0;
 
+	std::vector<class U2DCollision*> PanelAllVector;
 	std::vector<std::vector<int>> FarmInfoIndex;
 };

@@ -6,15 +6,15 @@
 class UEngineSerializer
 {
 public:
-		UEngineSerializer();
+	UEngineSerializer();
 	~UEngineSerializer();
 
-		UEngineSerializer(const UEngineSerializer& _Other) = delete;
+	UEngineSerializer(const UEngineSerializer& _Other) = delete;
 	UEngineSerializer(UEngineSerializer&& _Other) noexcept = delete;
 	UEngineSerializer& operator=(const UEngineSerializer& _Other) = delete;
 	UEngineSerializer& operator=(UEngineSerializer&& _Other) noexcept = delete;
 
-		void Write(void* _Data, unsigned int _Size);
+	void Write(void* _Data, unsigned int _Size);
 
 	void operator<<(int& _Data)
 	{
@@ -38,7 +38,7 @@ public:
 
 	void operator<<(std::string& _Data)
 	{
-						int Size = static_cast<int>(_Data.size());
+		int Size = static_cast<int>(_Data.size());
 		operator<<(Size);
 		if (0 != Size)
 		{
@@ -56,7 +56,7 @@ public:
 
 		for (size_t i = 0; i < _vector.size(); i++)
 		{
-						operator<<(_vector[i]);
+			operator<<(_vector[i]);
 		}
 	}
 
@@ -84,9 +84,9 @@ public:
 
 	void operator>>(std::string& _Data)
 	{
-						int Size;
+		int Size;
 		operator>>(Size);
-				_Data.resize(Size);
+		_Data.resize(Size);
 
 		Read(&_Data[0], static_cast<int>(_Data.size()));
 	}
@@ -102,7 +102,7 @@ public:
 
 		for (size_t i = 0; i < _vector.size(); i++)
 		{
-						operator>>(_vector[i]);
+			operator>>(_vector[i]);
 		}
 	}
 
@@ -124,23 +124,14 @@ public:
 protected:
 
 private:
-			
-		int WriteOffset = 0;
-
-		int ReadOffset = 0;
-
-		std::vector<char> Data;
+	int WriteOffset = 0;
+	int ReadOffset = 0;
+	std::vector<char> Data;
 };
 
 class ISerializObject
 {
-										
 public:
 		virtual void Serialize(UEngineSerializer& _Ser) = 0;
 		virtual void DeSerialize(UEngineSerializer& _Ser) = 0;
 };
-
-//class Test
-//{
-//	//	//	//	//	//
-//	bool Check; //	int Value;  //};

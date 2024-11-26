@@ -88,6 +88,16 @@ public:
 		return CropsIndex;
 	}
 
+	void SetWater(int _Water)
+	{
+		Water = _Water;
+	}
+
+	int GetWater() const
+	{
+		return Water;
+	}
+
 	void SetGrow(int _Grow)
 	{
 		Grow = _Grow;
@@ -117,6 +127,7 @@ private:
 	std::vector<std::vector<Tile>> AllTiles;
 
 	int CropsIndex = 0;
+	int Water = 0;
 	int Grow = 0;
 	int Time = 0;
 };
