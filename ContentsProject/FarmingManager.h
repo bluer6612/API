@@ -1,24 +1,23 @@
 #pragma once
 #include <EngineCore/GlobalVariable.h>
+#include "TileMap.h"
+#include "MenuPanelUI.h"
 
 // Ό³Έν :
-class UFarmingManager
+class AFarmingManager : public AActor
 {
 public:
-	// constrcuter destructer
-	UFarmingManager();
-	~UFarmingManager();
+	AFarmingManager();
+	~AFarmingManager();
 
-	// delete Function
-	UFarmingManager(const UFarmingManager& _Other) = delete;
-	UFarmingManager(UFarmingManager&& _Other) noexcept = delete;
-	UFarmingManager& operator=(const UFarmingManager& _Other) = delete;
-	UFarmingManager& operator=(UFarmingManager&& _Other) noexcept = delete;
+	AFarmingManager(const AFarmingManager& _Other) = delete;
+	AFarmingManager(AFarmingManager&& _Other) noexcept = delete;
+	AFarmingManager& operator=(const AFarmingManager& _Other) = delete;
+	AFarmingManager& operator=(AFarmingManager&& _Other) noexcept = delete;
 
-	static int CropsNeedMoney[CropsCount] = {};
 protected:
+	void BeginPlay();
+	void Tick(float _DeltaTime) override;
 
 private:
-	int i = 0;
 };
-

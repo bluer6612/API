@@ -58,6 +58,9 @@
     <ClInclude Include="MainContentsCore.h">
       <Filter>Core</Filter>
     </ClInclude>
+    <ClInclude Include="FarmingManager.h">
+      <Filter>ContentsObject\Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -116,6 +119,9 @@
     </ClCompile>
     <ClCompile Include="MainContentsCore.cpp">
       <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="FarmingManager.cpp">
+      <Filter>ContentsObject\Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -24,6 +24,7 @@ public:
 	friend class ACroppatch;
 
 	static AUIManager* UIManager;
+	static ATileMap* CroppatchTile;
 
 	AUIManager();
 	~AUIManager();
@@ -79,7 +80,6 @@ private:
 	ABuildingManager* BuildingManager = nullptr;
 	ACroppatch* Croppatch = nullptr;
 
-	ATileMap* CroppatchTile = nullptr;
 	USpriteRenderer* CroppatchTileImage[1000] = {};
 
 	int NowSelectCrops = -1;

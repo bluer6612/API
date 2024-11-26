@@ -1,11 +1,24 @@
 #include "PreCompile.h"
 #include "FarmingManager.h"
+#include "UIManager.h"
 
-UFarmingManager::UFarmingManager()
+AFarmingManager::AFarmingManager()
 {
 }
 
-UFarmingManager::~UFarmingManager()
+AFarmingManager::~AFarmingManager()
 {
 }
 
+
+void AFarmingManager::BeginPlay()
+{
+}
+
+void AFarmingManager::Tick(float _DeltaTime)
+{
+	Super::Tick(_DeltaTime);
+
+	//AUIManager::CroppatchTile;
+
+}
