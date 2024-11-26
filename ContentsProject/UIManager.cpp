@@ -237,8 +237,6 @@ void AUIManager::Tick(float _DeltaTime)
 					CroppatchTileImage[Index]->SetAlphafloat(1.f);
 
 					CropsAllVector.push_back(CropTile);
-
-					int a = CropsAllVector.size();
 				}
 			}
 		}
@@ -382,6 +380,14 @@ void AUIManager::PanelButtonTileStay(AActor* _Actor, FTransform _Index)
 			NowSelectCrops = _Index.Scale.X;
 			CursorImage->SetSprite("Crops.png", 3 + 11 * NowSelectCrops);
 			CursorImage->SetActive(true);
+
+			for (int i = 0; i < 448; i++)
+			{
+				if (-1 == CroppatchTile->GetTileLocation(-)->GetCropsIndex())
+				{
+					CroppatchTileImage[i]->SetActive(true);
+				}
+			}
 		}
 	}
 
