@@ -168,12 +168,13 @@ void AUIManager::BeginPlay()
 
 	//≥ÛªÁ ≈∏¿œ
 	{
-		FVector2D Location = { static_cast<float>(0), static_cast<float>(ScreenY - 298 - 36 + 4) };
-		FVector2D Location2 = { static_cast<float>(17), static_cast<float>(ScreenY - 298 - 36 + 4 + 17) };
+		FVector2D Location = { static_cast<float>(0), static_cast<float>(ScreenHY - 32 - 16 + 8) };
+		FVector2D Location2 = { static_cast<float>(17), static_cast<float>(ScreenHY - 32 - 16 + 25 ) };
 		FVector2D StartPos = Location2;
 
 		CroppatchTile = GetWorld()->SpawnActor<ATileMap>();
 		CroppatchTile->SetActorLocation(Location);
+		//CroppatchTile->Create("EmptyTile.png", { 56, 8 }, { 34, 34 });
 		CroppatchTile->Create("EmptyTile.png", { 56, 8 }, { 34, 34 });
 
 		int Index = 0;
