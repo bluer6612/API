@@ -63,8 +63,9 @@ public:
 	void PanelButtonTileStay(AActor* _Actor, FTransform _Index);
 	void PanelButtonTileEnd(AActor* _Actor, FTransform _Index);
 
-	std::vector<class ATileMap*> CropsAllVector;
+	std::vector<class Tile*> CropsAllVector;
 	USpriteRenderer* CroppatchTileImage[1000] = {};
+	ATileMap* CroppatchTile = nullptr;
 
 protected:
 
@@ -80,7 +81,6 @@ private:
 	ABuildingManager* BuildingManager = nullptr;
 
 	ACroppatch* Croppatch = nullptr;
-	ATileMap* CroppatchTile = nullptr;
 
 	bool CursorOnTap = false;
 	int NowSelectCrops = -1;

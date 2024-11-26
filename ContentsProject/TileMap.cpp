@@ -62,21 +62,6 @@ bool ATileMap::IsIndexOver(FIntPoint _Index) const
 	return false;
 }
 
-void ATileMap::SetWaterSprite(FVector2D _Location)
-{
-	FIntPoint _Index = GetIndex(_Location);
-
-	USpriteRenderer* FindSprite = AllTiles[_Index.Y][_Index.X].SpriteRenderer;
-	if (true == WaterNeed)
-	{
-		FindSprite->SetSprite("EmptyTile.png");
-	}
-	else
-	{
-		FindSprite->SetSprite("WaterDirt.png");
-	}
-}
-
 void ATileMap::SetTileSpriteIndex(FIntPoint _Index, int _SpriteIndex)
 {
 	SetTileSpriteIndex(_Index, { 0,0 }, TileSize, { 0, 0 }, { 0,0 }, _SpriteIndex);
@@ -129,6 +114,21 @@ int ATileMap::GetTileIndex(FVector2D _Location)
 	}
 
 	return AllTiles[_Index.Y][_Index.X].TileIndex;
+}
+
+void ATileMap::SetWaterSprite(FVector2D _Location, bool _WaterNeed)
+{
+	FIntPoint _Index = GetIndex(_Location);
+
+	USpriteRenderer* FindSprite = AllTiles[_Index.Y][_Index.X].SpriteRenderer;
+	if (true == _WaterNeed)
+	{
+		FindSprite->SetSprite("EmptyTile.png");
+	}
+	else
+	{
+		FindSprite->SetSprite("WaterDirt.png");
+	}
 }
 
 Tile* ATileMap::GetTileLocation(FVector2D _Location)

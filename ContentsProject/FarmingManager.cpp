@@ -34,9 +34,9 @@ void AFarmingManager::Tick(float _DeltaTime)
 		{
 			for (int i = 0; i < UIManager->CropsAllVector.size(); i++)
 			{
-				ATileMap* Crops = UIManager->CropsAllVector[i];
+				Tile* Crops = UIManager->CropsAllVector[i];
 
-				USpriteRenderer* CropsImage = UIManager->CroppatchTileImage[Crops->GetTileIndex()];
+				USpriteRenderer* CropsImage = UIManager->CroppatchTileImage[Crops->GetCropTileIndex()];
 
 				if (false == Crops->GetWaterNeed())
 				{
@@ -57,7 +57,7 @@ void AFarmingManager::Tick(float _DeltaTime)
 							Crops->SetProgress(0);
 							Crops->SetWater(0);
 							Crops->SetWaterNeed(true);
-							Crops->SetWaterSprite(CropsImage->GetComponentLocation());
+							UIManager->CroppatchTile->SetWaterSprite(CropsImage->GetComponentLocation(), true);
 							
 							CropsImage->SetSprite("Crops.png", (3 + Crops->GetProgress()) + 11 * Index);
 						}
@@ -67,10 +67,10 @@ void AFarmingManager::Tick(float _DeltaTime)
 							CropsImage->SetAlphafloat(0.75f);
 							CropsImage->SetActive(false);
 
-							Crops->CropsReset(0, 0);
+							Crops->CropsReset(0, -1);
 						}
 					}
-					else if (1 <= Crops->GetTime() / (6 - Progress))
+					else if (1 + Progress <= Crops->GetTime() / (6 * (1 + Progress)))
 					{
 						Crops->AddProgress();
 						CropsImage->SetSprite("Crops.png", (3 + Progress) + 11 * Index);
@@ -78,7 +78,7 @@ void AFarmingManager::Tick(float _DeltaTime)
 						if (0 == Progress % CropsNeedWater[Index] && 0 != Progress)
 						{
 							Crops->SetWaterNeed(true);
-							Crops->SetWaterSprite(CropsImage->GetComponentLocation());
+							UIManager->CroppatchTile->SetWaterSprite(CropsImage->GetComponentLocation(), true);
 						}
 					}
 				}

@@ -184,6 +184,7 @@ void AUIManager::BeginPlay()
 			for (int x = 0; x < 56; ++x)
 			{
 				CroppatchTile->SetTileSpriteIndex({ x, y }, { }, { 34, 34 }, { }, { }, 0, Index, ERenderOrder::BUILDINGUP);
+				CroppatchTile->GetTileLocation(StartPos)->SetCropsIndex(-1);
 
 				CroppatchTileImage[Index] = CreateDefaultSubObject<USpriteRenderer>();
 				CroppatchTileImage[Index]->SetComponentCrate(CroppatchTileImage[Index], "gridsmall.png", { 34, 34 }, { StartPos }, ERenderOrder::BUILDINGUP);
@@ -215,25 +216,29 @@ void AUIManager::Tick(float _DeltaTime)
 	{
 		if (nullptr != CroppatchTile->GetTileLocation(MousePos))
 		{
+			Tile* CropTile = CroppatchTile->GetTileLocation(MousePos);
+
 			if (CropsNeedMoney[NowSelectCrops] <= Money)
 			{
 				int Index = CroppatchTile->GetTileIndex(MousePos);
 
-				if (0 == CroppatchTile->GetCropsIndex())
+				if (-1 == CropTile->GetCropsIndex())
 				{
 					Money -= CropsNeedMoney[NowSelectCrops];
 
-					CroppatchTile->CropsReset(Index, NowSelectCrops);
+					CropTile->CropsReset(Index, NowSelectCrops);
 
-					CroppatchTile->SetWaterNeed(false);
-					CroppatchTile->SetWaterSprite(CroppatchTileImage[Index]->GetComponentLocation());
+					CropTile->SetWaterNeed(false);
+					CroppatchTile->SetWaterSprite(CroppatchTileImage[Index]->GetComponentLocation(), false);
 
 					CroppatchTileImage[Index]->SetActive(true);
 					CroppatchTileImage[Index]->SetSprite("Crops.png", 3 + 11 * NowSelectCrops);
 					CroppatchTileImage[Index]->SetComponentScale({ 32, 64 });
 					CroppatchTileImage[Index]->SetAlphafloat(1.f);
 
-					CropsAllVector.push_back(CroppatchTile);
+					CropsAllVector.push_back(CropTile);
+
+					int a = CropsAllVector.size();
 				}
 			}
 		}

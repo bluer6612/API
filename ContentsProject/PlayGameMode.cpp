@@ -54,16 +54,17 @@ void APlayGameMode::BeginPlay()
 	AUIManager* UIManager = nullptr;
 	ABuildingManager* BuildingManager = nullptr;
 	{
-		UIManager = GetWorld()->SpawnActor<AUIManager>();
+		//UIManager = GetWorld()->SpawnActor<AUIManager>();
+		//UIManager->SetUIManager(UIManager);
 	}
 
 	//ºôµù Manager
 	{
 		BuildingManager = GetWorld()->SpawnActor<ABuildingManager>();
-		UIManager->SetBuildingManager(BuildingManager);
+		//BuildingManager->SetBuildingManager(BuildingManager);
 	}
 
-	//AFarmingManager* FarmingManager = GetWorld()->SpawnActor<AFarmingManager>();
+	AFarmingManager* FarmingManager = GetWorld()->SpawnActor<AFarmingManager>();
 
 	//BGM
 	BGMPlayer = UEngineSound::Play("Rustys_Retirement-Full_OST_Master.mp3");

@@ -15,6 +15,14 @@ public:
 	int SpriteIndex;
 	int TileIndex = 0;
 
+	int CropTileIndex = 0;
+	int CropsIndex = 0;
+	int Water = 0;
+	bool WaterNeed = true;
+	int Grow = 0;
+	int Progress = 0;
+	float Time = 0;
+
 	void Serialize(UEngineSerializer& _Ser)
 	{
 		std::string SpriteName;
@@ -40,51 +48,12 @@ public:
 		_Ser >> Pivot;
 		_Ser >> SpriteIndex;
 	}
-};
 
 
-class ATileMap : public AActor, public ISerializObject
-{
-public:
-	ATileMap();
-	~ATileMap();
 
-	ATileMap(const ATileMap& _Other) = delete;
-	ATileMap(ATileMap&& _Other) noexcept = delete;
-	ATileMap& operator=(const ATileMap& _Other) = delete;
-	ATileMap& operator=(ATileMap&& _Other) noexcept = delete;
-
-	void Create(std::string_view _Sprite, FIntPoint _Count, FVector2D _TileSize);
-
-	FIntPoint GetTileLocation(ATileMap* _ATileMap) const;
-
-	Tile* GetTileLocation(FVector2D _Location);
-
-	FIntPoint GetIndex(FVector2D _Location);
-
-	int GetTileIndex(FVector2D _Location);
-
-	void SetWaterSprite(FVector2D _Location);
-
-	void SetTileSpriteIndex(FIntPoint _Index, int _SpriteIndex);
-	void SetTileSpriteIndex(FIntPoint _Index, FVector2D _Pivot, FVector2D _SpriteScale, FVector2D _Location, FVector2D _LocationPivot, int _SpriteIndex, int _TileIndex = 0, ERenderOrder _SpriteOrder = ERenderOrder::ZERO);
-
-	Tile* GetTileRef(FIntPoint _Index);
-	Tile* GetTileRef(FVector2D _Location);
-
-	FVector2D IndexToTileLocation(FIntPoint _Index, FVector2D _Location);
-
-	FIntPoint LocationToIndex(FVector2D _Location);
-
-	bool IsIndexOver(FIntPoint _Index)  const;
-
-	void Serialize(UEngineSerializer& _Ser);
-
-	void DeSerialize(UEngineSerializer& _Ser);
-
-	void CropsReset(int _TileIndex, int _CropsIndex)
+	void CropsReset(int _CropTileIndex, int _CropsIndex)
 	{
-		this->SetTileIndex(_TileIndex);
+		this->SetCropTileIndex(_CropTileIndex);
 		this->SetCropsIndex(_CropsIndex);
 		this->SetGrow(0);
 		this->SetWater(0);
@@ -93,14 +62,14 @@ public:
 		this->SetTime(0);
 	}
 
-	void SetTileIndex(int _TileIndex)
+	void SetCropTileIndex(int _CropTileIndex)
 	{
-		TileIndex = _TileIndex;
+		CropTileIndex = _CropTileIndex;
 	}
 
-	int GetTileIndex() const
+	int GetCropTileIndex() const
 	{
-		return TileIndex;
+		return CropTileIndex;
 	}
 
 	void SetCropsIndex(int _CropsIndex)
@@ -182,6 +151,45 @@ public:
 	{
 		return Time;
 	}
+};
+
+
+class ATileMap : public AActor, public ISerializObject
+{
+public:
+	ATileMap();
+	~ATileMap();
+
+	ATileMap(const ATileMap& _Other) = delete;
+	ATileMap(ATileMap&& _Other) noexcept = delete;
+	ATileMap& operator=(const ATileMap& _Other) = delete;
+	ATileMap& operator=(ATileMap&& _Other) noexcept = delete;
+
+	void Create(std::string_view _Sprite, FIntPoint _Count, FVector2D _TileSize);
+
+	Tile* GetTileLocation(FVector2D _Location);
+
+	FIntPoint GetIndex(FVector2D _Location);
+
+	int GetTileIndex(FVector2D _Location);
+
+	void SetWaterSprite(FVector2D _Location, bool _WaterNeed);
+
+	void SetTileSpriteIndex(FIntPoint _Index, int _SpriteIndex);
+	void SetTileSpriteIndex(FIntPoint _Index, FVector2D _Pivot, FVector2D _SpriteScale, FVector2D _Location, FVector2D _LocationPivot, int _SpriteIndex, int _TileIndex = 0, ERenderOrder _SpriteOrder = ERenderOrder::ZERO);
+
+	Tile* GetTileRef(FIntPoint _Index);
+	Tile* GetTileRef(FVector2D _Location);
+
+	FVector2D IndexToTileLocation(FIntPoint _Index, FVector2D _Location);
+
+	FIntPoint LocationToIndex(FVector2D _Location);
+
+	bool IsIndexOver(FIntPoint _Index)  const;
+
+	void Serialize(UEngineSerializer& _Ser);
+
+	void DeSerialize(UEngineSerializer& _Ser);
 
 protected:
 
@@ -190,14 +198,6 @@ private:
 	std::string SpriteName;
 	FVector2D TileSize;
 	std::vector<std::vector<Tile>> AllTiles;
-
-	int TileIndex = 0;
-	int CropsIndex = 0;
-	int Water = 0;
-	bool WaterNeed = true;
-	int Grow = 0;
-	int Progress = 0;
-	float Time = 0;
 };
 
 
