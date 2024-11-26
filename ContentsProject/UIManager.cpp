@@ -209,7 +209,7 @@ void AUIManager::Tick(float _DeltaTime)
 	CursorCollision->SetComponentLocation(MousePos);
 	CursorImage->SetComponentLocation({ MousePos.X - 5, MousePos.Y - 24 });
 
-	if (true == UEngineInput::GetInst().IsPress(VK_LBUTTON) && -1 != NowSelectCrops)
+	if (true == UEngineInput::GetInst().IsPress(VK_LBUTTON) && -1 != NowSelectCrops && false == CursorOnTap)
 	{
 		if (nullptr != CroppatchTile->GetTileLocation(MousePos))
 		{
@@ -318,17 +318,27 @@ void AUIManager::TapButtonStay(AActor* _Actor, FTransform _Index)
 	{
 		NowSelectTap = _Index.Scale.X;
 
-		if (0 == TapTimer)
+		if (0 == TapTimer && -1 == NowSelectTap)
 		{
 			TimeEventer.PushEvent(1.0f, std::bind(&AUIManager::TapButtonIn, this), true, false);
+
+			//X 버튼이 아니면 화이트 이동
+			if (-1 != NowSelectTap)
+			{
+				SRTapWhite->SetComponentLocation({ _Index.Location.X + (116 * 4), _Index.Location.Y});
+			}
 		}
 		else if (4 == TapTimer)
 		{
 			TimeEventer.PushEvent(0.5f, std::bind(&AUIManager::TapButtonOut, this), true, false);
-		}
 
-		//X 버튼이 아니면 화이트 이동
-		if (-1 != NowSelectTap)
+			//X 버튼이 아니면 화이트 이동
+			if (-1 != NowSelectTap)
+			{
+				SRTapWhite->SetComponentLocation({ _Index.Location.X + (116 * 4), _Index.Location.Y });
+			}
+		}
+		else
 		{
 			SRTapWhite->SetComponentLocation({ _Index.Location.X, _Index.Location.Y });
 		}
@@ -342,6 +352,8 @@ void AUIManager::PanelButtonTileEnter(AActor* _Actor, FTransform _Index)
 
 	SRButtonBlack->SetComponentLocation({ _Index.Location.X, _Index.Location.Y });
 	SRButtonBlack->SetActive(true);
+
+	CursorOnTap = true;
 }
 
 void AUIManager::PanelButtonTileStay(AActor* _Actor, FTransform _Index)
@@ -363,10 +375,14 @@ void AUIManager::PanelButtonTileStay(AActor* _Actor, FTransform _Index)
 			CursorImage->SetActive(true);
 		}
 	}
+
+	CursorOnTap = true;
 }
 
 void AUIManager::PanelButtonTileEnd(AActor* _Actor, FTransform _Index)
 {
 	SRFarmInfo->SetActive(false);
 	SRButtonBlack->SetActive(false);
+
+	CursorOnTap = false;
 }
