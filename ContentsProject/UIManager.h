@@ -23,8 +23,6 @@ class AUIManager : public AActor
 public:
 	friend class ACroppatch;
 
-	static AUIManager* UIManager;
-
 	AUIManager();
 	~AUIManager();
 
@@ -65,6 +63,9 @@ public:
 	void PanelButtonTileStay(AActor* _Actor, FTransform _Index);
 	void PanelButtonTileEnd(AActor* _Actor, FTransform _Index);
 
+	std::vector<class ATileMap*> CropsAllVector;
+	USpriteRenderer* CroppatchTileImage[1000] = {};
+
 protected:
 
 private:
@@ -79,14 +80,11 @@ private:
 	ABuildingManager* BuildingManager = nullptr;
 
 	ACroppatch* Croppatch = nullptr;
-	ATileMap* CroppatchTile;
-	USpriteRenderer* CroppatchTileImage[1000] = {};
+	ATileMap* CroppatchTile = nullptr;
 
 	int NowSelectCrops = -1;
 	int NowSelectTap = 1;
 	int TapTimer = 0;
-
-	std::vector<class ATileMap*> CropsAllVector;
 	std::vector<class U2DCollision*> PanelAllVector;
 	std::vector<std::vector<int>> FarmInfoIndex;
 };

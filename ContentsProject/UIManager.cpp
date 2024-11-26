@@ -220,10 +220,7 @@ void AUIManager::Tick(float _DeltaTime)
 				{
 					Money -= CropsNeedMoney[NowSelectCrops];
 
-					CroppatchTile->SetCropsIndex(NowSelectCrops);
-					CroppatchTile->SetGrow(0);
-					CroppatchTile->SetWater(0);
-					CroppatchTile->SetTime(CropsNeedGrowTime[NowSelectCrops]);
+					CroppatchTile->CropsReset(Index, NowSelectCrops);
 
 					CroppatchTileImage[Index]->SetActive(true);
 					CroppatchTileImage[Index]->SetSprite("Crops.png", 3 + 11 * NowSelectCrops);

@@ -78,6 +78,26 @@ public:
 
 	void DeSerialize(UEngineSerializer& _Ser);
 
+	void CropsReset(int _TileIndex, int _CropsIndex)
+	{
+		this->SetTileIndex(_TileIndex);
+		this->SetCropsIndex(_CropsIndex);
+		this->SetGrow(0);
+		this->SetWater(0);
+		this->SetProgress(0);
+		this->SetTime(0);
+	}
+
+	void SetTileIndex(int _TileIndex)
+	{
+		TileIndex = _TileIndex;
+	}
+
+	int GetTileIndex() const
+	{
+		return TileIndex;
+	}
+
 	void SetCropsIndex(int _CropsIndex)
 	{
 		CropsIndex = _CropsIndex;
@@ -88,9 +108,9 @@ public:
 		return CropsIndex;
 	}
 
-	void AddWater(int _Water)
+	void AddWater()
 	{
-		Water += _Water;
+		Water += 1;
 	}
 
 	void SetWater(int _Water)
@@ -103,9 +123,9 @@ public:
 		return Water;
 	}
 
-	void AddGrow(int _Grow)
+	void AddGrow()
 	{
-		Grow += _Grow;
+		Grow += 1;
 	}
 
 	void SetGrow(int _Grow)
@@ -118,17 +138,32 @@ public:
 		return Grow;
 	}
 
-	void AddTime(int _Time)
+	void AddProgress()
+	{
+		Progress += 1;
+	}
+
+	void SetProgress(int _Progress)
+	{
+		Progress = _Progress;
+	}
+
+	int GetProgress() const
+	{
+		return Progress;
+	}
+
+	void AddTime(float _Time)
 	{
 		Time += _Time;
 	}
 
-	void SetTime(int _Time)
+	void SetTime(float _Time)
 	{
 		Time = _Time;
 	}
 
-	int GetTime() const
+	float GetTime() const
 	{
 		return Time;
 	}
@@ -141,10 +176,12 @@ private:
 	FVector2D TileSize;
 	std::vector<std::vector<Tile>> AllTiles;
 
+	int TileIndex = 0;
 	int CropsIndex = 0;
 	int Water = 0;
 	int Grow = 0;
-	int Time = 0;
+	int Progress = 0;
+	float Time = 0;
 };
 
 

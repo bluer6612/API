@@ -20,6 +20,7 @@
 
 #include "PlayMap.h"
 #include "UIManager.h"
+#include "FarmingManager.h"
 
 APlayGameMode::APlayGameMode()
 {
@@ -61,6 +62,8 @@ void APlayGameMode::BeginPlay()
 		BuildingManager = GetWorld()->SpawnActor<ABuildingManager>();
 		UIManager->SetBuildingManager(BuildingManager);
 	}
+
+	AFarmingManager* FarmingManager = GetWorld()->SpawnActor<AFarmingManager>();
 
 	//BGM
 	BGMPlayer = UEngineSound::Play("Rustys_Retirement-Full_OST_Master.mp3");
