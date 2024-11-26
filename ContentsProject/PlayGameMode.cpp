@@ -63,7 +63,7 @@ void APlayGameMode::BeginPlay()
 	}
 
 	//BGM
-	BGMPlayer = UEngineSound::Play("Echo-metal-1.wav");
+	BGMPlayer = UEngineSound::Play("Rustys_Retirement-Full_OST_Master.mp3");
 
 	//Ä³¸¯ÅÍ
 	{
