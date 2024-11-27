@@ -30,5 +30,6 @@ private:
 	AUIManager* UIManager = nullptr;
 
 	std::vector<class Tile*> SelectCropsVector;
-	std::list<FTransform> SelectCropsLocList;
+	std::list<FVector2D> SelectCropsLocList;
+	std::list<int> SelectCropsLocListResult;
 };
