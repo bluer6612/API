@@ -10,7 +10,6 @@ public:
 	UFSMStateManager()	{	}
 	~UFSMStateManager()	{	}
 
-	
 	UFSMStateManager(const UFSMStateManager& _Other) = delete;
 	UFSMStateManager(UFSMStateManager&& _Other) noexcept = delete;
 	UFSMStateManager& operator=(const UFSMStateManager& _Other) = delete;
@@ -72,6 +71,11 @@ public:
 		{
 			CurState->StartFunction();
 		}
+	}
+
+	FSMState* GetCurState() const
+	{
+		return CurState;
 	}
 
 protected:

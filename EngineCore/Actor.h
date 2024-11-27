@@ -72,7 +72,6 @@ public:
 		return NewComponent;
 	}
 
-
 protected:
 	UTimeEvent TimeEventer;
 
@@ -90,4 +89,3 @@ private:
 
 	std::list<class UActorComponent*> Components;
 };
-

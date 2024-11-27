@@ -125,20 +125,21 @@ void ATileMap::SetCropsTileSprite(FVector2D _Location, int _SpriteIndex)
 	FIntPoint _Index = GetIndex(_Location);
 
 	USpriteRenderer* FindSprite = AllTiles[_Index.Y][_Index.X].SpriteRenderer;
-	if (0 == _SpriteIndex)
+
+	switch (_SpriteIndex)
 	{
+	case 0:
 		FindSprite->SetSprite("EmptyTile.png");
 		FindSprite->SetAlphafloat(1.f);
-	}
-	else if (1 == _SpriteIndex)
-	{
+		break;
+	case 1:
 		FindSprite->SetSprite("gridsmall.png");
 		FindSprite->SetAlphafloat(1.f);
-	}
-	else if (2 == _SpriteIndex)
-	{
+		break;
+	case 2:
 		FindSprite->SetSprite("WaterDirt.png");
 		FindSprite->SetAlphafloat(0.25f);
+		break;
 	}
 }
 

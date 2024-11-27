@@ -2,6 +2,8 @@
 #include "Rusty.h"
 #include "Fade.h"
 
+#include "CharacterManager.h"
+
 #include <EnginePlatform/EngineInput.h>
 #include <EngineCore/SpriteRenderer.h>
 #include <EngineCore/EngineAPICore.h>
@@ -51,13 +53,15 @@ void ARusty::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 
-	FSM.Update(_DeltaTime);
-
-	if (0 == ActionState)
+	switch (ActionState)
 	{
+	case 0:
 		FVector2D Location = GetActorLocation();
+		break;
 	}
 
+
+	FSM.Update(_DeltaTime);
 }
 
 void ARusty::Idle(float _DeltaTime)
