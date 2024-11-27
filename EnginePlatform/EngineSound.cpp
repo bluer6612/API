@@ -141,7 +141,6 @@ USoundPlayer UEngineSound::Play(std::string_view _Name)
 		MSGASSERT("로드하지 않은 사운드를 재생하려고 했습니다" + UpperString);
 	}
 
-
 	// 그냥 단순히 재생하는게 아니라면 채널을 얻어와야 속략이나 피치 볼륨 믹싱 등등을 조절할수 있다.
 	FMOD::Channel* Ch = nullptr;
 
@@ -152,7 +151,6 @@ USoundPlayer UEngineSound::Play(std::string_view _Name)
 
 	// 볼륨 1로
 	Ch->setVolume(1.0f);
-
 
 	USoundPlayer NewPlayer;
 	NewPlayer.Control = Ch;

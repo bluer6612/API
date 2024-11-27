@@ -56,56 +56,51 @@ void ARusty::Tick(float _DeltaTime)
 
 void ARusty::Idle(float _DeltaTime)
 {
-	if (true == UEngineInput::GetInst().IsPress('A') ||
-		true == UEngineInput::GetInst().IsPress('D') ||
-		true == UEngineInput::GetInst().IsPress('W') ||
-		true == UEngineInput::GetInst().IsPress('S'))
-	{
-		FSM.ChangeState(NewPlayerState::Move);
-		return;
-	}
+	//if (true == UEngineInput::GetInst().IsPress('A') ||
+	//	true == UEngineInput::GetInst().IsPress('D') ||
+	//	true == UEngineInput::GetInst().IsPress('W') ||
+	//	true == UEngineInput::GetInst().IsPress('S'))
+	//{
+	//	FSM.ChangeState(NewPlayerState::Move);
+	//	return;
+	//}
 }
 
 void ARusty::Move(float _DeltaTime)
 {
 
-	FVector2D Vector = FVector2D::ZERO;
+	//FVector2D Vector = FVector2D::ZERO;
 
-	if (true == UEngineInput::GetInst().IsPress('D'))
-	{
-		Vector += FVector2D::RIGHT;
-	}
-	if (true == UEngineInput::GetInst().IsPress('A'))
-	{
-		Vector += FVector2D::LEFT;
-	}
-	if (true == UEngineInput::GetInst().IsPress('S'))
-	{
-		Vector += FVector2D::DOWN;
-	}
-	if (true == UEngineInput::GetInst().IsPress('W'))
-	{
-		Vector += FVector2D::UP;
-	}
+	//if (true == UEngineInput::GetInst().IsPress('D'))
+	//{
+	//	Vector += FVector2D::RIGHT;
+	//}
+	//if (true == UEngineInput::GetInst().IsPress('A'))
+	//{
+	//	Vector += FVector2D::LEFT;
+	//}
+	//if (true == UEngineInput::GetInst().IsPress('S'))
+	//{
+	//	Vector += FVector2D::DOWN;
+	//}
+	//if (true == UEngineInput::GetInst().IsPress('W'))
+	//{
+	//	Vector += FVector2D::UP;
+	//}
 
-	Vector.Normalize();
+	//Vector.Normalize();
 
-	if (true == IsMove)
-	{
-		AddActorLocation(Vector * _DeltaTime * Speed);
-	}
+	//if (true == IsMove)
+	//{
+	//	AddActorLocation(Vector * _DeltaTime * Speed);
+	//}
 
-	if (false == UEngineInput::GetInst().IsPress('A') &&
-		false == UEngineInput::GetInst().IsPress('D') &&
-		false == UEngineInput::GetInst().IsPress('W') &&
-		false == UEngineInput::GetInst().IsPress('S'))
-	{
-		FSM.ChangeState(NewPlayerState::Idle);
-		return;
-	}
-}
-
-void ARusty::LevelChangeStart()
-{
-	int a = 0;
+	//if (false == UEngineInput::GetInst().IsPress('A') &&
+	//	false == UEngineInput::GetInst().IsPress('D') &&
+	//	false == UEngineInput::GetInst().IsPress('W') &&
+	//	false == UEngineInput::GetInst().IsPress('S'))
+	//{
+	//	FSM.ChangeState(NewPlayerState::Idle);
+	//	return;
+	//}
 }

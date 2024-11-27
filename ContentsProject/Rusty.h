@@ -20,8 +20,6 @@ public:
 	void Idle(float _DeltaTime);
 	void Move(float _DeltaTime);
 
-	void LevelChangeStart() override;
-
 protected:
 
 private:
