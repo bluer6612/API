@@ -55,14 +55,13 @@ void APlayGameMode::BeginPlay()
 	AUIManager* UIManager = nullptr;
 	ABuildingManager* BuildingManager = nullptr;
 	{
-		AUIManager* UIManager = GetWorld()->SpawnActor<AUIManager>();
-		SetUIManager(UIManager);
+		UIManager = GetWorld()->SpawnActor<AUIManager>();
 	}
 
 	//Building Manager
 	{
 		ABuildingManager* BuildingManager = GetWorld()->SpawnActor<ABuildingManager>();
-		//BuildingManager->SetBuildingManager(BuildingManager);
+		BuildingManager->SetUIManager(UIManager);
 	}
 
 	//Farming Manager

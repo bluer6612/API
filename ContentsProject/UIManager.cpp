@@ -3,7 +3,6 @@
 
 #include "MenuPanelUI.h"
 #include "TitleLogo.h"
-#include "BuildingManager.h"
 
 #include <EngineCore/SpriteRenderer.h>
 #include <EngineCore/2DCollision.h>

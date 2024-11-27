@@ -52,16 +52,33 @@ void ARusty::BeginPlay()
 void ARusty::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
-	FVector2D Location = GetActorLocation();
+	FIntPoint Start = GetActorLocation().ConvertToPoint();
+	FIntPoint End = GetActorLocation().ConvertToPoint();
 
 	switch (ActionState)
 	{
 	case 0:
-		if (0 < Water)
+		//Tile * CropTile = FindTile(Start, End);
+
+
+		switch (1)
 		{
-			Tile* CropTile = FindTile(Location);
-			Watering(Location);
+		case 0://정지
+			break;
+		case 1://건설
+			break;
+		case 2://바이오
+			break;
+		case 3://수확
+			break;
+		case 4://물주기
+			if (0 < Water)
+			{
+				//Watering(Location);
+			}
+			break;
 		}
+
 		break;
 	}
 

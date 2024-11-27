@@ -15,10 +15,7 @@ public:
 	ACharacterManager& operator=(const ACharacterManager& _Other) = delete;
 	ACharacterManager& operator=(ACharacterManager&& _Other) noexcept = delete;
 
-	Tile* FindTile(FVector2D _Location)
-	{
-
-	}
+	//Tile* FindTile(FIntPoint _Start, FIntPoint _End);
 
 	void Watering(FVector2D _Location);
 

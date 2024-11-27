@@ -83,7 +83,7 @@ void ATileMap::SetTileSpriteIndex(FIntPoint _Index, FVector2D _Pivot, FVector2D 
 
 	USpriteRenderer* FindSprite = AllTiles[_Index.Y][_Index.X].SpriteRenderer;
 	FindSprite->SetSprite(SpriteName, _SpriteIndex);
-	FindSprite->SetComponentScale(_SpriteScale * 0.9);
+	FindSprite->SetComponentScale(_SpriteScale);
 	FindSprite->SetOrder(_SpriteOrder);
 	if ("EmptyTile.png" == SpriteName)
 	{

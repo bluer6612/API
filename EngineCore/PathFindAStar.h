@@ -9,9 +9,9 @@ class UPathFindNode
 public:
 	UPathFindNode* ParentNode;
 	FIntPoint Point;
-	float F = 0.0f;
-	float G = 0.0f;
-	float H = 0.0f; 
+	float F = 0.0f; //G + H
+	float G = 0.0f; //현재 내 위치에서 시작지점과의 거리
+	float H = 0.0f; //현재 내 위치에서 도착지점과의 거리
 
 	FVector2D GetPointToVector()
 	{

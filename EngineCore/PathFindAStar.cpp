@@ -7,6 +7,8 @@ UPathFindAStar::UPathFindAStar()
 	NodePool.resize(1000);
 
 	WayDir = { {0, 1}, {0, -1}, {1, 0}, {-1, 0},  {-1, 1}, {-1, -1}, {1, 1}, {1, -1} };
+
+	int a = WayDir.size();
 }
 
 UPathFindAStar::~UPathFindAStar()

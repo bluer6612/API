@@ -1,6 +1,5 @@
 #pragma once
 #include <EngineCore/Actor.h>
-#include "BuildingManager.h"
 #include "Croppatch.h"
 #include "TileMap.h"
 #include "MenuPanelUI.h"
@@ -45,11 +44,6 @@ public:
 		MenuPanelUI = _MenuPanelUI;
 	}
 
-	void SetBuildingManager(ABuildingManager* const _BuildingManager)
-	{
-		BuildingManager = _BuildingManager;
-	}
-
 	void SetCroppatch(ACroppatch* const _Croppatch)
 	{
 		Croppatch = _Croppatch;
@@ -78,7 +72,6 @@ private:
 	class USpriteRenderer* SRTapWhite = nullptr;
 
 	AMenuPanelUI* MenuPanelUI = nullptr;
-	ABuildingManager* BuildingManager = nullptr;
 
 	ACroppatch* Croppatch = nullptr;
 
