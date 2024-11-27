@@ -55,13 +55,13 @@ void APlayGameMode::BeginPlay()
 	AUIManager* UIManager = nullptr;
 	ABuildingManager* BuildingManager = nullptr;
 	{
-		UIManager = GetWorld()->SpawnActor<AUIManager>();
+		AUIManager* UIManager = GetWorld()->SpawnActor<AUIManager>();
 		SetUIManager(UIManager);
 	}
 
 	//Building Manager
 	{
-		BuildingManager = GetWorld()->SpawnActor<ABuildingManager>();
+		ABuildingManager* BuildingManager = GetWorld()->SpawnActor<ABuildingManager>();
 		//BuildingManager->SetBuildingManager(BuildingManager);
 	}
 
@@ -77,12 +77,10 @@ void APlayGameMode::BeginPlay()
 		CharacterManager->SetUIManager(UIManager);
 	}
 
-	//BGM
-	BGMPlayer = UEngineSound::Play("Rustys_Retirement-Full_OST_Master.mp3");
-
 	//캐릭터
 	{
 		ARusty* Rusty = AActor::GetWorld()->GetPawn<ARusty>();
+		Rusty->SetUIManager(UIManager);
 	}
 
 	//건물
@@ -97,6 +95,9 @@ void APlayGameMode::BeginPlay()
 	{
 		APlayMap* NewActor = AActor::GetWorld()->SpawnActor<APlayMap>();
 	}
+
+	//BGM
+	BGMPlayer = UEngineSound::Play("Rustys_Retirement-Full_OST_Master.mp3");
 
 	//{
 	//	AScore* NewActor = GetWorld()->SpawnActor<AScore>();

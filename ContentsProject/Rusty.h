@@ -1,8 +1,9 @@
 #pragma once
 #include <EngineCore/Actor.h>
 #include <EngineBase/FSMStateManager.h>
+#include "CharacterManager.h"
 
-class ARusty : public AActor
+class ARusty : public AActor, public ACharacterManager
 {
 public:
 	
