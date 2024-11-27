@@ -57,7 +57,7 @@ void AFarmingManager::Tick(float _DeltaTime)
 							Crops->SetProgress(0);
 							Crops->SetWater(0);
 							Crops->SetWaterNeed(true);
-							UIManager->CroppatchTile->SetWaterSprite(CropsImage->GetComponentLocation(), true);
+							UIManager->CroppatchTile->SetCropsTileSprite(CropsImage->GetComponentLocation(), 0);
 							
 							CropsImage->SetSprite("Crops.png", (3 + Crops->GetProgress()) + 11 * Index);
 						}
@@ -78,7 +78,7 @@ void AFarmingManager::Tick(float _DeltaTime)
 						if (0 == Progress % CropsNeedWater[Index] && 0 != Progress)
 						{
 							Crops->SetWaterNeed(true);
-							UIManager->CroppatchTile->SetWaterSprite(CropsImage->GetComponentLocation(), true);
+							UIManager->CroppatchTile->SetCropsTileSprite(CropsImage->GetComponentLocation(), 0);
 						}
 					}
 				}

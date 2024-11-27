@@ -187,7 +187,7 @@ void AUIManager::BeginPlay()
 				CroppatchTile->GetTileLocation(StartPos)->SetCropsIndex(-1);
 
 				CroppatchTileImage[Index] = CreateDefaultSubObject<USpriteRenderer>();
-				CroppatchTileImage[Index]->SetComponentCrate(CroppatchTileImage[Index], "gridsmall.png", { 34, 34 }, { StartPos }, ERenderOrder::BUILDINGUP);
+				CroppatchTileImage[Index]->SetComponentCrate(CroppatchTileImage[Index], "EmptyTile.png", { 34, 34 }, { StartPos }, ERenderOrder::BUILDINGUP);
 				CroppatchTileImage[Index]->SetPivotType(PivotType::Bot);
 				CroppatchTileImage[Index]->SetComponentScale({33.f, 33.f});
 				CroppatchTileImage[Index]->SetAlphafloat(0.75f);
@@ -229,7 +229,7 @@ void AUIManager::Tick(float _DeltaTime)
 					CropTile->CropsReset(Index, NowSelectCrops);
 
 					CropTile->SetWaterNeed(false);
-					CroppatchTile->SetWaterSprite(CroppatchTileImage[Index]->GetComponentLocation(), false);
+					CroppatchTile->SetCropsTileSprite(CroppatchTileImage[Index]->GetComponentLocation(), 2);
 
 					CroppatchTileImage[Index]->SetActive(true);
 					CroppatchTileImage[Index]->SetSprite("Crops.png", 3 + 11 * NowSelectCrops);
@@ -246,6 +246,27 @@ void AUIManager::Tick(float _DeltaTime)
 	{
 		NowSelectCrops = -1;
 		CursorImage->SetActive(false);
+
+		FVector2D Location = { static_cast<float>(17), static_cast<float>(ScreenHY - 32 - 16 + 25) };
+		FVector2D StartPos = Location;
+		int Index = 0;
+
+		for (int y = 0; y < 8; ++y)
+		{
+			for (int x = 0; x < 56; ++x)
+			{
+				if (-1 == CroppatchTile->GetTileLocation(StartPos)->GetCropsIndex())
+				{
+					CroppatchTile->SetCropsTileSprite(StartPos, 0);
+				}
+
+				++Index;
+				StartPos.X += 34;
+			}
+
+			StartPos.X = Location.X;
+			StartPos.Y += 34;
+		}
 	}
 }
 
@@ -381,12 +402,25 @@ void AUIManager::PanelButtonTileStay(AActor* _Actor, FTransform _Index)
 			CursorImage->SetSprite("Crops.png", 3 + 11 * NowSelectCrops);
 			CursorImage->SetActive(true);
 
-			for (int i = 0; i < 448; i++)
+			FVector2D Location = { static_cast<float>(17), static_cast<float>(ScreenHY - 32 - 16 + 25) };
+			FVector2D StartPos = Location;
+			int Index = 0;
+
+			for (int y = 0; y < 8; ++y)
 			{
-				if (-1 == CroppatchTile->GetTileLocation(-)->GetCropsIndex())
+				for (int x = 0; x < 56; ++x)
 				{
-					CroppatchTileImage[i]->SetActive(true);
+					if (-1 == CroppatchTile->GetTileLocation(StartPos)->GetCropsIndex())
+					{
+						CroppatchTile->SetCropsTileSprite(StartPos, 1);
+					}
+
+					++Index;
+					StartPos.X += 34;
 				}
+
+				StartPos.X = Location.X;
+				StartPos.Y += 34;
 			}
 		}
 	}

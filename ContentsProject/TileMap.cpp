@@ -89,6 +89,10 @@ void ATileMap::SetTileSpriteIndex(FIntPoint _Index, FVector2D _Pivot, FVector2D 
 	{
 		FindSprite->SetAlphafloat(0.25f);
 	}
+	else
+	{
+		FindSprite->SetAlphafloat(1.f);
+	}
 
 	FVector2D TileLocation = IndexToTileLocation(_Index, _Location + _LocationPivot);
 
@@ -116,18 +120,25 @@ int ATileMap::GetTileIndex(FVector2D _Location)
 	return AllTiles[_Index.Y][_Index.X].TileIndex;
 }
 
-void ATileMap::SetWaterSprite(FVector2D _Location, bool _WaterNeed)
+void ATileMap::SetCropsTileSprite(FVector2D _Location, int _SpriteIndex)
 {
 	FIntPoint _Index = GetIndex(_Location);
 
 	USpriteRenderer* FindSprite = AllTiles[_Index.Y][_Index.X].SpriteRenderer;
-	if (true == _WaterNeed)
+	if (0 == _SpriteIndex)
 	{
 		FindSprite->SetSprite("EmptyTile.png");
+		FindSprite->SetAlphafloat(1.f);
 	}
-	else
+	else if (1 == _SpriteIndex)
+	{
+		FindSprite->SetSprite("gridsmall.png");
+		FindSprite->SetAlphafloat(1.f);
+	}
+	else if (2 == _SpriteIndex)
 	{
 		FindSprite->SetSprite("WaterDirt.png");
+		FindSprite->SetAlphafloat(0.25f);
 	}
 }
 

@@ -49,8 +49,6 @@ public:
 		_Ser >> SpriteIndex;
 	}
 
-
-
 	void CropsReset(int _CropTileIndex, int _CropsIndex)
 	{
 		this->SetCropTileIndex(_CropTileIndex);
@@ -173,7 +171,7 @@ public:
 
 	int GetTileIndex(FVector2D _Location);
 
-	void SetWaterSprite(FVector2D _Location, bool _WaterNeed);
+	void SetCropsTileSprite(FVector2D _Location, int _SpriteIndex);
 
 	void SetTileSpriteIndex(FIntPoint _Index, int _SpriteIndex);
 	void SetTileSpriteIndex(FIntPoint _Index, FVector2D _Pivot, FVector2D _SpriteScale, FVector2D _Location, FVector2D _LocationPivot, int _SpriteIndex, int _TileIndex = 0, ERenderOrder _SpriteOrder = ERenderOrder::ZERO);
