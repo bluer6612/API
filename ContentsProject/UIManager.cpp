@@ -311,29 +311,25 @@ void AUIManager::TapButtonOut()
 		MenuPanelUI->AddActorLocation({ -116, 0 });
 		SRTapWhite->AddComponentLocation({ -116, 0 });
 
-		{
-			std::vector<class U2DCollision*>::iterator StartIter = PanelAllVector.begin();
-			std::vector<class U2DCollision*>::iterator EndIter = PanelAllVector.end();
+		std::vector<class U2DCollision*>::iterator StartIter = PanelAllVector.begin();
+		std::vector<class U2DCollision*>::iterator EndIter = PanelAllVector.end();
 
-			for (int i = 0; i < PanelAllVector.size(); ++i)
-			{
-				PanelAllVector[i]->AddComponentLocation({ -116, 0 });
-				PanelAllVector[i]->SetActive(false);
-			}
+		for (int i = 0; i < PanelAllVector.size(); ++i)
+		{
+			PanelAllVector[i]->AddComponentLocation({ -116, 0 });
+			PanelAllVector[i]->SetActive(false);
 		}
 
 		--TapTimer;
 	}
 	else
 	{
-		{
-			std::vector<class U2DCollision*>::iterator StartIter = PanelAllVector.begin();
-			std::vector<class U2DCollision*>::iterator EndIter = PanelAllVector.end();
+		std::vector<class U2DCollision*>::iterator StartIter = PanelAllVector.begin();
+		std::vector<class U2DCollision*>::iterator EndIter = PanelAllVector.end();
 
-			for (int i = 0; i < PanelAllVector.size(); ++i)
-			{
-				PanelAllVector[i]->SetActive(true);
-			}
+		for (int i = 0; i < PanelAllVector.size(); ++i)
+		{
+			PanelAllVector[i]->SetActive(true);
 		}
 	}
 }

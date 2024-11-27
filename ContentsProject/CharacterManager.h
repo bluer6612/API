@@ -5,17 +5,15 @@
 class ACharacterManager : public AActor
 {
 public:
-	// constrcuter destructer
 	ACharacterManager();
 	~ACharacterManager();
 
-	// delete Function
 	ACharacterManager(const ACharacterManager& _Other) = delete;
 	ACharacterManager(ACharacterManager&& _Other) noexcept = delete;
 	ACharacterManager& operator=(const ACharacterManager& _Other) = delete;
 	ACharacterManager& operator=(ACharacterManager&& _Other) noexcept = delete;
 
-	//Tile* FindTile(FIntPoint _Start, FIntPoint _End);
+	Tile* FindTile(FVector2D _Location);
 
 	void Watering(FVector2D _Location);
 
@@ -30,5 +28,4 @@ protected:
 
 private:
 	AUIManager* UIManager = nullptr;
-
 };

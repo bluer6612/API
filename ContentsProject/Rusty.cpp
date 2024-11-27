@@ -52,13 +52,11 @@ void ARusty::BeginPlay()
 void ARusty::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
-	FIntPoint Start = GetActorLocation().ConvertToPoint();
-	FIntPoint End = GetActorLocation().ConvertToPoint();
+	FVector2D Location = GetActorLocation();
 
 	switch (ActionState)
 	{
 	case 0:
-		//Tile * CropTile = FindTile(Start, End);
 
 
 		switch (1)

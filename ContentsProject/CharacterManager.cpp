@@ -1,6 +1,5 @@
 #include "PreCompile.h"
 #include "CharacterManager.h"
-#include <EngineCore/PathFindAStar.h>
 
 ACharacterManager::ACharacterManager()
 {
@@ -20,17 +19,22 @@ void ACharacterManager::Tick(float _DeltaTime)
 	Super::Tick(_DeltaTime);
 }
 
-//Tile* FindTile(FVector2D _Location)
-//{
-//	Tile* CropTile = nullptr;
-//
-//	UPathFindAStar PathFindAStar;
-//	//PathFindAStar.PathFind()
-//
-//	return CropTile;
-//}
+Tile* ACharacterManager::FindTile(FVector2D _Location)
+{
+	Tile* CropTile = nullptr;
 
-void Watering(FVector2D _Location)
+	std::vector<class Tile*>::iterator StartIter = UIManager->CropsAllVector.begin();
+	std::vector<class Tile*>::iterator EndIter = UIManager->CropsAllVector.end();
+
+	for (int i = 0; i < UIManager->CropsAllVector.size(); ++i)
+	{
+		UIManager->CropsAllVector[i]->GetWaterNeed();
+	}
+
+	return CropTile;
+}
+
+void ACharacterManager::Watering(FVector2D _Location)
 {
 
 }
