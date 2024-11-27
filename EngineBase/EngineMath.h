@@ -291,10 +291,8 @@ public:
 	static bool CirCleToCirCle(const FTransform& _Left, const FTransform& _Right);
 	static bool CirCleToRect(const FTransform& _Left, const FTransform& _Right);
 
-
 	FVector2D Scale;
 	FVector2D Location;
-
 
 	FVector2D CenterLeftTop() const
 	{

@@ -51,7 +51,7 @@ AUIManager::AUIManager()
 			Collision->SetComponentLocation({ static_cast<float>(ScreenX - 475), (ScreenHY - 44) });
 			Collision->SetComponentScale({ 16, 16 });
 
-			Collision->SetCollisionStay(std::bind(&AUIManager::TapButtonStay, this, std::placeholders::_1, FTransform(FVector2D(-1, 0), FVector2D({}))));
+			Collision->SetCollisionStay(std::bind(&AUIManager::TapButtonStay, this, std::placeholders::_1, FTransform(FVector2D(-1, 0), FVector2D({}) )));
 
 			PanelAllVector.push_back(Collision);
 		}
@@ -177,7 +177,8 @@ void AUIManager::BeginPlay()
 			for (int x = 0; x < 56; ++x)
 			{
 				CroppatchTile->SetTileSpriteIndex({ x, y }, { }, { 34, 34 }, { }, { }, 0, Index, ERenderOrder::BUILDINGUP);
-				CroppatchTile->GetTileLocation(StartPos)->SetCropsIndex(-2);
+				CroppatchTile->GetTileByLocation(StartPos)->SetCropsIndex(-2);
+				CroppatchTile->GetTileByLocation(StartPos)->SetLocation(StartPos);
 
 				CroppatchTileImage[Index] = CreateDefaultSubObject<USpriteRenderer>();
 				CroppatchTileImage[Index]->SetComponentCrate(CroppatchTileImage[Index], "EmptyTile.png", { 34, 34 }, { StartPos }, ERenderOrder::BUILDINGUP);
@@ -207,9 +208,9 @@ void AUIManager::Tick(float _DeltaTime)
 
 	if (true == UEngineInput::GetInst().IsPress(VK_LBUTTON) && -1 != NowSelectCrops && false == CursorOnTap)
 	{
-		if (nullptr != CroppatchTile->GetTileLocation(MousePos))
+		if (nullptr != CroppatchTile->GetTileByLocation(MousePos))
 		{
-			Tile* CropTile = CroppatchTile->GetTileLocation(MousePos);
+			Tile* CropTile = CroppatchTile->GetTileByLocation(MousePos);
 
 			if (CropsNeedMoney[NowSelectCrops] <= Money)
 			{
@@ -248,7 +249,7 @@ void AUIManager::Tick(float _DeltaTime)
 		{
 			for (int x = 0; x < 56; ++x)
 			{
-				if (-1 == CroppatchTile->GetTileLocation(StartPos)->GetCropsIndex())
+				if (-1 == CroppatchTile->GetTileByLocation(StartPos)->GetCropsIndex())
 				{
 					CroppatchTile->SetCropsTileSprite(StartPos, 0);
 				}
@@ -399,7 +400,7 @@ void AUIManager::PanelButtonTileStay(AActor* _Actor, FTransform _Index)
 			{
 				for (int x = 0; x < 56; ++x)
 				{
-					if (-1 == CroppatchTile->GetTileLocation(StartPos)->GetCropsIndex())
+					if (-1 == CroppatchTile->GetTileByLocation(StartPos)->GetCropsIndex())
 					{
 						CroppatchTile->SetCropsTileSprite(StartPos, 1);
 					}

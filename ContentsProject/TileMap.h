@@ -15,14 +15,6 @@ public:
 	int SpriteIndex;
 	int TileIndex = 0;
 
-	int CropTileIndex = 0;
-	int CropsIndex = 0;
-	int Water = 0;
-	bool WaterNeed = true;
-	int Grow = 0;
-	int Progress = 0;
-	float Time = 0;
-
 	void Serialize(UEngineSerializer& _Ser)
 	{
 		std::string SpriteName;
@@ -47,6 +39,16 @@ public:
 		_Ser >> Scale;
 		_Ser >> Pivot;
 		_Ser >> SpriteIndex;
+	}
+
+	void SetLocation(FVector2D _Location)
+	{
+		Location = _Location;
+	}
+
+	FVector2D GetLocation() const
+	{
+		return Location;
 	}
 
 	void CropsReset(int _CropTileIndex, int _CropsIndex)
@@ -149,6 +151,16 @@ public:
 	{
 		return Time;
 	}
+
+private:
+	FVector2D Location = {};
+	int CropTileIndex = 0;
+	int CropsIndex = 0;
+	int Water = 0;
+	bool WaterNeed = true;
+	int Grow = 0;
+	int Progress = 0;
+	float Time = 0;
 };
 
 
@@ -165,7 +177,7 @@ public:
 
 	void Create(std::string_view _Sprite, FIntPoint _Count, FVector2D _TileSize);
 
-	Tile* GetTileLocation(FVector2D _Location);
+	Tile* GetTileByLocation(FVector2D _Location);
 
 	FIntPoint GetIndex(FVector2D _Location);
 

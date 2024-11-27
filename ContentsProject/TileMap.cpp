@@ -143,7 +143,7 @@ void ATileMap::SetCropsTileSprite(FVector2D _Location, int _SpriteIndex)
 	}
 }
 
-Tile* ATileMap::GetTileLocation(FVector2D _Location)
+Tile* ATileMap::GetTileByLocation(FVector2D _Location)
 {
 	FVector2D TilePos = _Location - GetActorLocation();
 

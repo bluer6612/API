@@ -29,5 +29,6 @@ protected:
 private:
 	AUIManager* UIManager = nullptr;
 
-	std::vector<class Tile*> CropsAllVector;
+	std::vector<class Tile*> SelectCropsVector;
+	std::list<FTransform> SelectCropsLocList;
 };
