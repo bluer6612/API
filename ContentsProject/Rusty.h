@@ -3,7 +3,7 @@
 #include <EngineBase/FSMStateManager.h>
 #include "CharacterManager.h"
 
-class ARusty : public AActor, public ACharacterManager
+class ARusty : public ACharacterManager
 {
 public:
 	
@@ -32,4 +32,5 @@ private:
 	bool IsMove = false;
 
 	int ActionState = 0;
+	int Water = 12;
 };

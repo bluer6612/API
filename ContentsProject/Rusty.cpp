@@ -57,8 +57,11 @@ void ARusty::Tick(float _DeltaTime)
 	switch (ActionState)
 	{
 	case 0:
-
-		//Watering(Location);
+		if (0 < Water)
+		{
+			Tile* CropTile = FindTile(Location);
+			Watering(Location);
+		}
 		break;
 	}
 

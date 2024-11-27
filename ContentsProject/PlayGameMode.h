@@ -15,10 +15,6 @@ public:
 	APlayGameMode& operator=(const APlayGameMode& _Other) = delete;
 	APlayGameMode& operator=(APlayGameMode&& _Other) noexcept = delete;
 
-	void SetUIManager(AUIManager* const _UIManager)
-	{
-		GlobalUIManager = _UIManager;
-	}
 
 protected:
 	void BeginPlay();

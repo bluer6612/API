@@ -1,4 +1,5 @@
 #pragma once
+#include "UIManager.h"
 
 // Ό³Έν :
 class ACharacterManager : public AActor
@@ -14,10 +15,12 @@ public:
 	ACharacterManager& operator=(const ACharacterManager& _Other) = delete;
 	ACharacterManager& operator=(ACharacterManager&& _Other) noexcept = delete;
 
-	void Watering(FVector2D _Location)
+	Tile* FindTile(FVector2D _Location)
 	{
 
 	}
+
+	void Watering(FVector2D _Location);
 
 	void SetUIManager(AUIManager* const _UIManager)
 	{
@@ -25,6 +28,8 @@ public:
 	}
 
 protected:
+	void BeginPlay();
+	void Tick(float _DeltaTime) override;
 
 private:
 	AUIManager* UIManager = nullptr;
