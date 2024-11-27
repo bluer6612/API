@@ -185,7 +185,7 @@ void AUIManager::BeginPlay()
 			for (int x = 0; x < 56; ++x)
 			{
 				CroppatchTile->SetTileSpriteIndex({ x, y }, { }, { 34, 34 }, { }, { }, 0, Index, ERenderOrder::BUILDINGUP);
-				CroppatchTile->GetTileLocation(StartPos)->SetCropsIndex(-1);
+				CroppatchTile->GetTileLocation(StartPos)->SetCropsIndex(-2);
 
 				CroppatchTileImage[Index] = CreateDefaultSubObject<USpriteRenderer>();
 				CroppatchTileImage[Index]->SetComponentCrate(CroppatchTileImage[Index], "EmptyTile.png", { 34, 34 }, { StartPos }, ERenderOrder::BUILDINGUP);

@@ -72,7 +72,7 @@ void MainContentsCore::BeginPlay()
 	DirectoryAdd("Building", "UI");
 
 	UEngineAPICore::GetCore()->GetMainWindow().SetWindowTitle("MainWindow");
-	UEngineAPICore::GetCore()->GetMainWindow().SetWindowPosAndScale({ static_cast <float>(0), (ScreenY - static_cast<float>(ScreenY)) }, { static_cast<float>(ScreenX), static_cast<float>(ScreenY) });
+	UEngineAPICore::GetCore()->GetMainWindow().SetWindowPosAndScale({ }, { static_cast<float>(ScreenX), static_cast<float>(ScreenY) });
 	UEngineAPICore::GetCore()->GetMainWindow().SetWindowAlpha();
 
 	UEngineAPICore::GetCore()->CreateLevel<APlayGameMode, ARusty>("Play");

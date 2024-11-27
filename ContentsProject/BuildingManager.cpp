@@ -8,4 +8,3 @@ ABuildingManager::ABuildingManager()
 ABuildingManager::~ABuildingManager()
 {
 }
-
