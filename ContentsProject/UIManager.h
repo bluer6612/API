@@ -1,6 +1,5 @@
 #pragma once
 #include <EngineCore/Actor.h>
-#include "Croppatch.h"
 #include "TileMap.h"
 #include "MenuPanelUI.h"
 
@@ -20,8 +19,6 @@ static int bio = 8;
 class AUIManager : public AActor
 {
 public:
-	friend class ACroppatch;
-
 	AUIManager();
 	~AUIManager();
 
@@ -42,11 +39,6 @@ public:
 	void SetMenuPanelUI(AMenuPanelUI* const _MenuPanelUI)
 	{
 		MenuPanelUI = _MenuPanelUI;
-	}
-
-	void SetCroppatch(ACroppatch* const _Croppatch)
-	{
-		Croppatch = _Croppatch;
 	}
 
 	void TapButtonIn();
@@ -72,8 +64,6 @@ private:
 	class USpriteRenderer* SRTapWhite = nullptr;
 
 	AMenuPanelUI* MenuPanelUI = nullptr;
-
-	ACroppatch* Croppatch = nullptr;
 
 	bool CursorOnTap = false;
 	int NowSelectCrops = -1;

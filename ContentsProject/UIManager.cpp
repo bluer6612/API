@@ -159,13 +159,6 @@ void AUIManager::BeginPlay()
 		this->SetMenuPanelUI(MenuPanelUI);
 	}
 
-	ACroppatch* Croppatch = nullptr;
-	{
-		Croppatch = GetWorld()->SpawnActor<ACroppatch>();
-
-		this->SetCroppatch(Croppatch);
-	}
-
 	//≥ÛªÁ ≈∏¿œ
 	{
 		FVector2D Location = { static_cast<float>(0), static_cast<float>(ScreenHY - 32 - 16 + 8) };

@@ -5,8 +5,6 @@
 #include <EnginePlatform/EngineInput.h>
 #include <EngineCore/2DCollision.h>
 
-#include "UIManager.h"
-
 ACroppatch::ACroppatch()
 {
 	Location.X = ScreenHX - 180;

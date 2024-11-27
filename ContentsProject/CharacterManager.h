@@ -28,4 +28,6 @@ protected:
 
 private:
 	AUIManager* UIManager = nullptr;
+
+	std::vector<class Tile*> CropsAllVector;
 };
