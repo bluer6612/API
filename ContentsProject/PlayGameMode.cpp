@@ -54,7 +54,7 @@ void APlayGameMode::BeginPlay()
 	ABuildingManager* BuildingManager = nullptr;
 	{
 		//UIManager = GetWorld()->SpawnActor<AUIManager>();
-		//UIManager->SetUIManager(UIManager);
+		SetUIManager(UIManager);
 	}
 
 	//ºôµù Manager

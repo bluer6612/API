@@ -2,6 +2,7 @@
 #include <EngineCore/GameMode.h>
 #include <EnginePlatform/EngineSound.h>
 #include "TileMap.h"
+#include "UIManager.h"
 
 class APlayGameMode : public AGameMode
 {
@@ -15,15 +16,22 @@ public:
 	APlayGameMode& operator=(const APlayGameMode& _Other) = delete;
 	APlayGameMode& operator=(APlayGameMode&& _Other) noexcept = delete;
 
+	void SetUIManager(AUIManager* const _UIManager)
+	{
+		UIManager = _UIManager;
+	}
+
 protected:
 	void BeginPlay();
 	void Tick(float _DeltaTime) override;
 
 private:
 	class AScore* Score = nullptr;
-	ATileMap* GroundTileMap = nullptr;
-	ATileMap* PanelButtonTile = nullptr;
 
 	USoundPlayer BGMPlayer;
+
+	ATileMap* GroundTileMap = nullptr;
+	ATileMap* PanelButtonTile = nullptr;
+	AUIManager* UIManager = nullptr;
 };
 

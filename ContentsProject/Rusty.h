@@ -29,4 +29,6 @@ private:
 	float Speed = 500.0f;
 	int IsGround = false;
 	bool IsMove = false;
+
+	int ActionState = 0;
 };

@@ -33,7 +33,7 @@ public:
 	virtual void LevelChangeStart() {}
 	virtual void LevelChangeEnd() {}
 
-	class ULevel* GetWorld()
+	class ULevel* GetWorld() const
 	{
 		return World;
 	}
@@ -48,12 +48,12 @@ public:
 		Transform.Location += _Direction;
 	}
 
-	FTransform GetTransform()
+	FTransform GetTransform() const
 	{
 		return Transform;
 	}
 
-	FVector2D GetActorLocation()
+	FVector2D GetActorLocation() const
 	{
 		return Transform.Location;
 	}

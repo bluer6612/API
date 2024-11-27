@@ -52,6 +52,12 @@ void ARusty::Tick(float _DeltaTime)
 	Super::Tick(_DeltaTime);
 
 	FSM.Update(_DeltaTime);
+
+	if (0 == ActionState)
+	{
+		FVector2D Location = GetActorLocation();
+	}
+
 }
 
 void ARusty::Idle(float _DeltaTime)
