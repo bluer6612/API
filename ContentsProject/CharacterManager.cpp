@@ -39,22 +39,21 @@ Tile* ACharacterManager::FindTile(FVector2D _Location)
 	Tile* CropTile = nullptr;
 
 	SelectCropsVector.clear();
-	SelectCropsLocList.clear();
+	SelectCropsLocVector.clear();
 	SelectCropsLocListResult.clear();
 
-	std::vector<class Tile*>::iterator StartIter = UIManager->CropsAllVector.begin();
-	std::vector<class Tile*>::iterator EndIter = UIManager->CropsAllVector.end();
-
 	float Distance;
+	int Index = 0;
 
 	for (int i = 0; i < UIManager->CropsAllVector.size(); ++i)
 	{
-		if (false == UIManager->CropsAllVector[i]->GetWaterNeed())
+		if (true == UIManager->CropsAllVector[i]->GetWaterNeed())
 		{
-			SelectCropsVector.push_back(UIManager->CropsAllVector[i]);
+			SelectCropsVector[Index] = UIManager->CropsAllVector[i];
 			Distance = static_cast<float>(sqrt(pow(_Location.X - UIManager->CropsAllVector[i]->GetLocation().X, 2) + pow(_Location.Y - UIManager->CropsAllVector[i]->GetLocation().Y, 2)));
-			SelectCropsLocList.push_back({ Distance, static_cast<float>(i)});
+			SelectCropsLocVector[Index] = { Distance, static_cast<float>(Index) };
 			SelectCropsLocListResult.push_back(static_cast<int>(Distance));
+			++Index;
 		}
 	}
 
@@ -63,21 +62,31 @@ Tile* ACharacterManager::FindTile(FVector2D _Location)
 		return CropTile;
 	}
 
+	std::list<int>::iterator StartIter = SelectCropsLocListResult.begin();
+	std::list<int>::iterator EndIter = SelectCropsLocListResult.end();
+
 	SelectCropsLocListResult.sort();
 
-	for (int i = 0; i < SelectCropsVector.size(); ++i)
+	Index = 0;
+	int i = 0;
+	for (; StartIter != EndIter; ++StartIter)
 	{
-		SelectCropsLocList.
+		i = *StartIter;
+		if (i == SelectCropsLocVector[Index].X)
+		{
+			break;
+		}
+		++Index;
 	}
 
-	FVector2D Location = SelectCropsLocList.front();
-
-	CropTile = UIManager->CroppatchTile->GetTileByLocation(SelectCropsVector[Location.Y]->GetLocation());;
+	CropTile = SelectCropsVector[i];
 
 	return CropTile;
 }
 
-void ACharacterManager::Watering(FVector2D _Location)
+void ACharacterManager::Watering(Tile* _Tile)
 {
+	_Tile->SetWaterNeed(false);
 
+	UIManager->CroppatchTile->SetCropsTileSprite(_Tile->GetLocation(), 2);
 }

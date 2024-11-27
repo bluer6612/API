@@ -58,6 +58,18 @@ void ARusty::Tick(float _DeltaTime)
 	{
 	case 0:
 
+		Tile* Tile = FindTile(Location);
+
+		if (Tile == nullptr)
+		{
+			break;
+		}
+
+		if (0 < Water)
+		{
+			--Water;
+			Watering(Tile);
+		}
 
 		switch (1)
 		{
@@ -72,7 +84,8 @@ void ARusty::Tick(float _DeltaTime)
 		case 4://¹°ÁÖ±â
 			if (0 < Water)
 			{
-				//Watering(Location);
+				--Water;
+				Watering(Tile);
 			}
 			break;
 		}

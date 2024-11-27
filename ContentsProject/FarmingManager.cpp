@@ -80,6 +80,4 @@ void AFarmingManager::Tick(float _DeltaTime)
 			}
 		}
 	}
-	//AUIManager::CroppatchTile;
-
 }

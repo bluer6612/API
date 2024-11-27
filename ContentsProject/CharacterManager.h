@@ -15,7 +15,7 @@ public:
 
 	Tile* FindTile(FVector2D _Location);
 
-	void Watering(FVector2D _Location);
+	void Watering(Tile* _Tile);
 
 	void SetUIManager(AUIManager* const _UIManager)
 	{
@@ -25,11 +25,11 @@ public:
 protected:
 	void BeginPlay();
 	void Tick(float _DeltaTime) override;
-
-private:
 	AUIManager* UIManager = nullptr;
 
+private:
+
 	std::vector<class Tile*> SelectCropsVector;
-	std::list<FVector2D> SelectCropsLocList;
+	std::vector<FVector2D> SelectCropsLocVector;
 	std::list<int> SelectCropsLocListResult;
 };

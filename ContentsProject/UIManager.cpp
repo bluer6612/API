@@ -177,7 +177,8 @@ void AUIManager::BeginPlay()
 			for (int x = 0; x < 56; ++x)
 			{
 				CroppatchTile->SetTileSpriteIndex({ x, y }, { }, { 34, 34 }, { }, { }, 0, Index, ERenderOrder::BUILDINGUP);
-				CroppatchTile->GetTileByLocation(StartPos)->SetCropsIndex(-2);
+				//CroppatchTile->GetTileByLocation(StartPos)->SetCropsIndex(-2);
+				CroppatchTile->GetTileByLocation(StartPos)->SetCropsIndex(-1);
 				CroppatchTile->GetTileByLocation(StartPos)->SetLocation(StartPos);
 
 				CroppatchTileImage[Index] = CreateDefaultSubObject<USpriteRenderer>();
@@ -222,8 +223,8 @@ void AUIManager::Tick(float _DeltaTime)
 
 					CropTile->CropsReset(Index, NowSelectCrops);
 
-					/*CropTile->SetWaterNeed(false);
-					CroppatchTile->SetCropsTileSprite(CroppatchTileImage[Index]->GetComponentLocation(), 2);*/
+					//CropTile->SetWaterNeed(false);
+					CroppatchTile->SetCropsTileSprite(CroppatchTileImage[Index]->GetComponentLocation(), 0);
 
 					CroppatchTileImage[Index]->SetActive(true);
 					CroppatchTileImage[Index]->SetSprite("Crops.png", 3 + 11 * NowSelectCrops);
@@ -271,29 +272,19 @@ void AUIManager::TapButtonIn()
 		MenuPanelUI->AddActorLocation({ 116, 0 });
 		SRTapWhite->AddComponentLocation({ 116, 0 });
 
+		for (int i = 0; i < PanelAllVector.size(); ++i)
 		{
-			std::vector<U2DCollision*>::iterator StartIter = PanelAllVector.begin();
-			std::vector<U2DCollision*>::iterator EndIter = PanelAllVector.end();
-
-			for (int i = 0; i < PanelAllVector.size(); ++i)
-			{
-				PanelAllVector[i]->AddComponentLocation({ 116, 0 });
-				PanelAllVector[i]->SetActive(false);
-			}
+			PanelAllVector[i]->AddComponentLocation({ 116, 0 });
+			PanelAllVector[i]->SetActive(false);
 		}
 
 		++TapTimer;
 	}
 	else
 	{
+		for (int i = 0; i < PanelAllVector.size(); ++i)
 		{
-			std::vector<class U2DCollision*>::iterator StartIter = PanelAllVector.begin();
-			std::vector<class U2DCollision*>::iterator EndIter = PanelAllVector.end();
-
-			for (int i = 0; i < PanelAllVector.size(); ++i)
-			{
-				PanelAllVector[i]->SetActive(true);
-			}
+			PanelAllVector[i]->SetActive(true);
 		}
 	}
 }
@@ -305,9 +296,6 @@ void AUIManager::TapButtonOut()
 		MenuPanelUI->AddActorLocation({ -116, 0 });
 		SRTapWhite->AddComponentLocation({ -116, 0 });
 
-		std::vector<class U2DCollision*>::iterator StartIter = PanelAllVector.begin();
-		std::vector<class U2DCollision*>::iterator EndIter = PanelAllVector.end();
-
 		for (int i = 0; i < PanelAllVector.size(); ++i)
 		{
 			PanelAllVector[i]->AddComponentLocation({ -116, 0 });
@@ -318,9 +306,6 @@ void AUIManager::TapButtonOut()
 	}
 	else
 	{
-		std::vector<class U2DCollision*>::iterator StartIter = PanelAllVector.begin();
-		std::vector<class U2DCollision*>::iterator EndIter = PanelAllVector.end();
-
 		for (int i = 0; i < PanelAllVector.size(); ++i)
 		{
 			PanelAllVector[i]->SetActive(true);
