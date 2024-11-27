@@ -89,6 +89,7 @@ AUIManager::AUIManager()
 			StartPos.Y = Location.Y + 24;
 		}
 	}
+
 	//농사 패널 버튼
 	{
 		FarmInfoIndex.resize(CropsCount);
@@ -228,8 +229,8 @@ void AUIManager::Tick(float _DeltaTime)
 
 					CropTile->CropsReset(Index, NowSelectCrops);
 
-					CropTile->SetWaterNeed(false);
-					CroppatchTile->SetCropsTileSprite(CroppatchTileImage[Index]->GetComponentLocation(), 2);
+					/*CropTile->SetWaterNeed(false);
+					CroppatchTile->SetCropsTileSprite(CroppatchTileImage[Index]->GetComponentLocation(), 2);*/
 
 					CroppatchTileImage[Index]->SetActive(true);
 					CroppatchTileImage[Index]->SetSprite("Crops.png", 3 + 11 * NowSelectCrops);

@@ -38,8 +38,7 @@ void APlayGameMode::BeginPlay()
 	{
 		GroundTileMap = GetWorld()->SpawnActor<ATileMap>();
 		GroundTileMap->SetActorLocation({ static_cast<float>(0), static_cast<float>(ScreenY - 296 - TaskbarY) });
-		GroundTileMap->Create("EmptyTile.png", { 53, 8 }, { 32, 32 });
-		//GroundTileMap->Create("EmptyTile.png", { 53, 8 }, { 36, 36 });
+		GroundTileMap->Create("gridsmall.png", { 53, 8 }, { 32, 32 });
 
 		for (int y = 0; y < 53; y++)
 		{
@@ -108,8 +107,6 @@ void APlayGameMode::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 
-
-
 	//if (true == UEngineInput::GetInst().IsPress('R'))
 	//{
 	//	UEngineSerializer _Ser;
@@ -162,23 +159,23 @@ void APlayGameMode::Tick(float _DeltaTime)
 	//	GroundTileMap->DeSerialize(Ser);
 	//}
 
-	if (true == UEngineInput::GetInst().IsPress('A'))
-	{
-		GroundTileMap->AddActorLocation(FVector2D::LEFT * _DeltaTime * 100.0f);
-	}
+	//if (true == UEngineInput::GetInst().IsPress('A'))
+	//{
+	//	GroundTileMap->AddActorLocation(FVector2D::LEFT * _DeltaTime * 100.0f);
+	//}
 
-	if (true == UEngineInput::GetInst().IsPress('D'))
-	{
-		GroundTileMap->AddActorLocation(FVector2D::RIGHT * _DeltaTime * 100.0f);
-	}
+	//if (true == UEngineInput::GetInst().IsPress('D'))
+	//{
+	//	GroundTileMap->AddActorLocation(FVector2D::RIGHT * _DeltaTime * 100.0f);
+	//}
 
-	if (true == UEngineInput::GetInst().IsPress('W'))
-	{
-		GroundTileMap->AddActorLocation(FVector2D::UP * _DeltaTime * 100.0f);
-	}
+	//if (true == UEngineInput::GetInst().IsPress('W'))
+	//{
+	//	GroundTileMap->AddActorLocation(FVector2D::UP * _DeltaTime * 100.0f);
+	//}
 
-	if (true == UEngineInput::GetInst().IsPress('S'))
-	{
-		GroundTileMap->AddActorLocation(FVector2D::DOWN * _DeltaTime * 100.0f);
-	}
+	//if (true == UEngineInput::GetInst().IsPress('S'))
+	//{
+	//	GroundTileMap->AddActorLocation(FVector2D::DOWN * _DeltaTime * 100.0f);
+	//}
 }

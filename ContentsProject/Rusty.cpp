@@ -30,7 +30,6 @@ void ARusty::BeginPlay()
 
 	GetWorld()->SetCameraToMainPawn(false);
 
-
 	FSM.CreateState(NewPlayerState::Idle, std::bind(&ARusty::Idle, this, std::placeholders::_1),
 		[this]()
 		{
