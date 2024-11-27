@@ -1,7 +1,7 @@
 #pragma once
 
 // Ό³Έν :
-class ACharacterManager
+class ACharacterManager : public AActor
 {
 public:
 	// constrcuter destructer
@@ -14,8 +14,19 @@ public:
 	ACharacterManager& operator=(const ACharacterManager& _Other) = delete;
 	ACharacterManager& operator=(ACharacterManager&& _Other) noexcept = delete;
 
+	void Watering(FVector2D _Location)
+	{
+
+	}
+
+	void SetUIManager(AUIManager* const _UIManager)
+	{
+		UIManager = _UIManager;
+	}
+
 protected:
 
 private:
+	AUIManager* UIManager = nullptr;
 
 };

@@ -18,9 +18,11 @@
 
 #include <EnginePlatform/EngineSound.h>
 
-#include "PlayMap.h"
-#include "UIManager.h"
+#include "BuildingManager.h"
+#include "CharacterManager.h"
 #include "FarmingManager.h"
+#include "UIManager.h"
+#include "PlayMap.h"
 
 APlayGameMode::APlayGameMode()
 {
@@ -49,21 +51,31 @@ void APlayGameMode::BeginPlay()
 		}
 	}
 
-	//UIManager
+	//UI Manager
 	AUIManager* UIManager = nullptr;
 	ABuildingManager* BuildingManager = nullptr;
 	{
-		//UIManager = GetWorld()->SpawnActor<AUIManager>();
+		UIManager = GetWorld()->SpawnActor<AUIManager>();
 		SetUIManager(UIManager);
 	}
 
-	//ºôµù Manager
+	//Building Manager
 	{
 		BuildingManager = GetWorld()->SpawnActor<ABuildingManager>();
 		//BuildingManager->SetBuildingManager(BuildingManager);
 	}
 
-	AFarmingManager* FarmingManager = GetWorld()->SpawnActor<AFarmingManager>();
+	//Farming Manager
+	{
+		AFarmingManager* FarmingManager = GetWorld()->SpawnActor<AFarmingManager>();
+		FarmingManager->SetUIManager(UIManager);
+	}
+
+	//Character Manager
+	{
+		ACharacterManager* CharacterManager = GetWorld()->SpawnActor<ACharacterManager>();
+		CharacterManager->SetUIManager(UIManager);
+	}
 
 	//BGM
 	BGMPlayer = UEngineSound::Play("Rustys_Retirement-Full_OST_Master.mp3");

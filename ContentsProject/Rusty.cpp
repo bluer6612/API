@@ -52,11 +52,13 @@ void ARusty::BeginPlay()
 void ARusty::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
+	FVector2D Location = GetActorLocation();
 
 	switch (ActionState)
 	{
 	case 0:
-		FVector2D Location = GetActorLocation();
+
+		//Watering(Location);
 		break;
 	}
 

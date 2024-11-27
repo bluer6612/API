@@ -12,12 +12,7 @@ AFarmingManager::~AFarmingManager()
 
 void AFarmingManager::BeginPlay()
 {
-	AUIManager* UIManager = nullptr;
-	{
-		UIManager = GetWorld()->SpawnActor<AUIManager>();
-
-		this->SetUIManager(UIManager);
-	}
+	Super::BeginPlay();
 }
 
 void AFarmingManager::Tick(float _DeltaTime)

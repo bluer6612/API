@@ -2,7 +2,6 @@
 #include <EngineCore/GameMode.h>
 #include <EnginePlatform/EngineSound.h>
 #include "TileMap.h"
-#include "UIManager.h"
 
 class APlayGameMode : public AGameMode
 {
@@ -18,7 +17,7 @@ public:
 
 	void SetUIManager(AUIManager* const _UIManager)
 	{
-		UIManager = _UIManager;
+		GlobalUIManager = _UIManager;
 	}
 
 protected:
@@ -32,6 +31,5 @@ private:
 
 	ATileMap* GroundTileMap = nullptr;
 	ATileMap* PanelButtonTile = nullptr;
-	AUIManager* UIManager = nullptr;
 };
 

@@ -13,8 +13,17 @@ public:
 	ABuildingManager& operator=(const ABuildingManager& _Other) = delete;
 	ABuildingManager& operator=(ABuildingManager&& _Other) noexcept = delete;
 
+
+
+	void SetUIManager(AUIManager* const _UIManager)
+	{
+		UIManager = _UIManager;
+	}
+
 protected:
 
 private:
+	AUIManager* UIManager = nullptr;
+
 	std::vector<std::vector<ABuilding*>> Buildinglist;
 };
