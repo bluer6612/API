@@ -31,5 +31,4 @@ private:
 
 	std::vector<class Tile*> SelectCropsVector;
 	std::vector<FVector2D> SelectCropsLocVector;
-	std::list<int> SelectCropsLocListResult;
 };

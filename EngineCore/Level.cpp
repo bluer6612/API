@@ -151,7 +151,6 @@ void ULevel::Render(float _DeltaTime)
 		CameraPos = MainPawn->GetTransform().Location + CameraPivot;
 	}
 
-
 	std::map<int, std::list<class USpriteRenderer*>>::iterator StartOrderIter = Renderers.begin();
 	std::map<int, std::list<class USpriteRenderer*>>::iterator EndOrderIter = Renderers.end();
 
@@ -171,7 +170,6 @@ void ULevel::Render(float _DeltaTime)
 
 			(*RenderStartIter)->Render(_DeltaTime);
 		}
-
 	}
 
 	UEngineDebug::PrintEngineDebugRender();

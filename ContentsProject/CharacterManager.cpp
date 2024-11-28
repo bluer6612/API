@@ -21,26 +21,22 @@ void ACharacterManager::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 }
-//
-//bool Comp(UPathFindNode* first, UPathFindNode* second)
-//{
-//	if (first->F < second->F)
-//	{
-//		return true;
-//	}
-//	else
-//	{
-//		return false;
-//	}
-//}
 
 Tile* ACharacterManager::FindTile(FVector2D _Location)
 {
 	Tile* CropTile = nullptr;
+	std::list<int> SelectCropsLocListResult;
+
+	if (0 >= UIManager->CropsAllVector.size())
+	{
+		return CropTile;
+	}
 
 	SelectCropsVector.clear();
 	SelectCropsLocVector.clear();
-	SelectCropsLocListResult.clear();
+
+	SelectCropsVector.resize(UIManager->CropsAllVector.size());
+	SelectCropsLocVector.resize(UIManager->CropsAllVector.size());
 
 	float Distance;
 	int Index = 0;
@@ -62,24 +58,30 @@ Tile* ACharacterManager::FindTile(FVector2D _Location)
 		return CropTile;
 	}
 
+	if (1 < SelectCropsLocListResult.size())
+	{
+		SelectCropsLocListResult.sort();
+	}
+
+	Index = 0;
+
+	int i = 0;
 	std::list<int>::iterator StartIter = SelectCropsLocListResult.begin();
 	std::list<int>::iterator EndIter = SelectCropsLocListResult.end();
 
-	SelectCropsLocListResult.sort();
-
-	Index = 0;
-	int i = 0;
 	for (; StartIter != EndIter; ++StartIter)
 	{
 		i = *StartIter;
-		if (i == SelectCropsLocVector[Index].X)
+		int a = static_cast<int>(SelectCropsLocVector[Index].X);
+		if (i == static_cast<int>(SelectCropsLocVector[Index].X))
 		{
 			break;
 		}
+
 		++Index;
 	}
 
-	CropTile = SelectCropsVector[i];
+	CropTile = SelectCropsVector[Index];
 
 	return CropTile;
 }
