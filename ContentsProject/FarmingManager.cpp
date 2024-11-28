@@ -65,12 +65,12 @@ void AFarmingManager::Tick(float _DeltaTime)
 							Crops->CropsReset(0, -1);
 						}
 					}
-					else if (1 + Progress <= Crops->GetTime() / (5 * (Progress + 1)))
+					else if (1 + Progress <= Crops->GetTime() / (6 * (Progress + 1)))
 					{
 						Crops->AddProgress();
 						CropsImage->SetSprite("Crops.png", (4 + Progress) + 11 * Index);
 
-						if (Progress == 5 / CropsNeedWater[Index] && 0 != Progress)
+						if (Progress == 6 / CropsNeedWater[Index] && 0 != Progress)
 						{
 							Crops->SetWaterNeed(true);
 							UIManager->CroppatchTile->SetCropsTileSprite(CropsImage->GetComponentLocation(), 0);
