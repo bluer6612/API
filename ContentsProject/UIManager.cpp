@@ -182,7 +182,7 @@ void AUIManager::BeginPlay()
 				CroppatchTile->GetTileByLocation(StartPos)->SetLocation(StartPos);
 
 				CroppatchTileImage[Index] = CreateDefaultSubObject<USpriteRenderer>();
-				CroppatchTileImage[Index]->SetComponentCrate(CroppatchTileImage[Index], "EmptyTile.png", { 34, 34 }, { StartPos }, ERenderOrder::BUILDINGUP);
+				CroppatchTileImage[Index]->SetComponentCrate(CroppatchTileImage[Index], "EmptyTile.png", { 34, 34 }, { StartPos }, ERenderOrder::BUILDINGTILE);
 				CroppatchTileImage[Index]->SetPivotType(PivotType::Bot);
 				CroppatchTileImage[Index]->SetComponentScale({33.f, 33.f});
 				CroppatchTileImage[Index]->SetAlphafloat(0.75f);
