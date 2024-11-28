@@ -91,24 +91,15 @@ Tile* ACharacterManager::FindTile(FVector2D _Location)
 		return CropTile;
 	}
 
-	if (1 < SelectCropsLocListResult.size())
-	{
-		SelectCropsLocListResult.sort();
-	}
-
+	SelectCropsLocListResult.sort();
 
 	int StartIter = SelectCropsLocListResult.front();
 
 	Index = 0;
 	for (int i = 0; i < SelectCropsLocVector.size(); ++i)
 	{
-		int a = StartIter;
-		int b = static_cast<int>(SelectCropsLocVector[Index].X);
-		int c = 0;
 		if (StartIter == static_cast<int>(SelectCropsLocVector[Index].X))
 		{
-			int d = static_cast<int>(SelectCropsLocVector[Index].Y);
-			int g = 0;
 			break;
 		}
 
