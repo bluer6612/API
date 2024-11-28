@@ -22,37 +22,28 @@ void ACharacterManager::Tick(float _DeltaTime)
 	Super::Tick(_DeltaTime);
 }
 
-std::string ACharacterManager::CalDirection(FVector2D _ActorLoc, FVector2D _TileLoc)
+std::string ACharacterManager::CalDirection(std::string _Direction, FVector2D _ActorLoc, FVector2D _TileLoc)
 {
-	std::string _Direction = "";
+	std::string TargetDirection = _Direction;
 
-	_ActorLoc;
-	_TileLoc;
-
-	if (_ActorLoc.X - _TileLoc.X >= _ActorLoc.Y - _TileLoc.Y)
+	if (_ActorLoc.X >= _TileLoc.X && _ActorLoc.X - _TileLoc.X > 10.f)
 	{
-		if (_ActorLoc.X >= _TileLoc.X)
-		{
-			_Direction = "Left";
-		}
-		else if (_ActorLoc.X <= _TileLoc.X)
-		{
-			_Direction = "Right";
-		}
+		TargetDirection = "Left";
 	}
-	else
+	else if (_ActorLoc.X <= _TileLoc.X && _TileLoc.X - _ActorLoc.X > 10.f)
 	{
-		if (_ActorLoc.Y >= _TileLoc.Y)
-		{
-			_Direction = "Top";
-		}
-		else if (_ActorLoc.Y <= _TileLoc.Y)
-		{
-			_Direction = "Bot";
-		}
+		TargetDirection = "Right";
+	}
+	else if (_ActorLoc.Y >= _TileLoc.Y && _ActorLoc.Y - _TileLoc.Y > 10.f)
+	{
+		TargetDirection = "Top";
+	}
+	else if (_ActorLoc.Y <= _TileLoc.Y && _TileLoc.Y - _ActorLoc.Y > 10.f)
+	{
+		TargetDirection = "Bot";
 	}
 
-	return _Direction;
+	return TargetDirection;
 }
 
 Tile* ACharacterManager::FindTile(FVector2D _Location)
@@ -115,7 +106,27 @@ Tile* ACharacterManager::FindTile(FVector2D _Location)
 
 bool ACharacterManager::Moving(AActor* _Actor, Tile* _Tile, float _DeltaTime)
 {
-	FVector2D Vector = FVector2D::LEFT;
+	FVector2D Vector = FVector2D::ZERO;
+
+	FVector2D _ActorLoc = _Actor->GetActorLocation();
+	FVector2D _TileLoc = _Tile->GetLocation();
+
+	if (_ActorLoc.X >= _TileLoc.X && _ActorLoc.X - _TileLoc.X > 10.f)
+	{
+		Vector += FVector2D::LEFT;
+	}
+	else if (_ActorLoc.X <= _TileLoc.X && _TileLoc.X - _ActorLoc.X > 10.f)
+	{
+		Vector += FVector2D::RIGHT;
+	}
+	else if (_ActorLoc.Y >= _TileLoc.Y && _ActorLoc.Y - _TileLoc.Y > 10.f)
+	{
+		Vector += FVector2D::UP;
+	}
+	else if (_ActorLoc.Y <= _TileLoc.Y && _TileLoc.Y - _ActorLoc.Y > 10.f)
+	{
+		Vector += FVector2D::DOWN;
+	}
 
 	Vector.Normalize();
 
@@ -123,7 +134,7 @@ bool ACharacterManager::Moving(AActor* _Actor, Tile* _Tile, float _DeltaTime)
 
 	for (size_t i = 0; i < WayDir.size(); i++)
 	{
-		if (UIManager->CroppatchTile->GetTileByLocation(_Actor->GetActorLocation()) == UIManager->CroppatchTile->GetTileByLocation(_Tile->GetLocation() + (WayDir[i] * 38)))
+		if (UIManager->CroppatchTile->GetTileByLocation(_Actor->GetActorLocation()) == UIManager->CroppatchTile->GetTileByLocation(_Tile->GetLocation() + (WayDir[i] * 15)))
 		{
 			return true;
 		}
@@ -131,42 +142,6 @@ bool ACharacterManager::Moving(AActor* _Actor, Tile* _Tile, float _DeltaTime)
 	}
 
 	return false;
-
-
-	//FVector2D Vector = FVector2D::LEFT;
-
-	//if (true == UEngineInput::GetInst().IsPress('D'))
-	//{
-	//	Vector += FVector2D::RIGHT;
-	//}
-	//if (true == UEngineInput::GetInst().IsPress('A'))
-	//{
-	//	Vector += FVector2D::LEFT;
-	//}
-	//if (true == UEngineInput::GetInst().IsPress('S'))
-	//{
-	//	Vector += FVector2D::DOWN;
-	//}
-	//if (true == UEngineInput::GetInst().IsPress('W'))
-	//{
-	//	Vector += FVector2D::UP;
-	////}
-
-	//Vector.Normalize();
-
-	//if (true == IsMove)
-	//{
-	//	AddActorLocation(Vector * _DeltaTime * Speed);
-	//}
-
-	//if (false == UEngineInput::GetInst().IsPress('A') &&
-	//	false == UEngineInput::GetInst().IsPress('D') &&
-	//	false == UEngineInput::GetInst().IsPress('W') &&
-	//	false == UEngineInput::GetInst().IsPress('S'))
-	//{
-	//	FSM.ChangeState(NewPlayerState::Idle);
-	//	return;
-	//}
 }
 
 void ACharacterManager::Watering(Tile* _Tile)

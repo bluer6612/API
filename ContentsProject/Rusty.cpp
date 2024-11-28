@@ -72,6 +72,7 @@ void ARusty::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 	FVector2D Location = GetActorLocation();
+	std::string BeforeDirection = Direction;
 
 	switch (ActionState)
 	{
@@ -92,7 +93,7 @@ void ARusty::Tick(float _DeltaTime)
 		}
 		else
 		{
-			Direction = CalDirection(Location, TargetTile->GetLocation());
+			Direction = CalDirection(Direction, Location, TargetTile->GetLocation());
 			TargetTile->SpriteRenderer->SetSprite("gridsmall2.png");
 		}
 
@@ -104,6 +105,11 @@ void ARusty::Tick(float _DeltaTime)
 
 		if (4 == NextAction)
 		{
+			if (CalDirection(Direction, Location, TargetTile->GetLocation()) != BeforeDirection)
+			{
+				FSM.ChangeState(NewPlayerState::Move);
+			}
+			Direction = CalDirection(Direction, Location, TargetTile->GetLocation());
 			NextActionBool = Moving(this, TargetTile, _DeltaTime);
 		}
 
@@ -125,6 +131,7 @@ void ARusty::Tick(float _DeltaTime)
 			case 4://π∞¡÷±‚
 				if (0 < WaterCount)
 				{
+					Direction = CalDirection(Direction, Location, TargetTile->GetLocation());
 					FSM.ChangeState(NewPlayerState::Water);
 					Watering(TargetTile);
 					--WaterCount;

@@ -13,7 +13,7 @@ public:
 	ACharacterManager& operator=(const ACharacterManager& _Other) = delete;
 	ACharacterManager& operator=(ACharacterManager&& _Other) noexcept = delete;
 
-	std::string CalDirection(FVector2D _ActorLoc, FVector2D _TileLoc);
+	std::string CalDirection(std::string _Direction, FVector2D _ActorLoc, FVector2D _TileLoc);
 
 	Tile* FindTile(FVector2D _Location);
 
