@@ -15,9 +15,9 @@ public:
 
 	Tile* FindTile(FVector2D _Location);
 
-	void Moving(AActor* _Actor, Tile* _Tile, float _DeltaTime);
+	bool Moving(AActor* _Actor, Tile* _Tile, float _DeltaTime);
 
-	void Watering(Tile* _Tile);
+	int Watering(Tile* _Tile);
 
 	void SetUIManager(AUIManager* const _UIManager)
 	{
@@ -30,6 +30,8 @@ protected:
 
 	AUIManager* UIManager = nullptr;
 	int ActionState = 0;
+	int NextAction = 0;
+	std::string Direction = "Bot";
 
 private:
 	std::vector<class Tile*> SelectCropsVector;

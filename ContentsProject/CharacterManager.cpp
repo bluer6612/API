@@ -88,7 +88,7 @@ Tile* ACharacterManager::FindTile(FVector2D _Location)
 	return CropTile;
 }
 
-void ACharacterManager::Moving(AActor* _Actor, Tile* _Tile, float _DeltaTime)
+bool ACharacterManager::Moving(AActor* _Actor, Tile* _Tile, float _DeltaTime)
 {
 	FVector2D Vector = FVector2D::LEFT;
 
@@ -100,15 +100,19 @@ void ACharacterManager::Moving(AActor* _Actor, Tile* _Tile, float _DeltaTime)
 	{
 		if (UIManager->CroppatchTile->GetTileByLocation(_Actor->GetActorLocation()) == UIManager->CroppatchTile->GetTileByLocation(_Tile->GetLocation() + (WayDir[i] * 34)))
 		{
-			Watering(_Tile);
+			return true;
 		}
 		
 	}
+
+	return false;
 }
 
-void ACharacterManager::Watering(Tile* _Tile)
+int ACharacterManager::Watering(Tile* _Tile)
 {
 	_Tile->SetWaterNeed(false);
 
 	UIManager->CroppatchTile->SetCropsTileSprite(_Tile->GetLocation(), 2);
+
+	return 0;
 }

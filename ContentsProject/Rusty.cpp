@@ -16,8 +16,14 @@ ARusty::ARusty()
 	{
 		SpriteR = CreateDefaultSubObject<USpriteRenderer>();
 		SpriteR->SetSprite("RustyGold");
-		SpriteR->CreateAnimation("Idle_Right", "RustyGold", 48, 49, 0.5f);
-		SpriteR->CreateAnimation("Run_Right", "RustyGold", 0, 5, 0.2f);
+		SpriteR->CreateAnimation("Idle_Bot", "RustyGold", 48, 49, 0.6f);
+		SpriteR->CreateAnimation("Idle_Top", "RustyGold", 50, 51, 0.6f);
+		SpriteR->CreateAnimation("Idle_Right", "RustyGold", 52, 53, 0.6f);
+		SpriteR->CreateAnimation("Idle_Left", "RustyGold", 54, 55, 0.6f);
+		SpriteR->CreateAnimation("Run_Bot", "RustyGold", 0, 5, 0.2f);
+		SpriteR->CreateAnimation("Run_Top", "RustyGold", 6, 11, 0.2f);
+		SpriteR->CreateAnimation("Run_Right", "RustyGold", 12, 17, 0.2f);
+		SpriteR->CreateAnimation("Run_Left", "RustyGold", 18, 23, 0.2f);
 		SpriteR->SetOrder(ERenderOrder::PLAYER);
 	}
 }
@@ -35,7 +41,7 @@ void ARusty::BeginPlay()
 	FSM.CreateState(NewPlayerState::Idle, std::bind(&ARusty::Idle, this, std::placeholders::_1),
 		[this]()
 		{
-			SpriteR->ChangeAnimation("Idle_Right");
+			SpriteR->ChangeAnimation("Idle_" + Direction);
 		}
 	);
 
@@ -53,11 +59,12 @@ void ARusty::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 	FVector2D Location = GetActorLocation();
+	bool NextActionBool = false;
 
 	switch (ActionState)
 	{
 	case 0:
-		TargetTile = FindTile(Location);;
+		TargetTile = FindTile(Location);
 
 		if (TargetTile == nullptr)
 		{
@@ -66,35 +73,37 @@ void ARusty::Tick(float _DeltaTime)
 
 		if (0 < Water)
 		{
+			NextAction = 4;
 			FSM.ChangeState(NewPlayerState::Move);
-			Moving(this, TargetTile, _DeltaTime);
-
-			//--Water;
-			//Watering(TargetTile);
+			NextActionBool = Moving(this, TargetTile, _DeltaTime);
 		}
 
-		switch (1)
+		if (true == NextActionBool)
 		{
-		case 0://정지
-			break;
-		case 1://건설
-			break;
-		case 2://바이오
-			break;
-		case 3://수확
-			break;
-		case 4://물주기
-			if (0 < Water)
+			switch (NextAction)
 			{
-				//--Water;
-				//Watering(TargetTile);
+			case 0://정지
+				break;
+			case 1://건설
+				break;
+			case 2://바이오
+				break;
+			case 3://수확
+				break;
+			case 4://물주기
+				if (0 < Water)
+				{
+					FSM.ChangeState(NewPlayerState::Idle);
+					NextAction = Watering(TargetTile);
+					--Water;
+				}
+
+				break;
 			}
-			break;
 		}
 
 		break;
 	}
-
 
 	FSM.Update(_DeltaTime);
 }
