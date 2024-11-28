@@ -34,4 +34,5 @@ protected:
 private:
 	std::vector<class Tile*> SelectCropsVector;
 	std::vector<FVector2D> SelectCropsLocVector;
+	std::vector<FVector2D> WayDir = { {0, 1}, {0, -1}, {1, 0}, {-1, 0},  {-1, 1}, {-1, -1}, {1, 1}, {1, -1} };
 };

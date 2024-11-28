@@ -94,7 +94,16 @@ void ACharacterManager::Moving(AActor* _Actor, Tile* _Tile, float _DeltaTime)
 
 	Vector.Normalize();
 
-	_Actor->AddActorLocation(Vector * _DeltaTime * 500.f);
+	_Actor->AddActorLocation(Vector * _DeltaTime * 30.f);
+
+	for (size_t i = 0; i < WayDir.size(); i++)
+	{
+		if (UIManager->CroppatchTile->GetTileByLocation(_Actor->GetActorLocation()) == UIManager->CroppatchTile->GetTileByLocation(_Tile->GetLocation() + (WayDir[i] * 34)))
+		{
+			Watering(_Tile);
+		}
+		
+	}
 }
 
 void ACharacterManager::Watering(Tile* _Tile)

@@ -12,7 +12,7 @@ ACroppatch::ACroppatch()
 
 	{
 		SpriteR = CreateDefaultSubObject<USpriteRenderer>();
-		SpriteR->SetComponentCrate(SpriteR, "croppatch0.png", {}, Location, ERenderOrder::BUILDING);
+		SpriteR->SetComponentCrate(SpriteR, "croppatch0.png", {}, Location, ERenderOrder::BUILDINGDOWN);
 	}
 
 	Location.X = Location.X - 48;

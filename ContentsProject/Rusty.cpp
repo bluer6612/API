@@ -69,8 +69,8 @@ void ARusty::Tick(float _DeltaTime)
 			FSM.ChangeState(NewPlayerState::Move);
 			Moving(this, TargetTile, _DeltaTime);
 
-			--Water;
-			Watering(TargetTile);
+			//--Water;
+			//Watering(TargetTile);
 		}
 
 		switch (1)
@@ -86,8 +86,8 @@ void ARusty::Tick(float _DeltaTime)
 		case 4://π∞¡÷±‚
 			if (0 < Water)
 			{
-				--Water;
-				Watering(Tile);
+				//--Water;
+				//Watering(TargetTile);
 			}
 			break;
 		}
