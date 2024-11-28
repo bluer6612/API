@@ -222,6 +222,7 @@ void AUIManager::Tick(float _DeltaTime)
 					Money -= CropsNeedMoney[NowSelectCrops];
 
 					CropTile->CropsReset(Index, NowSelectCrops);
+					CropTile->SetLocation(CroppatchTileImage[Index]->GetComponentLocation());
 
 					//CropTile->SetWaterNeed(false);
 					CroppatchTile->SetCropsTileSprite(CroppatchTileImage[Index]->GetComponentLocation(), 0);

@@ -79,14 +79,14 @@ Tile* ACharacterManager::FindTile(FVector2D _Location)
 		if (true == UIManager->CropsAllVector[i]->GetWaterNeed())
 		{
 			SelectCropsVector[Index] = UIManager->CropsAllVector[i];
-			Distance = static_cast<float>(sqrt(pow(_Location.X - UIManager->CropsAllVector[i]->GetLocation().X, 2) + pow(UIManager->CropsAllVector[i]->GetLocation().Y - _Location.Y, 2)));
+			Distance = static_cast<float>(sqrtf(pow(_Location.X - UIManager->CropsAllVector[i]->GetLocation().X, 2) + pow(_Location.Y - UIManager->CropsAllVector[i]->GetLocation().Y, 2)));
 			SelectCropsLocVector[Index] = { Distance, static_cast<float>(Index) };
 			SelectCropsLocListResult.push_back(static_cast<int>(Distance));
 			++Index;
 		}
 	}
 
-	if (0 >= SelectCropsVector.size())
+	if (0 == SelectCropsLocListResult.size())
 	{
 		return CropTile;
 	}
@@ -96,10 +96,10 @@ Tile* ACharacterManager::FindTile(FVector2D _Location)
 		SelectCropsLocListResult.sort();
 	}
 
-	Index = 0;
 
 	int StartIter = SelectCropsLocListResult.front();
 
+	Index = 0;
 	for (int i = 0; i < SelectCropsLocVector.size(); ++i)
 	{
 		int a = StartIter;
@@ -132,7 +132,7 @@ bool ACharacterManager::Moving(AActor* _Actor, Tile* _Tile, float _DeltaTime)
 
 	for (size_t i = 0; i < WayDir.size(); i++)
 	{
-		if (UIManager->CroppatchTile->GetTileByLocation(_Actor->GetActorLocation()) == UIManager->CroppatchTile->GetTileByLocation(_Tile->GetLocation() + (WayDir[i] * 20)))
+		if (UIManager->CroppatchTile->GetTileByLocation(_Actor->GetActorLocation()) == UIManager->CroppatchTile->GetTileByLocation(_Tile->GetLocation() + (WayDir[i] * 38)))
 		{
 			return true;
 		}
