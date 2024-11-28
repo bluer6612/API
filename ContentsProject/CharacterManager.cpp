@@ -22,6 +22,15 @@ void ACharacterManager::Tick(float _DeltaTime)
 	Super::Tick(_DeltaTime);
 }
 
+std::string ACharacterManager::CalDirection(FVector2D _ActorLoc, FVector2D _TileLoc)
+{
+	std::string _Direction = "";
+
+	if (_ActorLoc.X >)
+
+	return _Direction;
+}
+
 Tile* ACharacterManager::FindTile(FVector2D _Location)
 {
 	Tile* CropTile = nullptr;
