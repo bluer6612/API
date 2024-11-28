@@ -79,7 +79,7 @@ Tile* ACharacterManager::FindTile(FVector2D _Location)
 		if (true == UIManager->CropsAllVector[i]->GetWaterNeed())
 		{
 			SelectCropsVector[Index] = UIManager->CropsAllVector[i];
-			Distance = static_cast<float>(sqrt(pow(_Location.X - UIManager->CropsAllVector[i]->GetLocation().X, 2) + pow(_Location.Y - UIManager->CropsAllVector[i]->GetLocation().Y, 2)));
+			Distance = static_cast<float>(sqrt(pow(_Location.X - UIManager->CropsAllVector[i]->GetLocation().X, 2) + pow(UIManager->CropsAllVector[i]->GetLocation().Y - _Location.Y, 2)));
 			SelectCropsLocVector[Index] = { Distance, static_cast<float>(Index) };
 			SelectCropsLocListResult.push_back(static_cast<int>(Distance));
 			++Index;
@@ -98,36 +98,24 @@ Tile* ACharacterManager::FindTile(FVector2D _Location)
 
 	Index = 0;
 
-	int i = 0;
-	std::list<int>::iterator StartIter = SelectCropsLocListResult.begin();
-	std::list<int>::iterator EndIter = SelectCropsLocListResult.end();
-
-	//for (; StartIter != EndIter; ++StartIter)
-	//{
-	//	i = *StartIter;
-	//	if (i == static_cast<int>(SelectCropsLocVector[Index].X))
-	//	{
-	//		break;
-	//	}
-	//	else
-	//	{
-	//		int a = static_cast<int>(SelectCropsLocVector[Index].X);
-	//	}
-
-	//	++Index;
-	//}
+	int StartIter = SelectCropsLocListResult.front();
 
 	for (int i = 0; i < SelectCropsLocVector.size(); ++i)
 	{
-		if (*StartIter == static_cast<int>(SelectCropsLocVector[Index].X))
+		int a = StartIter;
+		int b = static_cast<int>(SelectCropsLocVector[Index].X);
+		int c = 0;
+		if (StartIter == static_cast<int>(SelectCropsLocVector[Index].X))
 		{
+			int d = static_cast<int>(SelectCropsLocVector[Index].Y);
+			int g = 0;
 			break;
 		}
 
 		++Index;
 	}
 
-	CropTile = SelectCropsVector[SelectCropsLocVector[Index].Y];
+	CropTile = SelectCropsVector[static_cast<int>(SelectCropsLocVector[Index].Y)];
 
 	SelectCropsLocListResult.clear();
 
