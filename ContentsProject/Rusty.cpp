@@ -81,14 +81,6 @@ void ARusty::Tick(float _DeltaTime)
 
 		if (TargetTile == nullptr)
 		{
-			if (4 == NextAction)
-			{
-				NextAction = -1;
-				TimeEventer.PushEvent(2.0f, std::bind(&ARusty::ChangeAction, this, NewPlayerState::Idle), false, false);
-			}
-			else
-			{
-			}
 			break;
 		}
 		else
@@ -131,10 +123,20 @@ void ARusty::Tick(float _DeltaTime)
 			case 4://물주기
 				if (0 < WaterCount)
 				{
+					NextAction = -1;
+
 					Direction = CalDirection(Direction, Location, TargetTile->GetLocation());
 					FSM.ChangeState(NewPlayerState::Water);
+
 					Watering(TargetTile);
 					--WaterCount;
+
+					TimeEventer.PushEvent(2.0f, std::bind(&ARusty::ChangeAction, this, NewPlayerState::Idle), false, false);
+				}
+				//물 기르기
+				else
+				{
+
 				}
 
 				break;

@@ -57,9 +57,9 @@ public:
 		this->SetCropsIndex(_CropsIndex);
 		this->SetGrow(0);
 		this->SetWater(0);
-		this->SetWaterNeed(true);
 		this->SetProgress(0);
 		this->SetTime(0);
+		this->SetWaterNeed(true);
 	}
 
 	void SetCropTileIndex(int _CropTileIndex)
@@ -95,16 +95,6 @@ public:
 	int GetWater() const
 	{
 		return Water;
-	}
-
-	void SetWaterNeed(bool _WaterNeed)
-	{
-		WaterNeed = _WaterNeed;
-	}
-
-	bool GetWaterNeed() const
-	{
-		return WaterNeed;
 	}
 
 	void AddGrow()
@@ -152,15 +142,25 @@ public:
 		return Time;
 	}
 
+	void SetWaterNeed(bool _WaterNeed)
+	{
+		WaterNeed = _WaterNeed;
+	}
+
+	bool GetWaterNeed() const
+	{
+		return WaterNeed;
+	}
+
 private:
 	FVector2D Location = {};
 	int CropTileIndex = 0;
 	int CropsIndex = 0;
 	int Water = 0;
-	bool WaterNeed = true;
 	int Grow = 0;
 	int Progress = 0;
 	float Time = 0;
+	bool WaterNeed = true;
 };
 
 
