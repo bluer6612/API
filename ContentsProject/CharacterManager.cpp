@@ -88,6 +88,15 @@ Tile* ACharacterManager::FindTile(FVector2D _Location)
 	return CropTile;
 }
 
+void ACharacterManager::Moving(AActor* _Actor, Tile* _Tile, float _DeltaTime)
+{
+	FVector2D Vector = FVector2D::LEFT;
+
+	Vector.Normalize();
+
+	_Actor->AddActorLocation(Vector * _DeltaTime * 500.f);
+}
+
 void ACharacterManager::Watering(Tile* _Tile)
 {
 	_Tile->SetWaterNeed(false);

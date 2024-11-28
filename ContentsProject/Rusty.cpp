@@ -57,18 +57,20 @@ void ARusty::Tick(float _DeltaTime)
 	switch (ActionState)
 	{
 	case 0:
+		TargetTile = FindTile(Location);;
 
-		Tile* Tile = FindTile(Location);
-
-		if (Tile == nullptr)
+		if (TargetTile == nullptr)
 		{
 			break;
 		}
 
 		if (0 < Water)
 		{
+			FSM.ChangeState(NewPlayerState::Move);
+			Moving(this, TargetTile, _DeltaTime);
+
 			--Water;
-			Watering(Tile);
+			Watering(TargetTile);
 		}
 
 		switch (1)
@@ -111,8 +113,7 @@ void ARusty::Idle(float _DeltaTime)
 
 void ARusty::Move(float _DeltaTime)
 {
-
-	//FVector2D Vector = FVector2D::ZERO;
+	//FVector2D Vector = FVector2D::LEFT;
 
 	//if (true == UEngineInput::GetInst().IsPress('D'))
 	//{
@@ -129,7 +130,7 @@ void ARusty::Move(float _DeltaTime)
 	//if (true == UEngineInput::GetInst().IsPress('W'))
 	//{
 	//	Vector += FVector2D::UP;
-	//}
+	////}
 
 	//Vector.Normalize();
 

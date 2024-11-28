@@ -6,7 +6,6 @@
 class ARusty : public ACharacterManager
 {
 public:
-	
 	ARusty();
 	~ARusty();
 
@@ -31,6 +30,6 @@ private:
 	int IsGround = false;
 	bool IsMove = false;
 
-	int ActionState = 0;
 	int Water = 12;
+	Tile* TargetTile = nullptr;
 };
