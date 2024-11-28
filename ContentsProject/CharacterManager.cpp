@@ -81,6 +81,8 @@ Tile* ACharacterManager::FindTile(FVector2D _Location)
 		++Index;
 	}
 
+	SelectCropsLocListResult.clear();
+
 	CropTile = SelectCropsVector[Index];
 
 	return CropTile;
