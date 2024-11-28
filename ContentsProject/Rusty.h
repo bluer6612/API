@@ -17,8 +17,10 @@ public:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
+	void ChangeAction(NewPlayerState _NewPlayerState);
 	void Idle(float _DeltaTime);
 	void Move(float _DeltaTime);
+	void Water(float _DeltaTime);
 
 protected:
 
@@ -30,6 +32,6 @@ private:
 	int IsGround = false;
 	bool IsMove = false;
 
-	int Water = 12;
+	int WaterCount = 12;
 	Tile* TargetTile = nullptr;
 };

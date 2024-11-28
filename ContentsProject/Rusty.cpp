@@ -16,6 +16,7 @@ ARusty::ARusty()
 	{
 		SpriteR = CreateDefaultSubObject<USpriteRenderer>();
 		SpriteR->SetSprite("RustyGold");
+
 		SpriteR->CreateAnimation("Idle_Bot", "RustyGold", 48, 49, 0.6f);
 		SpriteR->CreateAnimation("Idle_Top", "RustyGold", 50, 51, 0.6f);
 		SpriteR->CreateAnimation("Idle_Right", "RustyGold", 52, 53, 0.6f);
@@ -24,6 +25,11 @@ ARusty::ARusty()
 		SpriteR->CreateAnimation("Run_Top", "RustyGold", 6, 11, 0.2f);
 		SpriteR->CreateAnimation("Run_Right", "RustyGold", 12, 17, 0.2f);
 		SpriteR->CreateAnimation("Run_Left", "RustyGold", 18, 23, 0.2f);
+		SpriteR->CreateAnimation("Water_Bot", "RustyGold", 24, 27, 0.5f);
+		SpriteR->CreateAnimation("Water_Top", "RustyGold", 28, 31, 0.5f);
+		SpriteR->CreateAnimation("Water_Right", "RustyGold", 32, 35, 0.5f);
+		SpriteR->CreateAnimation("Water_Left", "RustyGold", 36, 39, 0.5f);
+
 		SpriteR->SetOrder(ERenderOrder::PLAYER);
 	}
 }
@@ -48,7 +54,14 @@ void ARusty::BeginPlay()
 	FSM.CreateState(NewPlayerState::Move, std::bind(&ARusty::Move, this, std::placeholders::_1),
 		[this]()
 		{
-			SpriteR->ChangeAnimation("Run_Right");
+			SpriteR->ChangeAnimation("Run_" + Direction);
+		}
+	);
+
+	FSM.CreateState(NewPlayerState::Water, std::bind(&ARusty::Water, this, std::placeholders::_1),
+		[this]()
+		{
+			SpriteR->ChangeAnimation("Water_" + Direction);
 		}
 	);
 
@@ -59,7 +72,6 @@ void ARusty::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 	FVector2D Location = GetActorLocation();
-	bool NextActionBool = false;
 
 	switch (ActionState)
 	{
@@ -68,21 +80,34 @@ void ARusty::Tick(float _DeltaTime)
 
 		if (TargetTile == nullptr)
 		{
+			if (4 == NextAction)
+			{
+				NextAction = -1;
+				TimeEventer.PushEvent(2.0f, std::bind(&ARusty::ChangeAction, this, NewPlayerState::Idle), false, false);
+			}
+			else
+			{
+				//FSM.ChangeState(NewPlayerState::Idle);
+			}
 			break;
 		}
 
-		if (0 < Water)
+		if (0 == NextAction && 0 < WaterCount)
 		{
 			NextAction = 4;
 			FSM.ChangeState(NewPlayerState::Move);
 			NextActionBool = Moving(this, TargetTile, _DeltaTime);
+			Direction = "Left";
 		}
 
 		if (true == NextActionBool)
 		{
+			NextActionBool = false;
+
 			switch (NextAction)
 			{
 			case 0://정지
+				FSM.ChangeState(NewPlayerState::Idle);
 				break;
 			case 1://건설
 				break;
@@ -91,15 +116,17 @@ void ARusty::Tick(float _DeltaTime)
 			case 3://수확
 				break;
 			case 4://물주기
-				if (0 < Water)
+				if (0 < WaterCount)
 				{
-					FSM.ChangeState(NewPlayerState::Idle);
-					NextAction = Watering(TargetTile);
-					--Water;
+					FSM.ChangeState(NewPlayerState::Water);
+					Watering(TargetTile);
+					--WaterCount;
 				}
 
 				break;
 			}
+			default:
+				break;
 		}
 
 		break;
@@ -108,52 +135,21 @@ void ARusty::Tick(float _DeltaTime)
 	FSM.Update(_DeltaTime);
 }
 
+void ARusty::ChangeAction(NewPlayerState _NewPlayerState)
+{
+	FSM.ChangeState(_NewPlayerState);
+}
+
 void ARusty::Idle(float _DeltaTime)
 {
-	//if (true == UEngineInput::GetInst().IsPress('A') ||
-	//	true == UEngineInput::GetInst().IsPress('D') ||
-	//	true == UEngineInput::GetInst().IsPress('W') ||
-	//	true == UEngineInput::GetInst().IsPress('S'))
-	//{
-	//	FSM.ChangeState(NewPlayerState::Move);
-	//	return;
-	//}
+	NextAction = 0;
 }
 
 void ARusty::Move(float _DeltaTime)
 {
-	//FVector2D Vector = FVector2D::LEFT;
+}
 
-	//if (true == UEngineInput::GetInst().IsPress('D'))
-	//{
-	//	Vector += FVector2D::RIGHT;
-	//}
-	//if (true == UEngineInput::GetInst().IsPress('A'))
-	//{
-	//	Vector += FVector2D::LEFT;
-	//}
-	//if (true == UEngineInput::GetInst().IsPress('S'))
-	//{
-	//	Vector += FVector2D::DOWN;
-	//}
-	//if (true == UEngineInput::GetInst().IsPress('W'))
-	//{
-	//	Vector += FVector2D::UP;
-	////}
-
-	//Vector.Normalize();
-
-	//if (true == IsMove)
-	//{
-	//	AddActorLocation(Vector * _DeltaTime * Speed);
-	//}
-
-	//if (false == UEngineInput::GetInst().IsPress('A') &&
-	//	false == UEngineInput::GetInst().IsPress('D') &&
-	//	false == UEngineInput::GetInst().IsPress('W') &&
-	//	false == UEngineInput::GetInst().IsPress('S'))
-	//{
-	//	FSM.ChangeState(NewPlayerState::Idle);
-	//	return;
-	//}
+void ARusty::Water(float _DeltaTime)
+{
+	NextActionBool = true;
 }

@@ -17,7 +17,7 @@ public:
 
 	bool Moving(AActor* _Actor, Tile* _Tile, float _DeltaTime);
 
-	int Watering(Tile* _Tile);
+	void Watering(Tile* _Tile);
 
 	void SetUIManager(AUIManager* const _UIManager)
 	{
@@ -31,6 +31,7 @@ protected:
 	AUIManager* UIManager = nullptr;
 	int ActionState = 0;
 	int NextAction = 0;
+	bool NextActionBool = false;
 	std::string Direction = "Bot";
 
 private:

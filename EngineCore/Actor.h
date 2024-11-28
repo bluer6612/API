@@ -9,6 +9,7 @@ enum class NewPlayerState
 {
 	Idle,
 	Move,
+	Water,
 };
 
 class AActor : public UObject

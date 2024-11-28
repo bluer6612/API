@@ -106,13 +106,47 @@ bool ACharacterManager::Moving(AActor* _Actor, Tile* _Tile, float _DeltaTime)
 	}
 
 	return false;
+
+
+	//FVector2D Vector = FVector2D::LEFT;
+
+	//if (true == UEngineInput::GetInst().IsPress('D'))
+	//{
+	//	Vector += FVector2D::RIGHT;
+	//}
+	//if (true == UEngineInput::GetInst().IsPress('A'))
+	//{
+	//	Vector += FVector2D::LEFT;
+	//}
+	//if (true == UEngineInput::GetInst().IsPress('S'))
+	//{
+	//	Vector += FVector2D::DOWN;
+	//}
+	//if (true == UEngineInput::GetInst().IsPress('W'))
+	//{
+	//	Vector += FVector2D::UP;
+	////}
+
+	//Vector.Normalize();
+
+	//if (true == IsMove)
+	//{
+	//	AddActorLocation(Vector * _DeltaTime * Speed);
+	//}
+
+	//if (false == UEngineInput::GetInst().IsPress('A') &&
+	//	false == UEngineInput::GetInst().IsPress('D') &&
+	//	false == UEngineInput::GetInst().IsPress('W') &&
+	//	false == UEngineInput::GetInst().IsPress('S'))
+	//{
+	//	FSM.ChangeState(NewPlayerState::Idle);
+	//	return;
+	//}
 }
 
-int ACharacterManager::Watering(Tile* _Tile)
+void ACharacterManager::Watering(Tile* _Tile)
 {
 	_Tile->SetWaterNeed(false);
 
 	UIManager->CroppatchTile->SetCropsTileSprite(_Tile->GetLocation(), 2);
-
-	return 0;
 }
