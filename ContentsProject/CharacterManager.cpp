@@ -26,7 +26,31 @@ std::string ACharacterManager::CalDirection(FVector2D _ActorLoc, FVector2D _Tile
 {
 	std::string _Direction = "";
 
-	if (_ActorLoc.X >)
+	_ActorLoc;
+	_TileLoc;
+
+	if (_ActorLoc.X - _TileLoc.X >= _ActorLoc.Y - _TileLoc.Y)
+	{
+		if (_ActorLoc.X >= _TileLoc.X)
+		{
+			_Direction = "Left";
+		}
+		else if (_ActorLoc.X <= _TileLoc.X)
+		{
+			_Direction = "Right";
+		}
+	}
+	else
+	{
+		if (_ActorLoc.Y >= _TileLoc.Y)
+		{
+			_Direction = "Top";
+		}
+		else if (_ActorLoc.Y <= _TileLoc.Y)
+		{
+			_Direction = "Bot";
+		}
+	}
 
 	return _Direction;
 }
@@ -78,11 +102,24 @@ Tile* ACharacterManager::FindTile(FVector2D _Location)
 	std::list<int>::iterator StartIter = SelectCropsLocListResult.begin();
 	std::list<int>::iterator EndIter = SelectCropsLocListResult.end();
 
-	for (; StartIter != EndIter; ++StartIter)
+	//for (; StartIter != EndIter; ++StartIter)
+	//{
+	//	i = *StartIter;
+	//	if (i == static_cast<int>(SelectCropsLocVector[Index].X))
+	//	{
+	//		break;
+	//	}
+	//	else
+	//	{
+	//		int a = static_cast<int>(SelectCropsLocVector[Index].X);
+	//	}
+
+	//	++Index;
+	//}
+
+	for (int i = 0; i < SelectCropsLocVector.size(); ++i)
 	{
-		i = *StartIter;
-		int a = static_cast<int>(SelectCropsLocVector[Index].X);
-		if (i == static_cast<int>(SelectCropsLocVector[Index].X))
+		if (*StartIter == static_cast<int>(SelectCropsLocVector[Index].X))
 		{
 			break;
 		}
@@ -90,9 +127,9 @@ Tile* ACharacterManager::FindTile(FVector2D _Location)
 		++Index;
 	}
 
-	SelectCropsLocListResult.clear();
+	CropTile = SelectCropsVector[SelectCropsLocVector[Index].Y];
 
-	CropTile = SelectCropsVector[Index];
+	SelectCropsLocListResult.clear();
 
 	return CropTile;
 }
@@ -107,7 +144,7 @@ bool ACharacterManager::Moving(AActor* _Actor, Tile* _Tile, float _DeltaTime)
 
 	for (size_t i = 0; i < WayDir.size(); i++)
 	{
-		if (UIManager->CroppatchTile->GetTileByLocation(_Actor->GetActorLocation()) == UIManager->CroppatchTile->GetTileByLocation(_Tile->GetLocation() + (WayDir[i] * 34)))
+		if (UIManager->CroppatchTile->GetTileByLocation(_Actor->GetActorLocation()) == UIManager->CroppatchTile->GetTileByLocation(_Tile->GetLocation() + (WayDir[i] * 20)))
 		{
 			return true;
 		}

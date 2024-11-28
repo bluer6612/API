@@ -1,13 +1,13 @@
 #include "PreCompile.h"
-#include "Rusty.h"
 #include "Fade.h"
+#include "Rusty.h"
 
 #include "CharacterManager.h"
 
-#include <EnginePlatform/EngineInput.h>
-#include <EngineCore/SpriteRenderer.h>
-#include <EngineCore/EngineAPICore.h>
 #include "ContentsEnum.h"
+#include <EngineCore/EngineAPICore.h>
+#include <EngineCore/SpriteRenderer.h>
+#include <EnginePlatform/EngineInput.h>
 
 ARusty::ARusty()
 {
@@ -87,12 +87,12 @@ void ARusty::Tick(float _DeltaTime)
 			}
 			else
 			{
-				//FSM.ChangeState(NewPlayerState::Idle);
 			}
 			break;
 		}
 		else
 		{
+			Direction = CalDirection(Location, TargetTile->GetLocation());
 			TargetTile->SpriteRenderer->SetSprite("gridsmall2.png");
 		}
 
@@ -100,7 +100,6 @@ void ARusty::Tick(float _DeltaTime)
 		{
 			NextAction = 4;
 			FSM.ChangeState(NewPlayerState::Move);
-			Direction = "Left";
 		}
 
 		if (4 == NextAction)
@@ -132,14 +131,13 @@ void ARusty::Tick(float _DeltaTime)
 				}
 
 				break;
-			}
 			default:
 				break;
+			}
 		}
 
 		break;
 	}
-
 	FSM.Update(_DeltaTime);
 }
 
