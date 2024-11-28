@@ -65,7 +65,7 @@ void AFarmingManager::Tick(float _DeltaTime)
 							Crops->CropsReset(0, -1);
 						}
 					}
-					else if (1 + Progress <= Crops->GetTime() / (6 * (Progress + 1)))
+					else if (0 == static_cast<int>(Crops->GetTime()) % (CropsNeedGrowTime[Index] / 6) && Progress != 5)
 					{
 						Crops->AddProgress();
 						CropsImage->SetSprite("Crops.png", (4 + Progress) + 11 * Index);
