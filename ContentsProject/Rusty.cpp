@@ -91,13 +91,21 @@ void ARusty::Tick(float _DeltaTime)
 			}
 			break;
 		}
+		else
+		{
+			TargetTile->SpriteRenderer->SetSprite("gridsmall2.png");
+		}
 
 		if (0 == NextAction && 0 < WaterCount)
 		{
 			NextAction = 4;
 			FSM.ChangeState(NewPlayerState::Move);
-			NextActionBool = Moving(this, TargetTile, _DeltaTime);
 			Direction = "Left";
+		}
+
+		if (4 == NextAction)
+		{
+			NextActionBool = Moving(this, TargetTile, _DeltaTime);
 		}
 
 		if (true == NextActionBool)
