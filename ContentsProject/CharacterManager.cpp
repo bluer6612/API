@@ -111,30 +111,30 @@ bool ACharacterManager::Moving(AActor* _Actor, Tile* _Tile, float _DeltaTime)
 	FVector2D _ActorLoc = _Actor->GetActorLocation();
 	FVector2D _TileLoc = _Tile->GetLocation();
 
-	if (_ActorLoc.X >= _TileLoc.X && _ActorLoc.X - _TileLoc.X > 10.f)
+	if (_ActorLoc.X >= _TileLoc.X && _ActorLoc.X - _TileLoc.X > 3.f)
 	{
 		Vector += FVector2D::LEFT;
 	}
-	else if (_ActorLoc.X <= _TileLoc.X && _TileLoc.X - _ActorLoc.X > 10.f)
+	else if (_ActorLoc.X <= _TileLoc.X && _TileLoc.X - _ActorLoc.X > 3.f)
 	{
 		Vector += FVector2D::RIGHT;
 	}
-	else if (_ActorLoc.Y >= _TileLoc.Y && _ActorLoc.Y - _TileLoc.Y > 10.f)
+	else if (_ActorLoc.Y >= _TileLoc.Y && _ActorLoc.Y - _TileLoc.Y > 3.f)
 	{
 		Vector += FVector2D::UP;
 	}
-	else if (_ActorLoc.Y <= _TileLoc.Y && _TileLoc.Y - _ActorLoc.Y > 10.f)
+	else if (_ActorLoc.Y <= _TileLoc.Y && _TileLoc.Y - _ActorLoc.Y > 3.f)
 	{
 		Vector += FVector2D::DOWN;
 	}
 
 	Vector.Normalize();
 
-	_Actor->AddActorLocation(Vector * _DeltaTime * 30.f);
+	_Actor->AddActorLocation(Vector * _DeltaTime * 25.f);
 
 	for (size_t i = 0; i < WayDir.size(); i++)
 	{
-		if (UIManager->CroppatchTile->GetTileByLocation(_Actor->GetActorLocation()) == UIManager->CroppatchTile->GetTileByLocation(_Tile->GetLocation() + (WayDir[i] * 15)))
+		if (UIManager->CroppatchTile->GetTileByLocation(_Actor->GetActorLocation()) == UIManager->CroppatchTile->GetTileByLocation(_Tile->GetLocation() + (WayDir[i] * 1)))
 		{
 			return true;
 		}

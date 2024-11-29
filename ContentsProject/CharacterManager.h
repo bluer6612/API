@@ -32,7 +32,7 @@ protected:
 
 	AUIManager* UIManager = nullptr;
 	int ActionState = 0;
-	int NextAction = 0;
+	int NextAction = -1;
 	bool NextActionBool = false;
 	std::string Direction = "Bot";
 

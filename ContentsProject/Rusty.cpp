@@ -71,22 +71,21 @@ void ARusty::BeginPlay()
 void ARusty::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
-	FVector2D Location = GetActorLocation();
-	std::string BeforeDirection = Direction;
 
 	switch (ActionState)
 	{
 	case 0:
-		TargetTile = FindTile(Location);
+		FVector2D Location = GetActorLocation();
+		std::string BeforeDirection = Direction;
 
 		if (TargetTile == nullptr)
 		{
+			TargetTile = FindTile(Location);
 			break;
 		}
 		else
 		{
 			Direction = CalDirection(Direction, Location, TargetTile->GetLocation());
-			TargetTile->SpriteRenderer->SetSprite("gridsmall2.png");
 		}
 
 		if (0 == NextAction && 0 < WaterCount)
@@ -157,6 +156,11 @@ void ARusty::ChangeAction(NewPlayerState _NewPlayerState)
 
 void ARusty::Idle(float _DeltaTime)
 {
+	if (-1 == NextAction)
+	{
+		TargetTile = nullptr;
+	}
+
 	NextAction = 0;
 }
 
