@@ -29,6 +29,10 @@ ARusty::ARusty()
 		SpriteR->CreateAnimation("Water_Top", "RustyGold", 28, 31, 0.5f);
 		SpriteR->CreateAnimation("Water_Right", "RustyGold", 32, 35, 0.5f);
 		SpriteR->CreateAnimation("Water_Left", "RustyGold", 36, 39, 0.5f);
+		SpriteR->CreateAnimation("Harvest_Bot", "RustyGold", 24, 27, 0.5f);
+		SpriteR->CreateAnimation("Harvest_Top", "RustyGold", 28, 31, 0.5f);
+		SpriteR->CreateAnimation("Harvest_Right", "RustyGold", 32, 35, 0.5f);
+		SpriteR->CreateAnimation("Harvest_Left", "RustyGold", 36, 39, 0.5f);
 
 		SpriteR->SetOrder(ERenderOrder::PLAYER);
 	}
@@ -65,19 +69,25 @@ void ARusty::BeginPlay()
 		}
 	);
 
+	FSM.CreateState(NewPlayerState::Harvest, std::bind(&ARusty::Harvest, this, std::placeholders::_1),
+		[this]()
+		{
+			SpriteR->ChangeAnimation("Harvest_" + Direction);
+		}
+	);
+
 	FSM.ChangeState(NewPlayerState::Idle);
 }
 
 void ARusty::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
+	FVector2D Location = GetActorLocation();
+	std::string BeforeDirection = Direction;
 
 	switch (ActionState)
 	{
 	case 0:
-		FVector2D Location = GetActorLocation();
-		std::string BeforeDirection = Direction;
-
 		if (TargetTile == nullptr)
 		{
 			TargetTile = FindTile(Location);
@@ -143,9 +153,12 @@ void ARusty::Tick(float _DeltaTime)
 				break;
 			}
 		}
+		break;
+	case 1://¼öÈ®
 
 		break;
 	}
+
 	FSM.Update(_DeltaTime);
 }
 
@@ -171,4 +184,8 @@ void ARusty::Move(float _DeltaTime)
 void ARusty::Water(float _DeltaTime)
 {
 	NextActionBool = true;
+}
+
+void ARusty::Harvest(float _DeltaTime)
+{
 }

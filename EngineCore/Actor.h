@@ -10,6 +10,7 @@ enum class NewPlayerState
 	Idle,
 	Move,
 	Water,
+	Harvest,
 };
 
 class AActor : public UObject

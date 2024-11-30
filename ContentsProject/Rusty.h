@@ -21,6 +21,7 @@ public:
 	void Idle(float _DeltaTime);
 	void Move(float _DeltaTime);
 	void Water(float _DeltaTime);
+	void Harvest(float _DeltaTime);
 
 protected:
 
