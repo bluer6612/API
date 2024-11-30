@@ -96,11 +96,11 @@ void ARusty::Tick(float _DeltaTime)
 
 		if (4 == NextAction)
 		{
-			if (CalDirection(Direction, Location, TargetTile->GetLocation()) != BeforeDirection)
+			Direction = CalDirection(Direction, Location, TargetTile->GetLocation());
+			if (Direction != BeforeDirection)
 			{
 				FSM.ChangeState(NewPlayerState::Move);
 			}
-			Direction = CalDirection(Direction, Location, TargetTile->GetLocation());
 			NextActionBool = Moving(this, TargetTile, _DeltaTime);
 		}
 
