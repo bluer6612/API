@@ -147,7 +147,7 @@ bool ACharacterManager::Moving(AActor* _Actor, Tile* _Tile, float _DeltaTime)
 
 	for (size_t i = 0; i < WayDir.size(); i++)
 	{
-		if (UIManager->CroppatchTile->GetTileByLocation(_Actor->GetActorLocation()) == UIManager->CroppatchTile->GetTileByLocation(_Tile->GetLocation() + (WayDir[i] * 1)))
+		if (UIManager->CroppatchTile->GetTileByLocation(_Actor->GetActorLocation()) == UIManager->CroppatchTile->GetTileByLocation(_Tile->GetLocation() + (WayDir[i] * 5)))
 		{
 			return true;
 		}

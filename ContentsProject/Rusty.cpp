@@ -83,14 +83,14 @@ void ARusty::BeginPlay()
 	FSM.CreateState(NewPlayerState::Harvest, std::bind(&ARusty::Harvest, this, std::placeholders::_1),
 		[this]()
 		{
-			SpriteR->ChangeAnimation("Harvest" + Direction);
+			SpriteR->ChangeAnimation("Harvest_" + Direction);
 		}
 	);
 
 	FSM.CreateState(NewPlayerState::HarvestCarry, std::bind(&ARusty::HarvestCarry, this, std::placeholders::_1),
 		[this]()
 		{
-			SpriteR->ChangeAnimation("HarvestCarry" + Direction);
+			SpriteR->ChangeAnimation("HarvestCarry_" + Direction);
 		}
 	);
 
@@ -105,7 +105,7 @@ void ARusty::Tick(float _DeltaTime)
 
 	if (TargetTile == nullptr)
 	{
-		TargetTile = FindTile(Location, ActionState);
+		TargetTile = FindCropTile(Location, ActionState);
 		return;
 	}
 	else if (0 == ActionState)
