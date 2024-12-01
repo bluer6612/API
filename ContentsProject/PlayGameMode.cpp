@@ -36,21 +36,6 @@ void APlayGameMode::BeginPlay()
 {
 	Super::BeginPlay();
 
-	//건물 타일
-	{
-		GroundTileMap = GetWorld()->SpawnActor<ATileMap>();
-		GroundTileMap->SetActorLocation({ static_cast<float>(0), static_cast<float>(ScreenY - 296 - TaskbarY) });
-		GroundTileMap->Create("GroundTile.png", { 55, 8 }, { 34, 34 });
-
-		for (int y = 0; y < 55; y++)
-		{
-			for (int x = 0; x < 8; x++)
-			{
-				GroundTileMap->SetTileSpriteIndex({ y, x }, { }, { 34, 34 }, { 1, 1 }, { }, 0);
-			}
-		}
-	}
-
 	//UI Manager
 
 	AUIManager* UIManager = nullptr;
@@ -85,8 +70,11 @@ void APlayGameMode::BeginPlay()
 	//건물
 	{
 		AHouse* House = AActor::GetWorld()->SpawnActor<AHouse>();
+		House->SetUIManager(UIManager);
 		AWell* Well = AActor::GetWorld()->SpawnActor<AWell>();
+		Well->SetUIManager(UIManager);
 		ABiofuelconverter* Biofuelconverter = AActor::GetWorld()->SpawnActor<ABiofuelconverter>();
+		Biofuelconverter->SetUIManager(UIManager);
 		ACroppatch* Croppatch = AActor::GetWorld()->SpawnActor<ACroppatch>();
 	}
 

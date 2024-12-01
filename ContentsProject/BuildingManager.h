@@ -35,5 +35,6 @@ protected:
 	int index = 0;
 
 	AUIManager* UIManager = nullptr;
+
 private:
 };

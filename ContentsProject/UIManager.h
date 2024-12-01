@@ -15,8 +15,6 @@ enum class UICollisionGroup
 static int Money = 400;
 static int bio = 8;
 
-static ATileMap* GroundTileMap = nullptr;
-
 // Ό³Έν :
 class AUIManager : public AActor
 {
@@ -50,6 +48,8 @@ public:
 	void PanelButtonTileEnter(AActor* _Actor, FTransform _Index);
 	void PanelButtonTileStay(AActor* _Actor, FTransform _Index);
 	void PanelButtonTileEnd(AActor* _Actor, FTransform _Index);
+
+	ATileMap* GroundTileMap = nullptr;
 
 	std::vector<class Tile*> CropsAllVector;
 	USpriteRenderer* CroppatchTileImage[1000] = {};

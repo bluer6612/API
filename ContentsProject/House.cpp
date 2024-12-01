@@ -1,5 +1,6 @@
 #include "PreCompile.h"
 #include "House.h"
+#include "BuildingManager.h"
 
 AHouse::AHouse()
 {
@@ -56,8 +57,8 @@ AHouse::~AHouse()
 void AHouse::BeginPlay()
 {
 	Super::BeginPlay();
-
-	UIManager->StorageTilesVector.push_back(GroundTileMap->GetTileByLocation(Location));
+	
+	UIManager->StorageTilesVector.push_back(UIManager->GroundTileMap->GetTileByLocation(Location));
 }
 
 void AHouse::Tick(float _DeltaTime)
