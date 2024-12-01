@@ -1,9 +1,9 @@
 #pragma once
 #include <EngineCore/Actor.h>
 #include <EngineCore/SpriteRenderer.h>
-#include "Building.h"
+#include "BuildingManager.h"
 
-class TitleLogo : public ABuilding
+class TitleLogo : public ABuildingManager
 {
 public:
 	TitleLogo();

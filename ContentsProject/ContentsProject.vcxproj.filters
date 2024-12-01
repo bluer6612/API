@@ -31,7 +31,7 @@
     <ClInclude Include="House.h">
       <Filter>ContentsObject\Building</Filter>
     </ClInclude>
-    <ClInclude Include="Building.h">
+    <ClInclude Include="BuildingManager.h">
       <Filter>ContentsObject\Building</Filter>
     </ClInclude>
     <ClInclude Include="Well.h">
@@ -64,6 +64,7 @@
     <ClInclude Include="CharacterManager.h">
       <Filter>ContentsObject\Manager</Filter>
     </ClInclude>
+    <ClInclude Include="Building.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -94,9 +95,6 @@
       <Filter>ContentsObject\Character</Filter>
     </ClCompile>
     <ClCompile Include="House.cpp">
-      <Filter>ContentsObject\Building</Filter>
-    </ClCompile>
-    <ClCompile Include="Building.cpp">
       <Filter>ContentsObject\Building</Filter>
     </ClCompile>
     <ClCompile Include="Well.cpp">

@@ -1,8 +1,8 @@
 #pragma once
-#include "Building.h"
+#include "BuildingManager.h"
 
 // Ό³Έν :
-class ACroppatch : public ABuilding
+class ACroppatch : public ABuildingManager
 {
 public:
 	ACroppatch();
@@ -23,4 +23,3 @@ protected:
 private:
 	USpriteRenderer* CroppatchTileImage[16] = {};
 };
-

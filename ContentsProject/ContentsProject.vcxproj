@@ -172,10 +172,6 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="Building.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="Fade.h" />
     <ClInclude Include="House.h" />
     <ClInclude Include="MenuPanelUI.h">
@@ -240,10 +236,6 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Biofuelconverter.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="Building.cpp">
       <SubType>
       </SubType>
     </ClCompile>

@@ -1,7 +1,7 @@
 #pragma once
-#include "Building.h"
+#include "BuildingManager.h"
 
-class ABiofuelconverter : public ABuilding
+class ABiofuelconverter : public ABuildingManager
 {
 public:
 	ABiofuelconverter();

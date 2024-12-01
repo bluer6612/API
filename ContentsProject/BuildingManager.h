@@ -3,7 +3,6 @@
 #include <EngineBase/FSMStateManager.h>
 #include <EngineCore/SpriteRenderer.h>
 #include <EngineCore/GlobalVariable.h>
-#include "UIManager.h"
 
 // Ό³Έν :
 class ABuildingManager : public AUIManager
@@ -16,6 +15,8 @@ public:
 	ABuildingManager(ABuildingManager&& _Other) noexcept = delete;
 	ABuildingManager& operator=(const ABuildingManager& _Other) = delete;
 	ABuildingManager& operator=(ABuildingManager&& _Other) noexcept = delete;
+
+	void ModelAdd(std::string_view _Name, double _X, double _Y, int _Order);
 
 	void SetUIManager(AUIManager* const _UIManager)
 	{

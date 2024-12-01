@@ -1,7 +1,7 @@
 #pragma once
-#include "Building.h"
+#include "BuildingManager.h"
 
-class AWell : public ABuilding
+class AWell : public ABuildingManager
 {
 public:
 	AWell();
