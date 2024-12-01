@@ -245,15 +245,16 @@ void ACharacterManager::Havesting(Tile* _Tile, USpriteRenderer* _SubActor)
 		std::vector<class Tile*> CropVector = UIManager->CropsAllVector;
 		CropVector.erase(remove(CropVector.begin(), CropVector.end(), _Tile), CropVector.end());
 		CropVector.clear();
-		return;
 	}
+	else
+	{
+		_Tile->SetTime(0);
+		_Tile->SetProgress(0);
+		_Tile->SetWater(0);
+		_Tile->SetWaterNeed(true);
 
-	_Tile->SetTime(0);
-	_Tile->SetProgress(0);
-	_Tile->SetWater(0);
-	_Tile->SetWaterNeed(true);
-
-	_TileImage->SetSprite("Crops.png", (3 + _Tile->GetProgress()) + 11 * CropIndex);
+		_TileImage->SetSprite("Crops.png", (3 + _Tile->GetProgress()) + 11 * CropIndex);
+	}
 }
 
 void ACharacterManager::CarryToStorage(Tile* _Tile, USpriteRenderer* _SubActor)

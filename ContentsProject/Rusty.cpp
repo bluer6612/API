@@ -145,6 +145,7 @@ void ARusty::Tick(float _DeltaTime)
 				FSM.ChangeState(NewPlayerState::Move);
 			}
 		}
+
 		NextActionBool = Moving(this, TargetTile, _DeltaTime, ActionState);
 	}
 

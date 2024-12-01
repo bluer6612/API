@@ -43,5 +43,5 @@ protected:
 private:
 	std::vector<class Tile*> SelectTilesVector;
 	std::vector<FVector2D> SelectTilesLocVector;
-	std::vector<FVector2D> WayDir = { {0, 1}, {0, -1}, {1, 0}, {-1, 0},  {-1, 1}, {-1, -1}, {1, 1}, {1, -1} };
+	std::vector<FVector2D> WayDir = { {0, 1}, {0, -1}, {1, 0}, {-1, 0}/*,  {-1, 1}, {-1, -1}, {1, 1}, {1, -1}*/ };
 };
