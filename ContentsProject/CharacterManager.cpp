@@ -245,8 +245,7 @@ void ACharacterManager::Watering(Tile* _Tile)
 void ACharacterManager::Havesting(Tile* _Tile, USpriteRenderer* _SubActor)
 {
 	int CropIndex = _Tile->GetCropsIndex();
-	int TileIndex = _Tile->GetCropTileIndex();
-	USpriteRenderer* _TileImage = UIManager->CroppatchTileImage[TileIndex];
+	USpriteRenderer* _TileImage = UIManager->CroppatchTileImage[_Tile->GetCropTileIndex()];
 
 	Money += CropsSellMoney[CropIndex];
 
@@ -260,8 +259,12 @@ void ACharacterManager::Havesting(Tile* _Tile, USpriteRenderer* _SubActor)
 	if (CropsNeedRegrow[CropIndex] >= _Tile->GetGrow())
 	{
 		_Tile->CropsReset(0, -1);
+
 		_TileImage->SetActive(false);
-		UIManager->CropsAllVector.erase(remove(UIManager->CropsAllVector.begin(), UIManager->CropsAllVector.end(), _Tile), UIManager->CropsAllVector.end());
+
+		std::vector<class Tile*> CropVector = UIManager->CropsAllVector;
+		CropVector.erase(remove(CropVector.begin(), CropVector.end(), _Tile), CropVector.end());
+		CropVector.clear();
 		return;
 	}
 
