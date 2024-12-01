@@ -228,6 +228,8 @@ void ACharacterManager::Havesting(Tile* _Tile, USpriteRenderer* _SubActor)
 	USpriteRenderer* _TileImage = UIManager->CroppatchTileImage[_Tile->GetCropTileIndex()];
 
 	Money += CropsSellMoney[CropIndex];
+	UIManager->ResourcesText[0]->SetValue(Money);
+	UIManager->ResourcesText[2]->SetValue(Money);
 
 	UIManager->CroppatchTile->SetCropsTileSprite(_Tile->GetLocation(), 0);
 

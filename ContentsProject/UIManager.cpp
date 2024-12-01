@@ -189,9 +189,16 @@ void AUIManager::BeginPlay()
 				PanelAllVector.push_back(Collision);
 
 				CropsCountText[Index] = GetWorld()->SpawnActor<AScore>();
-				CreateText(CropsCountText[Index], { static_cast<float>(StartPos.X + 42), static_cast<float>(StartPos.Y - 34) }, CropsNeedMoney[Index], true);
+				if (y == 5 || (4 == y && 3 == x))
+				{
+					CreateText(CropsCountText[Index], { static_cast<float>(StartPos.X + 42), static_cast<float>(StartPos.Y - 34 + 46) }, CropsNeedMoney[Index], true, ERenderOrder::UI);
+				}
+				else
+				{
+					CreateText(CropsCountText[Index], { static_cast<float>(StartPos.X + 42), static_cast<float>(StartPos.Y - 34 + 46) }, CropsNeedMoney[Index], true);
+				}
 
-				MenuPanelUI->SpriteRFarmCoin[Index]->SetComponentLocation({ static_cast<float>(StartPos.X + 38 - std::to_string(CropsNeedMoney[Index]).size() * 7.5), (static_cast<float>(StartPos.Y - 30))});
+				MenuPanelUI->SpriteRFarmCoin[Index]->SetComponentLocation({ static_cast<float>(StartPos.X + 37 - std::to_string(CropsNeedMoney[Index]).size() * 7.5), (static_cast<float>(StartPos.Y - 30 + 46))});
 
 				++Index;
 
@@ -252,6 +259,8 @@ void AUIManager::Tick(float _DeltaTime)
 				if (-1 == CropTile->GetCropsIndex())
 				{
 					Money -= CropsNeedMoney[NowSelectCrops];
+					ResourcesText[0]->SetValue(Money);
+					ResourcesText[2]->SetValue(Money);
 
 					CropTile->CropsReset(Index, NowSelectCrops);
 					CropTile->SetLocation(CroppatchTileImage[Index]->GetComponentLocation());
