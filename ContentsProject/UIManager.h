@@ -15,6 +15,8 @@ enum class UICollisionGroup
 static int Money = 400;
 static int bio = 8;
 
+static ATileMap* GroundTileMap = nullptr;
+
 // Ό³Έν :
 class AUIManager : public AActor
 {

@@ -24,7 +24,5 @@ private:
 	class AScore* Score = nullptr;
 
 	USoundPlayer BGMPlayer;
-
-	ATileMap* GroundTileMap = nullptr;
 };
 
