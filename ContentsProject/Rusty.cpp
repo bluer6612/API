@@ -38,6 +38,9 @@ ARusty::ARusty()
 
 		SpriteRSub = CreateDefaultSubObject<USpriteRenderer>();
 		SpriteRSub->SetSprite("EmptyTile.png");
+		SpriteRSub->SetOrder(ERenderOrder::BUILDINGUP);
+		SpriteRSub->SetPivotType(PivotType::Bot);
+		SpriteRSub->SetActive(false);
 	}
 }
 
@@ -135,7 +138,7 @@ void ARusty::Tick(float _DeltaTime)
 		case 3://수확
 			FSM.ChangeState(NewPlayerState::Harvest);
 
-			Havesting(TargetTile);
+			Havesting(TargetTile, SpriteRSub);
 			break;
 		case 4://물주기
 			if (0 < WaterCount)

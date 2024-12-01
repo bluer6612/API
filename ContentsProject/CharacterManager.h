@@ -21,7 +21,7 @@ public:
 
 	void Watering(Tile* _Tile);
 
-	void Havesting(Tile* _Tile);
+	void Havesting(Tile* _Tile, USpriteRenderer* _SubActor);
 
 	void SetUIManager(AUIManager* const _UIManager)
 	{

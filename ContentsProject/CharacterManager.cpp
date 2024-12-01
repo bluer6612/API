@@ -124,19 +124,19 @@ bool ACharacterManager::Moving(AActor* _Actor, Tile* _Tile, float _DeltaTime)
 	FVector2D _ActorLoc = _Actor->GetActorLocation();
 	FVector2D _TileLoc = _Tile->GetLocation();
 
-	if (_ActorLoc.X >= _TileLoc.X && _ActorLoc.X - _TileLoc.X > 3.f)
+	if (_ActorLoc.X >= _TileLoc.X && _ActorLoc.X - _TileLoc.X > 1.f)
 	{
 		Vector += FVector2D::LEFT;
 	}
-	else if (_ActorLoc.X <= _TileLoc.X && _TileLoc.X - _ActorLoc.X > 3.f)
+	else if (_ActorLoc.X <= _TileLoc.X && _TileLoc.X - _ActorLoc.X > 1.f)
 	{
 		Vector += FVector2D::RIGHT;
 	}
-	else if (_ActorLoc.Y >= _TileLoc.Y && _ActorLoc.Y - _TileLoc.Y > 3.f)
+	else if (_ActorLoc.Y >= _TileLoc.Y && _ActorLoc.Y - _TileLoc.Y > 1.f)
 	{
 		Vector += FVector2D::UP;
 	}
-	else if (_ActorLoc.Y <= _TileLoc.Y && _TileLoc.Y - _ActorLoc.Y > 3.f)
+	else if (_ActorLoc.Y <= _TileLoc.Y && _TileLoc.Y - _ActorLoc.Y > 1.f)
 	{
 		Vector += FVector2D::DOWN;
 	}
@@ -164,7 +164,7 @@ void ACharacterManager::Watering(Tile* _Tile)
 	UIManager->CroppatchTile->SetCropsTileSprite(_Tile->GetLocation(), 2);
 }
 
-void ACharacterManager::Havesting(Tile* _Tile)
+void ACharacterManager::Havesting(Tile* _Tile, USpriteRenderer* _SubActor)
 {
 	Money += CropsSellMoney[_Tile->GetCropsIndex()];
 
@@ -176,4 +176,6 @@ void ACharacterManager::Havesting(Tile* _Tile)
 	UIManager->CroppatchTile->SetCropsTileSprite(_Tile->GetLocation(), 0);
 
 	UIManager->CroppatchTileImage[_Tile->GetCropTileIndex()]->SetSprite("Crops.png", (3 + _Tile->GetProgress()) + 11 * _Tile->GetCropsIndex());
+	_SubActor->SetSprite("Crops.png", (1 + 11 * _Tile->GetCropsIndex()));
+	_SubActor->SetActive(true);
 }
