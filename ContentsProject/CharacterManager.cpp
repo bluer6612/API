@@ -261,6 +261,7 @@ void ACharacterManager::Havesting(Tile* _Tile, USpriteRenderer* _SubActor)
 	{
 		_Tile->CropsReset(0, -1);
 		_TileImage->SetActive(false);
+		UIManager->CropsAllVector.erase(remove(UIManager->CropsAllVector.begin(), UIManager->CropsAllVector.end(), _Tile), UIManager->CropsAllVector.end());
 		return;
 	}
 
