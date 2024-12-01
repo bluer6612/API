@@ -125,35 +125,23 @@ Tile* ACharacterManager::FindStorage(FVector2D _Location, int _ActionState)
 	SelectTilesVector.clear();
 	SelectTilesLocVector.clear();
 
-	SelectTilesVector.resize(UIManager->CropsAllVector.size());
-	SelectTilesLocVector.resize(UIManager->CropsAllVector.size());
+	SelectTilesVector.resize(UIManager->StorageTilesVector.size());
+	SelectTilesLocVector.resize(UIManager->StorageTilesVector.size());
 
 	int Index = 0;
 	float Distance = 0;
 	bool FindBool = false;
 
-	for (int i = 0; i < UIManager->CropsAllVector.size(); ++i)
+	for (int i = 0; i < UIManager->StorageTilesVector.size(); ++i)
 	{
-		if (5 <= UIManager->CropsAllVector[i]->GetProgress())
-		{
-			FindBool = true;
-		}
-		else if (true == UIManager->CropsAllVector[i]->GetWaterNeed())
-		{
-			FindBool = true;
-		}
+		FindBool = false;
+		Distance = static_cast<float>(sqrtf(pow(_Location.X - UIManager->StorageTilesVector[i]->GetLocation().X, 2) + pow(_Location.Y - UIManager->StorageTilesVector[i]->GetLocation().Y, 2)));
 
-		if (true == FindBool)
-		{
-			FindBool = false;
-			Distance = static_cast<float>(sqrtf(pow(_Location.X - UIManager->CropsAllVector[i]->GetLocation().X, 2) + pow(_Location.Y - UIManager->CropsAllVector[i]->GetLocation().Y, 2)));
+		SelectTilesVector[Index] = UIManager->StorageTilesVector[i];
+		SelectTilesLocVector[Index] = { Distance, static_cast<float>(Index) };
+		SelectStorageLocListResult.push_back(static_cast<int>(Distance));
 
-			SelectTilesVector[Index] = UIManager->CropsAllVector[i];
-			SelectTilesLocVector[Index] = { Distance, static_cast<float>(Index) };
-			SelectStorageLocListResult.push_back(static_cast<int>(Distance));
-
-			++Index;
-		}
+		++Index;
 	}
 
 	if (0 == SelectStorageLocListResult.size())
@@ -221,6 +209,26 @@ bool ACharacterManager::Moving(AActor* _Actor, Tile* _Tile, float _DeltaTime)
 	}
 
 	return false;
+
+	//if (true == UEngineInput::GetInst().IsPress('A'))
+	//{
+	//	GroundTileMap->AddActorLocation(FVector2D::LEFT * _DeltaTime * 100.0f);
+	//}
+
+	//if (true == UEngineInput::GetInst().IsPress('D'))
+	//{
+	//	GroundTileMap->AddActorLocation(FVector2D::RIGHT * _DeltaTime * 100.0f);
+	//}
+
+	//if (true == UEngineInput::GetInst().IsPress('W'))
+	//{
+	//	GroundTileMap->AddActorLocation(FVector2D::UP * _DeltaTime * 100.0f);
+	//}
+
+	//if (true == UEngineInput::GetInst().IsPress('S'))
+	//{
+	//	GroundTileMap->AddActorLocation(FVector2D::DOWN * _DeltaTime * 100.0f);
+	//}
 }
 
 void ACharacterManager::Watering(Tile* _Tile)

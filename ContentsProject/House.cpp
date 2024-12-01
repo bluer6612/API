@@ -57,7 +57,7 @@ void AHouse::BeginPlay()
 {
 	Super::BeginPlay();
 
-	//UIManager->StorageTilesVector.push_back();
+	UIManager->StorageTilesVector.push_back(GroundTileMap->GetTileByLocation(Location));
 }
 
 void AHouse::Tick(float _DeltaTime)

@@ -103,7 +103,11 @@ void ARusty::Tick(float _DeltaTime)
 	FVector2D Location = GetActorLocation();
 	std::string BeforeDirection = Direction;
 
-	if (TargetTile == nullptr)
+	if (3 == ActionState) //수확물 운반
+	{
+		TargetTile = FindStorage(Location, ActionState);
+	}
+	else if (TargetTile == nullptr)
 	{
 		TargetTile = FindCropTile(Location, ActionState);
 		return;
@@ -132,7 +136,14 @@ void ARusty::Tick(float _DeltaTime)
 		Direction = CalDirection(Direction, Location, TargetTile->GetLocation());
 		if (Direction != BeforeDirection)
 		{
-			FSM.ChangeState(NewPlayerState::Move);
+			if (3 == ActionState)
+			{
+				FSM.ChangeState(NewPlayerState::HarvestCarry);
+			}
+			else
+			{
+				FSM.ChangeState(NewPlayerState::Move);
+			}
 		}
 		NextActionBool = Moving(this, TargetTile, _DeltaTime);
 	}
