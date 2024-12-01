@@ -7,7 +7,6 @@ AHouse::AHouse()
 	Location.Y = ScreenHY + 2.5;
 
 	{
-
 		SpriteR = CreateDefaultSubObject<USpriteRenderer>();
 		SpriteR->SetComponentCrate(SpriteR, "004_House.png", {}, { ScreenHX, Location.Y + 1 }, ERenderOrder::BUILDING);
 	}
@@ -57,6 +56,8 @@ AHouse::~AHouse()
 void AHouse::BeginPlay()
 {
 	Super::BeginPlay();
+
+	UIManager->
 }
 
 void AHouse::Tick(float _DeltaTime)

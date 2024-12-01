@@ -4,7 +4,6 @@
 #include <EngineCore/SpriteRenderer.h>
 #include <EngineCore/GlobalVariable.h>
 
-// Ό³Έν :
 class ABuildingManager : public AUIManager
 {
 public:
@@ -34,6 +33,6 @@ protected:
 	FVector2D Location;
 	int index = 0;
 
-private:
 	AUIManager* UIManager = nullptr;
+private:
 };

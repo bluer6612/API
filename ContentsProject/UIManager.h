@@ -54,6 +54,7 @@ public:
 	ATileMap* CroppatchTile = nullptr;
 
 protected:
+	std::vector<class Tile*> StorageTilesVector;
 
 private:
 	class U2DCollision* CursorCollision = nullptr;
