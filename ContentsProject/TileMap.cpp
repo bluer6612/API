@@ -133,7 +133,7 @@ void ATileMap::SetCropsTileSprite(FVector2D _Location, int _SpriteIndex)
 		FindSprite->SetAlphafloat(1.f);
 		break;
 	case 1:
-		FindSprite->SetSprite("gridsmall.png");
+		FindSprite->SetSprite("GroundTile.png");
 		FindSprite->SetAlphafloat(1.f);
 		FindSprite->SetOrder(ERenderOrder::BUILDINGUP);
 		break;

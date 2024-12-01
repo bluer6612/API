@@ -36,24 +36,23 @@ void APlayGameMode::BeginPlay()
 {
 	Super::BeginPlay();
 
-	//타일
+	//건물 타일
 	{
 		GroundTileMap = GetWorld()->SpawnActor<ATileMap>();
 		GroundTileMap->SetActorLocation({ static_cast<float>(0), static_cast<float>(ScreenY - 296 - TaskbarY) });
-		GroundTileMap->Create("EmptyTile.png", { 53, 8 }, { 32, 32 });
+		GroundTileMap->Create("GroundTile.png", { 53, 8 }, { 34, 34 });
 
 		for (int y = 0; y < 53; y++)
 		{
 			for (int x = 0; x < 8; x++)
 			{
-				GroundTileMap->SetTileSpriteIndex({ y, x }, { }, { 32, 32 }, { 4, 4 }, { }, 0);
+				GroundTileMap->SetTileSpriteIndex({ y, x }, { }, { 34, 34 }, { 2, 2 }, { }, 0);
 			}
 		}
 	}
 
 	//UI Manager
 	AUIManager* UIManager = nullptr;
-	ABuildingManager* BuildingManager = nullptr;
 	{
 		UIManager = GetWorld()->SpawnActor<AUIManager>();
 	}

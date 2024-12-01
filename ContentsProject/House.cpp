@@ -57,7 +57,7 @@ void AHouse::BeginPlay()
 {
 	Super::BeginPlay();
 
-	UIManager->
+	//UIManager->StorageTilesVector.push_back();
 }
 
 void AHouse::Tick(float _DeltaTime)

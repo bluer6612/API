@@ -37,7 +37,7 @@ ACroppatch::ACroppatch()
 	//			Collision->SetCollisionStay(std::bind(&ACroppatch::ClickEnter, this, std::placeholders::_1, FTransform(FVector2D(Index, 0), FVector2D(StartPos))));
 
 	//			//CroppatchTileImage[Index] = CreateDefaultSubObject<USpriteRenderer>();
-	//			//CroppatchTileImage[Index]->SetComponentCrate(CroppatchTileImage[Index], "gridsmall.png", { 36, 36 }, { StartPos }, ERenderOrder::BUILDINGUP);
+	//			//CroppatchTileImage[Index]->SetComponentCrate(CroppatchTileImage[Index], "GroundTile.png", { 36, 36 }, { StartPos }, ERenderOrder::BUILDINGUP);
 	//			//CroppatchTileImage[Index]->SetAlphafloat(0.75f);
 	//			//CroppatchTile[Index]->SetActive(false);
 
@@ -73,7 +73,7 @@ void ACroppatch::BeginPlay()
 
 	//CroppatchTile = GetWorld()->SpawnActor<ATileMap>();
 	//CroppatchTile->SetActorLocation(Location);
-	//CroppatchTile->Create("gridsmall.png", { 6, 4 }, { 32, 32 });
+	//CroppatchTile->Create("GroundTile.png", { 6, 4 }, { 32, 32 });
 
 	//FVector2D StartPos = Location;
 
@@ -94,7 +94,7 @@ void ACroppatch::BeginPlay()
 	//StartPos.X -= 250;
 
 	//CroppatchTile->SetActorLocation(StartPos);
-	//CroppatchTile->Create("gridsmall.png", { 4, 4 }, { 32, 32 });
+	//CroppatchTile->Create("GroundTile.png", { 4, 4 }, { 32, 32 });
 
 	//for (int y = 0; y < 4; ++y)
 	//{

@@ -53,8 +53,9 @@ public:
 	USpriteRenderer* CroppatchTileImage[1000] = {};
 	ATileMap* CroppatchTile = nullptr;
 
-protected:
 	std::vector<class Tile*> StorageTilesVector;
+
+protected:
 
 private:
 	class U2DCollision* CursorCollision = nullptr;

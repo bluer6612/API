@@ -1,9 +1,7 @@
 #include "PreCompile.h"
 #include "UIManager.h"
-
 #include "MenuPanelUI.h"
 #include "TitleLogo.h"
-
 #include <EngineCore/SpriteRenderer.h>
 #include <EngineCore/2DCollision.h>
 #include <EngineCore/EngineAPICore.h>

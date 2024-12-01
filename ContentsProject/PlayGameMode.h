@@ -26,6 +26,5 @@ private:
 	USoundPlayer BGMPlayer;
 
 	ATileMap* GroundTileMap = nullptr;
-	ATileMap* PanelButtonTile = nullptr;
 };
 
