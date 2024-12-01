@@ -240,18 +240,32 @@ void ACharacterManager::Watering(Tile* _Tile)
 
 void ACharacterManager::Havesting(Tile* _Tile, USpriteRenderer* _SubActor)
 {
-	Money += CropsSellMoney[_Tile->GetCropsIndex()];
+	int Index = _Tile->GetCropsIndex();
+	USpriteRenderer* _TileImage = UIManager->CroppatchTileImage[_Tile->GetCropTileIndex()];
+
+	Money += CropsSellMoney[Index];
+
+	UIManager->CroppatchTile->SetCropsTileSprite(_Tile->GetLocation(), 0);
+
+	_SubActor->SetSprite("Crops.png", (1 + 11 * Index));
+	_SubActor->SetActive(true);
 
 	_Tile->AddGrow();
+
+	if (CropsNeedRegrow[Index] == _Tile->GetGrow())
+	{
+		_Tile->CropsReset(0, -1);
+
+		_TileImage->SetActive(false);
+		return;
+	}
+
+	_Tile->SetTime(0);
 	_Tile->SetProgress(0);
 	_Tile->SetWater(0);
 	_Tile->SetWaterNeed(true);
 
-	UIManager->CroppatchTile->SetCropsTileSprite(_Tile->GetLocation(), 0);
-
-	UIManager->CroppatchTileImage[_Tile->GetCropTileIndex()]->SetSprite("Crops.png", (3 + _Tile->GetProgress()) + 11 * _Tile->GetCropsIndex());
-	_SubActor->SetSprite("Crops.png", (1 + 11 * _Tile->GetCropsIndex()));
-	_SubActor->SetActive(true);
+	_TileImage->SetSprite("Crops.png", (3 + _Tile->GetProgress()) + 11 * Index);
 }
 
 void ACharacterManager::CarryToStorage(Tile* _Tile)

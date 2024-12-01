@@ -42,13 +42,7 @@ void AFarmingManager::Tick(float _DeltaTime)
 
 					if (CropsNeedGrowTime[Index] <= Crops->GetTime())
 					{
-						Crops->SetTime(0);
-
-						if (CropsNeedRegrow[Index] == Crops->GetGrow())
-						{
-							Crops->CropsReset(0, -1);
-							CropsImage->SetActive(false);
-						}
+						continue;
 					}
 					else if (0 == static_cast<int>(Crops->GetTime()) % (CropsNeedGrowTime[Index] / 6) && Progress != 5)
 					{
