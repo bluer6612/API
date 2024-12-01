@@ -260,10 +260,7 @@ void ACharacterManager::Havesting(Tile* _Tile, USpriteRenderer* _SubActor)
 	if (CropsNeedRegrow[CropIndex] >= _Tile->GetGrow())
 	{
 		_Tile->CropsReset(0, -1);
-
 		_TileImage->SetActive(false);
-
-		UIManager->CropsAllVector[TileIndex]->CropsReset(0, -1);
 		return;
 	}
 

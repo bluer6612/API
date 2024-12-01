@@ -151,9 +151,12 @@ void ARusty::Tick(float _DeltaTime)
 	if (true == NextActionBool)
 	{
 		NextActionBool = false;
+		int NextActionState = ActionState;
+		ActionState = -1;
+
 		Direction = CalDirection(Direction, Location, TargetTile->GetLocation());
 
-		switch (ActionState)
+		switch (NextActionState)
 		{
 		case 0://Á¤Áö
 			FSM.ChangeState(NewPlayerState::Idle);
@@ -194,8 +197,6 @@ void ARusty::Tick(float _DeltaTime)
 		default:
 			break;
 		}
-
-		ActionState = -1;
 	}
 
 	FSM.Update(_DeltaTime);
@@ -223,7 +224,6 @@ void ARusty::Move(float _DeltaTime)
 void ARusty::Water(float _DeltaTime)
 {
 	ActionState = -1;
-	NextActionBool = true;
 }
 
 void ARusty::Harvest(float _DeltaTime)
