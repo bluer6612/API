@@ -56,6 +56,7 @@ public:
 	ATileMap* CroppatchTile = nullptr;
 
 	std::vector<class Tile*> StorageTilesVector;
+	std::vector<int> FarmingStats;
 
 protected:
 
@@ -75,5 +76,4 @@ private:
 	int TapTimer = 0;
 
 	std::vector<class U2DCollision*> PanelAllVector;
-	std::vector<int> FarmInfoIndex;
 };

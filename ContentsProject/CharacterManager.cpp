@@ -231,6 +231,7 @@ void ACharacterManager::Havesting(Tile* _Tile, USpriteRenderer* _SubActor)
 
 	UIManager->CroppatchTile->SetCropsTileSprite(_Tile->GetLocation(), 0);
 
+	_SubActor->SetCount(CropIndex);
 	_SubActor->SetSprite("Crops.png", (1 + 11 * CropIndex));
 	_SubActor->SetActive(true);
 
@@ -257,5 +258,7 @@ void ACharacterManager::Havesting(Tile* _Tile, USpriteRenderer* _SubActor)
 
 void ACharacterManager::CarryToStorage(Tile* _Tile, USpriteRenderer* _SubActor)
 {
+	++(UIManager->FarmingStats[_SubActor->GetCount()]);
+	_SubActor->SetCount(0);
 	_SubActor->SetActive(false);
 }

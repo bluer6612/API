@@ -39,6 +39,9 @@ AUIManager::AUIManager()
 	SRTapWhite = CreateDefaultSubObject<USpriteRenderer>();
 	SRTapWhite->SetComponentCrate(SRTapWhite, "004_MenuPanel_pressed.png", {}, { static_cast<float>(ScreenX - 480), (ScreenHY - 5) }, ERenderOrder::UIUP);
 
+	//농사 통계
+	FarmingStats.resize(CropsCount);
+
 	//패널 탭 버튼
 	{
 		//패널 X 버튼
@@ -89,8 +92,6 @@ AUIManager::AUIManager()
 
 	//농사 패널 버튼
 	{
-		FarmInfoIndex.resize(CropsCount);
-
 		FVector2D Location = { static_cast<float>(ScreenX) - (104 * 4) + 29 , ScreenHY + 93 - 120 };
 		FVector2D StartPos = Location;
 

@@ -39,6 +39,7 @@ protected:
 	int ActionState = 0;
 	bool NextActionBool = false;
 	std::string Direction = "Bot";
+	Tile* TargetTile = nullptr;
 
 private:
 	std::vector<class Tile*> SelectTilesVector;

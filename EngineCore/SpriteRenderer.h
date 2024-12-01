@@ -129,18 +129,25 @@ public:
 		Alpha = static_cast<unsigned char>(_Value * 255.0f);
 	}
 
+	void SetCount(int _Count);
+
+	int GetCount() const
+	{
+		return Count;
+	}
+
 protected:
 
 private:
+	int Count = 0;
 	int Order = 0;
-
 	int CurIndex = 0;
+
 	bool IsCameraEffect = true;
 	float CameraEffectScale = 1.0f;
 	float CurAnimationSpeed = 1.0f;
 
 	unsigned char Alpha = 255;
-
 	FVector2D Pivot = FVector2D(0.5f, 0.5f);
 
 	class UEngineSprite* Sprite = nullptr;

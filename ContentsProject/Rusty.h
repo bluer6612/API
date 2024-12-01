@@ -32,5 +32,4 @@ private:
 	UFSMStateManager FSM;
 
 	int WaterCount = 12;
-	Tile* TargetTile = nullptr;
 };
