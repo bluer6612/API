@@ -59,6 +59,7 @@ void MainContentsCore::BeginPlay()
 	}
 
 	UImageManager::GetInst().CuttingSprite("Text.png", { 16, 32 });
+	UImageManager::GetInst().CuttingSprite("TextGreen.png", { 16, 32 });
 	UImageManager::GetInst().CuttingSprite("Crops.png", { 16, 32 });
 
 	DirectoryAdd("", "TileMap");

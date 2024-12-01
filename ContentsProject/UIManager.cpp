@@ -91,52 +91,6 @@ AUIManager::AUIManager()
 			StartPos.Y = Location.Y + 24;
 		}
 	}
-
-	//농사 패널 버튼
-	{
-		FVector2D Location = { static_cast<float>(ScreenX) - (104 * 4) + 29 , ScreenHY + 93 - 120 };
-		FVector2D StartPos = Location;
-
-		int Index = 0;
-		for (int y = 0; y < 6; ++y)
-		{
-			for (int x = 0; x < 4; ++x)
-			{
-				U2DCollision* Collision = CreateDefaultSubObject<U2DCollision>();
-				Collision->SetCollisionGroup(UICollisionGroup::Panel);
-				Collision->SetCollisionType(ECollisionType::Rect);
-				Collision->SetComponentLocation(StartPos);
-				Collision->SetComponentScale({ 102, 44 });
-
-				Collision->SetCollisionEnter(std::bind(&AUIManager::PanelButtonTileEnter, this, std::placeholders::_1, FTransform(FVector2D(Index, 0), FVector2D(StartPos))));
-				Collision->SetCollisionStay(std::bind(&AUIManager::PanelButtonTileStay, this, std::placeholders::_1, FTransform(FVector2D(Index, 0), FVector2D(StartPos))));
-				Collision->SetCollisionEnd(std::bind(&AUIManager::PanelButtonTileEnd, this, std::placeholders::_1, FTransform(FVector2D(Index, 0), FVector2D(StartPos))));
-
-				PanelAllVector.push_back(Collision);
-
-				++Index;
-
-				if ((6 * 4) - 1 == Index)
-				{
-					break;
-				}
-				else if (3 == Index)
-				{
-					StartPos.X = Location.X;
-					StartPos.Y += 46;
-				}
-				else if (0 == (Index - 3) % 4 && 4 != Index)
-				{
-					StartPos.X = Location.X;
-					StartPos.Y += 46;
-				}
-				else
-				{
-					StartPos.X += 104;
-				}
-			}
-		}
-	}
 }
 
 AUIManager::~AUIManager()
@@ -212,16 +166,68 @@ void AUIManager::BeginPlay()
 		}
 	}
 
+	//농사 패널 버튼
+	{
+		FVector2D Location = { static_cast<float>(ScreenX) - (104 * 4) + 29 , ScreenHY + 93 - 120 };
+		FVector2D StartPos = Location;
+
+		int Index = 0;
+		for (int y = 0; y < 6; ++y)
+		{
+			for (int x = 0; x < 4; ++x)
+			{
+				U2DCollision* Collision = CreateDefaultSubObject<U2DCollision>();
+				Collision->SetCollisionGroup(UICollisionGroup::Panel);
+				Collision->SetCollisionType(ECollisionType::Rect);
+				Collision->SetComponentLocation(StartPos);
+				Collision->SetComponentScale({ 102, 44 });
+
+				Collision->SetCollisionEnter(std::bind(&AUIManager::PanelButtonTileEnter, this, std::placeholders::_1, FTransform(FVector2D(Index, 0), FVector2D(StartPos))));
+				Collision->SetCollisionStay(std::bind(&AUIManager::PanelButtonTileStay, this, std::placeholders::_1, FTransform(FVector2D(Index, 0), FVector2D(StartPos))));
+				Collision->SetCollisionEnd(std::bind(&AUIManager::PanelButtonTileEnd, this, std::placeholders::_1, FTransform(FVector2D(Index, 0), FVector2D(StartPos))));
+
+				PanelAllVector.push_back(Collision);
+
+				CropsCountText[Index] = GetWorld()->SpawnActor<AScore>();
+				CreateText(CropsCountText[Index], { static_cast<float>(StartPos.X + 42), static_cast<float>(StartPos.Y - 34) }, CropsNeedMoney[Index], true);
+
+				MenuPanelUI->SpriteRFarmCoin[Index]->SetComponentLocation({ static_cast<float>(StartPos.X + 38 - std::to_string(CropsNeedMoney[Index]).size() * 7.5), (static_cast<float>(StartPos.Y - 30))});
+
+				++Index;
+
+				if ((6 * 4) - 1 == Index)
+				{
+					break;
+				}
+				else if (3 == Index)
+				{
+					StartPos.X = Location.X;
+					StartPos.Y += 46;
+				}
+				else if (0 == (Index - 3) % 4 && 4 != Index)
+				{
+					StartPos.X = Location.X;
+					StartPos.Y += 46;
+				}
+				else
+				{
+					StartPos.X += 104;
+				}
+			}
+		}
+	}
+
 	//자원 텍스트
-	for (size_t i = 0; i <= 3; i++)
+	for (size_t i = 0; i <= 4; i++)
 	{
 		ResourcesText[i] = GetWorld()->SpawnActor<AScore>();
 	}
 
-	CreateText(ResourcesText[0], { static_cast<float>(ScreenHX + 22), static_cast<float>(ScreenY - 48) }, Money, false);
-	CreateText(ResourcesText[1], { static_cast<float>(ScreenHX - 22), static_cast<float>(ScreenY - 48) }, Bio, true);
+	CreateText(ResourcesText[0], { static_cast<float>(ScreenHX + 24), static_cast<float>(ScreenY - 48) }, Money, false);
+	CreateText(ResourcesText[1], { static_cast<float>(ScreenHX - 24), static_cast<float>(ScreenY - 48) }, Bio, true);
 	CreateText(ResourcesText[2], { static_cast<float>(ScreenX - 310), static_cast<float>(ScreenHY + 225) }, Money, false, ERenderOrder::UITOP);
 	CreateText(ResourcesText[3], { static_cast<float>(ScreenX - 360), static_cast<float>(ScreenHY + 225) }, Bio, true, ERenderOrder::UITOP);
+	CreateText(ResourcesText[4], { static_cast<float>(ScreenX - 43), static_cast<float>(ScreenHY + 225) }, BioExchange, true, ERenderOrder::UITOP);
 }
 
 void AUIManager::Tick(float _DeltaTime)
@@ -299,6 +305,7 @@ void AUIManager::TapButtonIn()
 		SRTapWhite->AddComponentLocation({ 116, 0 });
 		ResourcesText[2]->SetLocation(Money, { 116, 0 });
 		ResourcesText[3]->SetLocation(Bio, { 116, 0 });
+		ResourcesText[4]->SetLocation(BioExchange, { 116, 0 });
 
 		for (int i = 0; i < PanelAllVector.size(); ++i)
 		{
@@ -325,6 +332,7 @@ void AUIManager::TapButtonOut()
 		SRTapWhite->AddComponentLocation({ -116, 0 });
 		ResourcesText[2]->SetLocation(Money, { -116, 0 });
 		ResourcesText[3]->SetLocation(Bio, { -116, 0 });
+		ResourcesText[4]->SetLocation(BioExchange, { -116, 0 });
 
 		for (int i = 0; i < PanelAllVector.size(); ++i)
 		{

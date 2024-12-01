@@ -19,6 +19,8 @@ public:
 		return Sprite[_index];
 	}
 
+	class USpriteRenderer* SpriteRFarmCoin[CropsCount] = {};
+
 protected:
 
 private:
@@ -29,6 +31,5 @@ private:
 	class USpriteRenderer* SpriteRResourcesBar = nullptr;
 	class USpriteRenderer* SpriteRFarmSlot[CropsCount] = {};
 	class USpriteRenderer* SpriteRFarmCrops[CropsCount] = {};
-	class USpriteRenderer* SpriteRFarmCoin[CropsCount] = {};
 	class USpriteRenderer* Sprite[10] = {};
 };

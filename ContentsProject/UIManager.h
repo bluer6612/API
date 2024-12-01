@@ -14,8 +14,9 @@ enum class UICollisionGroup
 	Panel,
 };
 
-static int Money = 1023456789;
-static int Bio = 811;
+static int Money = 400;
+static int Bio = 8;
+static int BioExchange = 1;
 
 // Ό³Έν :
 class AUIManager : public AActor
@@ -53,13 +54,19 @@ public:
 
 	void CreateText(AScore* _AScore, FVector2D _Location, int _Value, bool _Order = false, ERenderOrder _ERenderOrder = ERenderOrder::UIUP)
 	{
-		_AScore->SetTextSpriteName("Text.png");
+		if (_AScore != ResourcesText[4])
+		{
+			_AScore->SetTextSpriteName("Text.png");
+		}
+		else
+		{
+			_AScore->SetTextSpriteName("TextGreen.png");
+		}
 		_AScore->SetOrder(_ERenderOrder);
 		_AScore->SetTextScale({ 7.5f, 15.f });
 		_AScore->SetActorLocation(_Location);
 		_AScore->SetValue(_Value, _Order);
 	}
-
 
 	ATileMap* GroundTileMap = nullptr;
 
