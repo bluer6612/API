@@ -207,7 +207,7 @@ bool ACharacterManager::Moving(AActor* _Actor, Tile* _Tile, float _DeltaTime, in
 
 	Vector.Normalize();
 
-	_Actor->AddActorLocation(Vector * _DeltaTime * 25.f);
+	_Actor->AddActorLocation(Vector * _DeltaTime * 30.f);
 
 	for (size_t i = 0; i < WayDir.size(); i++)
 	{
@@ -216,6 +216,10 @@ bool ACharacterManager::Moving(AActor* _Actor, Tile* _Tile, float _DeltaTime, in
 			return true;
 		}
 		else if (6 == _ActionState && UIManager->GroundTileMap->GetTileByLocation(_Actor->GetActorLocation()) == UIManager->GroundTileMap->GetTileByLocation(_Tile->GetLocation() + (WayDir[i] * 5)))
+		{
+			return true;
+		}
+		else if (4 == _ActionState && UIManager->CroppatchTile->GetTileByLocation(_Actor->GetActorLocation()) == UIManager->CroppatchTile->GetTileByLocation(_Tile->GetLocation() + (WayDir[i] * 5)))
 		{
 			return true;
 		}

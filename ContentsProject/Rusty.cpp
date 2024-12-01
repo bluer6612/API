@@ -114,7 +114,7 @@ void ARusty::Tick(float _DeltaTime)
 	FVector2D Location = GetActorLocation();
 	std::string BeforeDirection = Direction;
 
-	if (3 == ActionState) //수확물 운반
+	if (3 == ActionState || 6 == ActionState) //수확물 운반
 	{
 		TargetTile = FindStorage(Location, ActionState);
 	}
@@ -228,7 +228,13 @@ void ARusty::ChangeAction(NewPlayerState _NewPlayerState)
 
 void ARusty::Idle(float _DeltaTime)
 {
-	if (-1 == ActionState)
+	if (0 >= WaterCount)
+	{
+		TargetTile = nullptr;
+		ActionState = 6;
+		return;
+	}
+	else if (-1 == ActionState)
 	{
 		TargetTile = nullptr;
 	}
@@ -242,11 +248,15 @@ void ARusty::Move(float _DeltaTime)
 
 void ARusty::Water(float _DeltaTime)
 {
-	ActionState = -1;
+	if (5 != ActionState)
+	{
+		ActionState = -1;
+	}
 }
 
 void ARusty::WaterGet(float _DeltaTime)
 {
+	WaterCount += 12;
 	ActionState = -1;
 }
 

@@ -32,5 +32,5 @@ private:
 	class USpriteRenderer* SpriteRSub = nullptr;
 	UFSMStateManager FSM;
 
-	int WaterCount = 12;
+	int WaterCount = 1;
 };

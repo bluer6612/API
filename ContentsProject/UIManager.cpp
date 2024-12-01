@@ -105,7 +105,7 @@ void AUIManager::BeginPlay()
 	{
 		GroundTileMap = GetWorld()->SpawnActor<ATileMap>();
 		GroundTileMap->SetActorLocation({ static_cast<float>(0), static_cast<float>(ScreenY - 296 - TaskbarY) });
-		GroundTileMap->Create("GroundTile.png", { 56, 8 }, { 34, 34 });
+		GroundTileMap->Create("EmptyTile.png", { 56, 8 }, { 34, 34 });
 
 		for (int y = 0; y < 56; y++)
 		{
