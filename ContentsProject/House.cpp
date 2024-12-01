@@ -20,7 +20,7 @@ AHouse::AHouse()
 
 	{
 		SpriteRDoor = CreateDefaultSubObject<USpriteRenderer>();
-		SpriteRDoor->SetComponentCrate(SpriteRDoor, "000_House.png", {}, { ScreenHX, Location.Y + 65 }, ERenderOrder::BUILDINGDOWN);
+		SpriteRDoor->SetComponentCrate(SpriteRDoor, "000_House.png", {}, { ScreenHX, Location.Y + 65 }, ERenderOrder::BUILDING);
 		SpriteRDoor->CreateAnimation("Idle_Door", "House", 0, 1, 0.5f, false);
 	}
 
@@ -38,7 +38,7 @@ AHouse::AHouse()
 		ModelAdd("003_House.png", 95, 20 - 2, 8);
 		ModelAdd("005_House.png", 80, 60 - 2, 9);
 		ModelAdd("006_House.png", 95, 60 - 2, 8);
-		ModelAdd("007_House.png", 0, 147.5 - 2, 7);
+		ModelAdd("007_House.png", 0, 147 - 2, 7);
 		ModelAdd("013_House.png", 72.5, 175 - 2, 7);
 		ModelAdd("015_House.png", -76, -21 - 2, 7);
 		ModelAdd("016_House.png", 87.5, 107.5 - 2, 8);
@@ -57,8 +57,11 @@ AHouse::~AHouse()
 void AHouse::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
+	Location.X = ScreenHX;
+	Location.Y = ScreenHY + 65;
 	UIManager->StorageTilesVector.push_back(UIManager->GroundTileMap->GetTileByLocation(Location));
+	UIManager->GroundTileMap->GetTileByLocation(Location)->SetLocation(Location);
 }
 
 void AHouse::Tick(float _DeltaTime)
