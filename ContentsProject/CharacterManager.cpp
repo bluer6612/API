@@ -242,9 +242,7 @@ void ACharacterManager::Havesting(Tile* _Tile, USpriteRenderer* _SubActor)
 
 		_TileImage->SetActive(false);
 
-		std::vector<class Tile*> CropVector = UIManager->CropsAllVector;
-		CropVector.erase(remove(CropVector.begin(), CropVector.end(), _Tile), CropVector.end());
-		CropVector.clear();
+		UIManager->CropsAllVector.erase(remove(UIManager->CropsAllVector.begin(), UIManager->CropsAllVector.end(), _Tile), UIManager->CropsAllVector.end());
 	}
 	else
 	{

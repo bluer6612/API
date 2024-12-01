@@ -82,7 +82,6 @@ void AActor::Tick(float _DeltaTime)
 
 		(*StartIter)->ComponentTick(_DeltaTime);
 	}
-
 }
 
 void AActor::ReleaseTimeCheck(float _DeltaTime)
