@@ -33,7 +33,7 @@ protected:
 	void Tick(float _DeltaTime) override;
 
 	AUIManager* UIManager = nullptr;
-	int ActionState = -1;
+	int ActionState = 0;
 	bool NextActionBool = false;
 	std::string Direction = "Bot";
 

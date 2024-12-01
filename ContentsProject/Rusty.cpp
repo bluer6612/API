@@ -96,20 +96,19 @@ void ARusty::Tick(float _DeltaTime)
 	else if (0 == ActionState)
 	{
 		Direction = CalDirection(Direction, Location, TargetTile->GetLocation());
+		FSM.ChangeState(NewPlayerState::Move);
 	}
 
-	if (0 == ActionState && 6 <= TargetTile->GetProgress()) //수확
+	if (0 == ActionState && 5 <= TargetTile->GetProgress()) //수확
 	{
 		ActionState = 3;
-		FSM.ChangeState(NewPlayerState::Move);
 	}
 	else if (0 == ActionState && 0 < WaterCount) //물 주기
 	{
 		ActionState = 4;
-		FSM.ChangeState(NewPlayerState::Move);
 	}
 
-	if (4 == ActionState)
+	if (0 < ActionState)
 	{
 		Direction = CalDirection(Direction, Location, TargetTile->GetLocation());
 		if (Direction != BeforeDirection)
@@ -158,6 +157,8 @@ void ARusty::Tick(float _DeltaTime)
 		default:
 			break;
 		}
+
+		ActionState = -1;
 	}
 
 	FSM.Update(_DeltaTime);

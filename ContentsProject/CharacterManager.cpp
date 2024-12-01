@@ -68,11 +68,11 @@ Tile* ACharacterManager::FindTile(FVector2D _Location, int _ActionState)
 
 	for (int i = 0; i < UIManager->CropsAllVector.size(); ++i)
 	{
-		if (3 == _ActionState && 6 == UIManager->CropsAllVector[i]->GetProgress())
+		if (5 <= UIManager->CropsAllVector[i]->GetProgress())
 		{
 			FindBool = true;
 		}
-		else if (4 == _ActionState && true == UIManager->CropsAllVector[i]->GetWaterNeed())
+		else if (true == UIManager->CropsAllVector[i]->GetWaterNeed())
 		{
 			FindBool = true;
 		}
