@@ -1,7 +1,9 @@
 #include "PreCompile.h"
 #include "UIManager.h"
+
 #include "MenuPanelUI.h"
 #include "TitleLogo.h"
+
 #include <EngineCore/SpriteRenderer.h>
 #include <EngineCore/2DCollision.h>
 #include <EngineCore/EngineAPICore.h>
@@ -9,6 +11,9 @@
 
 AUIManager::AUIManager()
 {
+	//³ó»ç Åë°è
+	FarmingStats.resize(CropsCount);
+
 	GetWorld()->CollisionGroupLink(UICollisionGroup::Panel, UICollisionGroup::Cursor);
 	GetWorld()->CollisionGroupLink(UICollisionGroup::Building, UICollisionGroup::Cursor);
 	GetWorld()->CollisionGroupLink(UICollisionGroup::Croppatch, UICollisionGroup::Cursor);
@@ -38,9 +43,6 @@ AUIManager::AUIManager()
 
 	SRTapWhite = CreateDefaultSubObject<USpriteRenderer>();
 	SRTapWhite->SetComponentCrate(SRTapWhite, "004_MenuPanel_pressed.png", {}, { static_cast<float>(ScreenX - 480), (ScreenHY - 5) }, ERenderOrder::UIUP);
-
-	//³ó»ç Åë°è
-	FarmingStats.resize(CropsCount);
 
 	//ÆÐ³Î ÅÇ ¹öÆ°
 	{
@@ -209,6 +211,11 @@ void AUIManager::BeginPlay()
 			StartPos.Y += 34;
 		}
 	}
+
+	CreateText(ResourcesText[0], { static_cast<float>(ScreenHX + 22), static_cast<float>(ScreenY - 48) }, Money, false);
+	CreateText(ResourcesText[1], { static_cast<float>(ScreenHX - 22), static_cast<float>(ScreenY - 48) }, Bio, true);
+	CreateText(ResourcesText[2], { static_cast<float>(ScreenX - 310), static_cast<float>(ScreenHY + 225) }, Money, false, ERenderOrder::UITOP);
+	CreateText(ResourcesText[3], { static_cast<float>(ScreenX - 360), static_cast<float>(ScreenHY + 225) }, Bio, true, ERenderOrder::UITOP);
 }
 
 void AUIManager::Tick(float _DeltaTime)
@@ -284,6 +291,8 @@ void AUIManager::TapButtonIn()
 	{
 		MenuPanelUI->AddActorLocation({ 116, 0 });
 		SRTapWhite->AddComponentLocation({ 116, 0 });
+		ResourcesText[2]->SetActive(false);
+		ResourcesText[3]->SetActive(false);
 
 		for (int i = 0; i < PanelAllVector.size(); ++i)
 		{
@@ -308,6 +317,8 @@ void AUIManager::TapButtonOut()
 	{
 		MenuPanelUI->AddActorLocation({ -116, 0 });
 		SRTapWhite->AddComponentLocation({ -116, 0 });
+		ResourcesText[2]->SetActive(true);
+		ResourcesText[3]->SetActive(true);
 
 		for (int i = 0; i < PanelAllVector.size(); ++i)
 		{

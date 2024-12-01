@@ -142,14 +142,16 @@ void USpriteRenderer::SetSprite(std::string_view _Name, int _CurIndex /*= 0*/)
 
 FVector2D USpriteRenderer::SetSpriteScale(float _Ratio /*= 2.0f*/, int _CurIndex /*= 0*/)
 {
+	FVector2D Scale = FVector2D::ZERO;
+
 	if (nullptr == Sprite)
 	{
 		MSGASSERT("스프라이트를 세팅하지 않고 스프라이트 크기로 랜더러 크기를 조정할수 없습니다.");
-		return FVector2D::ZERO;
+		return Scale;
 	}
 
 	UEngineSprite::USpriteData CurData = Sprite->GetSpriteData(_CurIndex);
-	FVector2D Scale = Sprite->GetSpriteData().Image->GetImageScale() * _Ratio;
+	Scale = Sprite->GetSpriteData().Image->GetImageScale() * _Ratio;
 
 	if (_Ratio > 1.0f)
 	{

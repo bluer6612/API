@@ -129,7 +129,10 @@ public:
 		Alpha = static_cast<unsigned char>(_Value * 255.0f);
 	}
 
-	void SetCount(int _Count);
+	void SetCount(int _Count)
+	{
+		Count = _Count;
+	}
 
 	int GetCount() const
 	{

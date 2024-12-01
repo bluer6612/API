@@ -33,7 +33,9 @@ public:
 
 	void SetOrder(int _Order);
 
-	void SetValue(int _Score);
+	void SetActive(bool _bool);
+
+	void SetValue(int _Score, bool _Order = false);
 
 protected:
 	void BeginPlay() override;

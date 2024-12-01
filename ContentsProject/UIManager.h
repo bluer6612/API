@@ -1,7 +1,9 @@
 #pragma once
 #include <EngineCore/Actor.h>
+
 #include "TileMap.h"
 #include "MenuPanelUI.h"
+#include "Score.h"
 
 enum class UICollisionGroup
 {
@@ -12,8 +14,8 @@ enum class UICollisionGroup
 	Panel,
 };
 
-static int Money = 400;
-static int bio = 8;
+static int Money = 1023456789;
+static int Bio = 811;
 
 // Ό³Έν :
 class AUIManager : public AActor
@@ -49,6 +51,17 @@ public:
 	void PanelButtonTileStay(AActor* _Actor, FTransform _Index);
 	void PanelButtonTileEnd(AActor* _Actor, FTransform _Index);
 
+	void CreateText(AScore* _AScore, FVector2D _Location, int _Value, bool _Order = false, ERenderOrder _ERenderOrder = ERenderOrder::UIUP)
+	{
+		_AScore = GetWorld()->SpawnActor<AScore>();
+
+		_AScore->SetTextSpriteName("Text.png");
+		_AScore->SetOrder(_ERenderOrder);
+		_AScore->SetTextScale({ 7.5f, 15.f });
+		_AScore->SetActorLocation(_Location);
+		_AScore->SetValue(_Value, _Order);
+	}
+
 	ATileMap* GroundTileMap = nullptr;
 
 	std::vector<class Tile*> CropsAllVector;
@@ -58,6 +71,8 @@ public:
 	std::vector<class Tile*> StorageTilesVector;
 	std::vector<int> FarmingStats;
 
+	AScore* ResourcesText[10] = {};
+	AScore* CropsCountText[CropsCount] = {};
 protected:
 
 private:

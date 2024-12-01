@@ -1,7 +1,6 @@
 #include "PreCompile.h"
 #include "PlayGameMode.h"
 #include "Fade.h"
-#include "Score.h"
 
 #include "Rusty.h"
 #include "House.h"
@@ -85,16 +84,6 @@ void APlayGameMode::BeginPlay()
 
 	//BGM
 	//BGMPlayer = UEngineSound::Play("Rustys_Retirement-Full_OST_Master.mp3");
-
-	//{
-	//	AScore* NewActor = GetWorld()->SpawnActor<AScore>();
-
-	//	NewActor->SetActorLocation({1600, 800});
-	//	NewActor->SetTextSpriteName("Text.png");
-	//	NewActor->SetOrder(ERenderOrder::UI);
-	//	NewActor->SetTextScale({ 7, 14 });
-	//	NewActor->SetValue(134567890);
-	//}
 
 	//∆‰¿ÃµÂ
 	//{
