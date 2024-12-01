@@ -10,6 +10,7 @@ enum class NewPlayerState
 	Idle,
 	Move,
 	Water,
+	WaterGet,
 	Harvest,
 	HarvestCarry,
 };

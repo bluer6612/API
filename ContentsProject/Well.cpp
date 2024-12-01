@@ -22,6 +22,11 @@ void AWell::BeginPlay()
 {
 	Super::BeginPlay();
 
+	Location.X = ScreenHX;
+	Location.Y = ScreenHY + 159;
+	UIManager->WellTilesVector.push_back(UIManager->GroundTileMap->GetTileByLocation(Location));
+	UIManager->GroundTileMap->GetTileByLocation(Location)->SetLocation(Location);
+
 	FSM.CreateState(NewPlayerState::Idle, std::bind(&AWell::Idle, this, std::placeholders::_1),
 		[this]()
 		{

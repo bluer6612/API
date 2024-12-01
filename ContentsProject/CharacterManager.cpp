@@ -122,19 +122,29 @@ Tile* ACharacterManager::FindStorage(FVector2D _Location, int _ActionState)
 {
 	Tile* StorageTile = nullptr;
 	std::list<int> SelectStorageLocListResult;
+	std::vector<class Tile*> TargetTilesVector;
 
 	SelectTilesVector.clear();
 	SelectTilesLocVector.clear();
 
-	SelectTilesVector.resize(UIManager->StorageTilesVector.size());
-	SelectTilesLocVector.resize(UIManager->StorageTilesVector.size());
+	if (3 == _ActionState)
+	{
+		TargetTilesVector = UIManager->StorageTilesVector;
+	}
+	else if (6 == _ActionState)
+	{
+		TargetTilesVector = UIManager->WellTilesVector;
+	}
+
+	SelectTilesVector.resize(TargetTilesVector.size());
+	SelectTilesLocVector.resize(TargetTilesVector.size());
 
 	int Index = 0;
 	float Distance = 0;
 
-	for (int i = 0; i < UIManager->StorageTilesVector.size(); ++i)
+	for (int i = 0; i < TargetTilesVector.size(); ++i)
 	{
-		StorageTile = UIManager->StorageTilesVector[i];
+		StorageTile = TargetTilesVector[i];
 		Distance = static_cast<float>(sqrtf(pow(_Location.X - StorageTile->GetLocation().X, 2) + pow(_Location.Y - StorageTile->GetLocation().Y, 2)));
 
 		SelectTilesVector[Index] = StorageTile;
@@ -205,7 +215,11 @@ bool ACharacterManager::Moving(AActor* _Actor, Tile* _Tile, float _DeltaTime, in
 		{
 			return true;
 		}
-		else if (5 >= _ActionState && UIManager->CroppatchTile->GetTileByLocation(_Actor->GetActorLocation()) == UIManager->CroppatchTile->GetTileByLocation(_Tile->GetLocation() + (WayDir[i] * 5)))
+		else if (6 == _ActionState && UIManager->GroundTileMap->GetTileByLocation(_Actor->GetActorLocation()) == UIManager->GroundTileMap->GetTileByLocation(_Tile->GetLocation() + (WayDir[i] * 5)))
+		{
+			return true;
+		}
+		else if (5 == _ActionState && UIManager->CroppatchTile->GetTileByLocation(_Actor->GetActorLocation()) == UIManager->CroppatchTile->GetTileByLocation(_Tile->GetLocation() + (WayDir[i] * 5)))
 		{
 			return true;
 		}

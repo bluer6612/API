@@ -75,6 +75,7 @@ public:
 	ATileMap* CroppatchTile = nullptr;
 
 	std::vector<class Tile*> StorageTilesVector;
+	std::vector<class Tile*> WellTilesVector;
 	std::vector<int> FarmingStats;
 
 	AScore* ResourcesText[10] = {};

@@ -30,6 +30,10 @@ ARusty::ARusty()
 		SpriteR->CreateAnimation("Water_Top", "RustyGold", 28, 31, 0.5f);
 		SpriteR->CreateAnimation("Water_Right", "RustyGold", 32, 35, 0.5f);
 		SpriteR->CreateAnimation("Water_Left", "RustyGold", 36, 39, 0.5f);
+		SpriteR->CreateAnimation("WaterGet_Bot", "RustyGold", 40, 40, 0.75f);
+		SpriteR->CreateAnimation("WaterGet_Top", "RustyGold", 44, 44, 0.75f);
+		SpriteR->CreateAnimation("WaterGet_Right", "RustyGold", 48, 48, 0.75f);
+		SpriteR->CreateAnimation("WaterGet_Left", "RustyGold", 52, 52, 0.75f);
 		SpriteR->CreateAnimation("Harvest_Bot", "RustyGold", 40, 41, 0.5f);
 		SpriteR->CreateAnimation("Harvest_Top", "RustyGold", 42, 43, 0.5f);
 		SpriteR->CreateAnimation("Harvest_Right", "RustyGold", 44, 45, 0.5f);
@@ -77,6 +81,13 @@ void ARusty::BeginPlay()
 		[this]()
 		{
 			SpriteR->ChangeAnimation("Water_" + Direction);
+		}
+	);
+
+	FSM.CreateState(NewPlayerState::WaterGet, std::bind(&ARusty::WaterGet, this, std::placeholders::_1),
+		[this]()
+		{
+			SpriteR->ChangeAnimation("WaterGet_" + Direction);
 		}
 	);
 
@@ -191,9 +202,16 @@ void ARusty::Tick(float _DeltaTime)
 			//물 기르기
 			else
 			{
-
+				ActionState = 6;
+				TargetTile = FindStorage(Location, ActionState);
+				Direction = CalDirection(Direction, Location, TargetTile->GetLocation());
+				FSM.ChangeState(NewPlayerState::Move);
 			}
 
+			break;
+		case 6://물 기르기
+			FSM.ChangeState(NewPlayerState::WaterGet);
+			TimeEventer.PushEvent(0.75f, std::bind(&ARusty::ChangeAction, this, NewPlayerState::Idle), false, false);
 			break;
 		default:
 			break;
@@ -223,6 +241,11 @@ void ARusty::Move(float _DeltaTime)
 }
 
 void ARusty::Water(float _DeltaTime)
+{
+	ActionState = -1;
+}
+
+void ARusty::WaterGet(float _DeltaTime)
 {
 	ActionState = -1;
 }
