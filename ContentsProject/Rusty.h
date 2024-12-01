@@ -27,11 +27,8 @@ protected:
 
 private:
 	class USpriteRenderer* SpriteR = nullptr;
+	class USpriteRenderer* SpriteRSub = nullptr;
 	UFSMStateManager FSM;
-
-	float Speed = 500.0f;
-	int IsGround = false;
-	bool IsMove = false;
 
 	int WaterCount = 12;
 	Tile* TargetTile = nullptr;

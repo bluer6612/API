@@ -15,11 +15,13 @@ public:
 
 	std::string CalDirection(std::string _Direction, FVector2D _ActorLoc, FVector2D _TileLoc);
 
-	Tile* FindTile(FVector2D _Location);
+	Tile* FindTile(FVector2D _Location, int ActionState);
 
 	bool Moving(AActor* _Actor, Tile* _Tile, float _DeltaTime);
 
 	void Watering(Tile* _Tile);
+
+	void Havesting(Tile* _Tile);
 
 	void SetUIManager(AUIManager* const _UIManager)
 	{
@@ -31,8 +33,7 @@ protected:
 	void Tick(float _DeltaTime) override;
 
 	AUIManager* UIManager = nullptr;
-	int ActionState = 0;
-	int NextAction = -1;
+	int ActionState = -1;
 	bool NextActionBool = false;
 	std::string Direction = "Bot";
 

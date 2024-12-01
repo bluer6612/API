@@ -46,7 +46,7 @@ std::string ACharacterManager::CalDirection(std::string _Direction, FVector2D _A
 	return TargetDirection;
 }
 
-Tile* ACharacterManager::FindTile(FVector2D _Location)
+Tile* ACharacterManager::FindTile(FVector2D _Location, int _ActionState)
 {
 	Tile* CropTile = nullptr;
 	std::list<int> SelectCropsLocListResult;
@@ -62,17 +62,30 @@ Tile* ACharacterManager::FindTile(FVector2D _Location)
 	SelectCropsVector.resize(UIManager->CropsAllVector.size());
 	SelectCropsLocVector.resize(UIManager->CropsAllVector.size());
 
-	float Distance;
 	int Index = 0;
+	float Distance = 0;
+	bool FindBool = false;
 
 	for (int i = 0; i < UIManager->CropsAllVector.size(); ++i)
 	{
-		if (true == UIManager->CropsAllVector[i]->GetWaterNeed())
+		if (3 == _ActionState && 6 == UIManager->CropsAllVector[i]->GetProgress())
 		{
-			SelectCropsVector[Index] = UIManager->CropsAllVector[i];
+			FindBool = true;
+		}
+		else if (4 == _ActionState && true == UIManager->CropsAllVector[i]->GetWaterNeed())
+		{
+			FindBool = true;
+		}
+
+		if (true == FindBool)
+		{
+			FindBool = false;
 			Distance = static_cast<float>(sqrtf(pow(_Location.X - UIManager->CropsAllVector[i]->GetLocation().X, 2) + pow(_Location.Y - UIManager->CropsAllVector[i]->GetLocation().Y, 2)));
+
+			SelectCropsVector[Index] = UIManager->CropsAllVector[i];
 			SelectCropsLocVector[Index] = { Distance, static_cast<float>(Index) };
 			SelectCropsLocListResult.push_back(static_cast<int>(Distance));
+
 			++Index;
 		}
 	}
@@ -149,4 +162,18 @@ void ACharacterManager::Watering(Tile* _Tile)
 	_Tile->SetWaterNeed(false);
 
 	UIManager->CroppatchTile->SetCropsTileSprite(_Tile->GetLocation(), 2);
+}
+
+void ACharacterManager::Havesting(Tile* _Tile)
+{
+	Money += CropsSellMoney[_Tile->GetCropsIndex()];
+
+	_Tile->AddGrow();
+	_Tile->SetProgress(0);
+	_Tile->SetWater(0);
+	_Tile->SetWaterNeed(true);
+
+	UIManager->CroppatchTile->SetCropsTileSprite(_Tile->GetLocation(), 0);
+
+	UIManager->CroppatchTileImage[_Tile->GetCropTileIndex()]->SetSprite("Crops.png", (3 + _Tile->GetProgress()) + 11 * _Tile->GetCropsIndex());
 }

@@ -16,6 +16,7 @@ ARusty::ARusty()
 	{
 		SpriteR = CreateDefaultSubObject<USpriteRenderer>();
 		SpriteR->SetSprite("RustyGold");
+		SpriteR->SetOrder(ERenderOrder::PLAYER);
 
 		SpriteR->CreateAnimation("Idle_Bot", "RustyGold", 48, 49, 0.6f);
 		SpriteR->CreateAnimation("Idle_Top", "RustyGold", 50, 51, 0.6f);
@@ -29,12 +30,14 @@ ARusty::ARusty()
 		SpriteR->CreateAnimation("Water_Top", "RustyGold", 28, 31, 0.5f);
 		SpriteR->CreateAnimation("Water_Right", "RustyGold", 32, 35, 0.5f);
 		SpriteR->CreateAnimation("Water_Left", "RustyGold", 36, 39, 0.5f);
-		SpriteR->CreateAnimation("Harvest_Bot", "RustyGold", 24, 27, 0.5f);
-		SpriteR->CreateAnimation("Harvest_Top", "RustyGold", 28, 31, 0.5f);
-		SpriteR->CreateAnimation("Harvest_Right", "RustyGold", 32, 35, 0.5f);
-		SpriteR->CreateAnimation("Harvest_Left", "RustyGold", 36, 39, 0.5f);
+		SpriteR->CreateAnimation("Harvest_Bot", "RustyGold", 65, 70, 0.2f);
+		SpriteR->CreateAnimation("Harvest_Top", "RustyGold", 71, 76, 0.2f);
+		SpriteR->CreateAnimation("Harvest_Right", "RustyGold", 77, 82, 0.2f);
+		SpriteR->CreateAnimation("Harvest_Left", "RustyGold", 83, 88, 0.2f);
 
-		SpriteR->SetOrder(ERenderOrder::PLAYER);
+
+		SpriteRSub = CreateDefaultSubObject<USpriteRenderer>();
+		SpriteRSub->SetSprite("EmptyTile.png");
 	}
 }
 
@@ -85,78 +88,76 @@ void ARusty::Tick(float _DeltaTime)
 	FVector2D Location = GetActorLocation();
 	std::string BeforeDirection = Direction;
 
-	switch (ActionState)
+	if (TargetTile == nullptr)
 	{
-	case 0:
-		if (TargetTile == nullptr)
-		{
-			TargetTile = FindTile(Location);
-			break;
-		}
-		else
-		{
-			Direction = CalDirection(Direction, Location, TargetTile->GetLocation());
-		}
+		TargetTile = FindTile(Location, ActionState);
+		return;
+	}
+	else if (0 == ActionState)
+	{
+		Direction = CalDirection(Direction, Location, TargetTile->GetLocation());
+	}
 
-		if (0 == NextAction && 0 < WaterCount)
+	if (0 == ActionState && 6 <= TargetTile->GetProgress()) //수확
+	{
+		ActionState = 3;
+		FSM.ChangeState(NewPlayerState::Move);
+	}
+	else if (0 == ActionState && 0 < WaterCount) //물 주기
+	{
+		ActionState = 4;
+		FSM.ChangeState(NewPlayerState::Move);
+	}
+
+	if (4 == ActionState)
+	{
+		Direction = CalDirection(Direction, Location, TargetTile->GetLocation());
+		if (Direction != BeforeDirection)
 		{
-			NextAction = 4;
 			FSM.ChangeState(NewPlayerState::Move);
 		}
+		NextActionBool = Moving(this, TargetTile, _DeltaTime);
+	}
 
-		if (4 == NextAction)
+	if (true == NextActionBool)
+	{
+		NextActionBool = false;
+		Direction = CalDirection(Direction, Location, TargetTile->GetLocation());
+
+		switch (ActionState)
 		{
-			Direction = CalDirection(Direction, Location, TargetTile->GetLocation());
-			if (Direction != BeforeDirection)
+		case 0://정지
+			FSM.ChangeState(NewPlayerState::Idle);
+			break;
+		case 1://건설
+			break;
+		case 2://바이오
+			break;
+		case 3://수확
+			FSM.ChangeState(NewPlayerState::Harvest);
+
+			Havesting(TargetTile);
+			break;
+		case 4://물주기
+			if (0 < WaterCount)
 			{
-				FSM.ChangeState(NewPlayerState::Move);
+				FSM.ChangeState(NewPlayerState::Water);
+
+				--WaterCount;
+				Watering(TargetTile);
+
+				TimeEventer.PushEvent(2.0f, std::bind(&ARusty::ChangeAction, this, NewPlayerState::Idle), false, false);
 			}
-			NextActionBool = Moving(this, TargetTile, _DeltaTime);
-		}
-
-		if (true == NextActionBool)
-		{
-			NextActionBool = false;
-
-			switch (NextAction)
+			//물 기르기
+			else
 			{
-			case 0://정지
-				FSM.ChangeState(NewPlayerState::Idle);
-				break;
-			case 1://건설
-				break;
-			case 2://바이오
-				break;
-			case 3://수확
-				break;
-			case 4://물주기
-				if (0 < WaterCount)
-				{
-					NextAction = -1;
 
-					Direction = CalDirection(Direction, Location, TargetTile->GetLocation());
-					FSM.ChangeState(NewPlayerState::Water);
-
-					Watering(TargetTile);
-					--WaterCount;
-
-					TimeEventer.PushEvent(2.0f, std::bind(&ARusty::ChangeAction, this, NewPlayerState::Idle), false, false);
-				}
-				//물 기르기
-				else
-				{
-
-				}
-
-				break;
-			default:
-				break;
 			}
-		}
-		break;
-	case 1://수확
 
-		break;
+			break;
+		default:
+			break;
+		}
 	}
 
 	FSM.Update(_DeltaTime);
@@ -169,12 +170,12 @@ void ARusty::ChangeAction(NewPlayerState _NewPlayerState)
 
 void ARusty::Idle(float _DeltaTime)
 {
-	if (-1 == NextAction)
+	if (-1 == ActionState)
 	{
 		TargetTile = nullptr;
 	}
 
-	NextAction = 0;
+	ActionState = 0;
 }
 
 void ARusty::Move(float _DeltaTime)
@@ -183,9 +184,11 @@ void ARusty::Move(float _DeltaTime)
 
 void ARusty::Water(float _DeltaTime)
 {
+	ActionState = -1;
 	NextActionBool = true;
 }
 
 void ARusty::Harvest(float _DeltaTime)
 {
+	ActionState = -1;
 }

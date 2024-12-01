@@ -167,7 +167,6 @@ void AUIManager::BeginPlay()
 
 		CroppatchTile = GetWorld()->SpawnActor<ATileMap>();
 		CroppatchTile->SetActorLocation(Location);
-		//CroppatchTile->Create("EmptyTile.png", { 56, 8 }, { 34, 34 });
 		CroppatchTile->Create("EmptyTile.png", { 56, 8 }, { 34, 34 });
 
 		int Index = 0;
@@ -224,7 +223,6 @@ void AUIManager::Tick(float _DeltaTime)
 					CropTile->CropsReset(Index, NowSelectCrops);
 					CropTile->SetLocation(CroppatchTileImage[Index]->GetComponentLocation());
 
-					//CropTile->SetWaterNeed(false);
 					CroppatchTile->SetCropsTileSprite(CroppatchTileImage[Index]->GetComponentLocation(), 0);
 
 					CroppatchTileImage[Index]->SetActive(true);

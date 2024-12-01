@@ -42,28 +42,18 @@ void AFarmingManager::Tick(float _DeltaTime)
 
 					if (CropsNeedGrowTime[Index] <= Crops->GetTime())
 					{
-						Money += CropsSellMoney[Index];
-
 						Crops->SetTime(0);
 
-						if (CropsNeedRegrow[Index] > Crops->GetGrow())
+						if (CropsNeedRegrow[Index] == Crops->GetGrow())
 						{
-							Crops->AddGrow();
-							Crops->SetProgress(0);
-							Crops->SetWater(0);
-							Crops->SetWaterNeed(true);
-							UIManager->CroppatchTile->SetCropsTileSprite(CropsImage->GetComponentLocation(), 0);
-							
-							CropsImage->SetSprite("Crops.png", (3 + Crops->GetProgress()) + 11 * Index);
-						}
-						else
-						{
-							CropsImage->SetSprite("gridsmall.png");
-							CropsImage->SetAlphafloat(0.75f);
-							CropsImage->SetActive(false);
-
 							Crops->CropsReset(0, -1);
+							CropsImage->SetActive(false);
 						}
+						//else
+						//{
+						//	//CropsImage->SetSprite("gridsmall.png");
+						//	//CropsImage->SetAlphafloat(0.75f);
+						//}
 					}
 					else if (0 == static_cast<int>(Crops->GetTime()) % (CropsNeedGrowTime[Index] / 6) && Progress != 5)
 					{
