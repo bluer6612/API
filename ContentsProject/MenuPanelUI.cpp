@@ -1,5 +1,7 @@
 #include "PreCompile.h"
 #include "MenuPanelUI.h"
+#include <EngineCore/SpriteRenderer.h>
+#include "ContentsEnum.h"
 
 AMenuPanelUI::AMenuPanelUI()
 {

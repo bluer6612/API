@@ -1,7 +1,8 @@
 #pragma once
-#include "Building.h"
+#include <EngineCore/Actor.h>
+#include <EngineCore/GlobalVariable.h>
 
-class AMenuPanelUI : public ABuilding
+class AMenuPanelUI : public AActor
 {
 public:
 	AMenuPanelUI();
@@ -20,6 +21,9 @@ public:
 protected:
 
 private:
+	FVector2D Location;
+	int index = 0;
+
 	class USpriteRenderer* SpriteRTap = nullptr;
 	class USpriteRenderer* SpriteRResourcesBar = nullptr;
 	class USpriteRenderer* SpriteRFarmSlot[CropsCount] = {};

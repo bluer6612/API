@@ -1,12 +1,12 @@
 #pragma once
-#include <EngineCore/Actor.h>
+#include "BuildingManager.h"
 
 #include <EngineBase/FSMStateManager.h>
 #include <EngineCore/SpriteRenderer.h>
 #include <EngineCore/GlobalVariable.h>
 //#include "UIManager.h"
 
-class ABuilding : public AActor
+class ABuilding : public ABuildingManager
 {
 public:
 	ABuilding();
