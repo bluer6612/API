@@ -20,8 +20,6 @@ public:
 	}
 
 protected:
-	void BeginPlay();
-	void Tick(float _DeltaTime) override;
 
 private:
 	AUIManager* UIManager = nullptr;

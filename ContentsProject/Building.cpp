@@ -12,6 +12,16 @@ ABuilding::~ABuilding()
 {
 }
 
+void ABuilding::BeginPlay()
+{
+	Super::BeginPlay();
+}
+
+void ABuilding::Tick(float _DeltaTime)
+{
+	Super::Tick(_DeltaTime);
+}
+
 void ABuilding::ModelAdd(std::string_view _Name, double _X, double _Y, int _Order)
 {
 	Model[index] = CreateDefaultSubObject<USpriteRenderer>();

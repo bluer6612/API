@@ -16,6 +16,7 @@ public:
 	std::string CalDirection(std::string _Direction, FVector2D _ActorLoc, FVector2D _TileLoc);
 
 	Tile* FindCropTile(FVector2D _Location, int ActionState);
+	Tile* FindStorage(FVector2D _Location, int _ActionState);
 
 	bool Moving(AActor* _Actor, Tile* _Tile, float _DeltaTime);
 
@@ -40,7 +41,7 @@ protected:
 	std::string Direction = "Bot";
 
 private:
-	std::vector<class Tile*> SelectCropsVector;
-	std::vector<FVector2D> SelectCropsLocVector;
+	std::vector<class Tile*> SelectTilesVector;
+	std::vector<FVector2D> SelectTilesLocVector;
 	std::vector<FVector2D> WayDir = { {0, 1}, {0, -1}, {1, 0}, {-1, 0},  {-1, 1}, {-1, -1}, {1, 1}, {1, -1} };
 };

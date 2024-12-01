@@ -56,11 +56,11 @@ Tile* ACharacterManager::FindCropTile(FVector2D _Location, int _ActionState)
 		return CropTile;
 	}
 
-	SelectCropsVector.clear();
-	SelectCropsLocVector.clear();
+	SelectTilesVector.clear();
+	SelectTilesLocVector.clear();
 
-	SelectCropsVector.resize(UIManager->CropsAllVector.size());
-	SelectCropsLocVector.resize(UIManager->CropsAllVector.size());
+	SelectTilesVector.resize(UIManager->CropsAllVector.size());
+	SelectTilesLocVector.resize(UIManager->CropsAllVector.size());
 
 	int Index = 0;
 	float Distance = 0;
@@ -82,8 +82,8 @@ Tile* ACharacterManager::FindCropTile(FVector2D _Location, int _ActionState)
 			FindBool = false;
 			Distance = static_cast<float>(sqrtf(pow(_Location.X - UIManager->CropsAllVector[i]->GetLocation().X, 2) + pow(_Location.Y - UIManager->CropsAllVector[i]->GetLocation().Y, 2)));
 
-			SelectCropsVector[Index] = UIManager->CropsAllVector[i];
-			SelectCropsLocVector[Index] = { Distance, static_cast<float>(Index) };
+			SelectTilesVector[Index] = UIManager->CropsAllVector[i];
+			SelectTilesLocVector[Index] = { Distance, static_cast<float>(Index) };
 			SelectCropsLocListResult.push_back(static_cast<int>(Distance));
 
 			++Index;
@@ -100,9 +100,9 @@ Tile* ACharacterManager::FindCropTile(FVector2D _Location, int _ActionState)
 	int StartIter = SelectCropsLocListResult.front();
 
 	Index = 0;
-	for (int i = 0; i < SelectCropsLocVector.size(); ++i)
+	for (int i = 0; i < SelectTilesLocVector.size(); ++i)
 	{
-		if (StartIter == static_cast<int>(SelectCropsLocVector[Index].X))
+		if (StartIter == static_cast<int>(SelectTilesLocVector[Index].X))
 		{
 			break;
 		}
@@ -110,11 +110,77 @@ Tile* ACharacterManager::FindCropTile(FVector2D _Location, int _ActionState)
 		++Index;
 	}
 
-	CropTile = SelectCropsVector[static_cast<int>(SelectCropsLocVector[Index].Y)];
+	CropTile = SelectTilesVector[static_cast<int>(SelectTilesLocVector[Index].Y)];
 
 	SelectCropsLocListResult.clear();
 
 	return CropTile;
+}
+
+Tile* ACharacterManager::FindStorage(FVector2D _Location, int _ActionState)
+{
+	Tile* StorageTile = nullptr;
+	std::list<int> SelectStorageLocListResult;
+
+	SelectTilesVector.clear();
+	SelectTilesLocVector.clear();
+
+	SelectTilesVector.resize(UIManager->CropsAllVector.size());
+	SelectTilesLocVector.resize(UIManager->CropsAllVector.size());
+
+	int Index = 0;
+	float Distance = 0;
+	bool FindBool = false;
+
+	for (int i = 0; i < UIManager->CropsAllVector.size(); ++i)
+	{
+		if (5 <= UIManager->CropsAllVector[i]->GetProgress())
+		{
+			FindBool = true;
+		}
+		else if (true == UIManager->CropsAllVector[i]->GetWaterNeed())
+		{
+			FindBool = true;
+		}
+
+		if (true == FindBool)
+		{
+			FindBool = false;
+			Distance = static_cast<float>(sqrtf(pow(_Location.X - UIManager->CropsAllVector[i]->GetLocation().X, 2) + pow(_Location.Y - UIManager->CropsAllVector[i]->GetLocation().Y, 2)));
+
+			SelectTilesVector[Index] = UIManager->CropsAllVector[i];
+			SelectTilesLocVector[Index] = { Distance, static_cast<float>(Index) };
+			SelectStorageLocListResult.push_back(static_cast<int>(Distance));
+
+			++Index;
+		}
+	}
+
+	if (0 == SelectStorageLocListResult.size())
+	{
+		return StorageTile;
+	}
+
+	SelectStorageLocListResult.sort();
+
+	int StartIter = SelectStorageLocListResult.front();
+
+	Index = 0;
+	for (int i = 0; i < SelectTilesLocVector.size(); ++i)
+	{
+		if (StartIter == static_cast<int>(SelectTilesLocVector[Index].X))
+		{
+			break;
+		}
+
+		++Index;
+	}
+
+	StorageTile = SelectTilesVector[static_cast<int>(SelectTilesLocVector[Index].Y)];
+
+	SelectStorageLocListResult.clear();
+
+	return StorageTile;
 }
 
 bool ACharacterManager::Moving(AActor* _Actor, Tile* _Tile, float _DeltaTime)
