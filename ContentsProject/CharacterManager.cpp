@@ -1,7 +1,6 @@
 #include "PreCompile.h"
 #include "CharacterManager.h"
 #include "TileMap.h"
-
 #include <cmath>
 
 ACharacterManager::ACharacterManager()
@@ -53,7 +52,7 @@ Tile* ACharacterManager::FindCropTile(FVector2D _Location, int _ActionState)
 
 	if (0 >= UIManager->CropsAllVector.size())
 	{
-		return CropTile;
+		return nullptr;
 	}
 
 	SelectTilesVector.clear();
@@ -68,11 +67,13 @@ Tile* ACharacterManager::FindCropTile(FVector2D _Location, int _ActionState)
 
 	for (int i = 0; i < UIManager->CropsAllVector.size(); ++i)
 	{
-		if (5 <= UIManager->CropsAllVector[i]->GetProgress())
+		CropTile = UIManager->CropsAllVector[i];
+
+		if (5 <= CropTile->GetProgress())
 		{
 			FindBool = true;
 		}
-		else if (true == UIManager->CropsAllVector[i]->GetWaterNeed())
+		else if (true == CropTile->GetWaterNeed())
 		{
 			FindBool = true;
 		}
@@ -80,9 +81,9 @@ Tile* ACharacterManager::FindCropTile(FVector2D _Location, int _ActionState)
 		if (true == FindBool)
 		{
 			FindBool = false;
-			Distance = static_cast<float>(sqrtf(pow(_Location.X - UIManager->CropsAllVector[i]->GetLocation().X, 2) + pow(_Location.Y - UIManager->CropsAllVector[i]->GetLocation().Y, 2)));
+			Distance = static_cast<float>(sqrtf(pow(_Location.X - CropTile->GetLocation().X, 2) + pow(_Location.Y - CropTile->GetLocation().Y, 2)));
 
-			SelectTilesVector[Index] = UIManager->CropsAllVector[i];
+			SelectTilesVector[Index] = CropTile;
 			SelectTilesLocVector[Index] = { Distance, static_cast<float>(Index) };
 			SelectCropsLocListResult.push_back(static_cast<int>(Distance));
 
@@ -92,7 +93,7 @@ Tile* ACharacterManager::FindCropTile(FVector2D _Location, int _ActionState)
 
 	if (0 == SelectCropsLocListResult.size())
 	{
-		return CropTile;
+		return nullptr;
 	}
 
 	SelectCropsLocListResult.sort();
@@ -130,14 +131,13 @@ Tile* ACharacterManager::FindStorage(FVector2D _Location, int _ActionState)
 
 	int Index = 0;
 	float Distance = 0;
-	bool FindBool = false;
 
 	for (int i = 0; i < UIManager->StorageTilesVector.size(); ++i)
 	{
-		FindBool = false;
-		Distance = static_cast<float>(sqrtf(pow(_Location.X - UIManager->StorageTilesVector[i]->GetLocation().X, 2) + pow(_Location.Y - UIManager->StorageTilesVector[i]->GetLocation().Y, 2)));
+		StorageTile = UIManager->StorageTilesVector[i];
+		Distance = static_cast<float>(sqrtf(pow(_Location.X - StorageTile->GetLocation().X, 2) + pow(_Location.Y - StorageTile->GetLocation().Y, 2)));
 
-		SelectTilesVector[Index] = UIManager->StorageTilesVector[i];
+		SelectTilesVector[Index] = StorageTile;
 		SelectTilesLocVector[Index] = { Distance, static_cast<float>(Index) };
 		SelectStorageLocListResult.push_back(static_cast<int>(Distance));
 
@@ -146,7 +146,7 @@ Tile* ACharacterManager::FindStorage(FVector2D _Location, int _ActionState)
 
 	if (0 == SelectStorageLocListResult.size())
 	{
-		return StorageTile;
+		return nullptr;
 	}
 
 	SelectStorageLocListResult.sort();
@@ -171,7 +171,7 @@ Tile* ACharacterManager::FindStorage(FVector2D _Location, int _ActionState)
 	return StorageTile;
 }
 
-bool ACharacterManager::Moving(AActor* _Actor, Tile* _Tile, float _DeltaTime)
+bool ACharacterManager::Moving(AActor* _Actor, Tile* _Tile, float _DeltaTime, int _ActionState)
 {
 	FVector2D Vector = FVector2D::ZERO;
 
@@ -201,7 +201,11 @@ bool ACharacterManager::Moving(AActor* _Actor, Tile* _Tile, float _DeltaTime)
 
 	for (size_t i = 0; i < WayDir.size(); i++)
 	{
-		if (UIManager->CroppatchTile->GetTileByLocation(_Actor->GetActorLocation()) == UIManager->CroppatchTile->GetTileByLocation(_Tile->GetLocation() + (WayDir[i] * 5)))
+		if (3 == _ActionState && UIManager->GroundTileMap->GetTileByLocation(_Actor->GetActorLocation()) == UIManager->GroundTileMap->GetTileByLocation(_Tile->GetLocation() + (WayDir[i] * 5)))
+		{
+			return true;
+		}
+		else if (5 >= _ActionState && UIManager->CroppatchTile->GetTileByLocation(_Actor->GetActorLocation()) == UIManager->CroppatchTile->GetTileByLocation(_Tile->GetLocation() + (WayDir[i] * 5)))
 		{
 			return true;
 		}
@@ -240,23 +244,26 @@ void ACharacterManager::Watering(Tile* _Tile)
 
 void ACharacterManager::Havesting(Tile* _Tile, USpriteRenderer* _SubActor)
 {
-	int Index = _Tile->GetCropsIndex();
-	USpriteRenderer* _TileImage = UIManager->CroppatchTileImage[_Tile->GetCropTileIndex()];
+	int CropIndex = _Tile->GetCropsIndex();
+	int TileIndex = _Tile->GetCropTileIndex();
+	USpriteRenderer* _TileImage = UIManager->CroppatchTileImage[TileIndex];
 
-	Money += CropsSellMoney[Index];
+	Money += CropsSellMoney[CropIndex];
 
 	UIManager->CroppatchTile->SetCropsTileSprite(_Tile->GetLocation(), 0);
 
-	_SubActor->SetSprite("Crops.png", (1 + 11 * Index));
+	_SubActor->SetSprite("Crops.png", (1 + 11 * CropIndex));
 	_SubActor->SetActive(true);
 
 	_Tile->AddGrow();
 
-	if (CropsNeedRegrow[Index] == _Tile->GetGrow())
+	if (CropsNeedRegrow[CropIndex] >= _Tile->GetGrow())
 	{
 		_Tile->CropsReset(0, -1);
 
 		_TileImage->SetActive(false);
+
+		UIManager->CropsAllVector[TileIndex]->CropsReset(0, -1);
 		return;
 	}
 
@@ -265,12 +272,10 @@ void ACharacterManager::Havesting(Tile* _Tile, USpriteRenderer* _SubActor)
 	_Tile->SetWater(0);
 	_Tile->SetWaterNeed(true);
 
-	_TileImage->SetSprite("Crops.png", (3 + _Tile->GetProgress()) + 11 * Index);
+	_TileImage->SetSprite("Crops.png", (3 + _Tile->GetProgress()) + 11 * CropIndex);
 }
 
-void ACharacterManager::CarryToStorage(Tile* _Tile)
+void ACharacterManager::CarryToStorage(Tile* _Tile, USpriteRenderer* _SubActor)
 {
-	_Tile->SetWaterNeed(false);
-
-	UIManager->CroppatchTile->SetCropsTileSprite(_Tile->GetLocation(), 2);
+	_SubActor->SetActive(false);
 }

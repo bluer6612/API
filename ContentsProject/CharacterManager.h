@@ -18,13 +18,13 @@ public:
 	Tile* FindCropTile(FVector2D _Location, int ActionState);
 	Tile* FindStorage(FVector2D _Location, int _ActionState);
 
-	bool Moving(AActor* _Actor, Tile* _Tile, float _DeltaTime);
+	bool Moving(AActor* _Actor, Tile* _Tile, float _DeltaTime, int ActionState);
 
 	void Watering(Tile* _Tile);
 
 	void Havesting(Tile* _Tile, USpriteRenderer* _SubActor);
 
-	void CarryToStorage(Tile* _Tile);
+	void CarryToStorage(Tile* _Tile, USpriteRenderer* _SubActor);
 
 	void SetUIManager(AUIManager* const _UIManager)
 	{

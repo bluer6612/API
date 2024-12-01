@@ -145,7 +145,7 @@ void ARusty::Tick(float _DeltaTime)
 				FSM.ChangeState(NewPlayerState::Move);
 			}
 		}
-		NextActionBool = Moving(this, TargetTile, _DeltaTime);
+		NextActionBool = Moving(this, TargetTile, _DeltaTime, ActionState);
 	}
 
 	if (true == NextActionBool)
@@ -163,6 +163,9 @@ void ARusty::Tick(float _DeltaTime)
 		case 2://바이오
 			break;
 		case 3://수확물 운반
+			FSM.ChangeState(NewPlayerState::Idle);
+
+			CarryToStorage(TargetTile, SpriteRSub);
 			break;
 		case 4://수확
 			FSM.ChangeState(NewPlayerState::Harvest);
