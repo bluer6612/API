@@ -35,7 +35,11 @@ public:
 
 	void SetLocation(int _Score, FVector2D _Pos);
 
-	void SetValue(int _Score, bool _Order = false);
+	void SetValue(int _Score, bool _Order = false, bool _Active = true);
+
+	int GetValue(int _Score);
+
+	int Count = 0;
 
 protected:
 	void BeginPlay() override;

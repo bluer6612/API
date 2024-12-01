@@ -52,7 +52,7 @@ public:
 	void PanelButtonTileStay(AActor* _Actor, FTransform _Index);
 	void PanelButtonTileEnd(AActor* _Actor, FTransform _Index);
 
-	void CreateText(AScore* _AScore, FVector2D _Location, int _Value, bool _Order = false, ERenderOrder _ERenderOrder = ERenderOrder::UIUP)
+	void CreateText(AScore* _AScore, FVector2D _Location, int _Value, bool _Order = false, bool _Active = true, ERenderOrder _ERenderOrder = ERenderOrder::UIUP)
 	{
 		if (_AScore != ResourcesText[4])
 		{
@@ -65,7 +65,7 @@ public:
 		_AScore->SetOrder(_ERenderOrder);
 		_AScore->SetTextScale({ 7.5f, 15.f });
 		_AScore->SetActorLocation(_Location);
-		_AScore->SetValue(_Value, _Order);
+		_AScore->SetValue(_Value, _Order, _Active);
 	}
 
 	ATileMap* GroundTileMap = nullptr;
@@ -80,6 +80,7 @@ public:
 
 	AScore* ResourcesText[10] = {};
 	AScore* CropsCountText[CropsCount] = {};
+	AScore* CropsPriceText[CropsCount] = {};
 protected:
 
 private:

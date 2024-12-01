@@ -83,7 +83,7 @@ void APlayGameMode::BeginPlay()
 	}
 
 	//BGM
-	//BGMPlayer = UEngineSound::Play("Rustys_Retirement-Full_OST_Master.mp3");
+	BGMPlayer = UEngineSound::Play("Rustys_Retirement-Full_OST_Master.mp3");
 
 	//∆‰¿ÃµÂ
 	//{
