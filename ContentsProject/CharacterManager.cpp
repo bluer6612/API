@@ -213,26 +213,6 @@ bool ACharacterManager::Moving(AActor* _Actor, Tile* _Tile, float _DeltaTime, in
 	}
 
 	return false;
-
-	//if (true == UEngineInput::GetInst().IsPress('A'))
-	//{
-	//	GroundTileMap->AddActorLocation(FVector2D::LEFT * _DeltaTime * 100.0f);
-	//}
-
-	//if (true == UEngineInput::GetInst().IsPress('D'))
-	//{
-	//	GroundTileMap->AddActorLocation(FVector2D::RIGHT * _DeltaTime * 100.0f);
-	//}
-
-	//if (true == UEngineInput::GetInst().IsPress('W'))
-	//{
-	//	GroundTileMap->AddActorLocation(FVector2D::UP * _DeltaTime * 100.0f);
-	//}
-
-	//if (true == UEngineInput::GetInst().IsPress('S'))
-	//{
-	//	GroundTileMap->AddActorLocation(FVector2D::DOWN * _DeltaTime * 100.0f);
-	//}
 }
 
 void ACharacterManager::Watering(Tile* _Tile)

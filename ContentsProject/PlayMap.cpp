@@ -14,7 +14,7 @@ APlayMap::APlayMap()
 
 	{
 		BackBottomSpriteR = CreateDefaultSubObject<USpriteRenderer>();
-		BackBottomSpriteR->SetComponentCrate(BackBottomSpriteR, "WindowBottomBlack.png", { 1, 1 }, { ScreenHX, static_cast<float>(ScreenY - 16.5) }, ERenderOrder::TITLE);
+		BackBottomSpriteR->SetComponentCrate(BackBottomSpriteR, "WindowBottomBlack.png", { 1, 1 }, { ScreenHX, static_cast<float>(ScreenY - 16) }, ERenderOrder::TITLE);
 	}
 
 	{
