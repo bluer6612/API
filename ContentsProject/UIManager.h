@@ -53,14 +53,13 @@ public:
 
 	void CreateText(AScore* _AScore, FVector2D _Location, int _Value, bool _Order = false, ERenderOrder _ERenderOrder = ERenderOrder::UIUP)
 	{
-		_AScore = GetWorld()->SpawnActor<AScore>();
-
 		_AScore->SetTextSpriteName("Text.png");
 		_AScore->SetOrder(_ERenderOrder);
 		_AScore->SetTextScale({ 7.5f, 15.f });
 		_AScore->SetActorLocation(_Location);
 		_AScore->SetValue(_Value, _Order);
 	}
+
 
 	ATileMap* GroundTileMap = nullptr;
 

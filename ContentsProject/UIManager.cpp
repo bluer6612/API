@@ -212,6 +212,12 @@ void AUIManager::BeginPlay()
 		}
 	}
 
+	//자원 텍스트
+	for (size_t i = 0; i <= 3; i++)
+	{
+		ResourcesText[i] = GetWorld()->SpawnActor<AScore>();
+	}
+
 	CreateText(ResourcesText[0], { static_cast<float>(ScreenHX + 22), static_cast<float>(ScreenY - 48) }, Money, false);
 	CreateText(ResourcesText[1], { static_cast<float>(ScreenHX - 22), static_cast<float>(ScreenY - 48) }, Bio, true);
 	CreateText(ResourcesText[2], { static_cast<float>(ScreenX - 310), static_cast<float>(ScreenHY + 225) }, Money, false, ERenderOrder::UITOP);
@@ -291,8 +297,8 @@ void AUIManager::TapButtonIn()
 	{
 		MenuPanelUI->AddActorLocation({ 116, 0 });
 		SRTapWhite->AddComponentLocation({ 116, 0 });
-		ResourcesText[2]->SetActive(false);
-		ResourcesText[3]->SetActive(false);
+		ResourcesText[2]->SetLocation(Money, { 116, 0 });
+		ResourcesText[3]->SetLocation(Bio, { 116, 0 });
 
 		for (int i = 0; i < PanelAllVector.size(); ++i)
 		{
@@ -317,8 +323,8 @@ void AUIManager::TapButtonOut()
 	{
 		MenuPanelUI->AddActorLocation({ -116, 0 });
 		SRTapWhite->AddComponentLocation({ -116, 0 });
-		ResourcesText[2]->SetActive(true);
-		ResourcesText[3]->SetActive(true);
+		ResourcesText[2]->SetLocation(Money, { -116, 0 });
+		ResourcesText[3]->SetLocation(Bio, { -116, 0 });
 
 		for (int i = 0; i < PanelAllVector.size(); ++i)
 		{

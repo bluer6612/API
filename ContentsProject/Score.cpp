@@ -41,11 +41,13 @@ void AScore::SetOrder(int _Order)
 	}
 }
 
-void AScore::SetActive(bool _Bool)
+void AScore::SetLocation(int _Score, FVector2D _Pos)
 {
-	for (size_t i = 0; i < Renders.size(); i++)
+	std::string Number = std::to_string(_Score);
+
+	for (size_t i = 0; i < Number.size(); i++)
 	{
-		Renders[i]->SetActive(_Bool);
+		Renders[i]->AddComponentLocation(_Pos);
 	}
 }
 
@@ -81,7 +83,7 @@ void AScore::SetValue(int _Score, bool _Order)
 			Renders[i]->SetSprite(TextSpriteName, Value);
 			Renders[i]->SetComponentScale(TextScale);
 			Renders[i]->SetComponentLocation(Pos);
-			Pos.X += TextScale.X - 15;
+			Pos.X += TextScale.X - (TextScale.X * 2);
 			Renders[i]->SetActive(true);
 		}
 	}

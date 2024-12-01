@@ -33,7 +33,7 @@ public:
 
 	void SetOrder(int _Order);
 
-	void SetActive(bool _bool);
+	void SetLocation(int _Score, FVector2D _Pos);
 
 	void SetValue(int _Score, bool _Order = false);
 
