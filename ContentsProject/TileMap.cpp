@@ -25,9 +25,9 @@ void ATileMap::Create(std::string_view _Sprite, FIntPoint _Count, FVector2D _Til
 	}
 }
 
-FVector2D ATileMap::IndexToTileLocation(FIntPoint _Index, FVector2D _Location)
+FVector2D ATileMap::IndexToTileLocation(FIntPoint _Index)
 {
-	return FVector2D(_Index.X * TileSize.X + _Index.X * _Location.X, _Index.Y * TileSize.Y + _Index.Y * _Location.Y);
+	return FVector2D(_Index.X * TileSize.X, _Index.Y * TileSize.Y);
 }
 
 FIntPoint ATileMap::LocationToIndex(const FVector2D _Location)
@@ -64,10 +64,10 @@ bool ATileMap::IsIndexOver(FIntPoint _Index) const
 
 void ATileMap::SetTileSpriteIndex(FIntPoint _Index, int _SpriteIndex)
 {
-	SetTileSpriteIndex(_Index, { 0,0 }, TileSize, { 0, 0 }, { 0,0 }, _SpriteIndex);
+	SetTileSpriteIndex(_Index, { }, TileSize, _SpriteIndex);
 }
 
-void ATileMap::SetTileSpriteIndex(FIntPoint _Index, FVector2D _Pivot, FVector2D _SpriteScale, FVector2D _Location, FVector2D _LocationPivot, int _SpriteIndex, int _TileIndex, ERenderOrder _SpriteOrder)
+void ATileMap::SetTileSpriteIndex(FIntPoint _Index, FVector2D _Pivot, FVector2D _SpriteScale, int _SpriteIndex, int _TileIndex, ERenderOrder _SpriteOrder)
 {
 	if (true == IsIndexOver(_Index))
 	{
@@ -85,6 +85,7 @@ void ATileMap::SetTileSpriteIndex(FIntPoint _Index, FVector2D _Pivot, FVector2D 
 	FindSprite->SetSprite(SpriteName, _SpriteIndex);
 	FindSprite->SetComponentScale(_SpriteScale);
 	FindSprite->SetOrder(_SpriteOrder);
+
 	if ("EmptyTile.png" == SpriteName)
 	{
 		FindSprite->SetAlphafloat(0.25f);
@@ -94,9 +95,9 @@ void ATileMap::SetTileSpriteIndex(FIntPoint _Index, FVector2D _Pivot, FVector2D 
 		FindSprite->SetAlphafloat(1.f);
 	}
 
-	FVector2D TileLocation = IndexToTileLocation(_Index, _Location + _LocationPivot);
+	FVector2D TileLocation = IndexToTileLocation(_Index);
 
-	AllTiles[_Index.Y][_Index.X].SpriteRenderer->SetComponentLocation(TileLocation + TileSize.Half() + _Pivot + _LocationPivot);
+	AllTiles[_Index.Y][_Index.X].SpriteRenderer->SetComponentLocation(TileLocation + TileSize.Half() + _Pivot);
 	AllTiles[_Index.Y][_Index.X].Pivot = _Pivot;
 	AllTiles[_Index.Y][_Index.X].Scale = _SpriteScale;
 	AllTiles[_Index.Y][_Index.X].SpriteIndex = _SpriteIndex;
@@ -199,7 +200,7 @@ void ATileMap::DeSerialize(UEngineSerializer& _Ser)
 	{
 		for (int x = 0; x < LoadTiles[y].size(); x++)
 		{
-			SetTileSpriteIndex({ x, y }, LoadTiles[y][x].Pivot, LoadTiles[y][x].Scale, { 0, 0 }, { 0,0 }, LoadTiles[y][x].SpriteIndex);
+			SetTileSpriteIndex({ x, y }, LoadTiles[y][x].Pivot, LoadTiles[y][x].Scale, LoadTiles[y][x].SpriteIndex);
 		}
 	}
 }

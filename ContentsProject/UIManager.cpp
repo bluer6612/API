@@ -148,13 +148,13 @@ void AUIManager::BeginPlay()
 	{
 		GroundTileMap = GetWorld()->SpawnActor<ATileMap>();
 		GroundTileMap->SetActorLocation({ static_cast<float>(0), static_cast<float>(ScreenY - 296 - TaskbarY) });
-		GroundTileMap->Create("GroundTile.png", { 55, 8 }, { 34, 34 });
+		GroundTileMap->Create("GroundTile.png", { 56, 8 }, { 34, 34 });
 
-		for (int y = 0; y < 55; y++)
+		for (int y = 0; y < 56; y++)
 		{
 			for (int x = 0; x < 8; x++)
 			{
-				GroundTileMap->SetTileSpriteIndex({ y, x }, { }, { 34, 34 }, { 1, 1 }, { }, 0);
+				GroundTileMap->SetTileSpriteIndex({ y, x }, { 1, 1 }, { 33, 33 }, 0);
 			}
 		}
 	}
@@ -188,7 +188,7 @@ void AUIManager::BeginPlay()
 		{
 			for (int x = 0; x < 56; ++x)
 			{
-				CroppatchTile->SetTileSpriteIndex({ x, y }, { }, { 34, 34 }, { }, { }, 0, Index, ERenderOrder::BUILDINGUP);
+				CroppatchTile->SetTileSpriteIndex({ x, y }, { 1, 1 }, { 33, 33 }, 0, Index, ERenderOrder::BUILDINGUP);
 				//CroppatchTile->GetTileByLocation(StartPos)->SetCropsIndex(-2);
 				CroppatchTile->GetTileByLocation(StartPos)->SetCropsIndex(-1);
 				CroppatchTile->GetTileByLocation(StartPos)->SetLocation(StartPos);

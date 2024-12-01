@@ -186,12 +186,12 @@ public:
 	void SetCropsTileSprite(FVector2D _Location, int _SpriteIndex);
 
 	void SetTileSpriteIndex(FIntPoint _Index, int _SpriteIndex);
-	void SetTileSpriteIndex(FIntPoint _Index, FVector2D _Pivot, FVector2D _SpriteScale, FVector2D _Location, FVector2D _LocationPivot, int _SpriteIndex, int _TileIndex = 0, ERenderOrder _SpriteOrder = ERenderOrder::ZERO);
+	void SetTileSpriteIndex(FIntPoint _Index, FVector2D _Pivot, FVector2D _SpriteScale, int _SpriteIndex, int _TileIndex = 0, ERenderOrder _SpriteOrder = ERenderOrder::ZERO);
 
 	Tile* GetTileRef(FIntPoint _Index);
 	Tile* GetTileRef(FVector2D _Location);
 
-	FVector2D IndexToTileLocation(FIntPoint _Index, FVector2D _Location);
+	FVector2D IndexToTileLocation(FIntPoint _Index);
 
 	FIntPoint LocationToIndex(FVector2D _Location);
 
