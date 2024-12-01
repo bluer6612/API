@@ -38,8 +38,9 @@ ARusty::ARusty()
 
 		SpriteRSub = CreateDefaultSubObject<USpriteRenderer>();
 		SpriteRSub->SetSprite("EmptyTile.png");
+		SpriteRSub->SetComponentScale({32, 64});
 		SpriteRSub->SetOrder(ERenderOrder::BUILDINGUP);
-		SpriteRSub->SetPivotType(PivotType::Bot);
+		SpriteRSub->SetPivotValue({0.5f, 1.25f});
 		SpriteRSub->SetActive(false);
 	}
 }
