@@ -30,10 +30,14 @@ ARusty::ARusty()
 		SpriteR->CreateAnimation("Water_Top", "RustyGold", 28, 31, 0.5f);
 		SpriteR->CreateAnimation("Water_Right", "RustyGold", 32, 35, 0.5f);
 		SpriteR->CreateAnimation("Water_Left", "RustyGold", 36, 39, 0.5f);
-		SpriteR->CreateAnimation("Harvest_Bot", "RustyGold", 65, 70, 0.2f);
-		SpriteR->CreateAnimation("Harvest_Top", "RustyGold", 71, 76, 0.2f);
-		SpriteR->CreateAnimation("Harvest_Right", "RustyGold", 77, 82, 0.2f);
-		SpriteR->CreateAnimation("Harvest_Left", "RustyGold", 83, 88, 0.2f);
+		SpriteR->CreateAnimation("Harvest_Bot", "RustyGold", 40, 41, 0.5f);
+		SpriteR->CreateAnimation("Harvest_Top", "RustyGold", 42, 43, 0.5f);
+		SpriteR->CreateAnimation("Harvest_Right", "RustyGold", 44, 45, 0.5f);
+		SpriteR->CreateAnimation("Harvest_Left", "RustyGold", 46, 47, 0.5f);
+		SpriteR->CreateAnimation("HarvestCarry_Bot", "RustyGold", 65, 70, 0.2f);
+		SpriteR->CreateAnimation("HarvestCarry_Top", "RustyGold", 71, 76, 0.2f);
+		SpriteR->CreateAnimation("HarvestCarry_Right", "RustyGold", 77, 82, 0.2f);
+		SpriteR->CreateAnimation("HarvestCarry_Left", "RustyGold", 83, 88, 0.2f);
 
 
 		SpriteRSub = CreateDefaultSubObject<USpriteRenderer>();
@@ -79,7 +83,14 @@ void ARusty::BeginPlay()
 	FSM.CreateState(NewPlayerState::Harvest, std::bind(&ARusty::Harvest, this, std::placeholders::_1),
 		[this]()
 		{
-			SpriteR->ChangeAnimation("Harvest_" + Direction);
+			SpriteR->ChangeAnimation("Harvest" + Direction);
+		}
+	);
+
+	FSM.CreateState(NewPlayerState::HarvestCarry, std::bind(&ARusty::HarvestCarry, this, std::placeholders::_1),
+		[this]()
+		{
+			SpriteR->ChangeAnimation("HarvestCarry" + Direction);
 		}
 	);
 
@@ -103,13 +114,17 @@ void ARusty::Tick(float _DeltaTime)
 		FSM.ChangeState(NewPlayerState::Move);
 	}
 
-	if (0 == ActionState && 5 <= TargetTile->GetProgress()) //수확
+	if (3 == ActionState) //수확물 운반
 	{
 		ActionState = 3;
 	}
-	else if (0 == ActionState && 0 < WaterCount) //물 주기
+	else if (0 == ActionState && 5 <= TargetTile->GetProgress()) //수확
 	{
 		ActionState = 4;
+	}
+	else if (0 == ActionState && 0 < WaterCount) //물 주기
+	{
+		ActionState = 5;
 	}
 
 	if (0 < ActionState)
@@ -136,12 +151,16 @@ void ARusty::Tick(float _DeltaTime)
 			break;
 		case 2://바이오
 			break;
-		case 3://수확
+		case 3://수확물 운반
+			break;
+		case 4://수확
 			FSM.ChangeState(NewPlayerState::Harvest);
 
 			Havesting(TargetTile, SpriteRSub);
+
+			TimeEventer.PushEvent(1.0f, std::bind(&ARusty::ChangeAction, this, NewPlayerState::HarvestCarry), false, false);
 			break;
-		case 4://물주기
+		case 5://물주기
 			if (0 < WaterCount)
 			{
 				FSM.ChangeState(NewPlayerState::Water);
@@ -196,4 +215,9 @@ void ARusty::Water(float _DeltaTime)
 void ARusty::Harvest(float _DeltaTime)
 {
 	ActionState = -1;
+}
+
+void ARusty::HarvestCarry(float _DeltaTime)
+{
+	ActionState = 3;
 }

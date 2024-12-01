@@ -49,11 +49,6 @@ void AFarmingManager::Tick(float _DeltaTime)
 							Crops->CropsReset(0, -1);
 							CropsImage->SetActive(false);
 						}
-						//else
-						//{
-						//	//CropsImage->SetSprite("gridsmall.png");
-						//	//CropsImage->SetAlphafloat(0.75f);
-						//}
 					}
 					else if (0 == static_cast<int>(Crops->GetTime()) % (CropsNeedGrowTime[Index] / 6) && Progress != 5)
 					{

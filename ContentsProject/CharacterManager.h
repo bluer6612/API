@@ -15,13 +15,15 @@ public:
 
 	std::string CalDirection(std::string _Direction, FVector2D _ActorLoc, FVector2D _TileLoc);
 
-	Tile* FindTile(FVector2D _Location, int ActionState);
+	Tile* FindCropTile(FVector2D _Location, int ActionState);
 
 	bool Moving(AActor* _Actor, Tile* _Tile, float _DeltaTime);
 
 	void Watering(Tile* _Tile);
 
 	void Havesting(Tile* _Tile, USpriteRenderer* _SubActor);
+
+	void CarryToStorage(Tile* _Tile);
 
 	void SetUIManager(AUIManager* const _UIManager)
 	{

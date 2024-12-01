@@ -46,7 +46,7 @@ std::string ACharacterManager::CalDirection(std::string _Direction, FVector2D _A
 	return TargetDirection;
 }
 
-Tile* ACharacterManager::FindTile(FVector2D _Location, int _ActionState)
+Tile* ACharacterManager::FindCropTile(FVector2D _Location, int _ActionState)
 {
 	Tile* CropTile = nullptr;
 	std::list<int> SelectCropsLocListResult;
@@ -178,4 +178,11 @@ void ACharacterManager::Havesting(Tile* _Tile, USpriteRenderer* _SubActor)
 	UIManager->CroppatchTileImage[_Tile->GetCropTileIndex()]->SetSprite("Crops.png", (3 + _Tile->GetProgress()) + 11 * _Tile->GetCropsIndex());
 	_SubActor->SetSprite("Crops.png", (1 + 11 * _Tile->GetCropsIndex()));
 	_SubActor->SetActive(true);
+}
+
+void ACharacterManager::CarryToStorage(Tile* _Tile)
+{
+	_Tile->SetWaterNeed(false);
+
+	UIManager->CroppatchTile->SetCropsTileSprite(_Tile->GetLocation(), 2);
 }

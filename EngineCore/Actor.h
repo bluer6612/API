@@ -11,6 +11,7 @@ enum class NewPlayerState
 	Move,
 	Water,
 	Harvest,
+	HarvestCarry,
 };
 
 class AActor : public UObject

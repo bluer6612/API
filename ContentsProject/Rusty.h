@@ -22,6 +22,7 @@ public:
 	void Move(float _DeltaTime);
 	void Water(float _DeltaTime);
 	void Harvest(float _DeltaTime);
+	void HarvestCarry(float _DeltaTime);
 
 protected:
 
