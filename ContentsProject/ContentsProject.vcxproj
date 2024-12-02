@@ -164,6 +164,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="FarmingManager.h" />
+    <ClInclude Include="Haiku.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="UIManager.h">
       <SubType>
       </SubType>
@@ -231,6 +235,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="FarmingManager.cpp" />
+    <ClCompile Include="Haiku.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="UIManager.cpp">
       <SubType>
       </SubType>

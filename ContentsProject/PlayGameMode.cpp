@@ -3,6 +3,8 @@
 #include "Fade.h"
 
 #include "Rusty.h"
+#include "Haiku.h"
+
 #include "House.h"
 #include "Well.h"
 #include "Biofuelconverter.h"
@@ -106,6 +108,13 @@ void APlayGameMode::Tick(float _DeltaTime)
 		UIManager->CropsCountText[Index]->SetActive(true);
 		UIManager->CropsPriceText[Index]->SetActive(true);
 	}
+
+	if (true == UEngineInput::GetInst().IsDown('1'))
+	{
+		AHaiku* Haiku = AActor::GetWorld()->SpawnActor<AHaiku>();
+		Haiku->SetUIManager(UIManager);
+	}
+
 
 	//if (true == UEngineInput::GetInst().IsPress('R'))
 	//{

@@ -67,6 +67,7 @@ void MainContentsCore::BeginPlay()
 	DirectoryAdd("", "Menu");
 	DirectoryAdd("Menu\\farm", "FarmInfo");
 	DirectoryAdd("Character", "RustyGold");
+	DirectoryAdd("Character", "Haiku");
 	DirectoryAdd("Building", "House");
 	DirectoryAdd("Building", "Well");
 	DirectoryAdd("Building", "Biofuelconverter");

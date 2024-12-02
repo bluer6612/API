@@ -64,7 +64,9 @@
     <ClInclude Include="CharacterManager.h">
       <Filter>ContentsObject\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="Building.h" />
+    <ClInclude Include="Haiku.h">
+      <Filter>ContentsObject\Character</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -126,6 +128,9 @@
     </ClCompile>
     <ClCompile Include="CharacterManager.cpp">
       <Filter>ContentsObject\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Haiku.cpp">
+      <Filter>ContentsObject\Character</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
