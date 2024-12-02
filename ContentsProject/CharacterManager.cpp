@@ -69,7 +69,17 @@ Tile* ACharacterManager::FindCropTile(FVector2D _Location, int _ActionState)
 	{
 		CropTile = UIManager->CropsAllVector[i];
 
-		if (5 <= CropTile->GetProgress())
+		if (0 < ActionTargetVector.size())
+		{
+			for (int j = 0; j < ActionTargetVector.size(); ++j)
+			{
+				if (ActionTargetVector[j] == CropTile)
+				{
+					FindBool = false;
+				}
+			}
+		}
+		else if (5 <= CropTile->GetProgress())
 		{
 			FindBool = true;
 		}
@@ -112,6 +122,8 @@ Tile* ACharacterManager::FindCropTile(FVector2D _Location, int _ActionState)
 	}
 
 	CropTile = SelectTilesVector[static_cast<int>(SelectTilesLocVector[Index].Y)];
+
+	ActionTargetVector.push_back(CropTile);
 
 	SelectCropsLocListResult.clear();
 
@@ -209,28 +221,35 @@ bool ACharacterManager::Moving(AActor* _Actor, Tile* _Tile, float _DeltaTime, in
 
 	_Actor->AddActorLocation(Vector * _DeltaTime * 30.f);
 
+	bool Find = false;
+
 	for (size_t i = 0; i < WayDir.size(); i++)
 	{
 		if (3 == _ActionState && UIManager->GroundTileMap->GetTileByLocation(_Actor->GetActorLocation()) == UIManager->GroundTileMap->GetTileByLocation(_Tile->GetLocation() + (WayDir[i] * 5)))
 		{
-			return true;
+			Find = true;
 		}
 		else if (6 == _ActionState && UIManager->GroundTileMap->GetTileByLocation(_Actor->GetActorLocation()) == UIManager->GroundTileMap->GetTileByLocation(_Tile->GetLocation() + (WayDir[i] * 5)))
 		{
-			return true;
+			Find = true;
 		}
 		else if (4 == _ActionState && UIManager->CroppatchTile->GetTileByLocation(_Actor->GetActorLocation()) == UIManager->CroppatchTile->GetTileByLocation(_Tile->GetLocation() + (WayDir[i] * 5)))
 		{
-			return true;
+			Find = true;
 		}
 		else if (5 == _ActionState && UIManager->CroppatchTile->GetTileByLocation(_Actor->GetActorLocation()) == UIManager->CroppatchTile->GetTileByLocation(_Tile->GetLocation() + (WayDir[i] * 5)))
 		{
-			return true;
+			Find = true;
 		}
 		
+		if (true == Find)
+		{
+			//ActionTargetVector.erase(remove(ActionTargetVector.begin(), ActionTargetVector.end(), _Tile), ActionTargetVector.end());
+			return Find;
+		}
 	}
 
-	return false;
+	return Find;
 }
 
 void ACharacterManager::Watering(Tile* _Tile)

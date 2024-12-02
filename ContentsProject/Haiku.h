@@ -31,6 +31,7 @@ public:
 protected:
 
 private:
+	Tile* TargetTile = nullptr;
 	class USpriteRenderer* SpriteR = nullptr;
 	class USpriteRenderer* SpriteRSub = nullptr;
 	UFSMStateManager FSM;

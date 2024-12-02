@@ -13,6 +13,7 @@ AHaiku::AHaiku()
 	{
 		SpriteR = CreateDefaultSubObject<USpriteRenderer>();
 		SpriteR->SetSprite("Haiku");
+		SpriteR->SetSpriteScale(1.75f);
 		SpriteR->SetOrder(ERenderOrder::PLAYER);
 
 		SpriteR->CreateAnimation("Idle_Bot", "Haiku", 48, 49, 0.6f);

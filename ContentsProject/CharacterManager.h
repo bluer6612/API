@@ -39,9 +39,9 @@ protected:
 	int ActionState = 0;
 	bool NextActionBool = false;
 	std::string Direction = "Bot";
-	Tile* TargetTile = nullptr;
 
 private:
+	std::vector<class Tile*> ActionTargetVector;
 	std::vector<class Tile*> SelectTilesVector;
 	std::vector<FVector2D> SelectTilesLocVector;
 	std::vector<FVector2D> WayDir = { {0, 1}, {0, -1}, {1, 0}, {-1, 0}/*,  {-1, 1}, {-1, -1}, {1, 1}, {1, -1}*/ };
