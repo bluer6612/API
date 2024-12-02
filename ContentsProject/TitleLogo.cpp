@@ -57,13 +57,14 @@ void TitleLogo::TitleButtonEnter(AActor * _Actor, FVector2D _Index)
 
 void TitleLogo::TitleButtonStay(AActor* _Actor, FVector2D _Index)
 {
-
 	if (true == UEngineInput::GetInst().IsDown(VK_LBUTTON))
 	{
 		LogoSpriteR->SetActiveSwitch();
 		TooltipSpriteR->SetActiveSwitch();
 		ButtonSpriteR->SetActiveSwitch();
 		ButtonBorderSpriteR->SetActiveSwitch();
+
+		_Actor->Destroy();
 	}
 }
 

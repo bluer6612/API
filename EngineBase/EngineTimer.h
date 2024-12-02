@@ -1,6 +1,8 @@
 #pragma once
 #include <Windows.h>
 
+static float TimeSpeed = 5.0f;
+
 class UEngineTimer
 {
 public:
@@ -16,12 +18,12 @@ public:
 
 	float GetDeltaTime()
 	{
-		return fDeltaTime;
+		return fDeltaTime * TimeSpeed;
 	}
 
 	double GetDoubleDeltaTime()
 	{
-		return DeltaTime;
+		return DeltaTime * TimeSpeed;
 	}
 
 	void TimeStart();

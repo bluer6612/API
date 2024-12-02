@@ -96,6 +96,16 @@ void APlayGameMode::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 
+	if (true == UEngineInput::GetInst().IsPress(VK_UP))
+	{
+		TimeSpeed += 1.0f;
+		TimeSpeed = 5.f;
+	}
+	else if (true == UEngineInput::GetInst().IsPress(VK_DOWN))
+	{
+		TimeSpeed -= 1.0f;
+	}
+
 	//if (true == UEngineInput::GetInst().IsPress('R'))
 	//{
 	//	UEngineSerializer _Ser;

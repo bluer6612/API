@@ -118,7 +118,7 @@ void AUIManager::BeginPlay()
 
 	//타이틀
 	{
-		//TitleLogo* NewActor = AActor::GetWorld()->SpawnActor<TitleLogo>();
+		TitleLogo* NewActor = AActor::GetWorld()->SpawnActor<TitleLogo>();
 	}
 
 	//패널
@@ -146,8 +146,15 @@ void AUIManager::BeginPlay()
 			for (int x = 0; x < 56; ++x)
 			{
 				CroppatchTile->SetTileSpriteIndex({ x, y }, { 1, 1 }, { 33, 33 }, 0, Index, ERenderOrder::BUILDINGUP);
-				//CroppatchTile->GetTileByLocation(StartPos)->SetCropsIndex(-2);
-				CroppatchTile->GetTileByLocation(StartPos)->SetCropsIndex(-1);
+
+				if ((y >= 4 && y <= 7) && (x >= 21 && x <= 24))
+				{				
+					CroppatchTile->GetTileByLocation(StartPos)->SetCropsIndex(-1);
+				}
+				else
+				{
+					CroppatchTile->GetTileByLocation(StartPos)->SetCropsIndex(-2);
+				}
 				CroppatchTile->GetTileByLocation(StartPos)->SetLocation(StartPos);
 
 				CroppatchTileImage[Index] = CreateDefaultSubObject<USpriteRenderer>();
