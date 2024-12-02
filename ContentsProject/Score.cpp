@@ -49,9 +49,9 @@ void AScore::SetLocation(FVector2D _Pos)
 	}
 }
 
-void AScore::SetActive(int _Score, bool _Active)
+void AScore::SetActive(bool _Active)
 {
-	std::string Number = std::to_string(_Score);
+	std::string Number = std::to_string(ValueData);
 
 	for (size_t i = 0; i < Number.size(); i++)
 	{
@@ -62,6 +62,8 @@ void AScore::SetActive(int _Score, bool _Active)
 void AScore::SetValue(int _Score, int _Order, bool _Active)
 {
 	std::string Number = std::to_string(_Score);
+
+	ValueData = _Score;
 
 	if (Renders.size() <= Number.size())
 	{
@@ -121,7 +123,7 @@ void AScore::SetValue(int _Score, int _Order, bool _Active)
 	}
 }
 
-int AScore::GetValue(int _Score)
+int AScore::GetValueData()
 {
-	return std::to_string(_Score).size();
+	return std::to_string(ValueData).size();
 }

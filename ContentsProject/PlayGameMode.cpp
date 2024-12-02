@@ -103,8 +103,8 @@ void APlayGameMode::Tick(float _DeltaTime)
 		UIManager->MenuPanelUI->SpriteRFarmCrops[Index]->SetSprite( "Crops.png", Index * 11 + 1);
 		UIManager->MenuPanelUI->SpriteRFarmCoin[Index]->SetSprite("uiresourceicons_0.png");
 		UIManager->MenuPanelUI->SpriteRFarmCoin[Index]->SetComponentLocation({ static_cast<float>(UIManager->MenuPanelUI->SpriteRFarmCoin[Index]->GetComponentLocation().X - std::to_string(CropsNeedMoney[Index]).size() * 7.5), (static_cast<float>(UIManager->MenuPanelUI->SpriteRFarmCoin[Index]->GetComponentLocation().Y)) });
-		UIManager->CropsCountText[Index]->SetActive(UIManager->CropsCountText[Index]->GetValue(UIManager->CropsCountText[Index]->ValueData), true);
-		UIManager->CropsPriceText[Index]->SetActive(UIManager->CropsCountText[Index]->GetValue(CropsNeedMoney[Index]), true);
+		UIManager->CropsCountText[Index]->SetActive(true);
+		UIManager->CropsPriceText[Index]->SetActive(true);
 	}
 
 	//if (true == UEngineInput::GetInst().IsPress('R'))

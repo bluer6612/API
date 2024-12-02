@@ -35,11 +35,11 @@ public:
 
 	void SetLocation(FVector2D _Pos);
 
-	void SetActive(int _Score, bool _Active);
+	void SetActive(bool _Active);
 
 	void SetValue(int _Score, int _Order = 0, bool _Active = true);
 
-	int GetValue(int _Score);
+	int GetValueData();
 
 	int ValueData = 0;
 
@@ -48,6 +48,7 @@ protected:
 	void Tick(float _DeltaTime) override;
 
 private:
+
 	std::string TextSpriteName;
 	FVector2D TextScale;
 	std::vector<class USpriteRenderer*> Renders;

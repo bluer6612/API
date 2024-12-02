@@ -28,14 +28,20 @@ AMenuPanelUI::AMenuPanelUI()
 
 	{
 		Sprite[index] = CreateDefaultSubObject<USpriteRenderer>();
-		Sprite[index]->SetComponentCrate(Sprite[index], "003_MenuPanel.png", {}, { Location.X + 1, (Location.Y + 126) }, ERenderOrder::UIUP);
+		Sprite[index]->SetComponentCrate(Sprite[index], "003_MenuPanel.png", {}, { Location.X + 1, (Location.Y + 126) }, ERenderOrder::UITOP);
 		++index;
 	}
 
 	{
 		Sprite[index] = CreateDefaultSubObject<USpriteRenderer>();
-		Sprite[index]->SetComponentCrate(Sprite[index], "003_MenuPanel_Font.png", {32 , 16}, { Location.X + 103, static_cast<float>((Location.Y + 130)) }, ERenderOrder::UIUP);
+		Sprite[index]->SetComponentCrate(Sprite[index], "003_MenuPanel_Font.png", {32 , 16}, { Location.X + 103, static_cast<float>((Location.Y + 130)) }, ERenderOrder::UITOP);
 		++index;
+	}
+
+	{
+		SpriteRPanel = CreateDefaultSubObject<USpriteRenderer>();
+		SpriteRPanel->SetComponentCrate(SpriteRPanel, "Echo.png", { 1, 1 }, { Location.X + 1, Location.Y - 10 }, ERenderOrder::UIUP);
+		SpriteRPanel->SetActive(false);
 	}
 
 	{

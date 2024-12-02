@@ -97,7 +97,7 @@ private:
 
 	bool CursorOnTap = false;
 	int NowSelectCrops = -1;
-	int NowSelectTap = 1;
+	int NowSelectTap = 0;
 	int TapTimer = 0;
 
 	std::vector<class U2DCollision*> PanelAllVector;

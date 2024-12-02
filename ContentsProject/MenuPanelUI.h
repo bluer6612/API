@@ -23,6 +23,8 @@ public:
 	class USpriteRenderer* SpriteRFarmCrops[CropsCount] = {};
 	class USpriteRenderer* SpriteRFarmCoin[CropsCount] = {};
 
+	class USpriteRenderer* SpriteRPanel = nullptr;
+
 protected:
 
 private:

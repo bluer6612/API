@@ -227,7 +227,7 @@ void AUIManager::BeginPlay()
 				}
 				else if (y > 0 || 3 == x)
 				{
-					CreateText(CropsPriceText[Index], { static_cast<float>(StartPos.X + 42), static_cast<float>(StartPos.Y - 34 + 46) }, CropsNeedMoney[Index], 2, true);
+					CreateText(CropsPriceText[Index], { static_cast<float>(StartPos.X + 42), static_cast<float>(StartPos.Y - 34 + 46) }, CropsNeedMoney[Index], 2, false);
 					MenuPanelUI->SpriteRFarmCoin[Index]->SetComponentLocation({ static_cast<float>(StartPos.X + 37), (static_cast<float>(StartPos.Y - 30 + 46)) });
 				}
 				else
@@ -359,7 +359,7 @@ void AUIManager::TapButtonIn()
 		{
 			for (int x = 0; x < 4; ++x)
 			{
-				if (Index < 23)
+				if (Index < 23 && CropsLock >= Index)
 				{
 					CropsCountText[Index]->SetLocation({ 116, 0 });
 					CropsPriceText[Index]->SetLocation({ 116, 0 });
@@ -401,7 +401,7 @@ void AUIManager::TapButtonOut()
 		{
 			for (int x = 0; x < 4; ++x)
 			{
-				if (Index < 23)
+				if (Index < 23 && CropsLock >= Index)
 				{
 					CropsCountText[Index]->SetLocation({ -116, 0 });
 					CropsPriceText[Index]->SetLocation({ -116, 0 });
@@ -433,7 +433,7 @@ void AUIManager::TapButtonStay(AActor* _Actor, FTransform _Index)
 
 	if (true == UEngineInput::GetInst().IsDown(VK_LBUTTON))
 	{
-		NowSelectTap = _Index.Scale.X;
+		NowSelectTap = static_cast<int>(_Index.Scale.X);
 
 		if (0 == TapTimer && -1 == NowSelectTap)
 		{
@@ -458,6 +458,93 @@ void AUIManager::TapButtonStay(AActor* _Actor, FTransform _Index)
 		else
 		{
 			SRTapWhite->SetComponentLocation({ _Index.Location.X, _Index.Location.Y });
+
+			if (1 <= NowSelectTap)
+			{
+				switch (NowSelectTap)
+				{
+				case 1:
+					MenuPanelUI->SpriteRPanel->SetSprite("Build.png");
+					break;
+				case 2:
+					MenuPanelUI->SpriteRPanel->SetSprite("Echo.png");
+					break;
+				case 3:
+					MenuPanelUI->SpriteRPanel->SetSprite("Sonet.png");
+					break;
+				case 4:
+					MenuPanelUI->SpriteRPanel->SetSprite("Setting.png");
+					break;
+				case 5:
+					MenuPanelUI->SpriteRPanel->SetSprite("Porbig.png");
+					break;
+				case 6:
+					MenuPanelUI->SpriteRPanel->SetSprite("Slate.png");
+					break;
+				case 7:
+					MenuPanelUI->SpriteRPanel->SetSprite("Pinion.png");
+					break;
+				case 8:
+					MenuPanelUI->SpriteRPanel->SetSprite("OrderSetting.png");
+					break;
+				}
+
+				for (size_t i = 0; i < 23; ++i)
+				{
+					MenuPanelUI->SpriteRFarmCrops[i]->SetActive(false);
+					MenuPanelUI->SpriteRFarmSlot[i]->SetActive(false);
+				}
+
+				for (int i = 10; i < PanelAllVector.size(); ++i)
+				{
+					PanelAllVector[i]->SetActive(false);
+				}
+
+				MenuPanelUI->SpriteRPanel->SetActive(true);
+
+				int Index = 0;
+				for (int y = 0; y < 6; ++y)
+				{
+					for (int x = 0; x < 4; ++x)
+					{
+						if (Index < 23 && CropsLock >= Index)
+						{
+							CropsCountText[Index]->SetActive(false);
+							CropsPriceText[Index]->SetActive(false);
+						}
+						++Index;
+					}
+				}
+			}
+			else if (0 == NowSelectTap)
+			{
+				for (size_t i = 0; i < 23; ++i)
+				{
+					MenuPanelUI->SpriteRFarmCrops[i]->SetActive(true);
+					MenuPanelUI->SpriteRFarmSlot[i]->SetActive(true);
+				}
+
+				for (int i = 10; i < PanelAllVector.size(); ++i)
+				{
+					PanelAllVector[i]->SetActive(true);
+				}
+
+				MenuPanelUI->SpriteRPanel->SetActive(false);
+
+				int Index = 0;
+				for (int y = 0; y < 6; ++y)
+				{
+					for (int x = 0; x < 4; ++x)
+					{
+						if (Index < 23 && CropsLock >= Index)
+						{
+							CropsCountText[Index]->SetActive(true);
+							CropsPriceText[Index]->SetActive(true);
+						}
+						++Index;
+					}
+				}
+			}
 		}
 	}
 }
@@ -487,7 +574,7 @@ void AUIManager::PanelButtonTileStay(AActor* _Actor, FTransform _Index)
 	{
 		if (CropsLock >= _Index.Scale.X)
 		{
-			NowSelectCrops = _Index.Scale.X;
+			NowSelectCrops = static_cast<int>(_Index.Scale.X);
 			CursorImage->SetSprite("Crops.png", 3 + 11 * NowSelectCrops);
 			CursorImage->SetActive(true);
 
