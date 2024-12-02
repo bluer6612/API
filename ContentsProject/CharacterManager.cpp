@@ -244,7 +244,7 @@ bool ACharacterManager::Moving(AActor* _Actor, Tile* _Tile, float _DeltaTime, in
 		
 		if (true == Find)
 		{
-			//ActionTargetVector.erase(remove(ActionTargetVector.begin(), ActionTargetVector.end(), _Tile), ActionTargetVector.end());
+			ActionTargetVector.erase(remove(ActionTargetVector.begin(), ActionTargetVector.end(), _Tile), ActionTargetVector.end());
 			return Find;
 		}
 	}

@@ -1,6 +1,5 @@
 #include "PreCompile.h"
 #include "House.h"
-#include "BuildingManager.h"
 
 AHouse::AHouse()
 {

@@ -9,6 +9,7 @@
 #include "Well.h"
 #include "Biofuelconverter.h"
 #include "Croppatch.h"
+#include "HaikuHouse.h"
 
 #include <EngineBase/EngineFile.h>
 #include <EngineBase/EngineDirectory.h>
@@ -113,6 +114,8 @@ void APlayGameMode::Tick(float _DeltaTime)
 	{
 		AHaiku* Haiku = AActor::GetWorld()->SpawnActor<AHaiku>();
 		Haiku->SetUIManager(UIManager);
+		AHaikuHouse* HaikuHouse = AActor::GetWorld()->SpawnActor<AHaikuHouse>();
+		HaikuHouse->SetUIManager(UIManager);
 	}
 
 

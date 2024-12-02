@@ -8,7 +8,7 @@
 
 AHaiku::AHaiku()
 {
-	SetActorLocation({ static_cast<float>(ScreenX * 0.5 + 85), static_cast<float>((ScreenY - 243) + 76) });
+	SetActorLocation({ static_cast<float>(ScreenX * 0.5 + 220), static_cast<float>((ScreenY - 243) + 76) });
 
 	{
 		SpriteR = CreateDefaultSubObject<USpriteRenderer>();

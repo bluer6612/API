@@ -71,6 +71,7 @@ void MainContentsCore::BeginPlay()
 	DirectoryAdd("Building", "House");
 	DirectoryAdd("Building", "Well");
 	DirectoryAdd("Building", "Biofuelconverter");
+	DirectoryAdd("Building", "HaikuHouse");
 	DirectoryAdd("Building", "UI");
 
 	UEngineAPICore::GetCore()->GetMainWindow().SetWindowTitle("MainWindow");
