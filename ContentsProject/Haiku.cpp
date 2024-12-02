@@ -36,10 +36,10 @@ AHaiku::AHaiku()
 		SpriteR->CreateAnimation("Harvest_Top", "Haiku", 42, 43, 0.5f);
 		SpriteR->CreateAnimation("Harvest_Right", "Haiku", 44, 45, 0.5f);
 		SpriteR->CreateAnimation("Harvest_Left", "Haiku", 46, 47, 0.5f);
-		SpriteR->CreateAnimation("HarvestCarry_Bot", "Haiku", 65, 70, 0.2f);
-		SpriteR->CreateAnimation("HarvestCarry_Top", "Haiku", 71, 76, 0.2f);
-		SpriteR->CreateAnimation("HarvestCarry_Right", "Haiku", 77, 82, 0.2f);
-		SpriteR->CreateAnimation("HarvestCarry_Left", "Haiku", 83, 88, 0.2f);
+		SpriteR->CreateAnimation("HarvestCarry_Bot", "Haiku", 64, 69, 0.2f);
+		SpriteR->CreateAnimation("HarvestCarry_Top", "Haiku", 70, 75, 0.2f);
+		SpriteR->CreateAnimation("HarvestCarry_Right", "Haiku", 76, 81, 0.2f);
+		SpriteR->CreateAnimation("HarvestCarry_Left", "Haiku", 82, 87, 0.2f);
 
 		SpriteRSub = CreateDefaultSubObject<USpriteRenderer>();
 		SpriteRSub->SetSprite("EmptyTile.png");
