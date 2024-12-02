@@ -16,10 +16,6 @@
     <ClInclude Include="PreCompile.h">
       <Filter>PreCompile</Filter>
     </ClInclude>
-    <ClInclude Include="Engine
-			   .h">
-      <Filter>Time</Filter>
-    </ClInclude>
     <ClInclude Include="EngineDirectory.h">
       <Filter>IO</Filter>
     </ClInclude>
@@ -46,6 +42,9 @@
     </ClInclude>
     <ClInclude Include="EngineResources.h">
       <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineTimer.h">
+      <Filter>Time</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

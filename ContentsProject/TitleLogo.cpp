@@ -64,7 +64,7 @@ void TitleLogo::TitleButtonStay(AActor* _Actor, FVector2D _Index)
 		ButtonSpriteR->SetActiveSwitch();
 		ButtonBorderSpriteR->SetActiveSwitch();
 
-		_Actor->Destroy();
+		this->Destroy();
 	}
 }
 

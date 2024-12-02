@@ -84,6 +84,7 @@ AMenuPanelUI::AMenuPanelUI()
 			else
 			{
 				SpriteRFarmCrops[i]->SetComponentCrate(SpriteRFarmCrops[i], "Crops.png", j * 11, {}, { (Location.X - 153 - 29 + (Loc * 104)), (Location.Y - 120 - 16 + ((i / 4) + Loc2) * 46) }, ERenderOrder::UI);
+
 			}
 			if (i > (24 - 2))
 			{

@@ -44,6 +44,14 @@ AUIManager::AUIManager()
 	SRTapWhite = CreateDefaultSubObject<USpriteRenderer>();
 	SRTapWhite->SetComponentCrate(SRTapWhite, "004_MenuPanel_pressed.png", {}, { static_cast<float>(ScreenX - 480), (ScreenHY - 5) }, ERenderOrder::UIUP);
 
+	{
+		USpriteRenderer* End = CreateDefaultSubObject<USpriteRenderer>();
+		End->SetComponentCrate(End, "BlockedLandFill.png", {}, { static_cast<float>(150), static_cast<float>(ScreenY - 148 - TaskbarY) }, ERenderOrder::BUILDINGTOP);
+	}
+	{
+		USpriteRenderer* End = CreateDefaultSubObject<USpriteRenderer>();
+		End->SetComponentCrate(End, "BlockedLandFill_Right.png", {}, { static_cast<float>(ScreenX - 150), static_cast<float>(ScreenY - 148 - TaskbarY) }, ERenderOrder::BUILDINGTOP);
+	}
 	//패널 탭 버튼
 	{
 		//패널 X 버튼
@@ -122,7 +130,6 @@ void AUIManager::BeginPlay()
 	}
 
 	//패널
-	AMenuPanelUI* MenuPanelUI = nullptr;
 	{
 		MenuPanelUI = GetWorld()->SpawnActor<AMenuPanelUI>();
 
@@ -198,12 +205,12 @@ void AUIManager::BeginPlay()
 				CropsCountText[Index] = GetWorld()->SpawnActor<AScore>();
 				if (y == 5 || (4 == y && 3 == x))
 				{
-					CreateText(CropsCountText[Index], { static_cast<float>(StartPos.X), static_cast<float>(StartPos.Y - 34 + 28) }, 0, false, false, ERenderOrder::UI);
+					CreateText(CropsCountText[Index], { static_cast<float>(StartPos.X), static_cast<float>(StartPos.Y - 34 + 28) }, 0, 0, false, ERenderOrder::UI);
 					MenuPanelUI->SpriteRFarmCoin[Index]->SetComponentLocation({ static_cast<float>(StartPos.X + 37), (static_cast<float>(StartPos.Y - 30 + 46)) });
 				}
 				else if (y > 0 || 3 == x)
 				{
-					CreateText(CropsCountText[Index], { static_cast<float>(StartPos.X), static_cast<float>(StartPos.Y - 34 + 28) }, 0, false, false);
+					CreateText(CropsCountText[Index], { static_cast<float>(StartPos.X), static_cast<float>(StartPos.Y - 34 + 28) }, 0, 0, false);
 					MenuPanelUI->SpriteRFarmCoin[Index]->SetComponentLocation({ static_cast<float>(StartPos.X + 37), (static_cast<float>(StartPos.Y - 30 + 46)) });
 				}
 				else
@@ -215,20 +222,19 @@ void AUIManager::BeginPlay()
 				CropsPriceText[Index] = GetWorld()->SpawnActor<AScore>();
 				if (y == 5 || (4 == y && 3 == x))
 				{
-					CreateText(CropsPriceText[Index], { static_cast<float>(StartPos.X + 42), static_cast<float>(StartPos.Y - 34 + 46) }, CropsNeedMoney[Index], true, false, ERenderOrder::UI);
+					CreateText(CropsPriceText[Index], { static_cast<float>(StartPos.X + 42), static_cast<float>(StartPos.Y - 34 + 46) }, CropsNeedMoney[Index], 2, false, ERenderOrder::UI);
 					MenuPanelUI->SpriteRFarmCoin[Index]->SetComponentLocation({ static_cast<float>(StartPos.X + 37), (static_cast<float>(StartPos.Y - 30 + 46)) });
 				}
 				else if (y > 0 || 3 == x)
 				{
-					CreateText(CropsPriceText[Index], { static_cast<float>(StartPos.X + 42), static_cast<float>(StartPos.Y - 34 + 46) }, CropsNeedMoney[Index], true, false);
+					CreateText(CropsPriceText[Index], { static_cast<float>(StartPos.X + 42), static_cast<float>(StartPos.Y - 34 + 46) }, CropsNeedMoney[Index], 2, true);
 					MenuPanelUI->SpriteRFarmCoin[Index]->SetComponentLocation({ static_cast<float>(StartPos.X + 37), (static_cast<float>(StartPos.Y - 30 + 46)) });
 				}
 				else
 				{
-					CreateText(CropsPriceText[Index], { static_cast<float>(StartPos.X + 42), static_cast<float>(StartPos.Y - 34 + 46) }, CropsNeedMoney[Index], true);
+					CreateText(CropsPriceText[Index], { static_cast<float>(StartPos.X + 42), static_cast<float>(StartPos.Y - 34 + 46) }, CropsNeedMoney[Index], 0);
 					MenuPanelUI->SpriteRFarmCoin[Index]->SetComponentLocation({ static_cast<float>(StartPos.X + 37 - std::to_string(CropsNeedMoney[Index]).size() * 7.5), (static_cast<float>(StartPos.Y - 30 + 46)) });
 				}
-
 
 				++Index;
 
@@ -260,11 +266,11 @@ void AUIManager::BeginPlay()
 		ResourcesText[i] = GetWorld()->SpawnActor<AScore>();
 	}
 
-	CreateText(ResourcesText[0], { static_cast<float>(ScreenHX + 24), static_cast<float>(ScreenY - 48) }, Money, false);
-	CreateText(ResourcesText[1], { static_cast<float>(ScreenHX - 24), static_cast<float>(ScreenY - 48) }, Bio, true);
-	CreateText(ResourcesText[2], { static_cast<float>(ScreenX - 310), static_cast<float>(ScreenHY + 225) }, Money, false, true, ERenderOrder::UITOP);
-	CreateText(ResourcesText[3], { static_cast<float>(ScreenX - 360), static_cast<float>(ScreenHY + 225) }, Bio, true, true, ERenderOrder::UITOP);
-	CreateText(ResourcesText[4], { static_cast<float>(ScreenX - 43), static_cast<float>(ScreenHY + 225) }, BioExchange, true, true, ERenderOrder::UITOP);
+	CreateText(ResourcesText[0], { static_cast<float>(ScreenHX + 24), static_cast<float>(ScreenY - 48) }, Money, 0);
+	CreateText(ResourcesText[1], { static_cast<float>(ScreenHX - 24), static_cast<float>(ScreenY - 48) }, Bio, 1);
+	CreateText(ResourcesText[2], { static_cast<float>(ScreenX - 310), static_cast<float>(ScreenHY + 225) }, Money, 0, true, ERenderOrder::UITOP);
+	CreateText(ResourcesText[3], { static_cast<float>(ScreenX - 360), static_cast<float>(ScreenHY + 225) }, Bio, 1, true, ERenderOrder::UITOP);
+	CreateText(ResourcesText[4], { static_cast<float>(ScreenX - 43), static_cast<float>(ScreenHY + 225) }, BioExchange, 1, true, ERenderOrder::UITOP);
 }
 
 void AUIManager::Tick(float _DeltaTime)
@@ -342,9 +348,25 @@ void AUIManager::TapButtonIn()
 	{
 		MenuPanelUI->AddActorLocation({ 116, 0 });
 		SRTapWhite->AddComponentLocation({ 116, 0 });
-		ResourcesText[2]->SetLocation(Money, { 116, 0 });
-		ResourcesText[3]->SetLocation(Bio, { 116, 0 });
-		ResourcesText[4]->SetLocation(BioExchange, { 116, 0 });
+
+		for (size_t i = 2; i <= 4; i++)
+		{
+			ResourcesText[i]->SetLocation({ 116, 0 });
+		}
+
+		int Index = 0;
+		for (int y = 0; y < 6; ++y)
+		{
+			for (int x = 0; x < 4; ++x)
+			{
+				if (Index < 23)
+				{
+					CropsCountText[Index]->SetLocation({ 116, 0 });
+					CropsPriceText[Index]->SetLocation({ 116, 0 });
+				}
+				++Index;
+			}
+		}
 
 		for (int i = 0; i < PanelAllVector.size(); ++i)
 		{
@@ -369,9 +391,24 @@ void AUIManager::TapButtonOut()
 	{
 		MenuPanelUI->AddActorLocation({ -116, 0 });
 		SRTapWhite->AddComponentLocation({ -116, 0 });
-		ResourcesText[2]->SetLocation(Money, { -116, 0 });
-		ResourcesText[3]->SetLocation(Bio, { -116, 0 });
-		ResourcesText[4]->SetLocation(BioExchange, { -116, 0 });
+		for (size_t i = 2; i <= 4; i++)
+		{
+			ResourcesText[i]->SetLocation({ -116, 0 });
+		}
+
+		int Index = 0;
+		for (int y = 0; y < 6; ++y)
+		{
+			for (int x = 0; x < 4; ++x)
+			{
+				if (Index < 23)
+				{
+					CropsCountText[Index]->SetLocation({ -116, 0 });
+					CropsPriceText[Index]->SetLocation({ -116, 0 });
+				}
+				++Index;
+			}
+		}
 
 		for (int i = 0; i < PanelAllVector.size(); ++i)
 		{
@@ -448,7 +485,7 @@ void AUIManager::PanelButtonTileStay(AActor* _Actor, FTransform _Index)
 
 	if (true == UEngineInput::GetInst().IsDown(VK_LBUTTON))
 	{
-		//if (0 == _Index.Scale.X)
+		if (CropsLock >= _Index.Scale.X)
 		{
 			NowSelectCrops = _Index.Scale.X;
 			CursorImage->SetSprite("Crops.png", 3 + 11 * NowSelectCrops);

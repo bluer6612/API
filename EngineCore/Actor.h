@@ -21,7 +21,6 @@ public:
 	typedef AActor Super;
 
 	friend class ULevel;
-
 	AActor();
 	~AActor();
 

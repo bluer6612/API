@@ -1,7 +1,7 @@
 #pragma once
 #include <Windows.h>
 
-static float TimeSpeed = 5.0f;
+static float TimeSpeed = 1.0f;
 
 class UEngineTimer
 {

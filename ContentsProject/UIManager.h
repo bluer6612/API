@@ -52,7 +52,7 @@ public:
 	void PanelButtonTileStay(AActor* _Actor, FTransform _Index);
 	void PanelButtonTileEnd(AActor* _Actor, FTransform _Index);
 
-	void CreateText(AScore* _AScore, FVector2D _Location, int _Value, bool _Order = false, bool _Active = true, ERenderOrder _ERenderOrder = ERenderOrder::UIUP)
+	void CreateText(AScore* _AScore, FVector2D _Location, int _Value, int _Order = false, bool _Active = true, ERenderOrder _ERenderOrder = ERenderOrder::UIUP)
 	{
 		if (_AScore != ResourcesText[4])
 		{
@@ -81,6 +81,10 @@ public:
 	AScore* ResourcesText[10] = {};
 	AScore* CropsCountText[CropsCount] = {};
 	AScore* CropsPriceText[CropsCount] = {};
+
+	AMenuPanelUI* MenuPanelUI = nullptr;
+
+	int CropsLock = 2;
 protected:
 
 private:
@@ -90,8 +94,6 @@ private:
 	class USpriteRenderer* SRFarmInfo = nullptr;
 	class USpriteRenderer* SRButtonBlack = nullptr;
 	class USpriteRenderer* SRTapWhite = nullptr;
-
-	AMenuPanelUI* MenuPanelUI = nullptr;
 
 	bool CursorOnTap = false;
 	int NowSelectCrops = -1;

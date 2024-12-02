@@ -20,7 +20,6 @@
 #include "BuildingManager.h"
 #include "CharacterManager.h"
 #include "FarmingManager.h"
-#include "UIManager.h"
 #include "PlayMap.h"
 
 APlayGameMode::APlayGameMode()
@@ -36,10 +35,9 @@ void APlayGameMode::BeginPlay()
 	Super::BeginPlay();
 
 	//UI Manager
-
-	AUIManager* UIManager = nullptr;
 	{
 		UIManager = GetWorld()->SpawnActor<AUIManager>();
+		this->SetUIManager(UIManager);
 	}
 
 	//Building Manager
@@ -96,14 +94,17 @@ void APlayGameMode::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 
-	if (true == UEngineInput::GetInst().IsPress(VK_UP))
+	if (true == UEngineInput::GetInst().IsDown(VK_UP))
 	{
-		TimeSpeed += 1.0f;
-		TimeSpeed = 5.f;
-	}
-	else if (true == UEngineInput::GetInst().IsPress(VK_DOWN))
-	{
-		TimeSpeed -= 1.0f;
+		UIManager->CropsLock += 1;
+
+		int Index = UIManager->CropsLock;
+
+		UIManager->MenuPanelUI->SpriteRFarmCrops[Index]->SetSprite( "Crops.png", Index * 11 + 1);
+		UIManager->MenuPanelUI->SpriteRFarmCoin[Index]->SetSprite("uiresourceicons_0.png");
+		UIManager->MenuPanelUI->SpriteRFarmCoin[Index]->SetComponentLocation({ static_cast<float>(UIManager->MenuPanelUI->SpriteRFarmCoin[Index]->GetComponentLocation().X - std::to_string(CropsNeedMoney[Index]).size() * 7.5), (static_cast<float>(UIManager->MenuPanelUI->SpriteRFarmCoin[Index]->GetComponentLocation().Y)) });
+		UIManager->CropsCountText[Index]->SetActive(UIManager->CropsCountText[Index]->GetValue(UIManager->CropsCountText[Index]->ValueData), true);
+		UIManager->CropsPriceText[Index]->SetActive(UIManager->CropsCountText[Index]->GetValue(CropsNeedMoney[Index]), true);
 	}
 
 	//if (true == UEngineInput::GetInst().IsPress('R'))

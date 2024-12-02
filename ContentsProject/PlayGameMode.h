@@ -2,6 +2,7 @@
 #include <EngineCore/GameMode.h>
 #include <EnginePlatform/EngineSound.h>
 #include "TileMap.h"
+#include "UIManager.h"
 
 class APlayGameMode : public AGameMode
 {
@@ -15,6 +16,10 @@ public:
 	APlayGameMode& operator=(const APlayGameMode& _Other) = delete;
 	APlayGameMode& operator=(APlayGameMode&& _Other) noexcept = delete;
 
+	void SetUIManager(AUIManager* const _UIManager)
+	{
+		UIManager = _UIManager;
+	}
 
 protected:
 	void BeginPlay();
@@ -23,6 +28,7 @@ protected:
 private:
 	class AScore* Score = nullptr;
 
+	AUIManager* UIManager = nullptr;
 	USoundPlayer BGMPlayer;
 };
 

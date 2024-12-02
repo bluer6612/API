@@ -33,13 +33,15 @@ public:
 
 	void SetOrder(int _Order);
 
-	void SetLocation(int _Score, FVector2D _Pos);
+	void SetLocation(FVector2D _Pos);
 
-	void SetValue(int _Score, bool _Order = false, bool _Active = true);
+	void SetActive(int _Score, bool _Active);
+
+	void SetValue(int _Score, int _Order = 0, bool _Active = true);
 
 	int GetValue(int _Score);
 
-	int Count = 0;
+	int ValueData = 0;
 
 protected:
 	void BeginPlay() override;
