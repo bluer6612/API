@@ -264,9 +264,6 @@ void ACharacterManager::Harvesting(Tile* _Tile, USpriteRenderer* _SubActor)
 	int CropIndex = _Tile->GetCropsIndex();
 	USpriteRenderer* _TileImage = UIManager->CroppatchTileImage[_Tile->GetCropTileIndex()];
 
-	int Count = UIManager->CropsCountText[CropIndex]->GetValueData() + 1;
-
-	UIManager->CropsCountText[CropIndex]->SetValue(Count);
 	Money += CropsSellMoney[CropIndex];
 	UIManager->ResourcesText[0]->SetValue(Money);
 	UIManager->ResourcesText[2]->SetValue(Money);
@@ -300,7 +297,19 @@ void ACharacterManager::Harvesting(Tile* _Tile, USpriteRenderer* _SubActor)
 
 void ACharacterManager::CarryToStorage(Tile* _Tile, USpriteRenderer* _SubActor)
 {
-	++(UIManager->FarmingStats[_SubActor->GetCount()]);
-	_SubActor->SetCount(0);
-	_SubActor->SetActive(false);
+	int CropIndex = _Tile->GetCropsIndex();
+
+	for (size_t i = 0; i < UIManager->FarmingStats.size(); i++)
+	{
+		if (CropIndex == UIManager->FarmingStats[i].X)
+		{
+			UIManager->FarmingStats[i].Y += 1;
+			UIManager->CropsCountText[CropIndex]->SetValue(UIManager->FarmingStats[i].Y);
+
+			_SubActor->SetCount(0);
+			_SubActor->SetActive(false);
+
+			return;
+		}
+	}
 }

@@ -236,6 +236,7 @@ void AUIManager::BeginPlay()
 					MenuPanelUI->SpriteRFarmCoin[Index]->SetComponentLocation({ static_cast<float>(StartPos.X + 37 - std::to_string(CropsNeedMoney[Index]).size() * 7.5), (static_cast<float>(StartPos.Y - 30 + 46)) });
 				}
 
+				FarmingStats.push_back({ Index, 0 });
 				++Index;
 
 				if ((6 * 4) - 1 == Index)

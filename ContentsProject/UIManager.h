@@ -76,7 +76,7 @@ public:
 
 	std::vector<class Tile*> StorageTilesVector;
 	std::vector<class Tile*> WellTilesVector;
-	std::vector<int> FarmingStats;
+	std::vector<FIntPoint> FarmingStats;
 
 	AScore* ResourcesText[10] = {};
 	AScore* CropsCountText[CropsCount] = {};
