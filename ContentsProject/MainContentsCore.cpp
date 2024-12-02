@@ -6,6 +6,7 @@
 #include <EngineBase/EngineFile.h>
 #include <EngineCore/ImageManager.h>
 #include <EnginePlatform/EngineSound.h>
+#include <EnginePlatform/EngineInput.h>
 
 #include "PlayGameMode.h"
 #include "Rusty.h"
@@ -85,6 +86,12 @@ void MainContentsCore::BeginPlay()
 
 void MainContentsCore::Tick()
 {
+
+	if (true == UEngineInput::GetInst().IsDown('5'))
+	{
+		UEngineAPICore::GetCore()->GetMainWindow().SetWindowPosAndScale({ static_cast<float>(0), static_cast<float>(-400) }, { static_cast<float>(ScreenX), static_cast<float>(ScreenY) });
+	}
+
 }
 
 void MainContentsCore::DirectoryAdd(std::string _dir, std::string _Append)
