@@ -182,7 +182,7 @@ void AHaiku::Tick(float _DeltaTime)
 		case 4://¼öÈ®
 			FSM.ChangeState(NewPlayerState::Harvest);
 
-			Havesting(TargetTile, SpriteRSub);
+			Harvesting(TargetTile, SpriteRSub);
 
 			TimeEventer.PushEvent(1.0f, std::bind(&AHaiku::ChangeAction, this, NewPlayerState::HarvestCarry), false, false);
 			break;

@@ -22,7 +22,7 @@ public:
 
 	void Watering(Tile* _Tile);
 
-	void Havesting(Tile* _Tile, USpriteRenderer* _SubActor);
+	void Harvesting(Tile* _Tile, USpriteRenderer* _SubActor);
 
 	void CarryToStorage(Tile* _Tile, USpriteRenderer* _SubActor);
 

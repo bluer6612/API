@@ -123,7 +123,7 @@ void AScore::SetValue(int _Score, int _Order, bool _Active)
 	}
 }
 
-int AScore::GetValueData()
+int AScore::GetValueDataSize()
 {
 	return std::to_string(ValueData).size();
 }

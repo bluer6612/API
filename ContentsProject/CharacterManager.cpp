@@ -259,12 +259,14 @@ void ACharacterManager::Watering(Tile* _Tile)
 	UIManager->CroppatchTile->SetCropsTileSprite(_Tile->GetLocation(), 2);
 }
 
-void ACharacterManager::Havesting(Tile* _Tile, USpriteRenderer* _SubActor)
+void ACharacterManager::Harvesting(Tile* _Tile, USpriteRenderer* _SubActor)
 {
 	int CropIndex = _Tile->GetCropsIndex();
 	USpriteRenderer* _TileImage = UIManager->CroppatchTileImage[_Tile->GetCropTileIndex()];
 
-	UIManager->CropsCountText[CropIndex]->SetValue(++UIManager->CropsCountText[CropIndex]->ValueData);
+	int Count = UIManager->CropsCountText[CropIndex]->GetValueData() + 1;
+
+	UIManager->CropsCountText[CropIndex]->SetValue(Count);
 	Money += CropsSellMoney[CropIndex];
 	UIManager->ResourcesText[0]->SetValue(Money);
 	UIManager->ResourcesText[2]->SetValue(Money);

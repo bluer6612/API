@@ -39,15 +39,20 @@ public:
 
 	void SetValue(int _Score, int _Order = 0, bool _Active = true);
 
-	int GetValueData();
+	int GetValueDataSize();
 
-	int ValueData = 0;
+	int GetValueData()
+	{
+		return ValueData;
+	}
+
 
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
 private:
+	int ValueData = 0;
 
 	std::string TextSpriteName;
 	FVector2D TextScale;
